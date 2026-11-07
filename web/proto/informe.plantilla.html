@@ -1,0 +1,1106 @@
+<title>Informe · Observatori de la bici i el patinet de València</title>
+<meta name="description" content="Seguim els sinistres amb bici i patinet a València amb les dades obertes de l'Ajuntament: on passen, què s'està fent i si el Pla Director de Seguretat Viària 2026-2030 funciona.">
+<meta name="theme-color" content="#EEF1F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F151B" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='11.5'%20fill='%2315202B'%20stroke='%2355626E'/%3E%3Cg%20fill='none'%20stroke='%23EEF1F2'%20stroke-width='2.2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Ccircle%20cx='6.5'%20cy='15'%20r='3.3'/%3E%3Ccircle%20cx='17.5'%20cy='15'%20r='3.3'/%3E%3Cpath%20d='M6.5%2015l3.8-6.5h4.7l2.5%206.5M10.3%208.5%209.3%206.2'/%3E%3C/g%3E%3C/svg%3E">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Observatori de la bici i el patinet de València">
+<meta property="og:url" content="https://observatoribicivlc.org/informe.html">
+<meta property="og:title" content="El Pla i les dades: sinistres amb bici i patinet a València">
+<meta property="og:description" content="Informe de l&#x27;observatori: on s&#x27;acumulen els sinistres amb bici i patinet, què en diu el Pla Director de Seguretat Viària 2026-2030 i què fa falta per a saber si funciona.">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:image" content="https://observatoribicivlc.org/og/informe.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gràfic de l&#x27;indicador de l&#x27;acció 3.2.2 del Pla Director, des de l&#x27;any base fins a la meta de 2030.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="El Pla i les dades: sinistres amb bici i patinet a València">
+<meta name="twitter:description" content="Informe de l&#x27;observatori: on s&#x27;acumulen els sinistres amb bici i patinet, què en diu el Pla Director de Seguretat Viària 2026-2030 i què fa falta per a saber si funciona.">
+<meta name="twitter:image" content="https://observatoribicivlc.org/og/informe.png">
+<meta name="twitter:image:alt" content="Gràfic de l&#x27;indicador de l&#x27;acció 3.2.2 del Pla Director, des de l&#x27;any base fins a la meta de 2030.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* Relato con escenario único (un SVG cuyos elementos cambian de estado y se interpolan).
+   Con animación: figura sticky y pasos que pasan. Sin animación (interruptor o prefers-reduced-motion): cada paso con su figura fija.
+   El SVG usa viewBox = tamaño real en px: el texto mide lo que dice su font-size. Alturas en px medidas por JS, nunca vh. */
+:root{
+  --bg:#EEF1F2; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
+  --bici:#2a78d6; --pat:#C94B17; --amb:#14875E; --lane:#9DB8AE; --sel:#b87a00; --meta:#15202B; --warn:#B42318; --mute:#AEB7BD; --hl:#FFE58A;
+  --display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --alto-fig:560px; --alto-paso:640px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F151B; --surface:#17212A; --line:#2A3641; --ink:#E7ECEF; --ink2:#9AA7B2;
+  --bici:#3987e5; --pat:#d95926; --amb:#199e70; --lane:#4E6A60; --sel:#c98500; --meta:#E7ECEF; --warn:#F97066; --mute:#3D4B57; --hl:#5C4A00; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F151B; --surface:#17212A; --line:#2A3641; --ink:#E7ECEF; --ink2:#9AA7B2;
+  --bici:#3987e5; --pat:#d95926; --amb:#199e70; --lane:#4E6A60; --sel:#c98500; --meta:#E7ECEF; --warn:#F97066; --mute:#3D4B57; --hl:#5C4A00; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.salta{position:absolute;left:-9999px}.salta:focus{left:16px;top:8px;z-index:50;background:var(--surface);padding:6px 10px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;padding-block:10px;flex-wrap:wrap}
+.marca{font-family:var(--display);font-weight:800;font-size:18px;text-transform:uppercase;letter-spacing:.01em}
+.marca span{color:var(--ink2);font-weight:600}
+.top nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.top nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.navlink{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-right:6px;text-decoration:none;border-bottom:2px solid transparent}
+.navlink:hover,.navlink:focus-visible{border-bottom-color:var(--ink)}
+.top nav button{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.04em;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 10px;cursor:pointer;border-radius:3px}
+.top nav button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--bici);outline-offset:2px}
+.intro{padding-block:40px 8px;max-width:760px;transform-origin:0 0}
+html.anim .intro{will-change:opacity,transform}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:0}
+.intro h1{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(36px,6vw,64px);line-height:.98;margin:8px 0 12px;text-wrap:balance}
+.intro p{font-size:18px;color:var(--ink2);max-width:58ch;margin:0}
+.relato{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:40px;position:relative}
+.pasos{padding-block:12px 240px}
+/* la primera tarjeta arranca alineada con la figura: al abrir se ven juntas, sin cortes */
+html.anim .paso:first-child{justify-content:flex-start;min-height:var(--alto-fig)}
+.paso{min-height:var(--alto-paso);display:flex;flex-direction:column;justify-content:center}
+.caja{background:var(--surface);border:1px solid var(--line);padding:18px 20px;border-radius:4px;transition:opacity .4s}
+html.anim .paso:not(.activo) .caja{opacity:.45}
+.caja-t{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:21px;line-height:1.05;letter-spacing:.01em;margin:0 0 10px;padding-bottom:9px;border-bottom:2px solid var(--ink);text-wrap:balance}
+.caja p{margin:0 0 10px}.caja p:last-child{margin:0}
+.caja b{font-variant-numeric:tabular-nums}
+.caja b.k{font-family:var(--display);font-weight:800;font-size:1.12em;letter-spacing:.01em}
+.caja .aviso{font-size:14px;color:var(--ink2);border-top:1px dashed var(--line);padding-top:8px;margin-top:10px}
+.caja ol.pide{list-style:none;padding:0;margin:8px 0 0;counter-reset:p}
+.caja ol.pide li{counter-increment:p;display:grid;grid-template-columns:34px 1fr;align-items:baseline;margin-bottom:6px}
+.caja ol.pide li.clave span{background:var(--hl);padding:0 3px;border-radius:2px;font-weight:600}
+.caja ol.pide li::before{content:counter(p);font-family:var(--display);font-weight:800;font-size:28px;line-height:1;color:var(--ink)}
+.caja a{color:var(--ink);font-weight:600}
+details.datos{margin-top:12px;font-size:13.5px}
+details.datos summary{cursor:pointer;color:var(--ink2);font-family:var(--display);font-weight:600;letter-spacing:.04em}
+details.datos table{border-collapse:collapse;margin-top:6px;width:100%;font-variant-numeric:tabular-nums}
+details.datos th,details.datos td{border-bottom:1px solid var(--line);padding:3px 6px;text-align:right}
+details.datos th:first-child,details.datos td:first-child{text-align:left}
+/* figura */
+.fig{position:sticky;top:calc(env(safe-area-inset-top,0px) + 58px);height:var(--alto-fig);transition:opacity .9s,filter .9s}
+.fig.atenua{opacity:.25;filter:blur(2px)}
+.lienzo{position:relative;width:100%;height:100%}
+.lienzo svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:hidden}
+html:not(.anim) .fig{display:none}
+html.anim .fig-paso{display:none}
+.fig-paso{position:relative;width:100%;margin-bottom:12px;background:var(--bg)}
+.fig-paso > svg{display:block;width:100%;overflow:hidden;position:relative}
+.ley{display:flex;flex-wrap:wrap;gap:4px 14px;font-family:var(--display);font-weight:500;font-size:14px;color:var(--ink2);min-height:22px;transition:opacity .25s}
+.ley span{display:inline-flex;align-items:center;gap:5px}
+.ley svg{width:22px;height:14px;overflow:visible;position:static}
+.fig .ley{position:absolute;left:0;right:0;bottom:0}
+/* texto del SVG (px reales) */
+svg text{font-family:var(--display);fill:var(--ink2);font-variant-numeric:tabular-nums}
+svg .eje{font-size:13px;font-weight:500}
+svg .rot{font-size:14.5px;font-weight:600;fill:var(--ink)}
+svg .rotf{font-size:15px;font-weight:800;fill:var(--ink)}
+svg .cifra{font-size:30px;font-weight:800;fill:var(--ink)}
+svg .gran{font-size:64px;font-weight:800;fill:var(--ink)}
+svg .tab{font-family:var(--body);font-size:13px;fill:var(--ink)}
+svg .tabh{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;fill:var(--ink2)}
+svg .halo{paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round}
+.sabemos{padding-block:40px 0}
+.sabemos h2{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:30px;margin:6px 0 14px}
+.sab3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px 32px}
+.sab3 h3{font-size:16px;margin:0 0 6px;padding-top:8px;border-top:3px solid var(--ink)}
+.sab3 ul{margin:0;padding-left:18px}.sab3 li{margin-bottom:8px;font-size:15px;line-height:1.45}
+.sab3 a{color:var(--ink2);font-size:13px;white-space:nowrap}
+.fin{padding-block:30px 60px;max-width:680px}
+.fin h2{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:30px;margin:6px 0 10px}
+.fin a{color:var(--ink);font-weight:600}
+.ref{font-size:12.5px;color:var(--ink2)}
+/* buscador del informe y figuras explorables con el teclado (06/11) */
+.busca-inf{margin:18px 0 6px}
+.busca-inf label{display:block;margin-bottom:6px}
+.busca-inf .buscar{position:relative;max-width:420px}
+.busca-inf input{width:100%;box-sizing:border-box;font:inherit;font-size:15px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 10px;border-radius:3px}
+.busca-inf input:focus-visible{outline:3px solid var(--bici);outline-offset:2px}
+#resi{position:absolute;top:100%;left:0;right:0;z-index:5;background:var(--surface);border:1px solid var(--line);margin:2px 0 0;padding:0;list-style:none;max-height:300px;overflow:auto}
+#resi li button,#resi li a{all:unset;display:block;width:100%;box-sizing:border-box;padding:7px 10px;cursor:pointer;font-size:14px;color:var(--ink)}
+#resi li a{font-weight:600;border-top:1px solid var(--line)}
+#resi li a.fit{font-weight:400;border-top:0}
+#resi li button:hover,#resi li button:focus-visible,#resi li a:hover,#resi li a:focus-visible{background:var(--bg);outline:2px solid var(--bici);outline-offset:-2px}
+.bus-fitxa h3{font-family:var(--display);font-weight:700;font-size:20px;margin:14px 0 4px}
+.bus-fitxa p{margin:4px 0}
+.sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.lienzo svg:focus-visible,.fig-paso > svg:focus-visible{outline:3px solid var(--bici);outline-offset:-3px}
+@media (max-width:860px){
+  .relato{grid-template-columns:1fr;gap:0}
+  .fig{grid-row:1;top:calc(env(safe-area-inset-top,0px) + 50px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-bottom:4px}
+  .pasos{grid-row:2;padding-block:40px 200px}
+  .paso{justify-content:flex-start}
+  html.anim .paso{padding-top:40px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+/*TEMA_CSS*/
+</style>
+<script>/*TEMA_JS*/</script>
+<script>/*PIE_JS*/</script>
+
+<a class="salta" href="#pasos" data-t="salta"></a>
+<header class="top"><div class="wrap">
+  <div class="marca" data-t="marca"></div>
+  <nav aria-label="Opcions">
+    <a class="navlink" href="observatori.html" data-t="nav_obs"></a><a class="navlink" href="pla.html" data-t="nav_pla"></a><a class="navlink" href="metode.html" data-t="nav_met"></a>
+    <button id="b-mov" aria-pressed="false" data-t="sinanim"></button>
+    <button data-tema></button><button id="l-va" aria-pressed="true" lang="ca">VA</button><button id="l-es" aria-pressed="false" lang="es">ES</button>
+  </nav>
+</div></header>
+
+<main>
+<div class="wrap intro">
+  <p class="eyebrow" data-t="ey"></p>
+  <h1 data-t="h1"></h1>
+  <p data-t="sub"></p>
+</div>
+
+<div class="wrap relato">
+  <div class="pasos" id="pasos"></div>
+  <div class="fig" id="fig">
+    <div class="lienzo"><svg id="esc" role="img"></svg><div class="ley" id="ley" aria-hidden="true"></div></div>
+  </div>
+</div>
+
+<section class="wrap sabemos" aria-labelledby="t-sab">
+  <p class="eyebrow" data-t="sab_ey"></p>
+  <h2 id="t-sab" data-t="sab_h"></h2>
+  <div class="sab3" data-t="sab"></div>
+</section>
+
+<div class="wrap fin">
+  <p class="eyebrow" data-t="fin_ey"></p>
+  <h2 data-t="fin_h"></h2>
+  <p data-t="fin_p"></p>
+  <div class="busca-inf">
+    <label class="eyebrow" for="qi" data-t="bus_l"></label>
+    <div class="buscar"><input type="search" id="qi" autocomplete="off" aria-describedby="bus-ajuda"><ul id="resi" hidden></ul></div>
+    <p class="ref" id="bus-ajuda" data-t="bus_ajuda"></p>
+    <div class="bus-fitxa" id="bus-fitxa" aria-live="polite"></div>
+  </div>
+  <p><a href="observatori.html" data-t="fin_a"></a></p>
+  <p class="ref" data-t="fuentes"></p>
+</div>
+</main>
+<p class="sr" id="exp-ajuda" data-t="exp_ajuda"></p><p class="sr" id="exp-vivo" aria-live="polite"></p>
+<footer class="wrap" data-pie></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script>/*DATA*/</script>
+<script>
+"use strict";
+const R = window.REL;
+// años: todos salen de los datos (exportar_web.py). AÑOS, los completos; IU, índice del último; RANG, «primero-último»
+const AÑOS = R.anys, IU = AÑOS.length - 1, A0 = AÑOS[0], ULT = AÑOS[IU], RANG = `${A0}-${ULT}`;
+const etqA = xs => xs.length > 1 ? `${xs[0]}-${xs[xs.length - 1]}` : `${xs[0]}`;   // periodo: «2022-2023» o «2024»
+// uso del carril bici: U0 y UU, primer y último año del panel de puntos de conteo; M1, último año de los conteos manuales
+const U0 = R.uso_idx.años[0], UU = R.uso_idx.años[R.uso_idx.años.length - 1], M1 = R.uso_manual[R.uso_manual.length - 1].año;
+// únicos años fijos (hechos pasados, no cambian con datos nuevos): heridos graves comparables desde 2024 (cambio de criterio
+// en 2023, Orden INT/2223/2014); la Alameda se cuenta desde 2023 (en 2022 el portal situaba peor los siniestros)
+const GRAV_COMP = 2024, ALA0 = 2023;
+let L = "va";
+const fmt = (n, d=0) => Number(n).toLocaleString(L==="va"?"ca-ES":"es-ES", {minimumFractionDigits:d, maximumFractionDigits:d, useGrouping:"always"});
+
+// ---------- cifras derivadas (todas salen de R) ----------
+const D_ala_prio = () => R.ala.filter(a => a[3]).length;
+const MT = R.meta, E0 = MT.esc[0], B = MT["año_base"], P26 = MT.pendiente;
+// AM, año de la meta; TODOS, del primer año al de la meta; EV, ya hay años del Plan con datos; JU, juicio del último (meta.py)
+const AM = MT["año_meta"], TODOS = d3.range(A0, AM + 1), EV = ULT > B, JU = EV ? E0.juicio[ULT] : null;
+const DASH = [null, null, "0.1 3.4"];   // anillo del Plan: 0 no lo menciona (sin anillo, no se dibuja) · 1 cita el lugar (continuo) · 2 solo su calle (puntos)
+const D = (() => {
+  // año base, meta y senda: de exportar_web.py (META); B = año base, alt = la alternativa
+  const base = E0.base, meta = E0.meta;
+  const senda = {}; TODOS.forEach(a => { if (a >= B) senda[a] = base * Math.pow(.5, (a-B)/(MT["año_meta"]-B)); });
+  const ala = R.ala.map(([lon,lat,k,prio,v,a]) => ({lon,lat,k,prio,v,a}));
+  const cnt = k => ala.filter(d => d.k === k).length;
+  const m0 = cnt("m"), pm = ala.filter(d => d.k === "m" && d.prio).length;
+  // ejemplos del paso trafico3, elegidos por regla en exportar_web.py (R.dest): x el que más siniestros tiene de los que están
+  // como la media; t el «claramente» solo de patinete con más siniestros; b el «claramente» no solo de patinete con menos
+  const dest = Object.fromEntries(Object.entries(R.dest).map(([c, o]) => [c, {...R.sc[o.i], nom: o.nom, i: o.i}]));
+  // margen del azar del primer año sin datos, comprobación con la media y series de control (scripts/meta.py y META)
+  const b26 = E0.banda[MT.desde], EM = MT.media, CT = MT.control, n = CT.años.length - 1, vr = x => (x[n]/x[0] - 1)*100;
+  const sinH = CT.bv_sin.map((v, i) => v + CT.resto_sin[i]);
+  return {base, meta, senda, s26: E0.senda[MT.desde], b26, alt: MT.esc[1], max: MT.max, ctx: MT.ctx2026,
+    em: EM, veh: MT.vehiculo, ct: CT, vCiudad: vr(CT.ciudad), vSinH: vr(sinH), vBvH: vr(CT.bv_her), vRestoH: vr(CT.resto_her), cuota1: CT.cuota[n]*100,
+    previa: MT.previa*100, previaAnt: MT.previa_ant*100, ritmo: E0.necesaria*100, anual: E0.senda_anual*100,
+    dc10: Math.round(R.vmp[IU]/R.tot[IU]*10), cuota: R.vmp[IU]/R.tot[IU]*100,
+    ala, m0, s0: cnt("s"), w0: cnt("w"), d0: cnt("d"), n0: ala.length, pm, pm10: Math.round(pm/m0*10),
+    ng0: R.negros[0], nn: R.negros.length, // persistencia fuera de muestra (lugares_nudos.py): ordenar con R.per.A, medir en R.per.B; perf = si cada lugar mantuviera su ritmo
+    pA: Math.round(R.pers.ab.A), pB: Math.round(R.pers.ab.obs), pLo: Math.round(R.pers.ab.perf_lo), pHi: Math.round(R.pers.ab.perf_hi), pLoc: Math.round(R.pers.ab.loc),
+    estMin: d3.min(R.estab.variantes, v => v.ret), estMax: d3.max(R.estab.variantes, v => v.ret), plNo: R.pl3.no, plL: R.pl3.lugar, plC: R.pl3.calle, plTop: R.pl3.top,   // recuentos del anillo (PL3 de exportar_web.py)
+    nc: R.sc.length, nalt: R.sc.filter(d => d.lv === 2).length, nq: R.sc.filter(d => d.lv === 1).length, ncont: R.n_contadores, dest,
+    nalt_sv: R.sc.filter(d => d.lv === 2 && d.sv).length,
+    ay: R.negros[0].vy.map(v => v[0] + v[1]), pt: D_ala_prio(), tPr: R.turia_pr, cob: R.cob*100,
+    destIdx: new Set(Object.values(dest).map(d => d.i))};
+})();
+const nomLugar = s => s.toLowerCase().replace(/\b(pg|av|c\/|pl|gv)\b\.?\s*/g, m => ({pg:"Pg. ",av:"Av. ","c/":"C/ ",pl:"Pl. ",gv:"Gran Via "}[m.trim().replace(".","")] || m))
+  .replace(/ cruce /g, " × ").replace(/(^|[\s×\/-])([a-zà-ú])/g, (m,a,b) => a + b.toUpperCase());
+
+// ---------- textos (las cifras, de D; *x* = cifra clave) ----------
+// cierre «Lo que sabemos y lo que no»: tres listas; cada punto enlaza a su sección de metode
+const sabHTML = (bl) => bl.map(([h, xs]) => `<div><h3>${h}</h3><ul>${xs.map(([s, a]) => `<li>${s} <a href="metode.html#${a}">${L === "va" ? "Mètode" : "Método"} →</a></li>`).join("")}</ul></div>`).join("");
+const T = {
+va:{marca:`Observatori de la bici i el patinet de València <span>· Informe ${ULT}</span>`, salta:"Salta al relat", sinanim:"Sense animació",nav_pla:"El Pla, al dia",nav_obs:"Observatori",nav_met:"Mètode",
+ey:`Informe anual · dades ${RANG}`, h1:"El que promet el Pla i el que diuen les dades",
+sub:`L'indicador de l'acció 3.2.2 del Pla Director de Seguretat Viària demana reduir a la meitat els sinistres amb bicis i patinets per a ${AM}. Hem creuat el Pla amb les dades obertes de l'Ajuntament per a veure d'on es parteix i què cal per a seguir-lo.`,
+tab:{tipo:"Tipus",ind:"Indicador",form:"Fórmula",base:"Línia base",meta:`Meta ${AM}`,tipo_v:"Impacte",ind_v:"Reducció de sinistres amb ciclistes/VMP",form_v:"Comparació anual",
+  ref:"Pla Director de Seguretat Viària 2026-2030, acció 3.2.2", sin:"sense línia base", prop:"proposta nostra"},
+r:{sin:"sinistres amb bici o patinet",base:"Base",meta:`Meta ${AM}`,senda:"senda proposada",pend:["pendent","de publicar"],senda26:"compatible amb la senda",prev:"abans del Pla",ob:"observat",
+  sb:"Només bici",am:"Xoc bici–patinet",sp:"Només patinet",bici:"Bici",pat:"Patinet",dc:"de cada 10 amb patinet",
+  lug:"llocs amb més sinistres",lug1:"Pg. de l'Albereda × pl. de Saragossa",pla1:n=>`n.º ${n} també en la llista de cruïlles del Pla`,
+  k:{m:"Cotxe, moto o altre vehicle",s:"Sol (caiguda)",w:"Vianant",d:"Una altra bici o patinet"},
+  prio:"no respectar la prioritat",cont:"punts de comptatge del carril bici",xs:`Mitjana per al seu trànsit (sinistres ${etqA(R.anys_eb)})`,ys:`Sinistres que ha tingut (${etqA(R.anys_eb)})`,
+  diag:"la mitjana per al trànsit",banda:"variació entre punts semblants (95 %)",grav:"Sinistres amb ferits greus (tots, a tota la ciutat)",crit:`comparable des de ${GRAV_COMP}`,nocomp:"transició",
+  uso:"Carril bici: qui hi passa",usoSep:`des de ${U0}, només el total (${U0} = 100)`,usoMan:"% de patinets (conteos manuals)",
+  usoNota:n=>`Conteos manuals: fonts externes, com a complement.`,
+  jz:{debajo:"per davall de la senda",compatible:"compatible amb la senda",encima:"per damunt de la senda"},
+  cruce:"Busca el teu",nota:"Els sinistres situats en el mateix punt se separen per a poder veure'ls.",de48:(a,b)=>`${a} de ${b}`},
+ley:{nus:"la cruïlla, amb 30 m al voltant",ob:"observat",hu:"senda proposada (des de la base)",mar:"marge de l'atzar al voltant de la senda (95 %)",bici:"només bici",pat:"només patinet",amb:"xoc bici–patinet",
+  bici2:"bici (amb els xocs bici–patinet)",pat2:"patinet (amb els xocs bici–patinet)",
+  anillo:["sense anell: el Pla no l'esmenta","el Pla cita aquest lloc","el Pla només cita el seu carrer"],lane:"xarxa ciclista",pc:"punt de comptatge",
+  clar:"clarament per damunt de la mitjana",quiza:"potser per damunt",normal:"com la mitjana",banda:"variació entre punts semblants (95 %)",prio:"amb «no respectar la prioritat»",sinp:"sense eixe factor",
+  biciU:"bicis",patU:"patinets",total:"trànsit total (no se sap quina part són patinets)",ferits:"ferits greus (comparable)",trans:"transició (no comparable)"},
+aria:{
+  promesa:d=>`Fila de la taula d'indicadors del Pla: reducció del 50 % dels sinistres amb ciclistes i patinets per a ${AM}, amb la casella de línia base buida.`,
+  partida:d=>`Barres de sinistres amb bici o patinet: ${AÑOS.map((a,i)=>a+", "+fmt(R.tot[i])).join("; ")}. ${B} és la base${d.max?" i el pitjor any de la sèrie":""}. Senda proposada en cercles buits des de ${MT.desde} fins a ${fmt(d.meta)} en ${AM}.`,
+  y2025:d=>`Abans del Pla: de ${fmt(R.tot[0])} sinistres en ${AÑOS[0]} a ${fmt(d.base)} en ${B}, un ${fmt(d.previa,0)} % més. ${EV ? `${ULT}: ${fmt(JU.obs)}, ${T.va.r.jz[JU.estado]}. ` : ""}${P26 ? P26+": pendent de publicar. " : ""}Per a arribar a ${fmt(d.meta)} en ${AM} cal baixar un ${fmt(d.ritmo,1)} % cada any des de ${MT.desde}.`,
+  quien:d=>`Cada barra partida, de baix a dalt, en només bici, només patinet i xoc bici–patinet. ${ULT}: ${fmt(R.serie[IU].b)}, ${fmt(R.serie[IU].p)} i ${fmt(R.serie[IU].a)}.`,
+  quien2:d=>`Línies: bici de ${fmt(R.bici[0])} a ${fmt(R.bici[IU])}; patinet de ${fmt(R.vmp[0])} a ${fmt(R.vmp[IU])}. ${d.dc10} de cada 10 amb patinet en ${ULT}.`,
+  donde:d=>`Mapa de València amb els ${d.nn} llocs amb més sinistres; el primer, l'Albereda amb Saragossa, ${d.ng0.n}.`,
+  alameda:d=>`Zoom al passeig de l'Albereda al voltant de la plaça de Saragossa: els ${d.n0} sinistres de ${RANG}, agrupats al voltant del punt on es van anotar, i la cruïlla amb 30 m al voltant en línia discontínua.`,
+  alameda2:d=>`Els ${d.n0} sinistres agrupats per amb qui: vehicle de motor ${d.m0}, sol ${d.s0}, vianant ${d.w0}, una altra bici o patinet ${d.d0}.`,
+  alameda3:d=>`En ${d.pt} dels ${d.n0} sinistres consta no respectar la prioritat. Sinistres per any: ${d.ay.join(", ")}.`,
+  trafico:d=>`Mapa amb els ${d.nc} punts de comptatge del carril bici.`,
+  trafico2:d=>`Dispersió: la mitjana per al trànsit davant dels sinistres observats en ${d.nc} punts de comptatge; ${d.nalt} clarament per damunt i ${d.nq} potser.`,
+  trafico3:d=>`Destacats: ${d.dest.x.nom} ${d.dest.x.N} davant d'una mitjana de ${fmt(d.dest.x.mu)}; ${d.dest.t.nom} ${d.dest.t.N} davant de ${fmt(d.dest.t.mu)}; ${d.dest.b.nom} ${d.dest.b.N} davant de ${fmt(d.dest.b.mu)}.`,
+  falta:d=>`La taula del Pla amb la casella de línia base omplida amb la nostra proposta: ${B}, ${fmt(d.base)} sinistres.`,
+  falta2:d=>`Sinistres amb ferits greus: ${R.grav.map((v,i)=>AÑOS[i]+", "+fmt(v)).join("; ")}. ${A0} i ${GRAV_COMP - 1} són de transició pel canvi de criteri; comparable des de ${GRAV_COMP}.`,
+  falta3:d=>`Carril bici: proporció de patinets en conteos manuals, ${R.uso_manual.map(m => m.año + " " + fmt(m.pat*100) + " %").join(", ")}; des de ${U0} només el total dels punts de comptatge (${U0} = 100): ${R.uso_idx.idx.map(fmt).join(", ")}, sense saber quina part són patinets.`,
+  falta4:d=>`Sinistres amb bici o patinet: ${R.tot.map((v,i)=>AÑOS[i]+", "+fmt(v)).join("; ")}.${P26 ? ` ${P26}, pendent de publicar; senda ${fmt(d.s26)}, compatible entre ${fmt(d.b26[0])} i ${fmt(d.b26[1])}.` : ""}${EV ? ` ${ULT}: ${T.va.r.jz[JU.estado]}.` : ""} Meta ${AM} amb base ${B}: ${fmt(d.meta)}.`, cruce:d=>`Mapa de la ciutat amb els llocs i els punts de comptatge.`},
+tit:{promesa:"La promesa",partida:"El punt de partida",y2025:"Abans del Pla, a més",quien:"Bici, patinet o tots dos",quien2:"El patinet creix",donde:"On s'acumulen",alameda:"L'Albereda amb Saragossa",alameda2:"Amb qui xoquen",alameda3:"No cedir el pas",trafico:"Quanta gent passa",trafico2:"Per damunt de la mitjana per al trànsit",trafico3:"Tres punts que destaquen",falta:"Què falta: la línia base",falta2:"Què falta: la gravetat",falta3:"Què falta: saber qui passa",falta4:"Què falta: les dades de cada any",cruce:"El teu carrer"},
+pasos:{
+  promesa:d=>`<p>En la taula d'indicadors del Pla Director de Seguretat Viària 2026-2030, l'acció 3.2.2 demana *reduir a la meitat* els sinistres amb ciclistes i patinets per a ${AM}.</p><p>Com en la majoria dels indicadors del Pla, la casella de la línia base està buida, i tampoc diu com es compta ni com es jutja cada any. *La meitat de què?*</p>`,
+  partida:d=>`<p>Proposem omplir eixa casella amb *${B}: ${fmt(d.base)} sinistres* amb bici o patinet. És l'últim any abans del Pla, que el mateix Pla ja analitza${d.max?", i el pitjor de la sèrie":""}.</p><p>Si cada any baixara en la mateixa proporció (un ${fmt(d.anual,1)} %), la senda passaria per ${fmt(d.s26)} en ${MT.desde} i arribaria a *${fmt(d.meta)}* en ${AM}. Els cercles buits són eixa senda: és una proposta nostra, no del Pla.</p><p>La franja al voltant de cada cercle és el marge de l'atzar: encara que tot anara segons la senda, cada any variaria. Per a ${MT.desde}, qualsevol xifra entre ${fmt(d.b26[0])} i ${fmt(d.b26[1])} seria compatible amb la senda.</p><p class="aviso">${d.max ? `Compte: ${B} és el pitjor any de la sèrie, i després d'un any així el següent sol baixar encara que no canvie res. Per això ho comprovem també amb la mitjana ${d.em.etq} (meta ${fmt(d.em.meta)}). ` : ""}Cada sinistre compta una sola vegada, també els xocs bici–patinet; comptant per vehicle, com les taules del Pla, la meta seria ${fmt(d.veh.meta)}.</p>`,
+  y2025:d=>`<p>Abans del Pla, els sinistres amb bici o patinet pugen: de ${fmt(R.tot[0])} en ${AÑOS[0]} a ${fmt(d.base)} en ${B}, *un ${fmt(d.previa,0)} % més*. Només en ${B}, un ${fmt(d.previaAnt,1)} % més que l'any anterior.</p><p>Però *tots els sinistres de la ciutat pugen igual* (un ${fmt(d.vCiudad,0)} %): la part de la bici i el patinet es queda en el ${fmt(d.cuota1,1)} %. El que més creix són els sinistres sense ferits (un ${fmt(d.vSinH,0)} %), i al juliol de 2024 la Policia Local va crear un nou sistema de dades de sinistres (SIASV). Amb ferits, la bici i el patinet sí que pugen més que la resta: un ${fmt(d.vBvH,0)} %, davant d'un ${fmt(d.vRestoH,0)} %.</p><p>Per a arribar a ${fmt(d.meta)} en ${AM}, cal baixar *un ${fmt(d.ritmo,1)} % cada any* des de ${MT.desde}.${EV ? ` En ${ULT} hi ha hagut *${fmt(JU.obs)} sinistres*: *${T.va.r.jz[JU.estado]}* (la senda en preveu ${fmt(JU.senda)}; hi seria compatible qualsevol xifra entre ${fmt(JU.banda[0])} i ${fmt(JU.banda[1])}).` : P26 ? ` Les dades de ${P26}, el primer any del Pla, *encara no estan publicades*: fins aleshores no es pot dir com va el Pla.` : ""}</p>${EV ? "" : `<p class="aviso">Primeres senyals, pendents de confirmar amb les dades obertes: segons la Policia Local (balanç del Pla Vector, ${d.ctx.fecha}), de gener a maig de 2026 hi hagué uns ${d.ctx.vmp_menos} sinistres amb patinet menys que en el mateix període de 2025. <a href="${d.ctx.url}">Font</a>.</p>`}`,
+  quien:d=>`<p>Qui hi ha darrere? Partim cada barra en tres: sinistres amb només bici, amb només patinet i xocs bici–patinet.</p>`,
+  quien2:d=>`<p>*La bici es manté*: ${fmt(R.bici[0])} sinistres en ${A0} i ${fmt(R.bici[IU])} en ${ULT}.</p><p>*El patinet passa de ${fmt(R.vmp[0])} a ${fmt(R.vmp[IU])}.* En ${ULT}, *${d.dc10} de cada 10* sinistres amb bici o patinet tenen un patinet implicat.</p><p class="aviso">Ara cada línia compta tots els sinistres del seu vehicle: un xoc bici–patinet compta en les dues, com en el Pla. Sense saber quants patinets circulen, no es pot dir si el risc ha pujat o si n'hi ha més.</p>`,
+  donde:d=>`<p>On passen? Cada cercle és un dels *${d.nn} llocs amb més sinistres* entre ${A0} i ${ULT}: una cruïlla, amb 30 m al voltant, o un tram de carrer de 150 m com a màxim. Com més gran, més sinistres, i es reparteix entre només bici, només patinet i xocs bici–patinet.</p><p>Es repeteixen. Si triem els ${d.nn} llocs només amb les dades de ${etqA(R.per.A)}, en ${etqA(R.per.B)} sumen *${fmt(d.pB)} sinistres*: el que s'espera si cada lloc mantinguera el seu ritme (entre ${fmt(d.pLo)} i ${fmt(d.pHi)}, per l'atzar). Llocs qualssevol del mateix barri en sumarien uns ${fmt(d.pLoc)}. Baixen des de ${fmt(d.pA)} perquè els triem en el seu pitjor moment.</p><p>L'anell diu què en diu el Pla: continu, cita el lloc (${d.plL} de ${d.nn}); de punts, només cita el seu carrer (${d.plC}); sense anell, no l'esmenta (${d.plNo}). El Pla només publica els ${d.plTop} encreuaments i carrers amb més sinistres de cada col·lectiu: que no esmente un lloc no vol dir que no el tinga en compte. Demanem la llista completa.</p><p class="aviso">Fora queda el Jardí del Túria, el n.º ${d.tPr} amb bici per al Pla: els seus sinistres no porten una adreça que es puga situar. En 2022 el portal donava menys adreces exactes; per això cada sinistre compta segons com de bé es localitzaven els del seu any i tipus d'adreça.</p>`,
+  alameda:d=>`<p>El primer és el *passeig de l'Albereda amb la plaça de Saragossa*: *${d.n0} sinistres* amb bici o patinet en ${RANG}. També és el n.º ${d.ng0.pr} de la llista de cruïlles del Pla.</p><p>Cada punt és un d'eixos sinistres, al voltant del lloc on el va anotar la policia. Molts cauen en el mateix punt perquè s'anoten per la cruïlla.</p>`,
+  alameda2:d=>`<p>Amb qui xoquen? *${d.m0} de ${d.n0}* són contra un cotxe, una moto o un altre vehicle de motor.</p><p>Només ${d.s0} són caigudes sense ningú més, i ${d.d0} entre bicis o patinets.</p>`,
+  alameda3:d=>`<p>En *${d.pt} dels ${d.n0}* sinistres, l'atestat anota *no respectar la prioritat*: algú no va cedir el pas.</p><p>Segons el Pla, ací ja s'hi va fer una auditoria de seguretat viària (2024) i una reordenació de la cruïlla (2025). En la cruïlla (amb 30 m al voltant, la línia discontínua), els sinistres passen de ${d.ay[AÑOS.indexOf(ALA0)]} en ${ALA0} a ${d.ay[IU]} en ${ULT}. Però en tot el passeig de l'Albereda quasi no canvien (${R.ala_paseo.map((v, i) => `${AÑOS[i]}: ${fmt(v)}`).join("; ")}), i des de mitjan 2024 la policia anota menys sinistres «en la cruïlla» i més per número de portal. A més, un lloc triat per ser el pitjor sol millorar una mica per si sol. Sense un grup de comparació, el canvi no es pot atribuir a l'obra.</p><p class="aviso">La causa s'anota per al sinistre, no per a cada persona: no diu qui no va respectar la prioritat. Comptem des de ${ALA0} perquè en ${ALA0 - 1} el portal situava pitjor els sinistres.</p>`,
+  trafico:d=>`<p>Però tenir molts sinistres no sempre vol dir ser més perillós: pot ser que hi passe molta gent. Per a saber-ho cal el trànsit.</p><p>L'Ajuntament té *${d.nc} punts de comptatge* (${d.ncont} comptadors) en el carril bici. Compten bicis i, probablement, també patinets, sense separar-los.</p>`,
+  trafico2:d=>`<p>Portem cada punt de comptatge a un gràfic. Cap a la dreta, *la mitjana per al seu trànsit*: els sinistres que té, de mitjana, un punt amb un trànsit semblant i amb tants encreuaments al voltant. Cap amunt, els que ha tingut.</p><p>La franja és la variació habitual entre punts semblants (95 %): uns punts tenen més sinistres i altres menys sense que hi haja res especial. *${d.nalt}* punts estan clarament per damunt de la mitjana dels punts amb un trànsit semblant (plens, foscos): ho estan tant si es compten els sinistres a 75 com a 100 o a 150 m. ${d.nq} potser (plens, grisos); la resta, com la mitjana (buits).</p><p class="aviso">Estar per damunt de la mitjana no és una anomalia: és la part alta de la variació habitual. És una orientació per a mirar-hi, no un rànquing tancat, i només hi entren els sinistres pròxims a un punt de comptatge.</p>`,
+  trafico3:d=>`<p>Entre els punts de comptatge, *${d.dest.x.nom}* té molts sinistres (${d.dest.x.N}, el lloc ${d.dest.x.rb} per nombre), però també molt de trànsit: la mitjana per al seu trànsit hi seria uns ${fmt(d.dest.x.mu)}. Està com la mitjana.</p><p>*${d.dest.t.nom}* en té ${d.dest.t.N} on la mitjana seria uns ${fmt(d.dest.t.mu)}. Però si es miren per separat, amb bici n'hi ha ${d.dest.t.b[0]} (la mitjana, ${fmt(d.dest.t.b[1], 1)}) i amb patinet, ${d.dest.t.v[0]} (la mitjana, ${fmt(d.dest.t.v[1], 1)}): l'excés és només de patinet. *${d.dest.b.nom}*, ${d.dest.b.N} on la mitjana seria uns ${fmt(d.dest.b.mu)}: en una llista per nombre de sinistres seria el lloc ${d.dest.b.rb}. Ací passa amb la bici (${d.dest.b.b[0]}, mitjana ${fmt(d.dest.b.b[1], 1)}) i amb el patinet (${d.dest.b.v[0]}, mitjana ${fmt(d.dest.b.v[1], 1)}).</p><p class="aviso">${d.nalt_sv ? `En ${d.nalt_sv} dels ${d.nalt} punts clarament per damunt, l'excés és només de patinet.` : ""} Pot ser que el comptador no compte els patinets: aleshores hi passarien més patinets dels que diu i l'excés seria menor.</p>`,
+  falta:d=>`<p>Què falta per a poder seguir el Pla? Primer, *la línia base*. Proposem ${fmt(d.base)}, els sinistres de ${B}, però l'ha de fixar l'Ajuntament.</p>`,
+  falta2:d=>`<p>Segon, *la gravetat*. Els sinistres amb ferits greus passen de *${fmt(R.grav[0])} a ${fmt(R.grav[IU])}*, però no perquè siguen més greus.</p><p>Des de ${GRAV_COMP - 1} compta com a greu tot ingrés en l'hospital de més de 24 hores, i el canvi va entrar a poc a poc: durant ${GRAV_COMP - 1} la xifra puja trimestre a trimestre. ${A0} i ${GRAV_COMP - 1} són una transició; els greus només es poden comparar des de ${GRAV_COMP}. I la categoria «baixa gravetat» encara puja molt en 2025: la classificació no està del tot estable.</p><p class="aviso">Tots els sinistres de la ciutat, no sols els de bici o patinet.</p>`,
+  falta3:d=>`<p>Tercer, *saber qui passa*. *Fins a ${M1} sabíem quants patinets hi havia. Des d'aleshores, no.* En els conteos manuals del carril bici, els patinets passen del ${fmt(R.uso_manual[0].pat*100)} % (${R.uso_manual[0].año}) al ${fmt(R.uso_manual[R.uso_manual.length-1].pat*100)} % (${M1}).</p><p>Des de ${U0}, els punts de comptatge només donen el total: puja un ${fmt(R.uso_idx.idx[R.uso_idx.idx.length-1] - 100)} % fins a ${UU} (${R.uso_idx.n} comptadors amb dades tots els anys), però no sabem quina part són patinets. Sense això no es pot saber si el patinet té més risc o si només n'hi ha més.</p><p class="aviso">Conteos manuals (fonts externes, com a complement): ${R.uso_manual.map(m => m.año + ", " + m.f).join("; ")}. Total: suma de la IMD dels ${R.uso_idx.n} comptadors del carril bici amb dades tots els anys (Mobilitat).</p>`,
+  falta4:d=>`<p>Quart, i el més urgent: *les dades de cada any*. ${EV ? `Les de ${ULT} ja s'han publicat: ${fmt(JU.obs)} sinistres, *${T.va.r.jz[JU.estado]}*. ` : ""}${P26 ? `Les de ${P26}${P26 === MT["año_plan"] ? ", el primer any del Pla," : ""} *encara no estan publicades* en el portal de dades obertes. Sense elles, ningú de fora de l'Ajuntament pot saber si el Pla va al ritme: la senda marca ${fmt(d.s26)} sinistres per a ${P26}, i qualsevol xifra entre ${fmt(d.b26[0])} i ${fmt(d.b26[1])} hi seria compatible. Quan arriben, també caldrà mirar els sinistres amb ferits i la part de la ciutat, per a descartar que una baixada siga només un canvi en com es registren.` : `Cada any ha d'arribar al portal a temps per a seguir la senda.`}</p><p>Per a mesurar el Pla caldria:</p><ol class="pide"><li>una línia base oficial;</li><li>una sèrie de gravetat amb el mateix criteri;</li><li>comptar els patinets a banda de les bicis i publicar les intensitats de trànsit en el portal de dades obertes;</li><li class="clave"><span>publicar cada any els sinistres${P26 ? `, començant per ${P26}` : ""}.</span></li></ol><p class="aviso">El mateix Pla preveu indicadors anuals, una memòria anual i un quadre de comandament (accions 7.1.1 i 7.1.2). El conjunt de dades de ${RANG} ja existeix: només cal continuar-lo.</p>`,
+  cruce:d=>`<p>I el teu carrer? En l'observatori pots buscar un carrer o una cruïlla. Els ${d.nn} llocs amb més sinistres i els ${d.nc} punts de comptatge tenen fitxa completa: any a any, amb qui xoquen i què en diu el Pla. Per a la resta, la llista dels seus sinistres.</p><p><a href="observatori.html">Busca el teu encreuament en l'observatori →</a></p>`},
+tabla:{ver:"Veure les dades",any:"Any",sin:"Sinistres",senda:"Senda proposada",marge:"Compatible amb la senda (95 %)",lugar:"Lloc",n:"Sinistres",cont:"Punt de comptatge",obs:"Observats",esp:"Mitjana amb un trànsit semblant",con:"Amb qui",prio:"Prioritat",grav:"Ferits greus",upat:"Patinets (conteos manuals)",uidx:`Trànsit total (${U0} = 100)`,plan:"Pla",pl:["no l'esmenta","cita el lloc","només el carrer"]},
+sab_ey:"Per a acabar", sab_h:"El que sabem i el que no",
+sab:d=>sabHTML([
+  ["El que se sosté", [
+    [`Hi ha llocs on els sinistres es concentren any rere any: triats amb ${etqA(R.per.A)}, en ${etqA(R.per.B)} en tenen tants com si mantingueren el seu ritme (${fmt(d.pB)}, entre ${fmt(d.pLo)} i ${fmt(d.pHi)}), i molts més que llocs qualssevol (${fmt(d.pLoc)}). La llista quasi no canvia si es mouen els límits de les cruïlles: se'n mantenen entre ${d.estMin} i ${d.estMax} de ${d.nn}.`, "lugares"],
+    [`El patinet canvia la composició: els sinistres amb patinet passen de ${fmt(R.vmp[0])} a ${fmt(R.vmp[IU])}, i els de bici, de ${fmt(R.bici[0])} a ${fmt(R.bici[IU])}.`, "uso"],
+    [`Abans del Pla, els sinistres amb bici o patinet pugen un ${fmt(d.previa,0)} %, igual que tots els de la ciutat (${fmt(d.vCiudad,0)} %).`, "uso"]]],
+  ["El que encara no es pot saber", [
+    [EV ? `Si el Pla funciona: de moment, només ${ULT - B === 1 ? "un any" : `${ULT - B} anys`} amb dades del Pla (${ULT}: ${T.va.r.jz[JU.estado]}).` : `Si el Pla funciona: falten les dades de ${P26 || MT.desde}, el primer any del Pla.`, "meta"],
+    [`Si el patinet té més risc per viatge que la bici: cap comptador mesura quants patinets circulen.`, "limites"]]],
+  ["El que hem descartat", [
+    [`Un rànquing de punts negres propis del patinet: amb pocs sinistres per lloc no es detecta cap diferència entre bici i patinet («no detectable» no vol dir «no existeix»).`, "limites"],
+    [`Que el patinet tinga més sinistres «amb el mateix ús»: el càlcul estava inflat perquè cada any se situen més sinistres en el mapa.`, "revisiones"],
+    [`Que la baixada de l'Albereda amb Saragossa es deba a l'obra: en tot el passeig quasi no canvia, i ha canviat com s'anota l'adreça.`, "lugares"]]]]),
+fin_ey:"Continua", fin_h:"Busca el teu encreuament",
+fin_p:d=>`L'observatori situa en el mapa el ${fmt(d.cob,0)} % dels sinistres amb bici o patinet de ${A0} a ${ULT} (els que porten una adreça que es pot situar), amb fitxa completa per als ${d.nn} llocs amb més sinistres i els ${d.nc} punts de comptatge.`,
+fin_a:"Obri l'observatori →",
+fuentes:`Dades: Portal de Dades Obertes de l'Ajuntament de València (sinistres de trànsit ${RANG}, carrerer, punts de comptatge del carril bici) i Pla Director de Seguretat Viària 2026-2030.`,
+titol:`Informe ${ULT} · Observatori de la bici i el patinet de València`},
+es:{marca:`Observatorio de la bici y el patinete de València <span>· Informe ${ULT}</span>`, salta:"Saltar al relato", sinanim:"Sin animación",nav_pla:"El Plan, al día",nav_obs:"Observatorio",nav_met:"Método",
+ey:`Informe anual · datos ${RANG}`, h1:"Lo que promete el Plan y lo que dicen los datos",
+sub:`El indicador de la acción 3.2.2 del Plan Director de Seguridad Vial pide reducir a la mitad los siniestros con bicis y patinetes para ${AM}. Hemos cruzado el Plan con los datos abiertos del Ayuntamiento para ver de dónde se parte y qué hace falta para seguirlo.`,
+tab:{tipo:"Tipo",ind:"Indicador",form:"Fórmula",base:"Línea base",meta:`Meta ${AM}`,tipo_v:"Impacto",ind_v:"Reducción de siniestros con ciclistas/VMP",form_v:"Comparación anual",
+  ref:"Plan Director de Seguridad Vial 2026-2030, acción 3.2.2", sin:"sin línea base", prop:"propuesta nuestra"},
+r:{sin:"siniestros con bici o patinete",base:"Base",meta:`Meta ${AM}`,senda:"senda propuesta",pend:["pendiente","de publicar"],senda26:"compatible con la senda",prev:"antes del Plan",ob:"observado",
+  sb:"Solo bici",am:"Choque bici–patinete",sp:"Solo patinete",bici:"Bici",pat:"Patinete",dc:"de cada 10 con patinete",
+  lug:"lugares con más siniestros",lug1:"Pg. Alameda × pl. Zaragoza",pla1:n=>`n.º ${n} también en la lista de cruces del Plan`,
+  k:{m:"Coche, moto u otro vehículo",s:"Solo (caída)",w:"Peatón",d:"Otra bici o patinete"},
+  prio:"no respetar la prioridad",cont:"puntos de conteo del carril bici",xs:`Media para su tráfico (siniestros ${etqA(R.anys_eb)})`,ys:`Siniestros que ha tenido (${etqA(R.anys_eb)})`,
+  diag:"la media para el tráfico",banda:"variación entre puntos parecidos (95 %)",grav:"Siniestros con heridos graves (todos, en toda la ciudad)",crit:`comparable desde ${GRAV_COMP}`,nocomp:"transición",
+  uso:"Carril bici: quién pasa",usoSep:`desde ${U0}, solo el total (${U0} = 100)`,usoMan:"% de patinetes (conteos manuales)",
+  usoNota:n=>`Conteos manuales: fuentes externas, como complemento.`,
+  jz:{debajo:"por debajo de la senda",compatible:"compatible con la senda",encima:"por encima de la senda"},
+  cruce:"Busca el tuyo",nota:"Los siniestros situados en el mismo punto se separan para poder verlos.",de48:(a,b)=>`${a} de ${b}`},
+ley:{nus:"el cruce, con 30 m alrededor",ob:"observado",hu:"senda propuesta (desde la base)",mar:"margen del azar alrededor de la senda (95 %)",bici:"solo bici",pat:"solo patinete",amb:"choque bici–patinete",
+  bici2:"bici (con los choques bici–patinete)",pat2:"patinete (con los choques bici–patinete)",
+  anillo:["sin anillo: el Plan no lo menciona","el Plan cita este lugar","el Plan solo cita su calle"],lane:"red ciclista",pc:"punto de conteo",
+  clar:"claramente por encima de la media",quiza:"quizá por encima",normal:"como la media",banda:"variación entre puntos parecidos (95 %)",prio:"con «no respetar la prioridad»",sinp:"sin ese factor",
+  biciU:"bicis",patU:"patinetes",total:"tráfico total (no se sabe qué parte son patinetes)",ferits:"heridos graves (comparable)",trans:"transición (no comparable)"},
+aria:{
+  promesa:d=>`Fila de la tabla de indicadores del Plan: reducción del 50 % de los siniestros con ciclistas y patinetes para ${AM}, con la casilla de línea base vacía.`,
+  partida:d=>`Barras de siniestros con bici o patinete: ${AÑOS.map((a,i)=>a+", "+fmt(R.tot[i])).join("; ")}. ${B} es la base${d.max?" y el peor año de la serie":""}. Senda propuesta en círculos huecos desde ${MT.desde} hasta ${fmt(d.meta)} en ${AM}.`,
+  y2025:d=>`Antes del Plan: de ${fmt(R.tot[0])} siniestros en ${AÑOS[0]} a ${fmt(d.base)} en ${B}, un ${fmt(d.previa,0)} % más. ${EV ? `${ULT}: ${fmt(JU.obs)}, ${T.es.r.jz[JU.estado]}. ` : ""}${P26 ? P26+": pendiente de publicar. " : ""}Para llegar a ${fmt(d.meta)} en ${AM} hay que bajar un ${fmt(d.ritmo,1)} % cada año desde ${MT.desde}.`,
+  quien:d=>`Cada barra partida, de abajo arriba, en solo bici, solo patinete y choque bici–patinete. ${ULT}: ${fmt(R.serie[IU].b)}, ${fmt(R.serie[IU].p)} y ${fmt(R.serie[IU].a)}.`,
+  quien2:d=>`Líneas: bici de ${fmt(R.bici[0])} a ${fmt(R.bici[IU])}; patinete de ${fmt(R.vmp[0])} a ${fmt(R.vmp[IU])}. ${d.dc10} de cada 10 con patinete en ${ULT}.`,
+  donde:d=>`Mapa de València con los ${d.nn} lugares con más siniestros; el primero, Alameda con Zaragoza, ${d.ng0.n}.`,
+  alameda:d=>`Zoom al paseo de la Alameda en torno a la plaza de Zaragoza: los ${d.n0} siniestros de ${RANG}, agrupados en torno al punto donde se anotaron, y el cruce con 30 m alrededor en línea discontinua.`,
+  alameda2:d=>`Los ${d.n0} siniestros agrupados por con quién: vehículo de motor ${d.m0}, solo ${d.s0}, peatón ${d.w0}, otra bici o patinete ${d.d0}.`,
+  alameda3:d=>`En ${d.pt} de los ${d.n0} siniestros consta no respetar la prioridad. Siniestros por año: ${d.ay.join(", ")}.`,
+  trafico:d=>`Mapa con los ${d.nc} puntos de conteo del carril bici.`,
+  trafico2:d=>`Dispersión: la media para el tráfico frente a los siniestros observados en ${d.nc} puntos de conteo; ${d.nalt} claramente por encima y ${d.nq} quizá.`,
+  trafico3:d=>`Destacados: ${d.dest.x.nom} ${d.dest.x.N} frente a una media de ${fmt(d.dest.x.mu)}; ${d.dest.t.nom} ${d.dest.t.N} frente a ${fmt(d.dest.t.mu)}; ${d.dest.b.nom} ${d.dest.b.N} frente a ${fmt(d.dest.b.mu)}.`,
+  falta:d=>`La tabla del Plan con la casilla de línea base rellena con nuestra propuesta: ${B}, ${fmt(d.base)} siniestros.`,
+  falta2:d=>`Siniestros con heridos graves: ${R.grav.map((v,i)=>AÑOS[i]+", "+fmt(v)).join("; ")}. ${A0} y ${GRAV_COMP - 1} son de transición por el cambio de criterio; comparable desde ${GRAV_COMP}.`,
+  falta3:d=>`Carril bici: proporción de patinetes en conteos manuales, ${R.uso_manual.map(m => m.año + " " + fmt(m.pat*100) + " %").join(", ")}; desde ${U0} solo el total de los puntos de conteo (${U0} = 100): ${R.uso_idx.idx.map(fmt).join(", ")}, sin saber qué parte son patinetes.`,
+  falta4:d=>`Siniestros con bici o patinete: ${R.tot.map((v,i)=>AÑOS[i]+", "+fmt(v)).join("; ")}.${P26 ? ` ${P26}, pendiente de publicar; senda ${fmt(d.s26)}, compatible entre ${fmt(d.b26[0])} y ${fmt(d.b26[1])}.` : ""}${EV ? ` ${ULT}: ${T.es.r.jz[JU.estado]}.` : ""} Meta ${AM} con base ${B}: ${fmt(d.meta)}.`, cruce:d=>`Mapa de la ciudad con los lugares y los puntos de conteo.`},
+tit:{promesa:"La promesa",partida:"El punto de partida",y2025:"Antes del Plan, a más",quien:"Bici, patinete o los dos",quien2:"El patinete crece",donde:"Dónde se acumulan",alameda:"La Alameda con Zaragoza",alameda2:"Con quién chocan",alameda3:"No ceder el paso",trafico:"Cuánta gente pasa",trafico2:"Por encima de la media para el tráfico",trafico3:"Tres puntos que destacan",falta:"Qué falta: la línea base",falta2:"Qué falta: la gravedad",falta3:"Qué falta: saber quién pasa",falta4:"Qué falta: los datos de cada año",cruce:"Tu calle"},
+pasos:{
+  promesa:d=>`<p>En la tabla de indicadores del Plan Director de Seguridad Vial 2026-2030, la acción 3.2.2 pide *reducir a la mitad* los siniestros con ciclistas y patinetes para ${AM}.</p><p>Como en la mayoría de los indicadores del Plan, la casilla de la línea base está vacía, y tampoco dice cómo se cuenta ni cómo se juzga cada año. *¿La mitad de qué?*</p>`,
+  partida:d=>`<p>Proponemos rellenar esa casilla con *${B}: ${fmt(d.base)} siniestros* con bici o patinete. Es el último año antes del Plan, que el propio Plan ya analiza${d.max?", y el peor de la serie":""}.</p><p>Si cada año bajara en la misma proporción (un ${fmt(d.anual,1)} %), la senda pasaría por ${fmt(d.s26)} en ${MT.desde} y llegaría a *${fmt(d.meta)}* en ${AM}. Los círculos huecos son esa senda: es una propuesta nuestra, no del Plan.</p><p>La franja alrededor de cada círculo es el margen del azar: aunque todo fuera según la senda, cada año variaría. Para ${MT.desde}, cualquier cifra entre ${fmt(d.b26[0])} y ${fmt(d.b26[1])} sería compatible con la senda.</p><p class="aviso">${d.max ? `Ojo: ${B} es el peor año de la serie, y después de un año así el siguiente suele bajar aunque no cambie nada. Por eso lo comprobamos también con la media ${d.em.etq} (meta ${fmt(d.em.meta)}). ` : ""}Cada siniestro cuenta una sola vez, también los choques bici–patinete; contando por vehículo, como las tablas del Plan, la meta sería ${fmt(d.veh.meta)}.</p>`,
+  y2025:d=>`<p>Antes del Plan, los siniestros con bici o patinete suben: de ${fmt(R.tot[0])} en ${AÑOS[0]} a ${fmt(d.base)} en ${B}, *un ${fmt(d.previa,0)} % más*. Solo en ${B}, un ${fmt(d.previaAnt,1)} % más que el año anterior.</p><p>Pero *todos los siniestros de la ciudad suben igual* (un ${fmt(d.vCiudad,0)} %): la parte de la bici y el patinete se queda en el ${fmt(d.cuota1,1)} %. Lo que más crece son los siniestros sin heridos (un ${fmt(d.vSinH,0)} %), y en julio de 2024 la Policía Local creó un nuevo sistema de datos de siniestros (SIASV). Con heridos, la bici y el patinete sí suben más que el resto: un ${fmt(d.vBvH,0)} %, frente a un ${fmt(d.vRestoH,0)} %.</p><p>Para llegar a ${fmt(d.meta)} en ${AM}, hay que bajar *un ${fmt(d.ritmo,1)} % cada año* desde ${MT.desde}.${EV ? ` En ${ULT} ha habido *${fmt(JU.obs)} siniestros*: *${T.es.r.jz[JU.estado]}* (la senda prevé ${fmt(JU.senda)}; sería compatible cualquier cifra entre ${fmt(JU.banda[0])} y ${fmt(JU.banda[1])}).` : P26 ? ` Los datos de ${P26}, el primer año del Plan, *aún no están publicados*: hasta entonces no se puede decir cómo va el Plan.` : ""}</p>${EV ? "" : `<p class="aviso">Primeras señales, pendientes de confirmar con los datos abiertos: según la Policía Local (balance del Plan Vector, ${d.ctx.fecha}), de enero a mayo de 2026 hubo unos ${d.ctx.vmp_menos} siniestros con patinete menos que en el mismo periodo de 2025. <a href="${d.ctx.url}">Fuente</a>.</p>`}`,
+  quien:d=>`<p>¿Quién hay detrás? Partimos cada barra en tres: siniestros con solo bici, con solo patinete y choques bici–patinete.</p>`,
+  quien2:d=>`<p>*La bici se mantiene*: ${fmt(R.bici[0])} siniestros en ${A0} y ${fmt(R.bici[IU])} en ${ULT}.</p><p>*El patinete pasa de ${fmt(R.vmp[0])} a ${fmt(R.vmp[IU])}.* En ${ULT}, *${d.dc10} de cada 10* siniestros con bici o patinete tienen un patinete implicado.</p><p class="aviso">Ahora cada línea cuenta todos los siniestros de su vehículo: un choque bici–patinete cuenta en las dos, como en el Plan. Sin saber cuántos patinetes circulan, no se puede decir si el riesgo ha subido o si hay más.</p>`,
+  donde:d=>`<p>¿Dónde pasan? Cada círculo es uno de los *${d.nn} lugares con más siniestros* entre ${A0} y ${ULT}: un cruce, con 30 m alrededor, o un tramo de calle de 150 m como máximo. Cuanto más grande, más siniestros, y se reparte entre solo bici, solo patinete y choques bici–patinete.</p><p>Se repiten. Si elegimos los ${d.nn} lugares solo con los datos de ${etqA(R.per.A)}, en ${etqA(R.per.B)} suman *${fmt(d.pB)} siniestros*: lo que se espera si cada lugar mantuviera su ritmo (entre ${fmt(d.pLo)} y ${fmt(d.pHi)}, por azar). Lugares cualesquiera del mismo barrio sumarían unos ${fmt(d.pLoc)}. Bajan desde ${fmt(d.pA)} porque los elegimos en su peor momento.</p><p>El anillo dice qué dice el Plan: continuo, cita el lugar (${d.plL} de ${d.nn}); de puntos, solo cita su calle (${d.plC}); sin anillo, no lo menciona (${d.plNo}). El Plan solo publica los ${d.plTop} cruces y calles con más siniestros de cada colectivo: que no mencione un lugar no quiere decir que no lo tenga en cuenta. Pedimos la lista completa.</p><p class="aviso">Fuera queda el Jardín del Turia, el n.º ${d.tPr} con bici para el Plan: sus siniestros no llevan una dirección que se pueda situar. En 2022 el portal daba menos direcciones exactas; por eso cada siniestro cuenta según lo bien que se localizaban los de su año y tipo de dirección.</p>`,
+  alameda:d=>`<p>El primero es el *paseo de la Alameda con la plaza de Zaragoza*: *${d.n0} siniestros* con bici o patinete en ${RANG}. También es el n.º ${d.ng0.pr} de la lista de cruces del Plan.</p><p>Cada punto es uno de esos siniestros, en torno al lugar donde lo anotó la policía. Muchos caen en el mismo punto porque se anotan por el cruce.</p>`,
+  alameda2:d=>`<p>¿Con quién chocan? *${d.m0} de ${d.n0}* son contra un coche, una moto u otro vehículo de motor.</p><p>Solo ${d.s0} son caídas sin nadie más, y ${d.d0} entre bicis o patinetes.</p>`,
+  alameda3:d=>`<p>En *${d.pt} de los ${d.n0}* siniestros, el atestado anota *no respetar la prioridad*: alguien no cedió el paso.</p><p>Según el Plan, aquí ya se hizo una auditoría de seguridad vial (2024) y una reordenación del cruce (2025). En el cruce (con 30 m alrededor, la línea discontinua), los siniestros pasan de ${d.ay[AÑOS.indexOf(ALA0)]} en ${ALA0} a ${d.ay[IU]} en ${ULT}. Pero en todo el paseo de la Alameda apenas cambian (${R.ala_paseo.map((v, i) => `${AÑOS[i]}: ${fmt(v)}`).join("; ")}), y desde mediados de 2024 la policía anota menos siniestros «en el cruce» y más por número de portal. Además, un lugar elegido por ser el peor suele mejorar algo por sí solo. Sin un grupo de comparación, el cambio no se puede atribuir a la obra.</p><p class="aviso">La causa se anota para el siniestro, no para cada persona: no dice quién no respetó la prioridad. Contamos desde ${ALA0} porque en ${ALA0 - 1} el portal situaba peor los siniestros.</p>`,
+  trafico:d=>`<p>Pero tener muchos siniestros no siempre significa ser más peligroso: puede que pase mucha gente. Para saberlo hace falta el tráfico.</p><p>El Ayuntamiento tiene *${d.nc} puntos de conteo* (${d.ncont} contadores) en el carril bici. Cuentan bicis y, probablemente, también patinetes, sin separarlos.</p>`,
+  trafico2:d=>`<p>Llevamos cada punto de conteo a un gráfico. Hacia la derecha, *la media para su tráfico*: los siniestros que tiene, de media, un punto con un tráfico parecido y con tantos cruces alrededor. Hacia arriba, los que ha tenido.</p><p>La franja es la variación habitual entre puntos parecidos (95 %): unos puntos tienen más siniestros y otros menos sin que haya nada especial. *${d.nalt}* puntos están claramente por encima de la media de los puntos con un tráfico parecido (llenos, oscuros): lo están tanto si se cuentan los siniestros a 75 como a 100 o a 150 m. ${d.nq}, quizá (llenos, grises); el resto, como la media (huecos).</p><p class="aviso">Estar por encima de la media no es una anomalía: es la parte alta de la variación habitual. Es una orientación para mirar, no un ranking cerrado, y solo entran los siniestros cercanos a un punto de conteo.</p>`,
+  trafico3:d=>`<p>Entre los puntos de conteo, *${d.dest.x.nom}* tiene muchos siniestros (${d.dest.x.N}, el puesto ${d.dest.x.rb} por número), pero también mucho tráfico: la media para su tráfico serían unos ${fmt(d.dest.x.mu)}. Está como la media.</p><p>*${d.dest.t.nom}* tiene ${d.dest.t.N} donde la media serían unos ${fmt(d.dest.t.mu)}. Pero si se miran por separado, con bici hay ${d.dest.t.b[0]} (la media, ${fmt(d.dest.t.b[1], 1)}) y con patinete, ${d.dest.t.v[0]} (la media, ${fmt(d.dest.t.v[1], 1)}): el exceso es solo de patinete. *${d.dest.b.nom}*, ${d.dest.b.N} donde la media serían unos ${fmt(d.dest.b.mu)}: en una lista por número de siniestros sería el puesto ${d.dest.b.rb}. Aquí pasa con la bici (${d.dest.b.b[0]}, media ${fmt(d.dest.b.b[1], 1)}) y con el patinete (${d.dest.b.v[0]}, media ${fmt(d.dest.b.v[1], 1)}).</p><p class="aviso">${d.nalt_sv ? `En ${d.nalt_sv} de los ${d.nalt} puntos claramente por encima, el exceso es solo de patinete.` : ""} Puede que el contador no cuente los patinetes: entonces pasarían más patinetes de los que dice y el exceso sería menor.</p>`,
+  falta:d=>`<p>¿Qué falta para poder seguir el Plan? Primero, *la línea base*. Proponemos ${fmt(d.base)}, los siniestros de ${B}, pero debe fijarla el Ayuntamiento.</p>`,
+  falta2:d=>`<p>Segundo, *la gravedad*. Los siniestros con heridos graves pasan de *${fmt(R.grav[0])} a ${fmt(R.grav[IU])}*, pero no porque sean más graves.</p><p>Desde ${GRAV_COMP - 1} cuenta como grave todo ingreso en el hospital de más de 24 horas, y el cambio entró poco a poco: durante ${GRAV_COMP - 1} la cifra sube trimestre a trimestre. ${A0} y ${GRAV_COMP - 1} son una transición; los graves solo se pueden comparar desde ${GRAV_COMP}. Y la categoría «baja gravedad» aún sube mucho en 2025: la clasificación no está del todo estable.</p><p class="aviso">Todos los siniestros de la ciudad, no solo los de bici o patinete.</p>`,
+  falta3:d=>`<p>Tercero, *saber quién pasa*. *Hasta ${M1} sabíamos cuántos patinetes había. Desde entonces, no.* En los conteos manuales del carril bici, los patinetes pasan del ${fmt(R.uso_manual[0].pat*100)} % (${R.uso_manual[0].año}) al ${fmt(R.uso_manual[R.uso_manual.length-1].pat*100)} % (${M1}).</p><p>Desde ${U0}, los puntos de conteo solo dan el total: sube un ${fmt(R.uso_idx.idx[R.uso_idx.idx.length-1] - 100)} % hasta ${UU} (${R.uso_idx.n} contadores con datos todos los años), pero no sabemos qué parte son patinetes. Sin eso no se puede saber si el patinete tiene más riesgo o si solo hay más.</p><p class="aviso">Conteos manuales (fuentes externas, como complemento): ${R.uso_manual.map(m => m.año + ", " + m.f).join("; ")}. Total: suma de la IMD de los ${R.uso_idx.n} contadores del carril bici con datos todos los años (Movilidad).</p>`,
+  falta4:d=>`<p>Cuarto, y lo más urgente: *los datos de cada año*. ${EV ? `Los de ${ULT} ya se han publicado: ${fmt(JU.obs)} siniestros, *${T.es.r.jz[JU.estado]}*. ` : ""}${P26 ? `Los de ${P26}${P26 === MT["año_plan"] ? ", el primer año del Plan," : ""} *aún no están publicados* en el portal de datos abiertos. Sin ellos, nadie fuera del Ayuntamiento puede saber si el Plan va al ritmo: la senda marca ${fmt(d.s26)} siniestros para ${P26}, y cualquier cifra entre ${fmt(d.b26[0])} y ${fmt(d.b26[1])} sería compatible con ella. Cuando lleguen, también habrá que mirar los siniestros con heridos y la parte de la ciudad, para descartar que una bajada sea solo un cambio en cómo se registran.` : `Cada año debe llegar al portal a tiempo para seguir la senda.`}</p><p>Para medir el Plan haría falta:</p><ol class="pide"><li>una línea base oficial;</li><li>una serie de gravedad con el mismo criterio;</li><li>contar los patinetes aparte de las bicis y publicar las intensidades de tráfico en el portal de datos abiertos;</li><li class="clave"><span>publicar cada año los siniestros${P26 ? `, empezando por ${P26}` : ""}.</span></li></ol><p class="aviso">El propio Plan prevé indicadores anuales, una memoria anual y un cuadro de mando (acciones 7.1.1 y 7.1.2). El conjunto de datos de ${RANG} ya existe: basta con continuarlo.</p>`,
+  cruce:d=>`<p>¿Y tu calle? En el observatorio puedes buscar una calle o un cruce. Los ${d.nn} lugares con más siniestros y los ${d.nc} puntos de conteo tienen ficha completa: año a año, con quién chocan y qué dice el Plan. Para el resto, la lista de sus siniestros.</p><p><a href="observatori.html">Busca tu cruce en el observatorio →</a></p>`},
+tabla:{ver:"Ver los datos",any:"Año",sin:"Siniestros",senda:"Senda propuesta",marge:"Compatible con la senda (95 %)",lugar:"Lugar",n:"Siniestros",cont:"Punto de conteo",obs:"Observados",esp:"Media con un tráfico parecido",con:"Con quién",prio:"Prioridad",grav:"Heridos graves",upat:"Patinetes (conteos manuales)",uidx:`Tráfico total (${U0} = 100)`,plan:"Plan",pl:["no lo menciona","cita el lugar","solo la calle"]},
+sab_ey:"Para terminar", sab_h:"Lo que sabemos y lo que no",
+sab:d=>sabHTML([
+  ["Lo que se sostiene", [
+    [`Hay lugares donde los siniestros se concentran año tras año: elegidos con ${etqA(R.per.A)}, en ${etqA(R.per.B)} tienen tantos como si mantuvieran su ritmo (${fmt(d.pB)}, entre ${fmt(d.pLo)} y ${fmt(d.pHi)}), y muchos más que lugares cualesquiera (${fmt(d.pLoc)}). La lista casi no cambia si se mueven los límites de los cruces: se mantienen entre ${d.estMin} y ${d.estMax} de ${d.nn}.`, "lugares"],
+    [`El patinete cambia la composición: los siniestros con patinete pasan de ${fmt(R.vmp[0])} a ${fmt(R.vmp[IU])}, y los de bici, de ${fmt(R.bici[0])} a ${fmt(R.bici[IU])}.`, "uso"],
+    [`Antes del Plan, los siniestros con bici o patinete suben un ${fmt(d.previa,0)} %, igual que todos los de la ciudad (${fmt(d.vCiudad,0)} %).`, "uso"]]],
+  ["Lo que aún no se puede saber", [
+    [EV ? `Si el Plan funciona: de momento, solo ${ULT - B === 1 ? "un año" : `${ULT - B} años`} con datos del Plan (${ULT}: ${T.es.r.jz[JU.estado]}).` : `Si el Plan funciona: faltan los datos de ${P26 || MT.desde}, el primer año del Plan.`, "meta"],
+    [`Si el patinete tiene más riesgo por viaje que la bici: ningún contador mide cuántos patinetes circulan.`, "limites"]]],
+  ["Lo que hemos descartado", [
+    [`Un ranking de puntos negros propios del patinete: con pocos siniestros por lugar no se detecta ninguna diferencia entre bici y patinete («no detectable» no quiere decir «no existe»).`, "limites"],
+    [`Que el patinete tenga más siniestros «con el mismo uso»: el cálculo estaba inflado porque cada año se sitúan más siniestros en el mapa.`, "revisiones"],
+    [`Que la bajada de la Alameda con Zaragoza se deba a la obra: en todo el paseo apenas cambia, y ha cambiado cómo se anota la dirección.`, "lugares"]]]]),
+fin_ey:"Continúa", fin_h:"Busca tu cruce",
+fin_p:d=>`El observatorio sitúa en el mapa el ${fmt(d.cob,0)} % de los siniestros con bici o patinete de ${A0} a ${ULT} (los que llevan una dirección que se puede situar), con ficha completa para los ${d.nn} lugares con más siniestros y los ${d.nc} puntos de conteo.`,
+fin_a:"Abre el observatorio →",
+fuentes:`Datos: Portal de Datos Abiertos del Ajuntament de València (siniestros de tráfico ${RANG}, callejero, puntos de conteo del carril bici) y Plan Director de Seguridad Vial 2026-2030.`,
+titol:`Informe ${ULT} · Observatorio de la bici y el patinete de València`}};
+
+// ---------- buscador y teclado en los mapas y la dispersión (06/11; pendiente 37) ----------
+Object.assign(T.va,{
+bus_l:"Busca un lloc o un punt de comptatge",bus_ph:"Escriu el nom d'un carrer",
+bus_ajuda:d=>`Entre els ${d.nn} llocs amb més sinistres i els ${d.nc} punts de comptatge. Amb el teclat: fletxa avall per a anar a la llista, Intro per a triar.`,
+bus_tots:q=>`Busca «${q}» en tots els sinistres de l'observatori →`,
+bus_tipus:{lloc:"lloc amb més sinistres",punt:"punt de comptatge"},
+bus_fitxa_e:{lloc:"fitxa del lloc",carrer:"fitxa del carrer"},
+bus_lloc:(n,i,nn)=>`Número ${i} dels ${nn} llocs amb més sinistres amb bici o patinet: <b>${fmt(n)}</b> sinistres de ${RANG}.`,
+bus_pl:["El Pla Director no l'esmenta.","El Pla Director cita aquest lloc.","El Pla Director només cita el seu carrer."],
+bus_punt:(n,mu)=>`<b>${fmt(n)}</b> sinistres al voltant d'aquest punt de comptatge; la mitjana dels punts amb un trànsit semblant és d'uns ${mu}.`,
+bus_nv:["Com la mitjana.","Potser per damunt de la mitjana.","Clarament per damunt de la mitjana."],
+bus_sv:"L'excés és només de patinet: pot ser que el comptador no compte els patinets.",
+bus_fitxa:"Obri la fitxa en l'observatori →",
+exp_ajuda:"Gràfic explorable amb el teclat: fletxes per a passar d'un element a un altre, Inici i Fi per al primer i l'últim, Intro per a obrir-ne la fitxa en l'observatori, Esc per a amagar l'etiqueta.",
+exp_neg:(i,nom,n,pl)=>`${i}. ${nom}: ${fmt(n)} sinistres de ${RANG}. ${pl}`,
+exp_sc:(nom,n,mu,nv)=>`${nom}: ${fmt(n)} sinistres; la mitjana dels punts amb un trànsit semblant, ${mu}. ${nv}`
+});
+Object.assign(T.es,{
+bus_l:"Busca un lugar o un punto de conteo",bus_ph:"Escribe el nombre de una calle",
+bus_ajuda:d=>`Entre los ${d.nn} lugares con más siniestros y los ${d.nc} puntos de conteo. Con el teclado: flecha abajo para ir a la lista, Intro para elegir.`,
+bus_tots:q=>`Busca «${q}» en todos los siniestros del observatorio →`,
+bus_tipus:{lloc:"lugar con más siniestros",punt:"punto de conteo"},
+bus_fitxa_e:{lloc:"ficha del lugar",carrer:"ficha de la calle"},
+bus_lloc:(n,i,nn)=>`Número ${i} de los ${nn} lugares con más siniestros con bici o patinete: <b>${fmt(n)}</b> siniestros de ${RANG}.`,
+bus_pl:["El Plan Director no lo menciona.","El Plan Director cita este lugar.","El Plan Director solo cita su calle."],
+bus_punt:(n,mu)=>`<b>${fmt(n)}</b> siniestros alrededor de este punto de conteo; la media de los puntos con un tráfico parecido es de unos ${mu}.`,
+bus_nv:["Como la media.","Quizá por encima de la media.","Claramente por encima de la media."],
+bus_sv:"El exceso es solo de patinete: puede que el contador no cuente los patinetes.",
+bus_fitxa:"Abre la ficha en el observatorio →",
+exp_ajuda:"Gráfico explorable con el teclado: flechas para pasar de un elemento a otro, Inicio y Fin para el primero y el último, Intro para abrir su ficha en el observatorio, Esc para ocultar la etiqueta.",
+exp_neg:(i,nom,n,pl)=>`${i}. ${nom}: ${fmt(n)} siniestros de ${RANG}. ${pl}`,
+exp_sc:(nom,n,mu,nv)=>`${nom}: ${fmt(n)} siniestros; la media de los puntos con un tráfico parecido, ${mu}. ${nv}`
+});
+
+const ESTADOS = Object.keys(T.va.pasos);
+const SOLO_TEXTO = new Set();                    // pasos sin figura propia (se atenúa la anterior); ahora ninguno
+const FIG_DE = {};
+
+// ---------- colores concretos (d3 no interpola var()) ----------
+let P = {};
+function leerTokens(){ const cs = getComputedStyle(document.documentElement);
+  ["ink","ink2","mute","line","bici","pat","amb","lane","sel","warn","meta","bg","surface","hl"].forEach(k => P[k] = cs.getPropertyValue("--"+k).trim()); }
+
+// ---------- geometría por tamaño (no cambia entre estados) ----------
+function geom(W, H, ley){
+  const F = {l: 46, r: W - 14, t: 46, b: H - ley - 30};
+  const G = {W, H, F};
+  const feat = {type:"MultiLineString", coordinates:R.mapa.princ};
+  // encuadre: la caja del núcleo urbano (el exportador recorta vías y carril bici a ese núcleo), con margen
+  G.proj = d3.geoMercator().fitExtent([[16, 16], [W - 16, H - ley - 16]], {type: "MultiPoint", coordinates: R.nucleo_bb});
+  G.cont = R.sc.map(d => G.proj([d.lon, d.lat]));
+  G.neg = R.negros.map(n => G.proj([n.lon, n.lat]));
+  // siniestros del primer lugar: los que comparten coordenada se empaquetan (d3.packSiblings) alrededor de ella
+  const grupos = d3.group(D.ala.map((d, i) => ({i, d})), x => x.d.lon + "," + x.d.lat);
+  G.ala = []; G.alaOff = [];
+  for (const [, xs] of grupos){ const cs = xs.map(() => ({r: 4.6})); d3.packSiblings(cs);
+    xs.forEach((x, j) => { G.ala[x.i] = G.proj([x.d.lon, x.d.lat]); G.alaOff[x.i] = [cs[j].x, cs[j].y]; }); }
+  const vista = (bb, m) => { const [[x0, y0], [x1, y1]] = bb, w = W, h = H - ley;
+    const k = Math.min(w*(1 - 2*m)/(x1 - x0), h*(1 - 2*m)/(y1 - y0)); return {k, tx: w/2 - k*(x0 + x1)/2, ty: h/2 - k*(y0 + y1)/2}; };
+  G.VC = {k:1, tx:0, ty:0};
+  // paso «alameda»: zoom de unos 560 m de lado al paseo de la Alameda alrededor de la plaza de Zaragoza
+  const n0 = R.negros[0], zl = 280/(111320*Math.cos(n0.lat*Math.PI/180)), zp = 280/110574;
+  G.VA = vista([G.proj([n0.lon - zl, n0.lat + zp]), G.proj([n0.lon + zl, n0.lat - zp])], .03);
+  // Los siniestros que comparten punto forman un racimo (d3.packSiblings, 2 px de separación) alrededor de su punto real.
+  // Cada racimo se trata como un círculo (d3.packEnclose) y una simulación de colisión (d3-force, determinista) los aparta
+  // lo justo para que no se pisen; si un racimo se separa de su punto, un trazo fino los une.
+  const sx = p => G.VA.k*p[0] + G.VA.tx, sy = p => G.VA.k*p[1] + G.VA.ty;
+  G.alaR = W < 520 ? 5.5 : 7; G.alaA = []; G.grp = [];
+  for (const [, xs] of grupos){ const cs = xs.map(() => ({r: G.alaR + 1})); d3.packSiblings(cs); const env = d3.packEnclose(cs);
+    const p = G.proj([xs[0].d.lon, xs[0].d.lat]);
+    G.grp.push({p, px: sx(p), py: sy(p), x: sx(p), y: sy(p), R: env.r + 9, cs: cs.map(c => [c.x - env.x, c.y - env.y]), is: xs.map(x => x.i)}); }
+  const hF = H - ley, lim = g => { g.x = Math.max(g.R + 4, Math.min(W - g.R - 4, g.x)); g.y = Math.max(g.R + 56, Math.min(hF - g.R - 30, g.y)); };
+  const sim = d3.forceSimulation(G.grp).stop().force("c", d3.forceCollide(g => g.R).iterations(4))
+    .force("x", d3.forceX(g => g.px).strength(.08)).force("y", d3.forceY(g => g.py).strength(.08));
+  for (let t = 0; t < 300; t++){ sim.tick(); G.grp.forEach(lim); }
+  G.grp.forEach(g => { g.off = [g.x - g.px, g.y - g.py]; g.lejos = Math.hypot(...g.off) > 3;
+    g.is.forEach((i, j) => { G.alaA[i] = [g.x + g.cs[j][0], g.y + g.cs[j][1]]; G.alaOff[i] = [G.alaA[i][0] - sx(G.ala[i]), G.alaA[i][1] - sy(G.ala[i])]; }); });
+  // escalas
+  G.x9 = d3.scaleBand(TODOS, [F.l, F.r]).padding(.3);
+  G.x4 = d3.scaleBand(AÑOS, [F.l, F.r - Math.min(130, W*.28)]).padding(.32);
+  G.YB = Math.ceil(d3.max(R.tot)/500)*500; G.yb = d3.scaleLinear([0, G.YB], [F.b, F.t]);
+  G.YG = Math.ceil(d3.max(R.grav)/50)*50; G.yg = d3.scaleLinear([0, G.YG], [F.b, F.t]);
+  G.usoA = d3.range(d3.min(R.uso_manual, m => m.año), d3.max(R.uso_idx.años) + 1);
+  G.xu = d3.scaleBand(G.usoA, [F.l, F.r]).padding(.3); G.yu = d3.scaleLinear([0, Math.max(100, d3.max(R.uso_idx.idx)) * 1.12], [F.b - 30, F.t + 40]);
+  G.XS = Math.ceil(d3.max(R.sc, d => d.mu)/5)*5; G.YS = Math.ceil(d3.max(R.sc, d => d.N)/10)*10;
+  G.xs = d3.scaleLinear([0, G.XS], [F.l, F.r]); G.ys = d3.scaleLinear([0, G.YS], [F.b, F.t]);
+  G.rN = d3.scaleSqrt([0, d3.max(R.negros, n => n.n)], [0, W < 520 ? 7.5 : Math.min(13, W/55)]);
+  // tabla del Plan (en SVG): filas etiqueta/valor; la casilla de línea base es el rectángulo del año base (B)
+  const tw = Math.min(W - 20, 520), tx0 = (W - tw)/2, lw = Math.min(130, tw*.36), vw = tw - lw, ty0 = F.t + 70;
+  const filas = ["tipo", "ind", "form", "base", "meta"], hs = [34, W < 480 ? 52 : 34, 34, 46, 40];
+  let y = ty0; G.tabla = filas.map((f, i) => { const r = {f, y, h: hs[i]}; y += hs[i]; return r; });
+  G.tab = {x0: tx0, lw, vw, w: tw, y0: ty0, y1: y};
+  const fb = G.tabla[3]; G.celda = {x: tx0 + lw + 8, y: fb.y + 6, w: Math.min(120, vw - 16), h: fb.h - 12};
+  // gráfico de unidades por «con quién»: ocupa la figura; se busca la rejilla con la celda más grande que cabe
+  G.cols = ["m", "s", "w", "d"]; const cnt = G.cols.map(c => D.ala.filter(d => d.k === c).length), maxN = d3.max(cnt);
+  const cw = (W - 28)/4, topU = F.t + 44, numH = 46, labH = 44, availH = (H - ley - 12) - topU - numH - labH;
+  let best = {s: 0, nc: 1}; for (let nc = 1; nc <= 12; nc++){ const s = Math.min((cw - 14)/nc, availH/Math.ceil(maxN/nc), 34); if (s > best.s) best = {s, nc}; }
+  const paso = best.s, nc = best.nc, hMax = Math.ceil(maxN/nc)*paso, yBase = topU + (availH - hMax)/2 + numH + hMax;
+  G.colX = G.cols.map((c, i) => 14 + i*cw + cw/2); G.uniPaso = paso; G.yBase = yBase;
+  G.colTop = cnt.map(n => yBase - Math.max(1, Math.ceil(n/nc))*paso);
+  const idx = {m:0, s:0, w:0, d:0};
+  G.uni = D.ala.map(d => { const c = G.cols.indexOf(d.k), j = idx[d.k]++, nf = Math.min(nc, cnt[c]), x0 = G.colX[c] - nf*paso/2 + paso/2;
+    return [x0 + (j % nc)*paso, yBase - paso/2 - Math.floor(j/nc)*paso]; });
+  return G;
+}
+
+// ---------- montaje de los elementos persistentes (una vez por SVG y tamaño) ----------
+function montar(svg, G){
+  const s = d3.select(svg).attr("viewBox", `0 0 ${G.W} ${G.H}`).attr("height", G.H); s.selectAll("*").remove();
+  const E = {s, G};
+  const cid = "clip" + (++montar.n); s.append("clipPath").attr("id", cid).append("rect").attr("width", G.W).attr("height", G.H - (G.H - G.F.b - 30));
+  E.cv = lienzosMapa(svg, G);
+  // tabla
+  E.tabla = s.append("g"); const t = G.tab;
+  E.tabla.append("text").attr("class", "gran").attr("x", t.x0).attr("y", t.y0 - 14).text("−50 %");
+  E.tabFilas = G.tabla.map(r => { const g = E.tabla.append("g");
+    g.append("line").attr("x1", t.x0).attr("x2", t.x0 + t.w).attr("y1", r.y).attr("y2", r.y).attr("stroke-width", 1).attr("class", "tl");
+    const h = g.append("text").attr("class", "tabh").attr("x", t.x0 + 4).attr("y", r.y + 21);
+    const v = g.append("text").attr("class", "tab").attr("x", t.x0 + t.lw + 8).attr("y", r.y + 21);
+    return {r, h, v}; });
+  E.tabla.append("line").attr("class", "tl").attr("x1", t.x0).attr("x2", t.x0 + t.w).attr("y1", t.y1).attr("y2", t.y1);
+  E.tabRef = E.tabla.append("text").attr("class", "eje").attr("x", t.x0).attr("y", t.y1 + 20);
+  // ejes: tres sistemas fijos que se funden (barras, gravedad, dispersión)
+  const ejeY = (sc, ticks) => { const g = s.append("g"); ticks.forEach(v => { g.append("line").attr("class", "grid").attr("x1", G.F.l).attr("x2", G.F.r).attr("y1", sc(v)).attr("y2", sc(v));
+    g.append("text").attr("class", "eje").attr("x", G.F.l - 6).attr("y", sc(v) + 4).attr("text-anchor", "end").text(fmt(v)); }); return g; };
+  E.yb = ejeY(G.yb, d3.range(0, G.YB + 1, 500)); E.yg = ejeY(G.yg, d3.range(0, G.YG + 1, 50)); E.ys = ejeY(G.ys, d3.range(0, G.YS + 1, 10));
+  E.xs = s.append("g"); d3.range(0, G.XS + 1, 5).forEach(v => E.xs.append("text").attr("class", "eje").attr("x", G.xs(v)).attr("y", G.F.b + 18).attr("text-anchor", "middle").text(v));
+  E.banda = s.append("path").attr("d", d3.area().x(d => G.xs(d[0])).y0(d => G.ys(d[1])).y1(d => G.ys(d[2])).curve(d3.curveStepAfter)(R.banda.filter(d => d[0] <= G.XS)));
+  E.diag = s.append("line").attr("x1", G.xs(0)).attr("y1", G.ys(0)).attr("x2", G.xs(Math.min(G.XS, G.YS))).attr("y2", G.ys(Math.min(G.XS, G.YS))).attr("stroke-width", 1.5).attr("stroke-dasharray", "2 4");
+  // años: hueco (contorno), tres segmentos llenos, objetivo hueco y etiqueta del año
+  E.bandaS = s.append("path");   // margen del azar alrededor de la senda (Poisson al 95 %, scripts/meta.py)
+  E.senda = s.append("path").attr("fill", "none").attr("stroke-width", 2).attr("stroke-dasharray", "2 5").attr("stroke-linecap", "round");
+  E.anos = TODOS.map(a => ({seg: [0, 1, 2].map(() => s.append("rect").attr("shape-rendering", "crispEdges")), o: s.append("rect").attr("fill", "none").attr("stroke-width", 2),
+    tg: s.append("circle").attr("fill", "none").attr("stroke-width", 2.2), yl: s.append("text").attr("class", "eje").attr("text-anchor", "middle").text(a)}));
+  // líneas bici y patinete
+  E.lin = ["b", "p"].map(k => ({path: s.append("path").attr("fill", "none").attr("stroke-linejoin", "round"), pts: AÑOS.map(() => s.append("circle"))}));
+  // gravedad
+  E.grRot = s.append("line").attr("stroke-width", 1.5).attr("stroke-dasharray", "5 4");
+  E.grPath = s.append("path").attr("fill", "none").attr("stroke-width", 3);
+  E.grPts = AÑOS.map(() => s.append("circle").attr("stroke-width", 2.5));
+  // rayado de «solo el total» (no se sabe qué parte son patinetes)
+  const pat = s.append("defs").append("pattern").attr("id", "ray" + cid).attr("width", 6).attr("height", 6).attr("patternUnits", "userSpaceOnUse").attr("patternTransform", "rotate(45)");
+  pat.append("rect").attr("width", 6).attr("height", 6).attr("fill", P.line); pat.append("line").attr("x1", 0).attr("y1", 0).attr("x2", 0).attr("y2", 6).attr("stroke", P.ink2).attr("stroke-width", 2);
+  E.uso = G.usoA.map(() => { const g = s.append("g"); return {g, b: g.append("rect").attr("fill", P.bici), p: g.append("rect").attr("fill", P.pat), t: g.append("rect").attr("fill", `url(#ray${cid})`).attr("stroke", P.ink2).attr("stroke-width", 1)}; });
+  // marcas del mapa
+  const mc = s.append("g").attr("clip-path", `url(#${cid})`);   // contadores, lugares y siniestros: nunca fuera de la figura
+  E.cont = R.sc.map(() => mc.append("circle").attr("stroke-width", 1.6));
+  E.dseg = Object.values(D.dest).map(() => mc.append("line").attr("stroke-width", 2));
+  // de mayor a menor: los pequeños quedan encima. a2 = anillo de lo que dice el Plan (como en la herramienta)
+  const gN = mc.append("g"), ordN = d3.range(R.negros.length).sort((i, j) => R.negros[j].n - R.negros[i].n);
+  // cada lugar es un quesito (d3.pie/d3.arc) con su mezcla real: solo bici, solo patinete, los dos. Se dibuja una vez y se mueve con transform.
+  const pie = d3.pie().sort(null).value(d => d);
+  E.neg = []; ordN.forEach(i => { const g = gN.append("g"), q = g.append("g"), r = G.rN(R.negros[i].n), arc = d3.arc().innerRadius(0).outerRadius(r);
+    q.append("circle").attr("r", r + .8).attr("fill", P.bg);
+    const sl = pie(R.negros[i].v3).map((a, j) => q.append("path").attr("d", arc(a)).attr("fill", [P.bici, P.pat, P.amb][j]).attr("stroke", P.bg).attr("stroke-width", .6));
+    E.neg[i] = {q, sl, a2: g.append("circle").attr("fill", "none").attr("stroke-width", 1.8).attr("stroke-dasharray", DASH[R.negros[i].pl]).attr("stroke-linecap", R.negros[i].pl === 2 ? "round" : null)}; });
+  E.selh = gN.insert("circle", ":first-child").attr("fill", "none").attr("stroke-width", 6);   // halo del lugar destacado
+  E.grp = E.G.grp.map(() => ({ln: mc.append("line").attr("stroke-width", 1), pt: mc.append("circle").attr("r", 2.6)}));
+  E.ala = D.ala.map(() => mc.append("circle").attr("stroke-width", 1.4));
+  E.ann = s.append("g");
+  textosTabla(E);
+  expPreparar(svg, E, null);        // capa de la etiqueta del teclado y del ratón (encima de todo); ir() fija el paso
+  return E;
+}
+montar.n = 0;
+// Calles y carril bici: se pintan UNA vez en <canvas> (con devicePixelRatio), detrás del SVG. El zoom y los fundidos son
+// CSS transform/opacity sobre los canvas: no se repintan durante la animación. Dos juegos: ciudad (vista VC) y Alameda (VA).
+function lienzosMapa(svg, G){
+  const host = svg.parentNode; host.querySelectorAll(":scope > .capa-mapa").forEach(n => n.remove());
+  const w = G.W, h = G.F.b + 30, dpr = Math.min(2, devicePixelRatio || 1);
+  const cm = document.createElement("div"); cm.className = "capa-mapa";
+  cm.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;overflow:hidden;pointer-events:none`;
+  host.insertBefore(cm, svg);
+  const t0 = G.proj.translate(), pz = d3.geoMercator().scale(G.proj.scale()*G.VA.k).translate([G.VA.k*t0[0] + G.VA.tx, G.VA.k*t0[1] + G.VA.ty]);
+  const lienzo = (proj, capas, zona) => { const c = document.createElement("canvas"); c.width = Math.round(w*dpr); c.height = Math.round(h*dpr);
+    c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;transform-origin:0 0;will-change:transform,opacity;opacity:0`;
+    const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); ctx.lineJoin = "round"; ctx.lineCap = "round"; const pth = d3.geoPath(proj, ctx);
+    capas.forEach(([lines, col, lw, al]) => { ctx.beginPath(); pth({type: "MultiLineString", coordinates: lines}); ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.globalAlpha = al; ctx.stroke(); });
+    // zona del lugar (cruce con 30 m alrededor, o tramo de calle): línea discontinua, como en la herramienta
+    if (zona){ ctx.beginPath(); pth(zona); ctx.globalAlpha = .08; ctx.fillStyle = P.ink; if (zona.type.endsWith("Polygon")) ctx.fill();
+      ctx.globalAlpha = .9; ctx.strokeStyle = P.ink; ctx.lineWidth = 2; ctx.setLineDash([6, 4]); ctx.stroke(); ctx.setLineDash([]); }
+    cm.appendChild(c); return c; };
+  // cada canvas se crea la primera vez que hace falta (en las figuras estáticas, solo los que se ven)
+  const def = {cc: () => lienzo(G.proj, [[R.mapa.ciclo, P.lane, 1, 1]]), cp: () => lienzo(G.proj, [[R.mapa.princ, P.mute, 1.1, 1]]),
+    zc: () => lienzo(pz, [[R.mapa.cerca, P.line, 1.6, 1]], R.ala_geo), zp: () => lienzo(pz, [[R.mapa.ciclo, P.lane, 1, .6], [R.mapa.princ, P.mute, 1.1, 1]])};
+  const hechos = {}, orden = ["cc", "cp", "zc", "zp"];
+  const get = n => { if (!hechos[n]){ hechos[n] = def[n](); orden.forEach(o => hechos[o] && cm.appendChild(hechos[o])); } return hechos[n]; };
+  return {get, hay: n => !!hechos[n], todos: () => orden.forEach(get)};
+}
+function textosTabla(E){ const t = T[L].tab;
+  E.tabFilas.forEach(({r, h, v}) => { h.text(t[r.f]); const val = r.f === "base" ? "" : r.f === "meta" ? "−50 %" : t[r.f + "_v"];
+    const lines = envolver(val, Math.floor(E.G.tab.vw/7.2)); v.selectAll("tspan").remove();
+    lines.forEach((ln, i) => v.append("tspan").attr("x", E.G.tab.x0 + E.G.tab.lw + 8).attr("dy", i ? 17 : 0).text(ln)); if (r.f === "meta") v.attr("class", "rotf"); });
+  E.tabRef.text(t.ref);
+}
+function envolver(s, n){ const out = []; let cur = ""; for (const w of s.split(" ")) { if ((cur + " " + w).trim().length > n && cur) { out.push(cur); cur = w; } else cur = (cur + " " + w).trim(); } if (cur) out.push(cur); return out; }
+
+// ---------- layout(estado): objeto plano de números y colores ----------
+const OFF = (c) => ({x:0, y:0, w:0, h:0, op:0, c});
+function layout(k, G){
+  const F = G.F, r = T[L].r, t = T[L].tab;
+  const L0 = {v: G.VC, mapOp: 0, princ: P.mute, cercaOp: 0, celOp: 0, ciclo: 0, tabOp: 0, yb: 0, yg: 0, ys: 0, xs: 0, banda: 0, diag: 0, senda: 0, sendaC: P.meta,
+    anos: [], lin: [], gr: {rot: 0, line: 0, pts: []}, cont: [], neg: [], ala: []};
+  const ann = []; const A = (o) => ann.push(o);
+  const grupo = k.replace(/\d$/, "");
+  // ---- años ----
+  const usa4 = ["quien", "quien2"].includes(k);
+  const xb = usa4 ? G.x4 : G.x9, bw = xb.bandwidth();
+  TODOS.forEach((a, i) => {
+    const x = (usa4 && a > ULT) ? G.x4(ULT) + G.x4.bandwidth() : xb(a), y0 = G.yb(0);
+    const o = {x, y: y0, w: bw, h: 0, op: 0, c: P.ink}, tg = {cx: x + bw/2, cy: y0, r: 6, op: 0}, yl = {x: x + bw/2, y: F.b + 18, op: 0};
+    let seg = [0, 1, 2].map(() => ({x, y: y0, w: bw, h: 0, op: 0, c: P.mute}));
+    const di = AÑOS.indexOf(a), tot = di >= 0 ? R.tot[di] : 0;
+    const relleno = (cs) => { const v = [R.serie[di].b, R.serie[di].p, R.serie[di].a]; let acc = 0;   // orden fijo: bici, patinete, choque bici–patinete arriba
+      seg = v.map((n, j) => { const s = {x, y: G.yb(acc + n), w: bw, h: G.yb(acc) - G.yb(acc + n), op: 1, c: cs[j]}; acc += n; return s; }); };
+    if (["partida", "y2025", "falta4"].includes(k)){
+      yl.op = 1;
+      if (a <= B){ const c = a === B && k !== "falta4" ? P.ink : P.mute; relleno([c, c, c]); }
+      if (a > B){ tg.cy = G.yb(D.senda[a]); tg.op = 1; tg.r = a === AM ? 9 : 6; }
+      // años del Plan ya publicados: barra llena, en rojo solo si está por encima del margen (juicio de meta.py)
+      if (a > B && di >= 0){ const c = E0.juicio[a].estado === "encima" ? P.warn : P.ink; relleno([c, c, c]); }
+      if (a === B && k !== "falta4"){ Object.assign(o, {y: G.yb(tot), h: G.yb(0) - G.yb(tot), op: 1}); }
+      if (k === "falta4" && a > B && a !== P26) tg.op = .35;
+    }
+    if (usa4 && di >= 0){ yl.op = 1; relleno([P.bici, P.pat, P.amb]); if (k === "quien2") seg.forEach(s => { s.op = .14; }); }
+    if (k === "falta2" && di >= 0){ yl.op = 1; yl.x = G.x4(a) + G.x4.bandwidth()/2; }
+    if (["promesa", "falta"].includes(k) && a === B){ Object.assign(o, G.celda, {op: 1, c: P.ink}); seg.forEach(s => Object.assign(s, {x: G.celda.x, y: G.celda.y + G.celda.h, w: G.celda.w})); }
+    L0.anos.push({o, seg, tg, yl});
+  });
+  // ---- líneas (bici en la cima de su parte; patinete en la cima de la barra) ----
+  ["b", "p"].forEach((q, j) => {
+    const vals = q === "b" ? R.bici : R.vmp;
+    const pts = AÑOS.map((a, i) => { const x = G.x4(a) + G.x4.bandwidth()/2;
+      const y = k === "quien2" ? G.yb(vals[i]) : (q === "b" ? G.yb(R.serie[i].b) : G.yb(R.serie[i].b + R.serie[i].p)); return {x, y}; });
+    L0.lin.push({pts, op: k === "quien2" ? 1 : 0, lp: k === "quien2" ? 1 : 0, c: q === "b" ? P.bici : P.pat});
+  });
+  // ---- gravedad ----
+  const xg = a => G.x4(a) + G.x4.bandwidth()/2;
+  L0.gr.pts = R.grav.map((v, i) => ({x: xg(AÑOS[i]), y: k === "falta2" ? G.yg(v) : G.yb(0), op: k === "falta2" ? 1 : 0, f: 1, c: AÑOS[i] < GRAV_COMP ? P.mute : P.ink}));
+  L0.gr.line = L0.gr.rot = k === "falta2" ? 1 : 0;
+  // ---- uso del carril bici (falta3): años de los conteos manuales, proporción bici/patinete (altura fija 100 %);
+  //      años del panel fijo de puntos de conteo, índice de tráfico (primer año = 100), rayado: no se sabe qué parte son patinetes
+  L0.uso = G.usoA.map((a, i) => { const x = G.xu(a), w = G.xu.bandwidth(), y0 = G.yu(0), man = R.uso_manual.find(m => m.año === a), u = k === "falta3";
+    if (man){ const yb = G.yu(100*(1 - man.pat)); return {x, w, b: {y: u ? yb : y0, h: u ? y0 - yb : 0}, p: {y: u ? G.yu(100) : y0, h: u ? yb - G.yu(100) : 0}, t: {y: y0, h: 0}, op: u ? 1 : 0}; }
+    const v = R.uso_idx.idx[R.uso_idx.años.indexOf(a)], yt = G.yu(v);
+    return {x, w, b: {y: y0, h: 0}, p: {y: y0, h: 0}, t: {y: u ? yt : y0, h: u ? y0 - yt : 0}, op: u ? 1 : 0}; });
+  // ---- mapa y marcas ----
+  const mapa = ["donde", "alameda", "trafico", "cruce"].includes(k), zoom = k === "alameda";
+  if (mapa){ L0.mapOp = 1; L0.ciclo = k === "trafico" ? .9 : .35; }
+  if (["alameda2", "alameda3"].includes(k)){ L0.mapOp = 0; }
+  if (zoom || k === "alameda2" || k === "alameda3"){ L0.v = G.VA; L0.cercaOp = 1; }
+  const disp = ["trafico2", "trafico3"].includes(k);
+  R.sc.forEach((d, i) => { const alto = d.lv === 2, dest = D.destIdx.has(i);
+    const o = {m: 1, cx: G.xs(Math.min(d.mu, G.XS)), cy: G.ys(Math.min(d.N, G.YS)), r: 3.2, f: 0, op: 0, c: P.ink2, sc: P.ink2, sw: 1.6};
+    if (k === "trafico"){ o.op = .9; o.r = 3.4; o.c = P.ink; }
+    if (k === "cruce"){ o.op = .35; }
+    if (k === "trafico"){ o.sc = P.ink; }
+    // claramente (p > 0,95): relleno --ink · quizá (0,80-0,95): relleno --ink2 · como la media: hueco --ink2 (mismos umbrales que la herramienta)
+    if (disp){ const quiza = d.lv === 1; o.m = 0; o.op = k === "trafico3" && !dest ? .22 : 1; o.r = k === "trafico3" && dest ? 7 : 4.6;
+      o.f = alto || quiza ? 1 : 0; o.c = alto ? P.ink : quiza ? P.ink2 : P.ink2; o.sc = alto ? P.ink : quiza ? P.ink2 : P.ink2; o.sw = alto || quiza ? 1.2 : 1.4;
+      if (k === "trafico3" && dest){ o.sc = P.sel; o.sw = 3.5; } }
+    L0.cont.push(o); });
+  R.negros.forEach((n, i) => { const o = {r: G.rN(n.n), op: 0, a2: 0, f: .9, ac: P.ink};
+    if (k === "donde" || k === "cruce"){ o.op = k === "cruce" ? .7 : 1; o.a2 = o.op; }
+    L0.neg.push(o); });
+  D.ala.forEach((d, i) => { const [ux, uy] = G.uni[i];
+    // color del vehículo (bici, patinete o los dos); lleno/hueco solo en «alameda3» (prioridad)
+    // m = 1: pegado al mapa (posición real + desplazamiento que escala con el zoom); m = 0: en la rejilla
+    const o = {m: 1, ox: G.alaOff[i][0], oy: G.alaOff[i][1], cx: ux, cy: uy, op: 0, f: 1, c: d.v === "b" ? P.bici : d.v === "p" ? P.pat : P.amb, r: G.alaR};
+    if (k === "alameda") o.op = 1;   // (los racimos van en L0.grp)
+    if (k === "alameda2" || k === "alameda3"){ o.m = 0; o.op = 1; o.r = G.uniPaso*.4; }
+    if (k === "alameda3") o.f = d.prio ? 1 : .22;
+    L0.ala.push(o); });
+  L0.grp = G.grp.map(g => ({op: k === "alameda" ? 1 : 0}));
+  L0.selOp = k === "donde" ? 1 : 0;
+  // rayitas de los puntos destacados: de la media de los puntos con un tráfico parecido (diagonal) al observado; ext = fracción extendida, sop = opacidad
+  L0.dseg = Object.values(D.dest).map(d => ({x: G.xs(d.mu), y1: G.ys(d.mu), yN: G.ys(d.N) + 7, ext: k === "trafico3" ? 1 : 0, sop: k === "trafico3" ? 1 : 0}));
+  if (disp){ L0.ys = 1; L0.xs = 1; L0.banda = .22; L0.diag = 1; }
+  if (["partida", "y2025", "falta4", "quien", "quien2"].includes(k)) L0.yb = 1;
+  if (k === "falta2") L0.yg = 1;
+  if (["promesa", "falta"].includes(k)) L0.tabOp = 1;
+  if (["partida", "y2025", "falta4"].includes(k)) L0.senda = 1;
+
+  // ---- rótulos (no se interpolan: aparecen al final) ----
+  const ytit = (s) => A({id: "yt-" + s, x: F.l - 40, y: F.t - 18, s, cls: "eje", a: "start"});
+  const estrecho = G.W < 520, rotCelda = (id, s, cls, c) => estrecho
+    ? A({id, x: G.celda.x, y: G.tab.y1 + 42, s: "↑ " + s, cls, c})
+    : A({id, x: G.celda.x + G.celda.w + 10, y: G.celda.y + G.celda.h/2 + 5, s: "← " + s, cls, c});
+  if (k === "promesa") rotCelda("sinbase", t.sin, "rotf");
+  if (k === "falta"){ A({id: "base-c", x: G.celda.x + G.celda.w/2, y: G.celda.y + G.celda.h/2 + 6, s: `${B}: ${fmt(D.base)}`, cls: "rotf", a: "middle"});
+    rotCelda("prop", t.prop, "rot"); }
+  if (["partida", "y2025", "falta4"].includes(k)){
+    ytit(r.sin);
+    AÑOS.forEach((a, i) => A({id: "v" + a, x: G.x9(a) + G.x9.bandwidth()/2, y: G.yb(R.tot[i]) - 7, s: fmt(R.tot[i]), cls: (EV ? a === ULT : a === B) ? "rotf" : "eje", a: "middle",   // con años del Plan, solo el último en grande (no se pisan)
+      c: a > B && E0.juicio[a].estado === "encima" ? P.warn : null}));
+    // juicio del último año del Plan con datos, sobre su barra
+    if (EV) A({id: "jz", x: G.x9(ULT) + G.x9.bandwidth()/2, y: G.yb(Math.max(JU.obs, JU.banda[1])) - 26, s: r.jz[JU.estado], cls: "rot halo", a: "middle"});
+    A({id: "base-l", x: G.x9(B) + G.x9.bandwidth()/2, y: F.b + 34, s: r.base, cls: "rotf", a: "middle"});
+    if (P26 && k !== "falta4") r.pend.forEach((s, j) => A({id: "p26-" + j, x: G.x9(P26) + G.x9.bandwidth()/2, y: G.yb(0) - 34 + 15*j, s, cls: "eje", a: "middle"}));
+    A({id: "meta", x: G.x9(AM) + G.x9.bandwidth()/2 + 6, y: G.yb(D.senda[AM]) + 30, s: `${r.meta}: ${fmt(D.meta)}`, cls: "rotf", a: "end"});
+    if (k === "partida") A({id: "s26", x: G.x9(MT.desde) + G.x9.bandwidth()/2 + 12, y: G.yb(D.senda[MT.desde]) + 4, s: fmt(D.s26), cls: "eje"});
+  }
+  if (k === "falta4" && P26){ const x = G.x9(P26), w = G.x9.bandwidth(), yT = G.yb(D.senda[P26]), y0 = G.yb(0);
+    A({id: "h26", tipo: "rect", x, y: yT, w, h: y0 - yT, c: P.ink, dash: "4 3"});
+    A({id: "q26", x: x + w/2, y: EV ? y0 - 12 : (yT + y0)/2 + 12, s: "?", cls: "cifra", a: "middle", fs: 34});   // con años del Plan, abajo: no pisa la meta
+    A({id: "p26-0", x: x + w + 14, y: yT - 24, s: `${P26}: ${r.pend.join(" ")}`, cls: "rotf", a: "start"});
+    A({id: "s26f", x: x + w + 14, y: yT - 6, s: `${r.senda26}: ${fmt(D.b26[0])}-${fmt(D.b26[1])}`, cls: "rot", a: "start"}); }
+  // tendencia previa al Plan: del primer año a la base (no es una evaluación del Plan)
+  if (k === "y2025"){ const x0 = G.x9(AÑOS[0]) + G.x9.bandwidth()/2, x1 = G.x9(B) + G.x9.bandwidth()/2;
+    // la línea pasa por encima de todas las etiquetas de las barras (texto en yb(tot) - 7, hasta unos 18 px de alto) con 8 px de aire
+    const iB = AÑOS.indexOf(B), sube = d3.max(d3.range(0, iB + 1), i => { const f = iB ? i/iB : 0, yl = (1 - f)*G.yb(R.tot[0]) + f*G.yb(D.base) - 24;
+      return yl - (G.yb(R.tot[i]) - 7 - 18 - 8); });
+    const y0 = G.yb(R.tot[0]) - 24 - Math.max(0, sube), y1 = G.yb(D.base) - 24 - Math.max(0, sube);
+    A({id: "prev", tipo: "path", d: `M${x0},${y0}L${x1},${y1}`, c: P.warn});
+    A({id: "pct", x: F.r, y: F.t + 10, s: `${D.previa < 0 ? "−" : "+"}${fmt(Math.abs(D.previa), 0)} %`, cls: "cifra", a: "end", c: P.warn});
+    A({id: "pct-t", x: F.r, y: F.t + 32, s: `${AÑOS[0]}-${B}, ${r.prev}`, cls: "eje", a: "end"}); }
+  if (usa4){ ytit(r.sin);
+    const xr = G.x4(ULT) + G.x4.bandwidth() + 8, s3 = R.serie[IU];
+    if (k === "quien"){ const y = [s3.b/2, s3.b + s3.p/2, s3.b + s3.p + s3.a/2];
+      [[r.sb, s3.b, P.bici], [r.sp, s3.p, P.pat], [r.am, s3.a, P.amb]].forEach(([n, v, c], j) => A({id: "sg" + j, x: xr, y: G.yb(y[j]) + 5, s: `${n} ${fmt(v)}`, cls: "rot"})); }
+    if (k === "quien2"){ [["b", R.bici, r.bici], ["p", R.vmp, r.pat]].forEach(([q, v, n]) => {
+        A({id: "l0" + q, x: G.x4(A0) + G.x4.bandwidth()/2, y: G.yb(v[0]) - 10, s: fmt(v[0]), cls: "rot", a: "middle"});
+        A({id: "l3" + q, x: xr, y: G.yb(v[IU]) + 5, s: `${n} ${fmt(v[IU])}`, cls: "rotf", c: q === "b" ? P.bici : P.pat}); });
+      A({id: "dc", x: F.l + 4, y: F.t + 30, s: `${D.dc10} ${r.dc}`, cls: "cifra"}); }
+  }
+  const pnt = (i, G2, v) => [v.k*G2[i][0] + v.tx, v.k*G2[i][1] + v.ty];
+  if (k === "donde"){ const [x, y] = pnt(0, G.neg, G.VC), s1 = `${r.lug1} · ${R.negros[0].n}`, dx = G.rN(R.negros[0].n) + 6, cabe = x + dx + s1.length*7.6 < G.W - 8;
+    const izq = x - dx - s1.length*7.6 > 8;   // si no cabe a ningún lado (móvil), va bajo el título de la figura
+    if (cabe || izq) A({id: "n1", x: cabe ? x + dx : x - dx, y: y + 5, s: s1, cls: "rotf halo", a: cabe ? "start" : "end"});
+    else A({id: "n1", x: 14, y: 46, s: "1.º " + s1, cls: "rotf halo"});
+    A({id: "nt", x: 14, y: 26, s: `${D.nn} ${r.lug}`, cls: "rot halo"}); }
+  if (zoom){ A({id: "z1", x: G.W/2, y: 26, s: `${r.lug1} · ${D.n0}`, cls: "rotf halo", a: "middle"});
+    A({id: "z2", x: G.W/2, y: 46, s: r.pla1(D.ng0.pr), cls: "rot halo", a: "middle"});
+    if (k === "alameda") envolver(r.nota, Math.floor((G.W - 28)/6.6)).reverse().forEach((ln, j) => A({id: "nota" + j, x: 14, y: G.H - (G.H - F.b - 30) - 10 - j*16, s: ln, cls: "eje halo"})); }
+  if (k === "alameda2" || k === "alameda3"){ G.cols.forEach((c, i) => { const n = D.ala.filter(d => d.k === c).length;
+      A({id: "cq" + c, x: G.colX[i], y: G.colTop[i] - 12, s: fmt(n), cls: "cifra", a: "middle", fs: G.W < 520 ? 30 : 38});
+      envolver(r.k[c], Math.max(10, Math.floor((G.W - 28)/4/7.8))).forEach((ln, j) => A({id: `cl${c}${j}`, x: G.colX[i], y: G.yBase + 22 + j*17, s: ln, cls: "rot", a: "middle"})); });
+    if (k === "alameda3") A({id: "pr", x: F.r, y: F.t + 10, s: r.de48(D.pt, D.n0), cls: "cifra", a: "end"}),
+      A({id: "pr2", x: F.r, y: F.t + 30, s: r.prio, cls: "rot", a: "end"}); }
+  if (k === "trafico") A({id: "ct", x: 14, y: 26, s: `${D.nc} ${r.cont}`, cls: "rot halo"});
+  if (disp){ A({id: "yts", x: F.l - 40, y: F.t - 18, s: r.ys, cls: "eje"}); A({id: "xts", x: F.r, y: F.b + 36, s: r.xs, cls: "eje", a: "end"});
+    const m = Math.min(G.XS, G.YS); A({id: "dg", x: G.xs(m*.97), y: G.ys(m*.97) + 18, s: r.diag, cls: "eje", a: "end"});
+    if (k === "trafico3") Object.entries(D.dest).forEach(([c, d]) => { const x = G.xs(d.mu), nm = d.nom, izq = x > G.W*.6;
+      A({id: "de" + c, tipo: "circle", x, y: G.ys(d.mu), r: 5, c: P.ink});
+      A({id: "dt" + c, x: x + (izq ? -12 : 12), y: G.ys(d.N) + 5, s: `${nm} · ${d.N} / ${fmt(d.mu)}`, cls: "rotf halo", a: izq ? "end" : "start"}); }); }
+  if (k === "falta3"){ ytit(r.uso);
+    R.uso_manual.forEach(m => { const x = G.xu(m.año) + G.xu.bandwidth()/2;
+      A({id: "um" + m.año, x, y: G.yu(100) - 10, s: `${fmt(m.pat*100)} %`, cls: "rotf", a: "middle"}); });
+    R.uso_idx.años.forEach((a, i) => { const x = G.xu(a) + G.xu.bandwidth()/2, y = G.yu(R.uso_idx.idx[i]);
+      A({id: "ui" + a, x, y: y - 10, s: fmt(R.uso_idx.idx[i]), cls: "rot", a: "middle"});
+      A({id: "uq" + a, x, y: y - 30, s: "?", cls: "cifra", a: "middle", fs: 24}); });
+    const xs_ = (G.xu(M1) + G.xu.bandwidth() + G.xu(U0))/2;
+    A({id: "usep", tipo: "line", x1: xs_, x2: xs_, y1: F.t - 4, y2: F.b, c: P.ink2});
+    const nch = Math.max(12, Math.floor((G.W/2 - 20)/6.6));
+    envolver(r.usoSep, nch).forEach((ln, j) => A({id: "usept" + j, x: xs_ + 6, y: F.t + 8 + j*14, s: ln, cls: "eje"}));
+    envolver(r.usoMan, nch).forEach((ln, j) => A({id: "uman" + j, x: xs_ - 6, y: F.t + 8 + j*14, s: ln, cls: "eje", a: "end"}));
+    G.usoA.forEach(a => A({id: "uy" + a, x: G.xu(a) + G.xu.bandwidth()/2, y: G.yu(0) + 16, s: a, cls: "eje", a: "middle"}));
+    envolver(r.usoNota(R.uso_idx.n), Math.floor((G.W - 28)/6.4)).forEach((ln, j) => A({id: "un" + j, x: 14, y: G.yu(0) + 36 + j*14, s: ln, cls: "eje", fs: 11.5})); }
+  if (k === "falta2"){ ytit(r.grav);
+    const xm = (xg(GRAV_COMP - 1) + xg(GRAV_COMP))/2; L0.gr.xr = xm;
+    A({id: "crit", x: xm + 6, y: F.t + 4, s: r.crit, cls: "rot"});
+    A({id: "nc", x: (xg(A0) + xg(GRAV_COMP - 1))/2, y: F.t + 4, s: r.nocomp, cls: "eje", a: "middle"});
+    R.grav.forEach((v, i) => A({id: "g" + i, x: xg(AÑOS[i]), y: G.yg(v) - 12, s: fmt(v), cls: AÑOS[i] < GRAV_COMP ? "eje" : "rotf", a: "middle"})); }
+  if (k === "cruce") A({id: "cr", x: 14, y: 26, s: r.cruce + " →", cls: "rotf halo"});
+  L0.gr.xr = L0.gr.xr ?? (xg(GRAV_COMP - 1) + xg(GRAV_COMP))/2;
+  return {L: L0, ann};
+}
+
+// ---------- render: aplica un estado (interpolado o final) a los elementos ----------
+function render(E, S){
+  const G = E.G, v = S.v, at = (sel, o) => { for (const k in o) sel.attr(k, o[k]); };
+  // mapa en canvas: solo escrituras de estilo (transform/opacity). El juego de ciudad y el de Alameda se cruzan según el zoom.
+  const sz = Math.max(0, Math.min(1, (Math.log(Math.max(1, v.k))/Math.log(G.VA.k) - .15)/.35)), rz = v.k/G.VA.k;
+  const tr = (n, k, tx, ty, op) => { if (op < .005 && !E.cv.hay(n)) return; const c = E.cv.get(n);
+    c.style.transform = `translate(${tx}px,${ty}px) scale(${k})`; c.style.opacity = op; c.style.visibility = op < .005 ? "hidden" : "visible"; };
+  tr("cc", v.k, v.tx, v.ty, S.mapOp*S.ciclo*(1 - sz)); tr("cp", v.k, v.tx, v.ty, S.mapOp*(1 - sz));
+  tr("zc", rz, v.tx - rz*G.VA.tx, v.ty - rz*G.VA.ty, S.mapOp*S.cercaOp*sz); tr("zp", rz, v.tx - rz*G.VA.tx, v.ty - rz*G.VA.ty, S.mapOp*sz);
+  E.tabla.attr("opacity", S.tabOp).attr("display", S.tabOp < .01 ? "none" : null); E.tabla.selectAll(".tl").attr("stroke", P.line);
+  for (const [g, o] of [[E.yb, S.yb], [E.yg, S.yg], [E.ys, S.ys], [E.xs, S.xs]]) { g.attr("opacity", o).attr("display", o < .01 ? "none" : null); g.selectAll(".grid").attr("stroke", P.line); }
+  E.banda.attr("fill", P.ink2).attr("opacity", S.banda); E.diag.attr("stroke", P.ink).attr("opacity", S.diag);
+  // senda: de la cima del año base al año de la meta, por los objetivos
+  const sp = TODOS.filter(a => a >= B).map(a => [G.x9(a) + G.x9.bandwidth()/2, G.yb(D.senda[a])]);
+  E.senda.attr("d", d3.line()(sp)).attr("stroke", P.meta).attr("opacity", S.senda);
+  const bw2 = G.x9.bandwidth()*.3;
+  E.bandaS.attr("d", TODOS.filter(a => a > B && E0.banda[a]).map(a => { const cx = G.x9(a) + G.x9.bandwidth()/2, [lo, hi] = E0.banda[a];
+    return `M${cx - bw2},${G.yb(hi)}H${cx + bw2}V${G.yb(lo)}H${cx - bw2}Z`; }).join("")).attr("fill", P.meta).attr("opacity", S.senda*.16);
+  S.anos.forEach((a, i) => { const e = E.anos[i];
+    a.seg.forEach((s, j) => at(e.seg[j], {x: s.x, y: s.y, width: Math.max(0, s.w), height: Math.max(0, s.h), fill: s.c, opacity: s.op}));
+    at(e.o, {x: a.o.x, y: a.o.y, width: Math.max(0, a.o.w), height: Math.max(0, a.o.h), stroke: a.o.c, opacity: a.o.op, "stroke-dasharray": (a.o.h < 80 ? "5 4" : null)});
+    at(e.tg, {cx: a.tg.cx, cy: a.tg.cy, r: a.tg.r, stroke: P.meta, opacity: a.tg.op, fill: P.bg, "fill-opacity": .6});
+    at(e.yl, {x: a.yl.x, y: a.yl.y, opacity: a.yl.op}); });
+  S.lin.forEach((l, j) => { const e = E.lin[j];
+    e.path.attr("d", d3.line()(l.pts.map(p => [p.x, p.y]))).attr("stroke", l.c).attr("opacity", l.op).attr("stroke-width", j ? 4 : 3);
+    if (j === 0) e.path.attr("stroke-dasharray", "7 5"); else e.path.attr("pathLength", 1).attr("stroke-dasharray", `${l.lp} 1`);
+    l.pts.forEach((p, i) => at(e.pts[i], {cx: p.x, cy: p.y, r: j ? 5 : 4.5, fill: j ? l.c : P.bg, stroke: l.c, "stroke-width": 2, opacity: l.op})); });
+  const g = S.gr;
+  at(E.grRot, {x1: g.xr, x2: g.xr, y1: G.F.t - 4, y2: G.F.b, stroke: P.ink2, opacity: g.rot});
+  E.grPath.attr("d", d3.line()(g.pts.slice(AÑOS.indexOf(GRAV_COMP)).map(p => [p.x, p.y]))).attr("stroke", P.ink).attr("opacity", g.line);   // solo lo comparable
+  g.pts.forEach((p, i) => at(E.grPts[i], {cx: p.x, cy: p.y, r: 6, fill: p.c, "fill-opacity": p.f, stroke: p.c, opacity: p.op}));
+  S.dseg.forEach((d, i) => at(E.dseg[i], {x1: d.x, x2: d.x, y1: d.y1, y2: d.y1 + (d.yN - d.y1)*d.ext, stroke: P.ink, opacity: d.sop, display: d.sop < .01 ? "none" : null}));
+  S.uso.forEach((u, i) => { const e = E.uso[i]; at(e.g, {opacity: u.op, display: u.op < .01 ? "none" : null});
+    for (const q of ["b", "p", "t"]) at(e[q], {x: u.x, width: u.w, y: u[q].y, height: Math.max(0, u[q].h)}); });
+  // marcas que viven en el mapa y en un gráfico: m = 1 en el mapa, 0 en el gráfico
+  const enMapa = (xy, m, cx, cy, ox = 0, oy = 0) => [m*(v.k*xy[0] + v.tx + ox) + (1 - m)*cx, m*(v.k*xy[1] + v.ty + oy) + (1 - m)*cy];
+  S.cont.forEach((c, i) => { const [x, y] = enMapa(G.cont[i], c.m, c.cx, c.cy);
+    at(E.cont[i], {cx: x, cy: y, r: c.r, fill: c.c, "fill-opacity": c.f, stroke: c.sc, "stroke-width": c.sw, opacity: c.op, display: c.op < .01 ? "none" : null}); });
+  S.neg.forEach((n, i) => { const [x, y] = enMapa(G.neg[i], 1, 0, 0), e = E.neg[i];
+    at(e.q, {transform: `translate(${x},${y})`, opacity: n.op, display: n.op < .01 ? "none" : null});
+    at(e.a2, {cx: x, cy: y, r: n.r + 1.8, stroke: n.ac, opacity: n.a2, display: n.a2 < .01 || R.negros[i].pl === 0 ? "none" : null}); });   // pl 0: sin anillo
+  { const [x, y] = enMapa(G.neg[0], 1, 0, 0); at(E.selh, {cx: x, cy: y, r: S.neg[0].r + 5, stroke: P.sel, opacity: S.selOp*.85, display: S.selOp < .01 ? "none" : null}); }
+  const ez = v.k/G.VA.k;
+  S.grp.forEach((q, i) => { const g = G.grp[i], [x, y] = enMapa(g.p, 1, 0, 0), x2 = x + g.off[0]*ez, y2 = y + g.off[1]*ez, e = E.grp[i];
+    at(e.ln, {x1: x, y1: y, x2, y2, stroke: P.ink2, opacity: g.lejos ? q.op : 0, display: q.op < .01 ? "none" : null});
+    at(e.pt, {cx: x, cy: y, fill: P.ink, opacity: g.lejos ? q.op : 0, display: q.op < .01 ? "none" : null}); });
+  S.ala.forEach((a, i) => { const [x, y] = enMapa(G.ala[i], a.m, a.cx, a.cy, a.ox*ez, a.oy*ez);
+    at(E.ala[i], {cx: x, cy: y, r: a.r, fill: a.c, "fill-opacity": a.f, stroke: a.c, opacity: a.op, display: a.op < .01 ? "none" : null}); });
+}
+// rótulos: nunca viajan. Se apagan al empezar (fundido corto) y entran al final.
+// Join por clave: la clave de un rótulo es su descripción completa (id, texto, posición, color). Los que siguen iguales en el
+// paso siguiente (p. ej. los números sobre las barras de «El punto de partida» a «Antes del Plan, a más», y al volver) se quedan
+// quietos; solo salen los que cambian o desaparecen y solo entran los nuevos.
+const firmaRot = d => JSON.stringify(d);
+function rotulosFuera(E, dur, quedan){ const k = new Set((quedan || []).map(firmaRot));
+  E.ann.selectAll(".an").filter(function(){ return !k.has(this.__firma); }).interrupt().classed("an", false).transition().duration(dur ? 150 : 0).attr("opacity", 0).remove(); }
+function rotulosDentro(E, ann, dur){
+  rotulosFuera(E, 0, ann);
+  const hay = new Set(); E.ann.selectAll(".an").each(function(){ hay.add(this.__firma); });
+  ann.forEach(d => { const f = firmaRot(d); if (hay.has(f)) return; hay.add(f);
+    const e = E.ann.append(() => document.createElementNS("http://www.w3.org/2000/svg", d.tipo || "text")).attr("class", "an").attr("opacity", 0); e.node().__firma = f;
+    if (!d.tipo || d.tipo === "text") e.attr("x", d.x).attr("y", d.y).attr("text-anchor", d.a || "start").attr("class", "an " + d.cls).style("fill", d.c || null).style("font-size", d.fs ? d.fs + "px" : null).text(d.s);
+    else if (d.tipo === "line") e.attr("x1", d.x1).attr("x2", d.x2).attr("y1", d.y1).attr("y2", d.y2).attr("stroke", d.c).attr("stroke-width", 2);
+    else if (d.tipo === "path") e.attr("d", d.d).attr("fill", "none").attr("stroke", d.c).attr("stroke-width", 2);
+    else if (d.tipo === "rect") e.attr("x", d.x).attr("y", d.y).attr("width", d.w).attr("height", d.h).attr("fill", "none").attr("stroke", d.c).attr("stroke-width", 2).attr("stroke-dasharray", d.dash || null);
+    else if (d.tipo === "circle") e.attr("cx", d.x).attr("cy", d.y).attr("r", d.r).attr("fill", P.bg).attr("stroke", d.c).attr("stroke-width", 2);
+    e.transition().duration(dur ? 150 : 0).attr("opacity", 1); });
+}
+// Transición: una sola fase en la que todo se interpola a la vez (fundido cruzado y movimiento), así la figura nunca queda vacía.
+// Opacidades: lo que sale se apaga en el primer 40 % (easeCubicIn); lo que entra aparece en el 60 % final (easeCubicOut);
+// lo que existe en los dos estados se mueve todo el tiempo (easeCubicInOut). Lo que nace con tamaño 0 (una barra que crece)
+// toma su opacidad desde el principio.
+const OPK = new Set(["ext", "sop", "selOp", "op", "mapOp", "cercaOp", "celOp", "ciclo", "tabOp", "yb", "yg", "ys", "xs", "banda", "diag", "senda", "a2", "line", "rot", "lp"]);
+function interpE(a, b, key, nace){
+  if (Array.isArray(a)){ const fs = a.map((x, i) => interpE(x, b[i])); return t => fs.map(f => f(t)); }
+  if (a && typeof a === "object"){ const n = ("h" in a && a.h < .5) || ("w" in a && a.w < .5), ks = Object.keys(a), fs = ks.map(k => interpE(a[k], b[k], k, n));
+    return t => { const o = {}; ks.forEach((k, i) => o[k] = fs[i](t)); return o; }; }
+  if (typeof a === "number" && OPK.has(key) && a !== b){
+    if (nace && key === "op") return () => b;
+    // rayitas destacadas: al entrar crecen desde la diagonal (t 0,15-1, easeCubicOut); al salir se recogen (t 0-0,5) y luego se apagan
+    if (key === "ext") return b > a ? t => a + (b - a)*d3.easeCubicOut(Math.max(0, Math.min(1, (t - .15)/.85))) : t => a + (b - a)*d3.easeCubicIn(Math.min(1, t/.5));
+    if (key === "sop") return b > a ? t => a + (b - a)*Math.max(0, Math.min(1, (t - .15)/.1)) : t => a + (b - a)*Math.max(0, Math.min(1, (t - .5)/.2));
+    if (key === "cercaOp" && b > a) return t => a + (b - a)*d3.easeCubicOut(Math.max(0, (t - .8)/.2));
+    if (b < a) return t => a + (b - a)*d3.easeCubicIn(Math.min(1, t/.4));
+    return t => a + (b - a)*d3.easeCubicOut(Math.max(0, (t - .6)/.4)); }
+  const f = d3.interpolate(a, b); return t => f(d3.easeCubicInOut(t));
+}
+function interpolador(A, B, ola){
+  if (!ola) return interpE(A, B);
+  const {cont: ca, ala: aa, ...ra} = A, {cont: cb, ala: ab, ...rb} = B, base = interpE(ra, rb);
+  const ondas = (xa, xb) => { const n = xa.length, ord = d3.range(n).sort((i, j) => (xb[i].cx - xb[j].cx) || (xb[j].cy - xb[i].cy)), d = [];
+    ord.forEach((i, r) => d[i] = .3*r/Math.max(1, n - 1)); const fs = xa.map((x, i) => interpE(x, xb[i]));
+    return t => fs.map((g, i) => g(Math.max(0, Math.min(1, (t - d[i])/.7)))); };
+  const fc = ondas(ca, cb), fa = ondas(aa, ab);
+  return t => { const o = base(t); o.cont = fc(t); o.ala = fa(t); return o; };
+}
+const igual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+// ---------- leyenda que dibuja la marca real ----------
+function leyenda(k){ const l = T[L].ley, c = (s) => `<svg viewBox="0 0 22 14" aria-hidden="true">${s}</svg>`;
+  const lleno = (col, op = 1) => c(`<circle cx="11" cy="7" r="5" fill="${col}" fill-opacity="${op}" stroke="${col}" stroke-width="1.2"/>`), hueco = (col) => c(`<circle cx="11" cy="7" r="5" fill="none" stroke="${col}" stroke-width="2"/>`);
+  const caja = (col) => c(`<rect x="5" y="1" width="12" height="12" fill="${col}"/>`), it = (m, s) => `<span>${m}${s}</span>`;
+  // quesito de muestra (bici, patinete, choque) con el anillo del Plan: 0 sin anillo, 1 continuo, 2 de puntos
+  const ques = (pl) => { const arc = d3.arc().innerRadius(0).outerRadius(4.6), ps = d3.pie().sort(null)([2, 3, 1]);
+    return c(`<g transform="translate(11,7)">${ps.map((a, j) => `<path d="${arc(a)}" fill="${[P.bici, P.pat, P.amb][j]}"/>`).join("")}${pl ? `<circle r="6.4" fill="none" stroke="${P.ink}" stroke-width="1.6"${DASH[pl] ? ` stroke-dasharray="${DASH[pl]}"` : ""}${pl === 2 ? ' stroke-linecap="round"' : ""}/>` : ""}</g>`); };
+  const carril = it(c(`<line x1="1" x2="21" y1="7" y2="7" stroke="${P.lane}" stroke-width="2.5"/>`), l.lane);
+  const vehAla = () => [["b", P.bici, l.bici], ["p", P.pat, l.pat], ["a", P.amb, l.amb]].filter(([v]) => D.ala.some(d => d.v === v)).map(([, col, s]) => it(lleno(col), s));
+  const vehLug = [["b", 0, P.bici, l.bici], ["p", 1, P.pat, l.pat], ["a", 2, P.amb, l.amb]].filter(([, j]) => R.negros.some(n => n.v3[j] > 0)).map(([, , col, s]) => it(caja(col), s));
+  const anillos = [1, 2, 0].map(j => [j, l.anillo[j]]).filter(([j]) => R.negros.some(n => n.pl === j)).map(([j, s]) => it(ques(j), s));
+  // solo las entradas que aparecen en el paso
+  const g = {
+    partida: [it(caja(P.ink), l.ob), it(hueco(P.meta), l.hu), it(c(`<rect x="7" y="1" width="8" height="12" fill="${P.meta}" fill-opacity=".16"/>`), l.mar)],
+    quien: [it(caja(P.bici), l.bici), it(caja(P.pat), l.pat), it(caja(P.amb), l.amb)],
+    quien2: [it(c(`<line x1="1" x2="21" y1="7" y2="7" stroke="${P.pat}" stroke-width="4"/>`), l.pat2), it(c(`<line x1="1" x2="21" y1="7" y2="7" stroke="${P.bici}" stroke-width="3" stroke-dasharray="5 3"/>`), l.bici2)],
+    donde: [...vehLug, ...anillos, carril],
+    cruce: [...vehLug, ...anillos, it(hueco(P.ink2), l.pc), carril],
+    alameda: [...vehAla(), it(c(`<rect x="3" y="2" width="16" height="10" fill="none" stroke="${P.ink}" stroke-width="1.6" stroke-dasharray="4 2.5"/>`), l.nus)],
+    alameda3: [it(lleno(P.ink2), l.prio), it(lleno(P.ink2, .22), l.sinp), ...vehAla()],
+    trafico: [it(hueco(P.ink), l.pc), carril],
+    trafico2: [it(lleno(P.ink), l.clar), it(lleno(P.ink2), l.quiza), it(hueco(P.ink2), l.normal),
+      it(c(`<rect x="1" y="3" width="20" height="8" fill="${P.ink2}" opacity=".25"/><line x1="1" x2="21" y1="7" y2="7" stroke="${P.ink}" stroke-dasharray="2 3"/>`), l.banda)],
+    falta2: [it(lleno(P.ink), l.ferits), it(lleno(P.mute), l.trans)]};
+  g.falta3 = [it(caja(P.bici), l.biciU), it(caja(P.pat), l.patU),
+    it(c(`<defs><pattern id="lray" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="${P.line}"/><line x1="0" y1="0" x2="0" y2="5" stroke="${P.ink2}" stroke-width="1.6"/></pattern></defs><rect x="5" y="1" width="12" height="12" fill="url(#lray)" stroke="${P.ink2}"/>`), l.total)];
+  const alias = {alameda2: "alameda", y2025: "partida", falta4: "partida", trafico3: "trafico2"};
+  return (g[k] || g[alias[k]] || []).join("");
+}
+
+// ---------- tabla de datos por paso ----------
+function tablaDatos(k){ const t = T[L].tabla, r = T[L].r; let head, rows;
+  if (["promesa", "partida", "y2025", "falta", "falta4"].includes(k)){ head = [t.any, t.sin, t.senda, t.marge]; rows = TODOS.map(a => [a, AÑOS.includes(a) ? fmt(R.tot[AÑOS.indexOf(a)]) : a === P26 ? r.pend.join(" ") : "", a >= B ? fmt(Math.round(D.senda[a])) : "", E0.banda[a] ? `${fmt(E0.banda[a][0])}-${fmt(E0.banda[a][1])}` : ""]); }
+  else if (k.startsWith("quien")){ head = [t.any, r.sb, r.am, r.sp, r.bici, r.pat]; rows = R.serie.map((s, i) => [AÑOS[i], fmt(s.b), fmt(s.a), fmt(s.p), fmt(R.bici[i]), fmt(R.vmp[i])]); }
+  else if (["donde", "cruce"].includes(k)){ head = [t.lugar, t.n, t.plan]; rows = R.negros.slice(0, 10).map(n => [nomLugar(L === "es" && n.nom_es || n.nom), n.n, t.pl[n.pl]]); }
+  else if (k.startsWith("alameda")){ head = [t.con, t.n, t.prio]; rows = ["m", "s", "w", "d"].map(c => [r.k[c], D.ala.filter(d => d.k === c).length, D.ala.filter(d => d.k === c && d.prio).length]); }
+  else if (k.startsWith("trafico")){ head = [t.cont, t.obs, t.esp]; rows = [...R.sc].sort((a, b) => b.N - a.N).slice(0, 12).map(d => [d.n, d.N, fmt(d.mu, 1)]); }
+  else if (k === "falta3"){ head = [t.any, t.upat, t.uidx];
+    rows = [...R.uso_manual.map(m => [m.año, `${fmt(m.pat*100)} %`, ""]), ...R.uso_idx.años.map((a, i) => [a, "?", fmt(R.uso_idx.idx[i])])]; }
+  else if (k.startsWith("falta")){ head = [t.any, t.grav]; rows = R.grav.map((v, i) => [AÑOS[i], fmt(v)]); }
+  else return "";
+  return `<details class="datos"><summary>${t.ver}</summary><table><thead><tr>${head.map(h => `<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>${rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></details>`;
+}
+
+// ---------- buscador (pendiente 37): los lugares con más siniestros y los puntos de conteo, con su nombre en el idioma ----------
+// Misma regla que el buscador del observatorio: sin acentos, todas las palabras; nom (oficial) y nom_es (castellano).
+// Lo que no esté aquí se busca en el observatorio (#cerca=texto, con todas las direcciones de los siniestros).
+const sinT = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const slug = s => sinT(s).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");   // como hashDe() del observatorio (#lloc=…)
+const BUSCA = R.negros.map((n, i) => ({t: "lloc", i, k: sinT(n.nom + " " + (n.nom_es || ""))}))
+  .concat(R.sc.map((d, i) => ({t: "punt", i, k: sinT(d.n + " " + (d.id || ""))})));
+// (los nombres de los contadores vienen cortados a 45 caracteres: se quita un paréntesis sin cerrar, «(sentido»)
+const etqB = b => b.t === "lloc" ? nomLugar(L === "es" && R.negros[b.i].nom_es || R.negros[b.i].nom) : R.sc[b.i].n.replace(/\s*\([^)]*$/, "");
+// fichas estáticas (datos/fichas_indice.<hash>.js, de scripts/fichas.py, cargado con SRI): [[clase, slug, nombre va, nombre es, n], …]
+const FICHAS_B = (window.FICHAS || []).map(f => [f, sinT(f[2] + " " + f[3])]);
+const qi = document.getElementById("qi"), resi = document.getElementById("resi"), busF = document.getElementById("bus-fitxa");
+let busSel = null;
+function buscarInf(){ const t = T[L], txt = qi.value.trim(), v = sinT(txt); resi.innerHTML = "";
+  if (v.length < 3){ resi.hidden = true; return; }
+  const ws = v.split(/\s+/);
+  BUSCA.filter(b => ws.every(w => b.k.includes(w))).slice(0, 8).forEach(b => { const li = document.createElement("li"), bt = document.createElement("button");
+    bt.type = "button"; bt.textContent = etqB(b) + " "; const s = document.createElement("span"); s.className = "ref"; s.textContent = "· " + t.bus_tipus[b.t]; bt.append(s);
+    bt.onclick = () => { busSel = b; fitxaB(); resi.hidden = true; qi.value = etqB(b); qi.focus(); }; li.append(bt); resi.append(li); });
+  // fichas estáticas por lugar y por calle (window.FICHAS, como en el observatorio): enlace a <clase>/<slug>/
+  FICHAS_B.filter(([f, s]) => ws.every(w => s.includes(w))).map(x => x[0]).sort((a, b) => b[4] - a[4]).slice(0, 6).forEach(f => {
+    const li = document.createElement("li"), a = document.createElement("a"), s = document.createElement("span");
+    a.className = "fit"; a.href = f[0] + "/" + f[1] + "/"; a.textContent = (L === "es" ? f[3] : f[2]) + " "; s.className = "ref"; s.textContent = "· " + t.bus_fitxa_e[f[0]];
+    a.append(s); li.append(a); resi.append(li); });
+  const li = document.createElement("li"), a = document.createElement("a"); a.href = "observatori.html#cerca=" + encodeURIComponent(txt); a.textContent = t.bus_tots(txt); li.append(a); resi.append(li);
+  resi.hidden = false; }
+function fitxaB(){ const t = T[L], b = busSel; if (!b){ busF.innerHTML = ""; return; }
+  const h = document.createElement("h3"); h.textContent = etqB(b); busF.innerHTML = ""; busF.append(h);
+  if (b.t === "lloc"){ const n = R.negros[b.i];
+    busF.insertAdjacentHTML("beforeend", `<p>${t.bus_lloc(n.n, b.i + 1, R.negros.length)} ${t.bus_pl[n.pl]}</p><p><a href="observatori.html#lloc=${slug(n.nom)}">${t.bus_fitxa}</a></p>`); }
+  else { const d = R.sc[b.i];
+    busF.insertAdjacentHTML("beforeend", `<p>${t.bus_punt(d.N, fmt(d.mu, 1))} ${t.bus_nv[d.lv]}${d.sv ? " " + t.bus_sv : ""}</p>${d.id ? `<p><a href="observatori.html#punt=${d.id}">${t.bus_fitxa}</a></p>` : ""}`); } }
+qi.addEventListener("input", buscarInf);
+// teclado en la lista: flecha abajo desde el campo, flechas para moverse, Esc para cerrar
+qi.addEventListener("keydown", e => { if (e.key === "ArrowDown" && !resi.hidden){ e.preventDefault(); resi.querySelector("button,a")?.focus(); } else if (e.key === "Escape"){ resi.hidden = true; } });
+resi.addEventListener("keydown", e => { const xs = [...resi.querySelectorAll("button,a")], j = xs.indexOf(document.activeElement);
+  if (e.key === "ArrowDown" || e.key === "ArrowUp"){ e.preventDefault(); const k = j + (e.key === "ArrowDown" ? 1 : -1); if (k < 0) qi.focus(); else xs[Math.min(k, xs.length - 1)].focus(); }
+  else if (e.key === "Escape"){ resi.hidden = true; qi.focus(); } });
+document.addEventListener("click", e => { if (!e.target.closest(".busca-inf .buscar")) resi.hidden = true; });
+
+// ---------- teclado (y ratón) en los mapas y la dispersión (pendiente 37) ----------
+// En los pasos con lugares o puntos de conteo, la figura se puede recorrer: flechas (siguiente / anterior), Inicio y Fin,
+// Intro abre la ficha en el observatorio y Esc oculta la etiqueta. Las posiciones se leen de las marcas ya dibujadas.
+const EXPLORA = {donde: "neg", cruce: "neg", trafico: "sc", trafico2: "sc", trafico3: "sc"};
+function itemsExp(k){
+  if (EXPLORA[k] === "neg") return R.negros.map((n, i) => i);                                   // de más a menos siniestros
+  const xs = R.sc.map((d, i) => i);                                                               // mapa: de oeste a este; dispersión: por la media (eje x)
+  return k === "trafico" ? xs.sort((a, b) => R.sc[a].lon - R.sc[b].lon) : xs.sort((a, b) => (R.sc[a].mu - R.sc[b].mu) || (R.sc[a].N - R.sc[b].N));
+}
+function posExp(E, k, i){
+  if (EXPLORA[k] === "neg"){ const m = /translate\(([-\d.e]+),\s*([-\d.e]+)\)/.exec(E.neg[i].q.attr("transform") || ""); return m ? [+m[1], +m[2], (+E.neg[i].a2.attr("r") || 8)] : null; }
+  return [+E.cont[i].attr("cx"), +E.cont[i].attr("cy"), +E.cont[i].attr("r") || 4];
+}
+function textoExp(k, i, corto){ const t = T[L];
+  if (EXPLORA[k] === "neg"){ const n = R.negros[i], nom = nomLugar(L === "es" && n.nom_es || n.nom);
+    return corto ? `${nom} · ${fmt(n.n)}` : t.exp_neg(i + 1, nom, n.n, t.bus_pl[n.pl]); }
+  const d = R.sc[i], nom = etqB({t: "punt", i}); return corto ? `${nom} · ${d.N} / ${fmt(d.mu, 1)}` : t.exp_sc(nom, d.N, fmt(d.mu, 1), t.bus_nv[d.lv]); }
+const anunciarExp = txt => { const a = document.getElementById("exp-vivo"); a.textContent = ""; setTimeout(() => { a.textContent = txt; }, 50); };
+function pintarExp(E, i, anuncia){
+  const k = E.expK, g = E.exp, p = i == null ? null : posExp(E, k, i);
+  if (!p || !isFinite(p[0])){ g.attr("display", "none"); return; }
+  const [x, y, r] = p, W = E.G.W, txt = textoExp(k, i, true), izq = x > W*.6;
+  g.attr("display", null);
+  g.select("circle").attr("cx", x).attr("cy", y).attr("r", r + 5).attr("stroke", P.sel);
+  g.select("text").attr("x", x + (izq ? -(r + 9) : r + 9)).attr("y", Math.max(16, Math.min(E.G.H - 8, y + 5))).attr("text-anchor", izq ? "end" : "start").style("fill", P.ink).text(txt);
+  if (anuncia) anunciarExp(textoExp(k, i));
+}
+function expPreparar(svg, E, k){
+  E.exp = E.s.append("g").attr("class", "exp").attr("display", "none").attr("pointer-events", "none");
+  E.exp.append("circle").attr("fill", "none").attr("stroke-width", 3); E.exp.append("text").attr("class", "rotf halo");
+  E.expK = k; E.expJ = -1; svg.__E = E;
+  if (EXPLORA[k]){ svg.setAttribute("tabindex", "0"); svg.setAttribute("role", "application"); svg.setAttribute("aria-describedby", "exp-ajuda"); }
+  else { svg.removeAttribute("tabindex"); svg.setAttribute("role", "img"); svg.removeAttribute("aria-describedby"); }
+  if (svg.__exp) return; svg.__exp = true;                                                       // escuchadores, una vez por <svg>
+  svg.addEventListener("focus", () => { const E = svg.__E; if (!EXPLORA[E.expK]) return; if (E.expJ < 0) E.expJ = 0; pintarExp(E, itemsExp(E.expK)[E.expJ], true); });
+  svg.addEventListener("blur", () => svg.__E.exp.attr("display", "none"));
+  svg.addEventListener("keydown", e => { const E = svg.__E, k = E.expK; if (!EXPLORA[k] || e.altKey || e.ctrlKey || e.metaKey) return;
+    const its = itemsExp(k), n = its.length; let j = E.expJ;
+    if (["ArrowRight", "ArrowDown"].includes(e.key)) j = (j + 1) % n;
+    else if (["ArrowLeft", "ArrowUp"].includes(e.key)) j = (j - 1 + n) % n;
+    else if (e.key === "Home") j = 0; else if (e.key === "End") j = n - 1;
+    else if (e.key === "Escape"){ E.exp.attr("display", "none"); return; }
+    else if (e.key === "Enter" && j >= 0){ const i = its[j];
+      location.href = EXPLORA[k] === "neg" ? "observatori.html#lloc=" + slug(R.negros[i].nom) : "observatori.html#punt=" + R.sc[i].id; return; }
+    else return;
+    e.preventDefault(); E.expJ = j; pintarExp(E, its[j], true); });
+  // ratón: la etiqueta del elemento más cercano (a 16 px o menos)
+  svg.addEventListener("pointermove", e => { const E = svg.__E, k = E.expK; if (!EXPLORA[k]) return;
+    const b = svg.getBoundingClientRect(), sx = E.G.W/b.width, x = (e.clientX - b.left)*sx, y = (e.clientY - b.top)*sx;
+    let best = null, bd = 16*16; itemsExp(k).forEach(i => { const p = posExp(E, k, i); if (!p) return; const d = (p[0] - x)**2 + (p[1] - y)**2; if (d < bd){ bd = d; best = i; } });
+    if (best != null) pintarExp(E, best, false); else if (document.activeElement !== svg) E.exp.attr("display", "none"); });
+  svg.addEventListener("pointerleave", () => { if (document.activeElement !== svg) svg.__E.exp.attr("display", "none"); });
+}
+
+// ---------- modo animado / estático ----------
+let anim = true, sinAnim = false, estado = "promesa", ESC = null, CUR = null, timer = null, obs = null, altoMed = 0, anchoMed = 0;
+const reduceMQ = matchMedia("(prefers-reduced-motion: reduce)");
+try { sinAnim = localStorage.getItem("obs-sinanim") === "1"; } catch(e){}
+const movil = () => innerWidth <= 860;
+const LEY = 28, leyAlto = () => movil() ? 64 : LEY;   // en móvil la leyenda ocupa dos o tres líneas
+
+// Al terminar o al interrumpirse, siempre se pinta el estado final exacto (sin interpolar). Si llegan dos cambios de paso
+// en menos de 350 ms, se salta al final sin animar. Duración: 700 ms (750 con ola) + 150 ms de rótulos.
+let DESTINO = null, ultimoIr = -1e9, guardia = null;
+function terminar(fundido){
+  if (timer){ timer.stop(); timer = null; } clearTimeout(guardia);
+  if (!ESC || !DESTINO) return;
+  CUR = DESTINO.L; render(ESC, CUR); rotulosDentro(ESC, DESTINO.ann, fundido);
+  const ley = document.getElementById("ley"), lh = leyenda(DESTINO.fk);
+  if (ley.dataset.html !== lh){ ley.innerHTML = lh; ley.dataset.html = lh; } ley.style.opacity = 1;
+}
+function ir(k, dur){
+  estado = k; if (!ESC) return;
+  terminar(0);                                   // la transición anterior acaba en su estado final
+  const fk = FIG_DE[k] || k, {L: Lb, ann} = layout(fk, ESC.G);
+  const fig = document.getElementById("fig"); fig.classList.toggle("atenua", SOLO_TEXTO.has(k));
+  if (SOLO_TEXTO.has(k)) fig.setAttribute("inert", ""); else fig.removeAttribute("inert");
+  ESC.s.attr("aria-label", T[L].aria[k](D));
+  ESC.exp.remove(); expPreparar(ESC.s.node(), ESC, fk);     // figura explorable con el teclado en los mapas y la dispersión
+  const ahora = performance.now(); if (ahora - ultimoIr < 350) dur = 0; ultimoIr = ahora;
+  DESTINO = {L: Lb, ann, fk};
+  if (!CUR || !dur) return terminar(0);
+  rotulosFuera(ESC, 1, ann);   // solo salen los rótulos que cambian; la leyenda, solo si cambia
+  const ley = document.getElementById("ley"); if (ley.dataset.html !== leyenda(fk)) ley.style.opacity = 0;
+  const ola = CUR.cont.some((c, i) => c.m !== Lb.cont[i].m) || CUR.ala.some((a, i) => a.m !== Lb.ala[i].m);
+  const T_ = ola ? 750 : 700, f = interpolador(CUR, Lb, ola);
+  timer = d3.timer(el => { const t = Math.min(1, el/T_); CUR = f(t); render(ESC, CUR); if (t >= 1) terminar(1); });
+  guardia = setTimeout(() => terminar(1), T_ + 200);   // por si el navegador no da fotogramas (pestaña oculta, ahorro de energía)
+}
+document.addEventListener("visibilitychange", () => { if (timer) terminar(0); });
+// con scroll rápido, solo se anima el último paso al que se llega (tras una pausa breve)
+let pend = null;
+function pedir(k){ clearTimeout(pend); pend = setTimeout(() => { if (k !== estado) ir(k, 1); }, 90); }
+function medir(){ altoMed = innerHeight; anchoMed = innerWidth;
+  const af = movil() ? Math.round(altoMed*.55) : Math.round(altoMed - 80);
+  document.documentElement.style.setProperty("--alto-fig", af + "px");
+  document.documentElement.style.setProperty("--alto-paso", Math.round(altoMed*(movil() ? .9 : .8)) + "px"); }
+function alinearPrimera(){
+  const p=document.querySelector(".paso"), c=p&&p.querySelector(".caja"), f=document.querySelector(".fig");
+  if (!c || !f || !document.documentElement.classList.contains("anim") || movil()) { if (p) p.style.paddingTop=""; return; }
+  const hojas=[...f.querySelectorAll("*")].filter(e=>e.children.length===0);
+  const big=hojas.find(e=>e.textContent.trim()==="−50 %"), src=hojas.find(e=>/3\.2\.2/.test(e.textContent));
+  if (!big || !src) return;
+  const fr=f.getBoundingClientRect(), centro=(big.getBoundingClientRect().top+src.getBoundingClientRect().bottom)/2-fr.top;
+  const pr=p.getBoundingClientRect(), desfase=pr.top-fr.top;
+  p.style.paddingTop=Math.max(0,Math.round(centro-desfase-c.getBoundingClientRect().height/2))+"px";
+}
+function montarTodo(){
+  leerTokens(); medir();
+  const html = document.documentElement; html.classList.toggle("anim", anim);
+  const t = T[L];
+  const caja = k => `<div class="caja"><h2 class="caja-t">${t.tit[k]}</h2>${t.pasos[k](D).replace(/\*([^*]+)\*/g, '<b class="k">$1</b>')}${tablaDatos(k)}</div>`;
+  document.getElementById("pasos").innerHTML = ESTADOS.map(k => `<section class="paso" data-paso="${k}">${(!anim && !SOLO_TEXTO.has(k)) ? `<div class="fig-paso"><svg role="img" aria-label="${t.aria[k](D).replace(/"/g, "&quot;")}"></svg><div class="ley" aria-hidden="true">${leyenda(k)}</div></div>` : ""}${caja(k)}</section>`).join("");
+  if (obs) obs.disconnect(); if (timer){ timer.stop(); timer = null; } clearTimeout(guardia); DESTINO = null;
+  if (anim){
+    const svg = document.getElementById("esc"), box = svg.parentNode.getBoundingClientRect();
+    ESC = montar(svg, geom(Math.round(box.width), Math.round(box.height), leyAlto())); ESC.cv.todos(); CUR = null; ir(estado, 0);
+    const top = movil() ? .72 : .5;
+    obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ const k = e.target.dataset.paso; pedir(k);
+      document.querySelectorAll(".paso").forEach(p => p.classList.toggle("activo", p.dataset.paso === k)); } }),
+      {rootMargin: `-${Math.round(altoMed*top)}px 0px -${Math.round(altoMed*(1 - top) - 2)}px 0px`});
+    document.querySelectorAll(".paso").forEach(p => obs.observe(p));
+    document.querySelectorAll(".paso").forEach(p => p.classList.toggle("activo", p.dataset.paso === estado));
+  } else {
+    ESC = null;
+    document.querySelectorAll(".fig-paso > svg").forEach(svg => { const k = svg.closest(".paso").dataset.paso, w = Math.round(svg.parentNode.getBoundingClientRect().width);
+      const h = Math.round(Math.max(320, Math.min(500, w*.78)));
+      const E = montar(svg, geom(w, h, 0)), {L: Lb, ann} = layout(FIG_DE[k] || k, E.G); render(E, Lb); rotulosDentro(E, ann, 0);
+      E.exp.remove(); expPreparar(svg, E, FIG_DE[k] || k); });
+  }
+}
+function textos(){ const t = T[L]; document.documentElement.lang = L === "va" ? "ca" : "es"; document.title = t.titol;
+  document.querySelectorAll("[data-t]").forEach(e => { const v = t[e.dataset.t]; if (typeof v === "string") e.innerHTML = v; else if (typeof v === "function") e.innerHTML = v(D); });
+  document.getElementById("l-va").setAttribute("aria-pressed", L === "va"); document.getElementById("l-es").setAttribute("aria-pressed", L === "es");
+  document.getElementById("b-mov").setAttribute("aria-pressed", sinAnim);
+  qi.placeholder = t.bus_ph; if (qi.value.trim().length >= 3 && !resi.hidden) buscarInf(); fitxaB(); }
+// salida de la cabecera ligada al scroll: se desvanece y sube un poco (solo opacidad y transform)
+const intro=document.querySelector(".intro"); let introPend=false;
+function salidaIntro(){
+  introPend=false;
+  if (!document.documentElement.classList.contains("anim")){ intro.style.opacity=""; intro.style.transform=""; return; }
+  const h=intro.offsetHeight||300, p=Math.min(1,Math.max(0,scrollY/(h*.9))), e=p*p*(3-2*p);
+  intro.style.opacity=String(1-e); intro.style.transform=`translateY(${-36*e}px) scale(${1-.035*e})`;
+}
+addEventListener("scroll",()=>{ if(!introPend){ introPend=true; requestAnimationFrame(salidaIntro); } },{passive:true});
+// el relato se lee desde el principio: al recargar, siempre arriba (sin restaurar la posición anterior)
+try{ history.scrollRestoration="manual"; }catch(e){}
+if (location.hash) history.replaceState(null,"",location.pathname+location.search);
+scrollTo(0,0); addEventListener("load",()=>scrollTo(0,0));
+function modo(){ anim = !reduceMQ.matches && !sinAnim; textos(); montarTodo(); requestAnimationFrame(()=>requestAnimationFrame(alinearPrimera)); salidaIntro(); }
+try { const s = localStorage.getItem("obs-lang"); if (s === "va" || s === "es") L = s; } catch(e){}
+["va", "es"].forEach(l => document.getElementById("l-" + l).onclick = () => { L = l; try { localStorage.setItem("obs-lang", l); } catch(e){} modo(); });
+document.getElementById("b-mov").onclick = () => { sinAnim = !sinAnim; try { localStorage.setItem("obs-sinanim", sinAnim ? "1" : "0"); } catch(e){} modo(); };
+reduceMQ.addEventListener?.("change", modo);
+// tema.js avisa con «tema-cambiado» al pulsar el botón y, en Automático, al cambiar el sistema: d3 y los canvas leen colores concretos
+document.addEventListener("tema-cambiado", () => { leerTokens(); modo(); });
+addEventListener("resize", () => { if (innerWidth !== anchoMed) modo(); });   // solo si cambia el ancho (la barra del móvil cambia el alto)
+modo();
+</script>

@@ -1,0 +1,1537 @@
+<title>Observatori de la bici i el patinet de València</title>
+<meta name="description" content="Seguim els sinistres amb bici i patinet a València amb les dades obertes de l'Ajuntament: on passen, què s'està fent i si el Pla Director de Seguretat Viària 2026-2030 funciona.">
+<meta name="theme-color" content="#EEF1F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F151B" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='11.5'%20fill='%2315202B'%20stroke='%2355626E'/%3E%3Cg%20fill='none'%20stroke='%23EEF1F2'%20stroke-width='2.2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Ccircle%20cx='6.5'%20cy='15'%20r='3.3'/%3E%3Ccircle%20cx='17.5'%20cy='15'%20r='3.3'/%3E%3Cpath%20d='M6.5%2015l3.8-6.5h4.7l2.5%206.5M10.3%208.5%209.3%206.2'/%3E%3C/g%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Observatori de la bici i el patinet de València">
+<meta property="og:url" content="https://observatoribicivlc.org/observatori.html">
+<meta property="og:title" content="Observatori de la bici i el patinet de València">
+<meta property="og:description" content="Seguim els sinistres amb bici i patinet a València amb les dades obertes de l&#x27;Ajuntament: on passen, què s&#x27;està fent i si el Pla Director de Seguretat Viària 2026-2030 funciona.">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:image" content="https://observatoribicivlc.org/og/observatori.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sinistres amb bici i patinet de l&#x27;últim any sobre el mapa dels llocs amb més sinistres de València.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Observatori de la bici i el patinet de València">
+<meta name="twitter:description" content="Seguim els sinistres amb bici i patinet a València amb les dades obertes de l&#x27;Ajuntament: on passen, què s&#x27;està fent i si el Pla Director de Seguretat Viària 2026-2030 funciona.">
+<meta name="twitter:image" content="https://observatoribicivlc.org/og/observatori.png">
+<meta name="twitter:image:alt" content="Sinistres amb bici i patinet de l&#x27;últim any sobre el mapa dels llocs amb més sinistres de València.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: banda de meta arriba, mapa protagonista con ficha lateral, hallazgos y datos debajo. Lenguaje de señalización vial. */
+:root{
+  --bg:#EEF1F2; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
+  /* categorías (orden fijo: bici, patinete, choque bici–patinete); validadas con validate_palette.js sobre #EEF1F2:
+     el naranja y el aqua no llegan a 3:1 en claro, así que siempre van con leyenda o etiqueta */
+  --bici:#2a78d6; --pat:#C94B17; --amb:#14875E; --mix:#8A949D; --meta:#15202B; --warn:#B42318;
+  --sel:#b87a00; --street:#C9D0D4; --street2:#AEB7BD; --lane:#9DB8AE; --mapbg:#F7F8F8;
+  --display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F151B; --surface:#17212A; --line:#2A3641; --ink:#E7ECEF; --ink2:#9AA7B2;
+  --bici:#3987e5; --pat:#d95926; --amb:#199e70; --mix:#6F7B86; --meta:#E7ECEF; --warn:#F97066;
+  --sel:#c98500; --street:#26323C; --street2:#34434F; --lane:#4E6A60; --mapbg:#121A21; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F151B; --surface:#17212A; --line:#2A3641; --ink:#E7ECEF; --ink2:#9AA7B2;
+  --bici:#3987e5; --pat:#d95926; --amb:#199e70; --mix:#6F7B86; --meta:#E7ECEF; --warn:#F97066;
+  --sel:#c98500; --street:#26323C; --street2:#34434F; --lane:#4E6A60; --mapbg:#121A21; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+a{color:var(--ink)}   /* sin esto, el azul por defecto del navegador, que en oscuro no se lee bien */
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding-block:10px;flex-wrap:wrap}
+.marca{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:.01em;text-transform:uppercase}
+.senal{width:28px;height:28px;border-radius:50%;background:var(--ink);display:grid;place-items:center;flex:none}
+.senal svg{width:18px;height:18px}
+.top nav{margin-left:auto;display:flex;gap:4px}
+.top nav button,.seg button{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 10px;cursor:pointer;border-radius:3px}
+.top nav button[aria-pressed="true"],.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.proto{font-size:13px;color:var(--ink2);padding-block:8px;border-bottom:1px dashed var(--line)}
+/* entradilla de la portada: de qué va y tres accesos con su respuesta (dónde ocurren · qué se hace, en pla.html · ¿funciona?) */
+.entrada{padding-block:28px 4px}
+.entrada h1{font-size:clamp(22px,2.7vw,31px);font-weight:600;line-height:1.2;max-width:46ch;margin:0 0 18px}
+.accesos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:980px){.accesos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.accesos a{display:block;box-sizing:border-box;height:100%;min-height:44px;border-top:4px solid var(--ink);background:var(--surface);padding:10px 14px 12px;color:var(--ink);text-decoration:none}
+.accesos .acc-t{display:block;font-family:var(--display);font-weight:700;font-size:21px;line-height:1.15;text-transform:uppercase;letter-spacing:.02em}
+.accesos .acc-s{display:block;font-size:15px;line-height:1.4;color:var(--ink2);margin-top:5px}
+.accesos .acc-s b{color:var(--ink);font-weight:700}
+.accesos .acc-m{display:block;font-size:14px;font-weight:600;margin-top:6px;text-decoration:underline;text-underline-offset:3px}
+.accesos a:hover{background:var(--ink);color:var(--bg)}
+.accesos a:hover .acc-s,.accesos a:hover .acc-s b{color:var(--bg)}
+.accesos a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+#donde,#funciona{scroll-margin-top:70px}
+/* compartir la ficha */
+.compartir{margin:10px 0 0;display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px}
+.b-comp{display:inline-flex;align-items:center;gap:6px;min-height:32px;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:4px 10px;border-radius:3px;cursor:pointer}
+.b-comp:hover{border-color:var(--ink)}
+.comp-ok{font-size:13px;color:var(--ink2)}
+@media (max-width:640px){.accesos{grid-template-columns:1fr}}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+section{padding-block:28px}
+.meta{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px;align-items:center}
+.meta h2{font-size:clamp(26px,3.6vw,42px);font-weight:700;line-height:1.08;margin-block:6px 12px;overflow-wrap:break-word}
+.meta h2 em{display:block;font-style:normal;font-weight:600;font-size:.56em;line-height:1.2;margin-top:.55em;padding-left:12px;border-left:4px solid var(--ink);color:var(--ink)}
+.meta h2 em.alerta{border-left-color:var(--warn)}
+.meta h2 em.alerta{color:var(--warn)}
+.estado{font-size:17px;max-width:46ch}
+.estado b{font-variant-numeric:tabular-nums}
+.leyenda{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--ink2);margin-top:12px}
+.leyenda i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.nota{font-size:12.5px;color:var(--ink2);max-width:60ch;margin-top:10px}
+.control summary{cursor:pointer;font-weight:600;color:var(--ink)}
+.control table{border-collapse:collapse;margin-block:6px;font-variant-numeric:tabular-nums}
+.control th,.control td{padding:2px 8px 2px 0;text-align:right;border-bottom:1px solid var(--line);vertical-align:bottom}
+.control th:first-child,.control td:first-child{text-align:left}
+#graf{width:100%;height:auto;display:block}
+#graf text{fill:var(--ink2);font-family:var(--display);font-size:13px}
+.mapa-sec h2{font-size:28px;font-weight:800;text-transform:uppercase}
+.controles{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-block:12px}
+.seg{display:flex;gap:0}
+.seg button{border-radius:0;margin-left:-1px}
+.seg button:first-child{border-radius:3px 0 0 3px;margin-left:0}
+.seg button:last-child{border-radius:0 3px 3px 0}
+select,input[type=search]{font:inherit;font-size:14px;border:1.5px solid var(--ink2);background:var(--surface);color:var(--ink);padding:5px 8px;border-radius:3px}
+#filtros{display:inline-flex;gap:12px;flex-wrap:wrap;align-items:center}
+#filtros[hidden]{display:none!important}
+.buscar{position:relative;flex:1 1 220px;max-width:340px}
+.buscar input{width:100%;box-sizing:border-box}
+#res{position:absolute;top:100%;left:0;right:0;z-index:5;background:var(--surface);border:1px solid var(--line);margin:2px 0 0;padding:0;list-style:none;max-height:260px;overflow:auto}
+#res li button{all:unset;display:block;width:100%;box-sizing:border-box;padding:6px 10px;cursor:pointer;font-size:13.5px}
+#res li button:hover,#res li button:focus-visible{background:var(--bg)}
+#res li a{display:block;padding:6px 10px;font-size:13.5px;color:var(--ink);text-decoration:none}
+#res li a:hover,#res li a:focus-visible{background:var(--bg)}
+#res li a .ref{color:var(--ink2);font-weight:400}
+.mapa-wrap{border:1px solid var(--line);background:var(--surface)}
+.expl{font-size:14.5px;color:var(--ink2);max-width:80ch;margin:0 0 10px}
+.ques{pointer-events:none}
+.selbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:8px 12px;border-top:1px solid var(--line);background:var(--bg);font-size:14px}
+.selbar .et{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.selbar b{font-family:var(--display);font-size:16px}
+.selbar button{background:none;border:0;border-radius:0;padding:0;cursor:pointer;margin-left:auto;font-family:var(--display);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:13px;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--ink)}
+.navlink{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-right:8px}
+#mapa{height:540px;background:var(--mapbg);position:relative}
+.zoom{position:absolute;right:10px;top:10px;z-index:3;display:flex;flex-direction:column;gap:4px}
+.zoom button{width:32px;height:32px;font-size:18px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:3px;cursor:pointer}
+.ficha-wrap{border:1px solid var(--line);border-top:0;background:var(--surface);scroll-margin-top:70px}
+.ficha-cab{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;padding:18px 20px 0}
+.ficha-wrap.sin .ficha-cab{grid-template-columns:1fr}
+#minimapa{height:220px;border:1px solid var(--line);border-radius:4px;background:var(--mapbg);overflow:hidden}
+.mm-caja p{margin:4px 0 0}
+.ficha{padding:6px 20px 18px;min-width:0}
+.plan h5{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin:6px 0 4px}
+.ficha .cab{max-width:80ch}
+.secs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px 28px}
+.secs .mini-svg{max-width:320px}
+.lista{width:100%;border-collapse:collapse;font-size:13.5px}
+.lista td,.lista th{border-bottom:1px solid var(--line);padding:5px 6px;text-align:left;vertical-align:top}
+.lista th{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.lista-wrap{overflow-x:auto}
+.hb-ley{margin:0 0 6px}
+.cab .lugar h4{margin-top:12px}
+.resum{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.2;margin:2px 0 6px;max-width:40ch}
+.br-m{display:inline-block;width:18px;height:8px;background:var(--ink2);border-radius:2px;vertical-align:0}
+.ct-m{display:inline-block;width:3px;height:14px;background:var(--ink);border-radius:1px;vertical-align:-3px;margin-left:4px}
+details.com{margin-top:14px;border-top:1px solid var(--line);padding-top:8px;font-size:13.5px;color:var(--ink2)}
+details.com summary{cursor:pointer;font-family:var(--display);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:13px;color:var(--ink)}
+details.com p{max-width:80ch}
+.secs .ancho{grid-column:1/-1}
+.plan-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px 28px}
+.plan{margin:0;padding-left:18px;font-size:14px}.plan li{margin-bottom:8px}
+.verd{display:inline-block;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:999px;border:1.5px solid transparent}
+.verd.n2{background:var(--ink);color:var(--surface)}.verd.n1{background:var(--ink2);color:var(--surface)}.verd.n0{background:none;color:var(--ink);border-color:var(--line)}
+.ficha h3{font-size:22px;font-weight:700;line-height:1.15;margin-block:4px 10px}
+.ficha .vac{color:var(--ink2);font-size:14px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14px;margin-block:10px}
+.kv dt{color:var(--ink2)}.kv dd{margin:0;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:999px;border:1.5px solid currentColor}
+.mini{width:100%;height:auto;display:block;margin-block:6px}
+.mini text{fill:var(--ink2);font-family:var(--display);font-size:12px}
+.ficha h4{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin:16px 0 6px;border-top:1px solid var(--line);padding-top:10px}
+.lead{font-size:15px;margin:6px 0 0}
+/* etiqueta y cifra en una línea y la barra debajo, a todo el ancho: en columnas estrechas (la ficha tiene cuatro) la barra
+   en medio se quedaba en pocos píxeles. grid-auto-flow:dense sube la cifra al hueco que deja la barra de ancho completo. */
+.hb{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-auto-flow:dense;gap:2px 10px;align-items:end;font-size:16px}
+.hb .tr{grid-column:1 / -1;position:relative;height:12px;background:var(--bg);border-radius:2px;margin:2px 0 12px}
+.hb .br{position:absolute;left:0;top:0;bottom:0;background:var(--ink2);border-radius:2px}
+.hb .ct{position:absolute;top:-5px;bottom:-5px;width:3px;margin-left:-1.5px;background:var(--ink);border-radius:1px;box-shadow:0 0 0 2px var(--surface)}
+.hb .nv{text-align:right;font-variant-numeric:tabular-nums;line-height:1.15}
+.hb .nv b{display:block}
+.hb .nv small{display:block;font-size:15px;color:var(--ink2);white-space:nowrap}
+.ref{font-size:12px;color:var(--ink2);margin-top:4px}
+.ley-ap{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--ink2);margin:2px 0 0}
+.ley-ap i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.ico{display:inline-block;vertical-align:middle;flex:none}
+.pista{background:var(--bg);border-left:3px solid var(--ink);padding:8px 10px;font-size:14px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;border:1px solid var(--line);border-radius:999px;padding:2px 9px}
+.mapley{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink2);padding:8px 12px;border-top:1px solid var(--line)}
+.leer-mapa{margin:0;padding:8px 12px;border-top:1px solid var(--line);font-size:14px}
+.leer-mapa summary{cursor:pointer;font-weight:600}
+.leer-mapa ul{margin:8px 0 0;padding-left:20px}.leer-mapa li{margin:0 0 6px}.leer-mapa li .ico,.leer-mapa li .dot{margin-right:6px;vertical-align:-2px}
+.mapley span{display:inline-flex;align-items:center;gap:6px}
+/* actuaciones del Plan («El Pla, al dia»): rombo con el color de su estado; el botón (24 px) es el área de toque */
+.c-pla{display:inline-flex;align-items:center;gap:6px;font-size:14px;cursor:pointer}
+.c-pla input{width:18px;height:18px;margin:0;accent-color:var(--ink)}
+.pla-m{width:24px;height:24px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center}
+.rombo{margin:0 6px 0 3px;flex:none}
+.pla-m i,.rombo{display:inline-block;width:11px;height:11px;transform:rotate(45deg);background:var(--c);border:2px solid var(--surface);box-shadow:0 0 0 1px var(--ink)}
+.pla-m:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+.pla-m[aria-pressed="true"] i{box-shadow:0 0 0 2.5px var(--sel)}
+.pla-info{font-size:14px;margin:0;padding:8px 12px;border-top:1px solid var(--line);background:var(--surface)}
+.pla-info[hidden]{display:none}
+ul.pla-aqui{list-style:none;padding:0;margin:0 0 8px}
+ul.pla-aqui li{margin:0 0 6px;font-size:14.5px}
+ul.pla-aqui .rombo{width:9px;height:9px;margin:0 8px 0 2px;vertical-align:0}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.hall{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.hall article{border-top:4px solid var(--ink);padding-top:12px;min-width:0}
+.hall .cifra{font-family:var(--display);font-weight:800;font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
+.hall h3{font-size:18px;font-weight:700;margin-block:6px}
+.hall p{font-size:14px;color:var(--ink2);margin:0}
+.datos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;border-top:1px solid var(--line);padding-top:24px}
+.datos h3{font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px}
+.datos p,.datos li{font-size:14px;color:var(--ink2)}
+.datos ul{padding-left:18px;margin:0}
+.etq-prox{display:inline-block;font-family:var(--display);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px;border:1px dashed var(--ink2);color:var(--ink2);padding:2px 9px;border-radius:999px;margin-top:4px}
+.datos a{color:var(--ink);font-weight:600}
+.maplibregl-map{position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent}
+.maplibregl-canvas{position:absolute;left:0;top:0}
+.maplibregl-canvas-container.maplibregl-interactive{cursor:grab}
+.maplibregl-canvas-container.maplibregl-interactive:active{cursor:grabbing}
+.maplibregl-ctrl-attrib,.maplibregl-ctrl-logo{display:none}
+.maplibregl-marker{position:absolute;top:0;left:0;will-change:transform}
+@media (max-width:860px){
+  .meta{grid-template-columns:1fr;gap:16px}
+  #mapa{height:440px}
+  .ficha-cab{grid-template-columns:1fr}
+  #minimapa{height:200px}
+  .hall{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .datos{grid-template-columns:1fr}
+}
+@media (max-width:480px){.hall{grid-template-columns:1fr}.top nav{margin-left:0}}
+/* filtros del mapa, aviso de gravedad, resumen del filtro, descarga y teclado (06/11) */
+.filtros-fila{margin-top:-4px}
+.f-any{display:inline-flex;align-items:center;gap:6px}
+.f-any select{min-width:5.2em}
+.avis{font-size:14px;max-width:90ch;margin:0 0 10px;padding:8px 12px;border-left:3px solid var(--warn);background:var(--surface)}
+.f-resum{font-size:14px;margin:0 0 8px;font-variant-numeric:tabular-nums}
+.f-resum:empty{display:none}
+.sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.maplibregl-canvas:focus-visible{outline:3px solid var(--ink);outline-offset:-3px}
+.mira{display:none;position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;z-index:2;pointer-events:none;border:2px solid var(--sel);border-radius:50%;box-shadow:0 0 0 2px var(--surface)}
+#mapa.teclado .mira{display:block}
+.teclat{margin:6px 0 0}
+.teclat kbd{font-family:var(--body);font-size:11.5px;border:1px solid var(--line);border-radius:3px;padding:0 4px;background:var(--bg)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/*TEMA_CSS*/
+</style>
+<script>/*TEMA_JS*/</script>
+<script>/*PIE_JS*/</script>
+
+<header class="top"><div class="wrap">
+  <div class="marca"><span class="senal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" style="stroke:var(--bg)" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="16" r="3.5"/><circle cx="18" cy="16" r="3.5"/><path d="M6 16l4-7h5l3 7M10 9l-1-2.5H7.5M13 9l2 0"/></svg></span><span data-t="marca"></span></div>
+  <nav aria-label="Navegació"><a class="navlink" href="informe.html" data-t="nav_inf"></a><a class="navlink" href="pla.html" data-t="nav_pla"></a><a class="navlink" href="metode.html" data-t="nav_met"></a><button data-tema></button><button id="l-va" aria-pressed="true">VA</button><button id="l-es" aria-pressed="false">ES</button></nav>
+</div></header>
+
+<div class="wrap"><p class="proto" data-t="proto"></p></div>
+
+<main>
+<section class="wrap entrada" aria-labelledby="t-entrada">
+  <h1 id="t-entrada" data-t="ent_h"></h1>
+  <ul class="accesos">
+    <li><a href="#donde"><span class="acc-t" data-t="acc1"></span><span class="acc-s" data-t="acc1_s"></span><span class="acc-m" data-t="acc1_m"></span></a></li>
+    <li><a href="pla.html"><span class="acc-t" data-t="acc2"></span><span class="acc-s" data-t="acc2_s"></span><span class="acc-m" data-t="acc2_m"></span></a></li>
+    <li><a href="#funciona"><span class="acc-t" data-t="acc3"></span><span class="acc-s" data-t="acc3_s"></span></a></li>
+  </ul>
+</section>
+
+<section class="wrap meta" id="funciona" aria-labelledby="t-meta">
+  <div>
+    <p class="eyebrow" data-t="ey_meta"></p>
+    <h2 id="t-meta" data-t="h_meta"></h2>
+    <p class="estado" id="estado"></p>
+    <div class="leyenda">
+      <span><i style="background:var(--bici)"></i><span data-t="bici"></span></span>
+      <span><i style="background:var(--pat)"></i><span data-t="pat"></span></span>
+      <span><i style="background:var(--amb)"></i><span data-t="amb"></span></span>
+      <span><svg class="ico" width="26" height="12" viewBox="0 0 26 12" aria-hidden="true" style="margin-right:5px"><line x1="1" y1="6" x2="25" y2="6" stroke="var(--meta)" stroke-width="1.5" stroke-dasharray="2 3"/><circle cx="13" cy="6" r="4" fill="var(--bg)" stroke="var(--meta)" stroke-width="1.5"/></svg><span data-t="senda"></span></span>
+      <span><i style="background:var(--meta);opacity:.18"></i><span data-t="banda"></span></span>
+    </div>
+    <p class="nota" data-t="nota_base"></p>
+    <details class="nota control"><summary data-t="ctrl_t"></summary><table id="control"></table><p data-t="ctrl_txt"></p></details>
+  </div>
+  <svg id="graf" viewBox="0 0 640 330" role="img" aria-labelledby="graf-t"><title id="graf-t" data-t="graf_t"></title></svg>
+</section>
+
+<section class="wrap mapa-sec" id="donde" aria-labelledby="t-mapa">
+  <p class="eyebrow" data-t="ey_mapa"></p>
+  <h2 id="t-mapa" data-t="h_mapa"></h2>
+  <div class="controles">
+    <div class="seg" role="group" aria-label="Vista">
+      <button data-vista="negros" aria-pressed="true" data-t="v_negros"></button>
+      <button data-vista="uso" aria-pressed="false" data-t="v_uso"></button>
+      <button data-vista="pts" aria-pressed="false" data-t="v_pts"></button>
+    </div>
+    <label class="c-pla"><input type="checkbox" id="c-pla"><span data-t="c_pla"></span></label>
+    <div class="buscar"><input type="search" id="q" autocomplete="off"><ul id="res" hidden></ul></div>
+  </div>
+  <!-- filtros (año, vehículo y gravedad): cambian el mapa, la leyenda, las fichas y la descarga; no la vista «Según el tráfico» -->
+  <div class="controles filtros-fila">
+    <span id="filtros"><span class="f-any" role="group" aria-labelledby="l-any"><span class="eyebrow" id="l-any" data-t="any"></span> <select id="f-des"></select><span aria-hidden="true">–</span><select id="f-fins"></select></span>
+    <label><span class="eyebrow" data-t="vehicle"></span> <select id="f-veh"><option value="t" data-t="tots"></option><option value="b" data-t="bici"></option><option value="p" data-t="pat"></option><option value="a" data-t="amb"></option></select></label>
+    <label><span class="eyebrow" data-t="grav"></span> <select id="f-grav"><option value="t" data-t="g_tot"></option><option value="0" data-t="g_sin"></option><option value="h" data-t="g_her"></option><option value="g" data-t="g_greu"></option></select></label>
+    <button type="button" id="f-net" class="b-comp" data-t="f_net" hidden></button></span>
+    <button type="button" id="b-csv" class="b-comp"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg><span data-t="csv"></span></button>
+  </div>
+  <p class="avis" id="avis-grav" hidden></p>
+  <p class="f-resum" id="f-resum" role="status"></p>
+  <p class="expl" id="expl"></p>
+  <div class="mapa-wrap">
+    <div id="mapa"><div class="zoom"><button id="zin">+</button><button id="zout">−</button><button id="zhome">⌂</button></div><div class="mira" id="mira" aria-hidden="true"></div></div>
+    <div class="mapley" id="mapley"></div>
+    <div class="selbar" id="mini" hidden></div>
+    <p class="pla-info" id="pla-info" aria-live="polite" hidden></p>
+    <details class="saber leer-mapa"><summary data-t="leer_t"></summary><div><ul id="leer"></ul><p class="teclat" id="teclat"></p></div></details>
+    <p class="sr" id="anunci" aria-live="polite"></p>
+  </div>
+  <div class="ficha-wrap" id="ficha-wrap">
+    <div class="ficha-cab"><div id="ficha-top"></div><div class="mm-caja" id="mm-caja" hidden><div id="minimapa" aria-hidden="true"></div><p class="ref" id="mm-ley"></p></div></div>
+    <div class="ficha" id="ficha" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="t-hall">
+  <p class="eyebrow" data-t="ey_hall"></p>
+  <h2 id="t-hall" class="mapa-sec" style="font-size:28px;font-weight:800;text-transform:uppercase;margin-bottom:16px" data-t="h_hall"></h2>
+  <div class="hall" id="hall"></div>
+</section>
+
+<section class="wrap" aria-labelledby="t-dades">
+  <div class="datos">
+    <div><h3 id="t-dades" data-t="d1_t"></h3><p data-t="d1_p"></p><span class="etq-prox" data-t="d1_b"></span></div>
+    <div><h3 data-t="d2_t"></h3><ul id="lim"></ul></div>
+    <div><h3 data-t="d3_t"></h3><p data-t="d3_p"></p></div>
+  </div>
+</section>
+</main>
+<footer class="wrap" data-pie></footer>
+
+<script>
+// al recargar, quedarse donde se estaba (arriba si se estaba arriba), sin saltos mientras carga el mapa
+if (location.hash==="#ficha-wrap") history.replaceState(null,"",location.pathname+location.search);
+try{ history.scrollRestoration="manual"; }catch(e){}
+let Y0=0; try{ Y0=+sessionStorage.getItem("obs-scroll")||0; }catch(e){}
+addEventListener("pagehide",()=>{ try{ sessionStorage.setItem("obs-scroll",String(scrollY)); }catch(e){} });
+let tocado=false; ["wheel","touchstart","keydown","mousedown"].forEach(ev=>addEventListener(ev,()=>{ tocado=true; },{once:true,passive:true}));
+// con ancla (#donde, #funciona: accesos de la entradilla), ir a la sección; si no, a donde se estaba
+const volverY=()=>{ if (tocado) return; const h=location.hash.length>1&&document.getElementById(location.hash.slice(1)); if (h) h.scrollIntoView(); else scrollTo(0,Y0); };
+const T = {
+va:{
+fac:{prio:"No respectar la prioritat",dist:"Distracció",via:"Estat de la via",vel:"Velocitat inadequada"},
+fac_any:(a,n)=>`Només ${a} (${n} ${n===1?"accident":"accidents"}): abans, en un de cada tres comunicats no hi consta cap motiu.`,
+fac_pocs:a=>`En ${a} hi va haver massa pocs accidents ací per a comparar els motius amb la ciutat.`,
+fr:["0-7 h","7-10 h","10-14 h","14-17 h","17-21 h","21-24 h"],ciutat:"mitjana de la ciutat",
+lab:(x)=>`${x} % en dies feiners`,cb:(m)=>m<=15?"Carril bici al mateix punt":`Carril bici a ${m} m`,
+inclou:"Encreuaments inclosos",t_ult:(a,n)=>`Tipus en ${a} (${n} sinistres)`,
+pla_ref:"Pla Director de Seguretat Viària",pla_pend:"Pendent: creuarem aquest punt amb les actuacions i els llocs que cita el Pla Director.",
+fecha:"Data i hora",unis:"Vehicles implicats",facs:"Factors",
+marca:"Observatori de la bici i el patinet de València",nav_inf:"Informe {a1}",nav_pla:"El Pla, al dia",nav_met:"Mètode",
+ent_h:"Seguim els sinistres amb bici i patinet a València amb les dades obertes de l'Ajuntament: on passen, què s'està fent i si el Pla Director de Seguretat Viària 2026-2030 funciona.",
+acc1:"On passen <span aria-hidden=\"true\">→</span>",acc1_s:"<b>{cn}</b> sinistres en només {neg} {ctip}. El primer, {c1nom}, amb <b>{c1n}</b>.",acc1_m:"Busca el teu carrer",ctip:{nudo:"encreuaments",tramo:"trams",ambos:"encreuaments i trams"},
+acc2:"Què s'hi fa? <span aria-hidden=\"true\">→</span>",acc2_s:"<b>{pn}</b> actuacions del Pla per a la bici i el patinet, amb font: {ph} fetes, {pm} en marxa, {pa} anunciades i {ps} sense informació pública.",acc2_m:"El Pla, al dia",
+acc3:"Funciona? <span aria-hidden=\"true\">→</span>",acc3_s:"{fun}",
+fun0:"<b>{nb}</b> sinistres amb bici o patinet en {ab}. El Pla demana reduir-los a la meitat per a {ameta}: amb {ab} com a base, <b>{meta}</b>. Les dades de {apend} encara no estan publicades.",
+fun_ev:"<b>{t1}</b> sinistres amb bici o patinet en {a1}: <b>{jult}</b>. El Pla demana reduir-los a la meitat per a {ameta}: amb {ab} com a base ({nb}), la meta és <b>{meta}</b>.",
+comp:"Compartir",comp_aria:"Compartir l'enllaç a aquesta fitxa",comp_neg:"lloc amb més sinistres amb bici i patinet a València",comp_uso:"punt de comptatge del carril bici a València",
+sin_res:q=>`No hi ha res amb «${q}» en el mapa. Només hi ha fitxa dels llocs i carrers amb 5 accidents o més; prova amb un altre nom o mou el mapa fins a la zona.`,
+copiat:"Enllaç copiat",copia_no:"No s'ha pogut copiar: copia l'adreça del navegador",
+h_lista:"Què hi ha passat",th:["Data","Vehicles","Tipus ({tany})","Gravetat"],
+ey_meta:"Indicador de l'acció 3.2.2 del Pla Director de Seguretat Viària 2026-2030",
+estado:J=>`En ${V.a1} hi hagué <b>${J.b}</b> sinistres amb bici o patinet, ${J.d} respecte a ${V.ab}. La senda marcava ${J.s}; per l'atzar, qualsevol xifra entre ${J.lo} i ${J.hi} hi és compatible. Resultat: <b>${J.est}</b>. ${J.med}`,
+estado0:J=>`${V.partida} Amb ${V.ab} com a base, la meta és <b>${V.meta}</b> en ${V.ameta}: caldria baixar un ${V.falta} cada any des de ${V.adesde}. Per a ${V.apend}, la senda marca ${J.s}: entre ${J.lo} i ${J.hi} seria compatible amb la senda.`,
+p26:"{apend}: pendent de publicar",
+ey_mapa:"On s'acumulen",h_mapa:"El mapa dels sinistres",
+any:"Any",vehicle:"Vehicle",tots:"Tots",
+cerca:"Cerca un carrer o un encreuament",
+fitxa:{lloc:"fitxa del lloc",carrer:"fitxa del carrer"},
+n_total:"Sinistres {rang}",n_pat:"Amb patinet",n_A:"{nA}",n_B:"{nB}",
+prob:"Probabilitat d'excés",
+uso_txt:(p)=>p>.95?"Hi ha més sinistres dels que tocarien pel trànsit que hi passa.":p>.8?"Possible excés; cal més temps de dades.":"Sense excés clar segons l'ús.",
+any_l:"Any",grav:"Gravetat",tipo:"Tipus (només {tany})",loc:"Localització",geo:{c:"per encreuament",p:"per portal",q:"per portal proper",o:"altres"},
+gravs:["Sense ferits","Ferits lleus","Ferits de gravetat baixa","Ferits greus","Morts"],
+lane:"Carril bici",
+ey_hall:"El que diuen les dades",h_hall:"El que hem aprés",
+d1_t:"Descarrega les dades",d1_p:"Els sinistres de bici i patinet situats en el mapa, en CSV i GeoJSON, amb el mètode de localització de cadascun i versions datades. Els publicarem ací. Mentrestant, el botó «Descarrega el que veus» del mapa baixa en CSV el que mostra el mapa amb el filtre triat.",d1_b:"Pròximament",
+d2_t:"Limitacions",
+d3_t:"Mètode"},
+es:{
+fac:{prio:"No respetar la prioridad",dist:"Distracción",via:"Estado de la vía",vel:"Velocidad inadecuada"},
+fac_any:(a,n)=>`Solo ${a} (${n} ${n===1?"accidente":"accidentes"}): antes, en uno de cada tres partes no consta ningún motivo.`,
+fac_pocs:a=>`En ${a} hubo demasiado pocos accidentes aquí para comparar los motivos con la ciudad.`,
+
+fr:["0-7 h","7-10 h","10-14 h","14-17 h","17-21 h","21-24 h"],ciutat:"media de la ciudad",
+lab:(x)=>`${x} % en días laborables`,cb:(m)=>m<=15?"Carril bici en el mismo punto":`Carril bici a ${m} m`,
+inclou:"Cruces incluidos",t_ult:(a,n)=>`Tipo en ${a} (${n} siniestros)`,
+pla_ref:"Plan Director de Seguridad Vial",pla_pend:"Pendiente: cruzaremos este punto con las actuaciones y los lugares que cita el Plan Director.",
+fecha:"Fecha y hora",unis:"Vehículos implicados",facs:"Factores",
+marca:"Observatorio de la bici y el patinete de València",nav_inf:"Informe {a1}",nav_pla:"El Plan, al día",nav_met:"Método",
+ent_h:"Seguimos los siniestros con bici y patinete en València con los datos abiertos del Ajuntament: dónde ocurren, qué se está haciendo y si el Plan Director de Seguridad Vial 2026-2030 funciona.",
+acc1:"Dónde ocurren <span aria-hidden=\"true\">→</span>",acc1_s:"<b>{cn}</b> siniestros en solo {neg} {ctip}. El primero, {c1nom}, con <b>{c1n}</b>.",acc1_m:"Busca tu calle",ctip:{nudo:"cruces",tramo:"tramos",ambos:"cruces y tramos"},
+acc2:"¿Qué se hace? <span aria-hidden=\"true\">→</span>",acc2_s:"<b>{pn}</b> actuaciones del Plan para la bici y el patinete, con fuente: {ph} hechas, {pm} en marcha, {pa} anunciadas y {ps} sin información pública.",acc2_m:"El Plan, al día",
+acc3:"¿Funciona? <span aria-hidden=\"true\">→</span>",acc3_s:"{fun}",
+fun0:"<b>{nb}</b> siniestros con bici o patinete en {ab}. El Plan pide reducirlos a la mitad para {ameta}: con {ab} como base, <b>{meta}</b>. Los datos de {apend} aún no están publicados.",
+fun_ev:"<b>{t1}</b> siniestros con bici o patinete en {a1}: <b>{jult}</b>. El Plan pide reducirlos a la mitad para {ameta}: con {ab} como base ({nb}), la meta es <b>{meta}</b>.",
+comp:"Compartir",comp_aria:"Compartir el enlace a esta ficha",comp_neg:"lugar con más siniestros con bici y patinete en València",comp_uso:"punto de conteo del carril bici en València",
+sin_res:q=>`No hay nada con «${q}» en el mapa. Solo hay ficha de los lugares y calles con 5 accidentes o más; prueba con otro nombre o mueve el mapa hasta la zona.`,
+copiat:"Enlace copiado",copia_no:"No se ha podido copiar: copia la dirección del navegador",
+h_lista:"Qué ha pasado",th:["Fecha","Vehículos","Tipo ({tany})","Gravedad"],
+ey_meta:"Indicador de la acción 3.2.2 del Plan Director de Seguridad Vial 2026-2030",
+estado:J=>`En ${V.a1} hubo <b>${J.b}</b> siniestros con bici o patinete, ${J.d} respecto a ${V.ab}. La senda marcaba ${J.s}; por azar, cualquier cifra entre ${J.lo} y ${J.hi} es compatible con ella. Resultado: <b>${J.est}</b>. ${J.med}`,
+estado0:J=>`${V.partida} Con ${V.ab} como base, la meta es <b>${V.meta}</b> en ${V.ameta}: habría que bajar un ${V.falta} cada año desde ${V.adesde}. Para ${V.apend}, la senda marca ${J.s}: entre ${J.lo} y ${J.hi} sería compatible con la senda.`,
+p26:"{apend}: pendiente de publicar",
+ey_mapa:"Dónde se acumulan",h_mapa:"El mapa de los siniestros",
+any:"Año",vehicle:"Vehículo",tots:"Todos",
+cerca:"Busca una calle o un cruce",
+fitxa:{lloc:"ficha del lugar",carrer:"ficha de la calle"},
+n_total:"Siniestros {rang}",n_pat:"Con patinete",n_A:"{nA}",n_B:"{nB}",
+prob:"Probabilidad de exceso",
+uso_txt:(p)=>p>.95?"Hay más siniestros de los que tocarían por el tráfico que pasa.":p>.8?"Posible exceso; hace falta más tiempo de datos.":"Sin exceso claro según el uso.",
+any_l:"Año",grav:"Gravedad",tipo:"Tipo (solo {tany})",loc:"Localización",geo:{c:"por cruce",p:"por portal",q:"por portal cercano",o:"otros"},
+gravs:["Sin heridos","Heridos leves","Heridos de baja gravedad","Heridos graves","Fallecidos"],
+lane:"Carril bici",
+ey_hall:"Lo que dicen los datos",h_hall:"Lo que hemos aprendido",
+d1_t:"Descarga los datos",d1_p:"Los siniestros de bici y patinete situados en el mapa, en CSV y GeoJSON, con el método de localización de cada uno y versiones fechadas. Los publicaremos aquí. Mientras tanto, el botón «Descarga lo que ves» del mapa baja en CSV lo que muestra el mapa con el filtro elegido.",d1_b:"Próximamente",
+d2_t:"Limitaciones",
+d3_t:"Método"}};
+
+// ---------- lenguaje llano (03/11): textos que no estaban en T (los que sustituía se borraron el 04/11; cada clave se define una sola vez) ----------
+Object.assign(T.va,{
+ciu_c:"ciutat",
+selec:"Seleccionat",veure:"Veure la fitxa ↓",
+pla_no:"El Pla Director no l'esmenta: ni com a lloc conflictiu ni amb cap actuació.",
+pla_act_t:"Què s'hi ha fet o s'hi farà",pla_act_no:"El Pla no hi cita cap actuació.",
+v_pts:"Tots els sinistres",
+f_pts:"Sinistres en aquest lloc",
+resum:{m:"La majoria són xocs amb cotxes, motos o furgonetes",w:"Hi ha molts atropellaments a vianants",d:"Molts són xocs entre bicis i patinets",s:"La majoria són caigudes sense ningú més"},
+resum_dist:", sovint per distraccions",
+compara:(a,b)=>`Ací, ${a} de cada 10; en el conjunt de la ciutat, ${b} de cada 10.`,
+llegenda:"<span class='br-m'></span> aquest lloc &nbsp; <span class='ct-m'></span> mitjana de la ciutat",
+lead:(m,n)=>`En <b>${m} dels ${n}</b> sinistres hi ha implicat un cotxe, una moto o un altre vehicle.`,
+k:{m:"Cotxe, moto o un altre vehicle",w:"Vianant",d:"Una altra bici o patinet",s:"Ningú més (caiguda)"},
+h_evo:"Sinistres cada any",h_qui:"Amb qui xoquen",h_que:"Per què, segons la policia",h_quan:"A quina hora",h_lloc:"Com és el lloc",h_pla:"Què diu el Pla",c_pla:"Actuacions del Pla",accio:"Acció",
+pla_est:{hecha:"Feta",en_marcha:"En marxa",anunciada:"Anunciada",sin_info:"Sense informació pública"},
+pla_ley:"Actuacions del Pla amb lloc, per estat:",pla_veure:"Mira-la en «Què està fent l'Ajuntament?» →",pla_aqui_t:"En quin punt estan les mesures d'aquest lloc",
+com:"Com ho sabem",
+
+pista_nota:"Aquesta diferència és prou gran perquè no siga casualitat: es compara amb {ref} (sense aquest lloc), amb una prova binomial i la correcció de Holm per a totes les proves del mapa, i només en llocs amb {pmin} sinistres o més. És un senyal en les dades, no un diagnòstic: no en diu la causa ni si cal canviar res.",
+ley_negros:"Mida: nombre de sinistres.",
+});
+Object.assign(T.es,{
+ciu_c:"ciudad",
+selec:"Seleccionado",veure:"Ver la ficha ↓",
+pla_no:"El Plan Director no lo menciona: ni como lugar conflictivo ni con ninguna actuación.",
+pla_act_t:"Qué se ha hecho o se hará aquí",pla_act_no:"El Plan no cita ninguna actuación aquí.",
+v_pts:"Todos los siniestros",
+f_pts:"Siniestros en este lugar",
+resum:{m:"La mayoría son choques con coches, motos o furgonetas",w:"Hay muchos atropellos a peatones",d:"Muchos son choques entre bicis y patinetes",s:"La mayoría son caídas sin nadie más"},
+resum_dist:", a menudo por distracciones",
+compara:(a,b)=>`Aquí, ${a} de cada 10; en el conjunto de la ciudad, ${b} de cada 10.`,
+llegenda:"<span class='br-m'></span> este lugar &nbsp; <span class='ct-m'></span> media de la ciudad",
+lead:(m,n)=>`En <b>${m} de los ${n}</b> siniestros hay implicado un coche, una moto u otro vehículo.`,
+k:{m:"Coche, moto u otro vehículo",w:"Peatón",d:"Otra bici o patinete",s:"Nadie más (caída)"},
+h_evo:"Siniestros cada año",h_qui:"Con quién chocan",h_que:"Por qué, según la policía",h_quan:"A qué hora",h_lloc:"Cómo es el lugar",h_pla:"Qué dice el Plan",c_pla:"Actuaciones del Plan",accio:"Acción",
+pla_est:{hecha:"Hecha",en_marcha:"En marcha",anunciada:"Anunciada",sin_info:"Sin información pública"},
+pla_ley:"Actuaciones del Plan con lugar, por estado:",pla_veure:"Verla en «¿Qué está haciendo el Ayuntamiento?» →",pla_aqui_t:"En qué punto están las medidas de este lugar",
+com:"Cómo lo sabemos",
+
+pista_nota:"Esta diferencia es lo bastante grande para no ser casualidad: se compara con {ref} (sin este lugar), con una prueba binomial y la corrección de Holm para todas las pruebas del mapa, y solo en lugares con {pmin} siniestros o más. Es una señal en los datos, no un diagnóstico: no dice la causa ni si hay que cambiar algo.",
+ley_negros:"Tamaño: número de siniestros.",
+});
+// ---------- glosario de la revisión de coherencia (03/11): mismos términos que el informe ----------
+// Términos: «Xoc bici–patinet» (siniestro con bici y patinete) · «llocs amb més sinistres» (los 30) · «punts de comptatge»
+// (los 145, con {ncont} comptadors) · «la mitjana dels punts amb un trànsit semblant» (μ) · «probabilitat d'estar per damunt d'eixa mitjana» (p) ·
+// «senda proposada (base {ab})» · niveles: clarament (p > 0,95), potser (0,8-0,95), com la mitjana (resto).
+Object.assign(T.va,{
+graf_t:"Sinistres amb bici o patinet per any i senda proposada cap a la meta",q_aria:"Cerca un carrer o un encreuament",z_in:"Apropa",z_out:"Allunya",z_home:"Tota la ciutat",
+h_meta:"El Pla demana reduir a la meitat els sinistres amb bici i patinet per a 2030. <em class=\"{alerta}\">{concl}</em>",
+partida_max:"Es parteix del pitjor any de la sèrie: <b>{nb}</b> sinistres amb bici o patinet en {ab}, {pprev} que en {a0}.",
+partida:"Es parteix de <b>{nb}</b> sinistres amb bici o patinet en {ab}, {pprev} que en {a0}.",
+concl:{pendiente:"El primer any del Pla, {aplan}, encara no està publicat.",debajo:"Per davall de la senda: baixen més del previst.",compatible:"Van al ritme de la senda, dins del marge de l'atzar.",encima:"Per damunt de la senda: no baixen al ritme necessari."},
+juicio:{debajo:"per davall de la senda",compatible:"compatible amb la senda",encima:"per damunt de la senda"},
+med_igual:"Amb la mitjana {etqmed} com a base, el mateix resultat.",
+med_dif:est=>`Amb la mitjana ${V.etqmed} com a base, en canvi, quedaria ${est}: una part de la baixada pot ser tornada a la mitjana després del pitjor any.`,
+banda:"Marge de l'atzar al voltant de la senda (95 %)",
+avis_max:"Compte: {ab} és el pitjor any de la sèrie, i una part d'una baixada en {apend} pot ser simple tornada a la mitjana. Per això ho comprovem també amb la mitjana {etqmed} ({nbmed} sinistres, meta {metamed}).",
+ctrl_t:"Dues sèries de control",
+ctrl_h:["Any","Amb bici o patinet","Dels quals, amb ferits","Part de tots els sinistres de la ciutat"],
+ctrl_txt:"Com llegir-les quan arribe {apend}: si baixa el total però no els sinistres amb ferits, probablement ha canviat com es registren (el sistema de la Policia Local, SIASV, es va crear al juliol de 2024). Si baixa la part de la ciutat, la bici i el patinet milloren més que la resta del trànsit.",
+bici:"Bici",pat:"Patinet (VMP)",amb:"Xoc bici–patinet",amb_mismo:"Xoc bici–patinet",mescla:"Diverses categories en el mateix punt (apropa't per a veure el formatget)",
+senda:"Senda proposada (base {ab}, −50 % en {ameta})",
+hall_vb:"En {a1}, {varb} que en {ab}, l'any base.",
+nota_base:"L'indicador de l'acció 3.2.2 del Pla Director demana reduir un 50 % els sinistres amb ciclistes o VMP per a {ameta}. Com la majoria dels indicadors del Pla, no fixa la línia base. Prenem {ab}, l'últim any abans del Pla, que el Pla ja analitza. {avismax} Comptem cada sinistre una vegada; amb el recompte per vehicle de les taules del Pla, la base seria {nveh} i la meta, {metaveh}. La senda és nostra: cada any baixa en la mateixa proporció. <a href=\"metode.html#meta\">Com es calcula</a>",
+proto:"<b>Versió beta.</b> Dades reals del portal de dades obertes de l'Ajuntament (sinistres {rang}); {apend} apareix com a any pendent de publicació. Les xifres anuals coincideixen amb les del Pla Director llevat d'algun sinistre solt (el Pla les trau del sistema de la Policia Local en una altra data).",
+ques_ley:"Cada lloc, com un formatget: la part de cada color és la proporció dels seus sinistres. Xoc bici–patinet: sinistre amb bici i patinet; el {ambsolo} són xocs només entre ells.",
+zona_ley:"Zona: Jardí del Túria (els seus sinistres no tenen punt exacte)",
+zona_txt:(g,n)=>g?`És una zona, no un punt: dels ${n} sinistres del Jardí del Túria, només ${g} tenen un punt dins del jardí. La resta diuen només «Jardín del Turia», «S/N» o el pont més proper.`:`És una zona, no un punt: cap dels ${n} sinistres del Jardí del Túria té un punt exacte. L'adreça diu només «Jardín del Turia», «S/N» o el pont més proper.`,
+mm_ley:{zona:(g)=>g?`Línia discontínua i ombra: el Jardí del Túria. Cercles: els ${g} sinistres del jardí que tenen punt dins de la zona.`:"Línia discontínua i ombra: el Jardí del Túria. No hi ha cap cercle perquè cap sinistre del jardí té punt exacte.",
+negros:"Línia discontínua: la zona d'aquest lloc (la cruïlla amb 30 m al voltant, o el tram de carrer). Cercles: sinistres {filtre} en cada punt dels voltants, com a formatget (blau: bici; taronja: patinet; verd aigua: xoc bici–patinet). Com més grans, més sinistres.",
+uso:"Línia discontínua: 100 m al voltant del punt de comptatge. Cercles: sinistres de bici o patinet de {rang} en cada punt, com a formatget (blau: bici; taronja: patinet; verd aigua: xoc bici–patinet).",
+pts:"Línia discontínua: el lloc triat. Cercles: sinistres {filtre} en cada punt, com a formatget (blau: bici; taronja: patinet; verd aigua: xoc bici–patinet)."},
+filtre:()=>`${F.v==="t"?"de bici o patinet":F.v==="b"?"només amb bici":F.v==="p"?"només amb patinet":"de xoc bici–patinet"}${F.g==="t"?"":F.g==="0"?" sense ferits":F.g==="h"?" amb ferits":" amb ferits greus o morts"} de ${rangF()}`,
+pref:{nudo:"la resta de cruïlles de la ciutat",tramo:"la resta de trams de carrer de la ciutat",zona:"la resta de la ciutat"},
+tipo_l:{nudo:"Cruïlla (amb 30 m al voltant)",tramo:"Tram de carrer"},
+lug_ley:"Línia discontínua: la cruïlla (30 m al voltant) o el tram de carrer de cada lloc (s'hi veu en apropar-se)",
+evo_nota:"Són els sinistres d'aquest lloc que hem pogut situar en el mapa cada any, i sumen el total de la fitxa. Compara els anys amb prudència: els primers anys se'n podien situar menys, i des de juliol de 2024 la policia anota més sinistres pel número de portal i menys «en la cruïlla», així que una cruïlla pot perdre casos sense que hi canvie res.",
+anillo:["sense anell: el Pla no l'esmenta","el Pla cita aquest lloc","el Pla només cita el seu carrer"],
+sel_ley:"Halo groc: lloc seleccionat",
+hall_plan:["{nop} de {neg}","Sense dades del Pla","El Pla només publica els {ptop} encreuaments i carrers amb més sinistres de cada col·lectiu (patinet, bici i vianants). Dels nostres {neg} llocs, en cita {npl} pel seu nom i {npc} pel seu carrer; dels altres {nop} no diu res. Demanem la llista completa."],
+v_negros:"Llocs amb més sinistres",v_uso:"Segons el trànsit",
+f_negros:"Un dels llocs amb més sinistres",f_uso:"Punt de comptatge",
+f_vac:{negros:"Toca un cercle del mapa per a veure què passa en aquest lloc.",uso:"Toca un cercle per a veure si en aquest punt de comptatge hi ha més sinistres que la mitjana dels punts amb un trànsit semblant.",pts:"Toca un cercle per a veure la llista de sinistres d'aquest lloc."},
+expl:{negros:"Els {neg} llocs (cruïlles i trams de carrer) amb més sinistres de bici i patinet entre {a0} i {a1}, i el Jardí del Túria, que es mostra com a zona perquè els seus sinistres no porten un punt exacte. Toca'n un per a saber què hi passa.",
+uso:"Hi ha carrers amb molts sinistres simplement perquè hi passen moltes bicis. Als {uso} punts de comptatge de Mobilitat ({ncont} comptadors), que compten bicis i, probablement, també patinets, sense separar-los, podem veure on hi ha més sinistres que la mitjana dels punts amb un trànsit semblant i amb tants encreuaments al voltant. Cercle roig: clarament per damunt (probabilitat de més del 95 %, tant si es miren 75 com 100 o 150 m al voltant del comptador). Anell gruixut: potser (més del 80 % amb 100 m). Cercle buit fi: sense indicis d'excés. En cada punt, la bici i el patinet es miren també per separat: on l'excés és només de patinet, pot ser que el comptador no compte els patinets.",
+pts:"Cada cercle és un lloc; com més gran, més sinistres. En el mapa hi ha el {cobt} dels sinistres: els que porten una adreça que es pot situar. Toca'n un per a veure la llista del que hi ha passat."},
+
+sem:(s)=>s.o<=40?`Semàfor a ${s.o} m (OpenStreetMap)`:s.r<=40?`Regulador semafòric municipal a ${s.r} m`:"Sense semàfor conegut a 40 m (ni municipal ni d'OpenStreetMap)",
+resum_may:{m:"La majoria són xocs amb cotxes, motos o furgonetes",w:"La majoria són atropellaments a vianants",d:"La majoria són xocs entre ciclistes o usuaris de patinet",s:"La majoria són caigudes sense ningú més"},
+resum_n:{m:"els xocs amb cotxes, motos o furgonetes",w:"els atropellaments a vianants",d:"els xocs entre ciclistes o usuaris de patinet",s:"les caigudes sense ningú més"},
+resum_fre:(xs)=>xs.length>1?`Els més freqüents, empatats, són ${xs.slice(0,-1).join(", ")} i ${xs[xs.length-1]}`:`Els més freqüents són ${xs[0]}`,
+resum_prio:(a)=>`; en ${a} de cada 10 d'aquests xocs, algú no respecta la prioritat`,
+hb_nota:"Percentatge sobre tots els sinistres del lloc.",
+pista:{m:"Senyal en les dades: ací els xocs amb cotxes, motos i altres vehicles són molt més freqüents que en {ref}. Les dades no diuen per què.",s:"Senyal en les dades: ací hi ha moltes més caigudes que en {ref}. Les dades no diuen per què.",w:"Senyal en les dades: ací hi ha molts més atropellaments que en {ref}. Les dades no diuen per què.",d:"Senyal en les dades: ací hi ha molts més xocs entre bicis i patinets que en {ref}. Les dades no diuen per què."},
+pts_lead:(n,b,p,a)=>`<b>${n}</b> sinistres en aquest lloc: ${b} només amb bici, ${p} només amb patinet i ${a} xocs bici–patinet.`,
+uso_lead:(n,m,r,na)=>`Ací hi ha hagut <b>${n}</b> sinistres en ${na} amb dades de trànsit. Amb les bicis que hi passen, la mitjana dels punts amb un trànsit semblant és d'uns <b>${m}</b>${r}.`,
+anys_txt:(na)=>na===1?"l'únic any":`els ${NUM.va[na]??na} anys`,
+uso_r:(r)=>r>=1.15?`: ${fmt(r)} vegades la mitjana`:r<=0.85?": ací n'hi ha menys":": ací n'hi ha com la mitjana",
+verd:(lv)=>[["Sense indicis de tindre'n més que els punts amb un trànsit semblant",0],["Potser per damunt de la mitjana dels punts amb un trànsit semblant",1],["Clarament per damunt de la mitjana dels punts amb un trànsit semblant",2]][lv],
+obs:"Han passat",esp:"Mitjana amb un trànsit semblant",imd:"Bicis que hi passen en un dia feiner (mitjana dels anys amb dades; probablement també patinets)",
+uso_nota:(pr)=>`Probabilitat d'estar per damunt de la mitjana dels punts amb un trànsit semblant, comptant els sinistres a 75, 100 i 150 m: ${pr.map(x=>x+" %").join(", ")}.`,
+h_bv:"Bici i patinet, per separat",bv_fila:(n,m)=>`${n} sinistres; la mitjana amb un trànsit semblant, uns ${m}`,
+bv_nota:"Cada vehicle amb el seu propi model. Un xoc bici–patinet compta en totes dues files.",
+sv_aviso:"L'excés és només de patinet: pot ser que el comptador no compte els patinets i que, per tant, hi passen més patinets dels que diu.",
+h_uso_n:(na)=>`Sinistres en ${na}`,
+uso_com:"Comparem els sinistres amb la mitjana dels punts amb un trànsit semblant, amb un model estadístic (binomial negatiu i Bayes empíric) que té en compte les bicis i els cotxes que hi passen i quants encreuaments de carrers hi ha a 100 m del comptador. Clarament per damunt de la mitjana dels punts amb un trànsit semblant: probabilitat de més del 95 % comptant els sinistres a 75, a 100 i a 150 m (si només passa amb una distància, es queda en potser); potser: més del 80 % amb 100 m; la resta, com la mitjana. Estar per damunt de la mitjana no vol dir ser una anomalia: és d'esperar que molts punts ho estiguen. Els punts de comptatge compten bicis i, probablement, també patinets, sense separar-los. Només es compten els anys amb dades de tots els comptadors del punt.",
+ley_uso:"Mida: sinistres observats.",
+ley_pts:"Mida: nombre de sinistres. En apropar-se, els punts amb sinistres de diverses categories es mostren com a formatget.",
+gravTxt:(g,f,r)=>`${g} amb ferits greus i ${f} amb morts en ${r}. Els ferits greus només es poden comparar des de 2024: el canvi de criteri comença en 2023 i no s'aplica del tot fins a 2024.`,
+neg_txt:"Cada lloc és una cruïlla, amb 30 m al voltant (les rotondes i les places xicotetes compten com una sola), o un tram de carrer de 150 m com a màxim. Que n'hi haja molts sinistres no vol dir que siga el lloc més perillós: pot ser que hi passe molta gent. {p1txt} el portal anotava pitjor on passava cada sinistre, i ho tenim en compte.",
+hall:[["{var0}","Pugen com en tota la ciutat","Entre {a0} i {a1} els sinistres amb bici o patinet han passat de {t0} a {t1}, i tots els de la ciutat, de {c0} a {c1} ({varc}): la seua part es queda en el {cuota1}. Una part de la pujada pot vindre de com es registren, perquè el que més creix en tota la ciutat són els sinistres sense ferits ({varsin}). Amb ferits, els sinistres amb bici o patinet pugen més que la resta: {varbvh} davant de {varresh}. {hvb}"],
+["{pat1d} de 10","Cada vegada més patinet","En {a1}, {pat1w} de cada deu sinistres amb bici o patinet tenen un patinet implicat. En {a0} ja eren {pat0w} de cada deu."],
+["{persB}","Els llocs amb més sinistres es repeteixen","Triem els {neg} llocs amb més sinistres amb les dades de {pA} i mirem què hi passa després, en {pB}: hi sumen {persB} sinistres. És el que s'espera si cada lloc mantinguera el seu ritme (entre {persLo} i {persHi}, per l'atzar). Si foren llocs qualssevol del mateix barri, en sumarien uns {persLoc}. Que baixen des de {persA} és, sobretot, que els triem en el seu pitjor moment."],
+["−{falta}","El que caldria cada any","Per a arribar a la meta de {ameta}, caldria baixar un {falta} cada any des de {adesde}."]],
+lim:["Els ferits greus només es poden comparar des de 2024: el canvi de criteri de la policia comença en 2023 i no s'aplica del tot fins a 2024. Ho explica el mateix Pla Director. La categoria «baixa gravetat» encara creix molt en 2025, possiblement per canvis de classificació.","El tipus de sinistre només és fiable des de 2025: es mostra el de {tany}.","{p1txt} el portal anotava pitjor on passava cada sinistre: en {a0} se'n situa en el mapa el {cob0}, i en {a1}, el {cob1}. Les xifres per any es calculen amb tots els sinistres, també els que no estan en el mapa.","Els punts de comptatge compten bicis i, probablement, també patinets, sense separar-los (pendent de confirmar amb Mobilitat)."],
+d3_p:"Cada lloc és una cruïlla o un tram de carrer de fins a 150 m, i s'ordenen pels sinistres de {rang}. Als {uso} punts de comptatge del carril bici, «clarament per damunt de la mitjana dels punts amb un trànsit semblant» vol dir una probabilitat de més del 95 % comptant els sinistres a 75, 100 i 150 m. <a href=\"metode.html\">Tot el mètode →</a>",
+pla_diag_t:"Com el cita el Pla",pla_diag_no:"El Pla no el posa entre els llocs ni els carrers amb més sinistres.",
+pla_col:{VMP:"amb patinet",bici:"amb bici","peatón":"amb vianants",todos:""},
+pla_sin:(c)=>c.replace(new RegExp("sinie"+"stros"),"sinistres"),
+pla_diag:(g)=>{ const t=T.va, x=g[0], rk=g.filter(y=>y.rank), nr=g.filter(y=>!y.rank&&y.cifra);
+  const parts=rk.map(y=>`el número ${y.rank} ${t.pla_col[y.col]||""} (${t.pla_sin(y.cifra)})`).join(" i ");
+  const llista=nr.map(y=>`apareix en la llista de carrers amb més sinistres ${t.pla_col[y.col]||""} (${t.pla_sin(y.cifra)}, sense número d'ordre)`).join("; ");
+  if (x.tl==="zona") return "El Pla el descriu com a zona de concentració d'ús de patinets (és un diagnòstic, no una actuació).";
+  if (x.niv==="lugar" && (x.tl||"").startsWith("cruce")) return `Entre els encreuaments amb més sinistres, és ${parts}, segons el Pla (${x.per}). El Pla compta l'encreuament de 2019 a 2025; nosaltres, la cruïlla amb 30 m al voltant, de ${V.rang}.`;
+  if (x.niv==="lugar") return `Entre els carrers i parcs amb més sinistres, és ${parts}, segons el Pla (${x.per}).`;
+  return `${V.cital?"També cita el seu carrer":"El Pla no cita aquest lloc, sinó el seu carrer"}, ${x.lug}: ${[parts?"és "+parts+" entre els carrers amb més sinistres":"",llista].filter(Boolean).join("; ")} (${x.per}).`; },
+pla_carrer:"al carrer",
+pla_act:{audit_reord:"Auditoria de seguretat viària (2024) i reordenació de l'encreuament (2025)",auditoria:"Auditoria de seguretat viària",reordenacion:"Reordenació de l'encreuament",radar:"Radar pedagògic de velocitat",estudio:"Pendent d'estudi",otra:"Actuació citada pel Pla"}
+});
+Object.assign(T.es,{
+graf_t:"Siniestros con bici o patinete por año y senda propuesta hacia la meta",q_aria:"Busca una calle o un cruce",z_in:"Acercar",z_out:"Alejar",z_home:"Toda la ciudad",
+h_meta:"El Plan pide reducir a la mitad los siniestros con bici y patinete para 2030. <em class=\"{alerta}\">{concl}</em>",
+partida_max:"Se parte del peor año de la serie: <b>{nb}</b> siniestros con bici o patinete en {ab}, {pprev} que en {a0}.",
+partida:"Se parte de <b>{nb}</b> siniestros con bici o patinete en {ab}, {pprev} que en {a0}.",
+concl:{pendiente:"El primer año del Plan, {aplan}, aún no está publicado.",debajo:"Por debajo de la senda: bajan más de lo previsto.",compatible:"Van al ritmo de la senda, dentro del margen del azar.",encima:"Por encima de la senda: no bajan al ritmo necesario."},
+juicio:{debajo:"por debajo de la senda",compatible:"compatible con la senda",encima:"por encima de la senda"},
+med_igual:"Con la media {etqmed} como base, el mismo resultado.",
+med_dif:est=>`Con la media ${V.etqmed} como base, en cambio, quedaría ${est}: parte de la bajada puede ser vuelta a la media tras el peor año.`,
+banda:"Margen del azar alrededor de la senda (95 %)",
+avis_max:"Ojo: {ab} es el peor año de la serie, y parte de una bajada en {apend} puede ser simple vuelta a la media. Por eso lo comprobamos también con la media {etqmed} ({nbmed} siniestros, meta {metamed}).",
+ctrl_t:"Dos series de control",
+ctrl_h:["Año","Con bici o patinete","De ellos, con heridos","Parte de todos los siniestros de la ciudad"],
+ctrl_txt:"Cómo leerlas cuando llegue {apend}: si baja el total pero no los siniestros con heridos, probablemente ha cambiado cómo se registran (el sistema de la Policía Local, SIASV, se creó en julio de 2024). Si baja la parte de la ciudad, la bici y el patinete mejoran más que el resto del tráfico.",
+bici:"Bici",pat:"Patinete (VMP)",amb:"Choque bici–patinete",amb_mismo:"Choque bici–patinete",mescla:"Varias categorías en el mismo punto (acércate para ver el quesito)",
+senda:"Senda propuesta (base {ab}, −50 % en {ameta})",
+hall_vb:"En {a1}, {varb} que en {ab}, el año base.",
+nota_base:"El indicador de la acción 3.2.2 del Plan Director pide reducir un 50 % los siniestros con ciclistas o VMP para {ameta}. Como la mayoría de los indicadores del Plan, no fija la línea base. Tomamos {ab}, el último año antes del Plan, que el Plan ya analiza. {avismax} Contamos cada siniestro una vez; con el recuento por vehículo de las tablas del Plan, la base sería {nveh} y la meta, {metaveh}. La senda es nuestra: cada año baja en la misma proporción. <a href=\"metode.html#meta\">Cómo se calcula</a>",
+proto:"<b>Versión beta.</b> Datos reales del portal de datos abiertos del Ajuntament (siniestros {rang}); {apend} aparece como año pendiente de publicación. Las cifras anuales coinciden con las del Plan Director salvo algún siniestro suelto (el Plan las saca del sistema de la Policía Local en otra fecha).",
+ques_ley:"Cada lugar, como un quesito: la parte de cada color es la proporción de sus siniestros. Choque bici–patinete: siniestro con bici y patinete; el {ambsolo} son choques solo entre ellos.",
+zona_ley:"Zona: Jardín del Turia (sus siniestros no tienen punto exacto)",
+zona_txt:(g,n)=>g?`Es una zona, no un punto: de los ${n} siniestros del Jardín del Turia, solo ${g} tienen un punto dentro del jardín. El resto dicen solo «Jardín del Turia», «S/N» o el puente más cercano.`:`Es una zona, no un punto: ninguno de los ${n} siniestros del Jardín del Turia tiene un punto exacto. La dirección dice solo «Jardín del Turia», «S/N» o el puente más cercano.`,
+mm_ley:{zona:(g)=>g?`Línea discontinua y sombra: el Jardín del Turia. Círculos: los ${g} siniestros del jardín que tienen punto dentro de la zona.`:"Línea discontinua y sombra: el Jardín del Turia. No hay ningún círculo porque ningún siniestro del jardín tiene punto exacto.",
+negros:"Línea discontinua: la zona de este lugar (el cruce con 30 m alrededor, o el tramo de calle). Círculos: siniestros {filtre} en cada punto de alrededor, como quesito (azul: bici; naranja: patinete; verde agua: choque bici–patinete). Cuanto más grandes, más siniestros.",
+uso:"Línea discontinua: 100 m alrededor del punto de conteo. Círculos: siniestros de bici o patinete de {rang} en cada punto, como quesito (azul: bici; naranja: patinete; verde agua: choque bici–patinete).",
+pts:"Línea discontinua: el lugar elegido. Círculos: siniestros {filtre} en cada punto, como quesito (azul: bici; naranja: patinete; verde agua: choque bici–patinete)."},
+filtre:()=>`${F.v==="t"?"de bici o patinete":F.v==="b"?"solo con bici":F.v==="p"?"solo con patinete":"de choque bici–patinete"}${F.g==="t"?"":F.g==="0"?" sin heridos":F.g==="h"?" con heridos":" con heridos graves o fallecidos"} de ${rangF()}`,
+pref:{nudo:"el resto de cruces de la ciudad",tramo:"el resto de tramos de calle de la ciudad",zona:"el resto de la ciudad"},
+tipo_l:{nudo:"Cruce (con 30 m alrededor)",tramo:"Tramo de calle"},
+lug_ley:"Línea discontinua: el cruce (30 m alrededor) o el tramo de calle de cada lugar (se ve al acercarse)",
+evo_nota:"Son los siniestros de este lugar que hemos podido situar en el mapa cada año, y suman el total de la ficha. Compara los años con prudencia: los primeros años se podían situar menos, y desde julio de 2024 la policía anota más siniestros por el número de portal y menos «en el cruce», así que un cruce puede perder casos sin que cambie nada.",
+anillo:["sin anillo: el Plan no lo menciona","el Plan cita este lugar","el Plan solo cita su calle"],
+sel_ley:"Halo amarillo: lugar seleccionado",
+hall_plan:["{nop} de {neg}","Sin datos del Plan","El Plan solo publica los {ptop} cruces y calles con más siniestros de cada colectivo (patinete, bici y peatones). De nuestros {neg} lugares, cita {npl} por su nombre y {npc} por su calle; de los otros {nop} no dice nada. Pedimos la lista completa."],
+v_negros:"Lugares con más siniestros",v_uso:"Según el tráfico",
+f_negros:"Uno de los lugares con más siniestros",f_uso:"Punto de conteo",
+f_vac:{negros:"Toca un círculo del mapa para ver qué pasa en ese lugar.",uso:"Toca un círculo para ver si en ese punto de conteo hay más siniestros que la media de los puntos con un tráfico parecido.",pts:"Toca un círculo para ver la lista de siniestros de ese lugar."},
+expl:{negros:"Los {neg} lugares (cruces y tramos de calle) con más siniestros de bici y patinete entre {a0} y {a1}, y el Jardín del Turia, que se muestra como zona porque sus siniestros no llevan un punto exacto. Toca uno para saber qué pasa allí.",
+uso:"Hay calles con muchos siniestros simplemente porque pasan muchas bicis. En los {uso} puntos de conteo de Movilidad ({ncont} contadores), que cuentan bicis y, probablemente, también patinetes, sin separarlos, podemos ver dónde hay más siniestros que la media de los puntos con un tráfico parecido y con tantos cruces alrededor. Círculo rojo: claramente por encima (probabilidad de más del 95 %, tanto si se miran 75 como 100 o 150 m alrededor del contador). Anillo grueso: quizá (más del 80 % con 100 m). Círculo hueco fino: sin indicios de exceso. En cada punto, la bici y el patinete se miran también por separado: donde el exceso es solo de patinete, puede que el contador no cuente los patinetes.",
+pts:"Cada círculo es un lugar; cuanto más grande, más siniestros. En el mapa está el {cobt} de los siniestros: los que llevan una dirección que se puede situar. Toca uno para ver la lista de lo que ha pasado."},
+
+sem:(s)=>s.o<=40?`Semáforo a ${s.o} m (OpenStreetMap)`:s.r<=40?`Regulador semafórico municipal a ${s.r} m`:"Sin semáforo conocido a 40 m (ni municipal ni de OpenStreetMap)",
+resum_may:{m:"La mayoría son choques con coches, motos o furgonetas",w:"La mayoría son atropellos a peatones",d:"La mayoría son choques entre ciclistas o usuarios de patinete",s:"La mayoría son caídas sin nadie más"},
+resum_n:{m:"los choques con coches, motos o furgonetas",w:"los atropellos a peatones",d:"los choques entre ciclistas o usuarios de patinete",s:"las caídas sin nadie más"},
+resum_fre:(xs)=>xs.length>1?`Lo más frecuente, empatados, son ${xs.slice(0,-1).join(", ")} y ${xs[xs.length-1]}`:`Lo más frecuente son ${xs[0]}`,
+resum_prio:(a)=>`; en ${a} de cada 10 de esos choques, alguien no respeta la prioridad`,
+hb_nota:"Porcentaje sobre todos los siniestros del lugar.",
+pista:{m:"Señal en los datos: aquí los choques con coches, motos y otros vehículos son mucho más frecuentes que en {ref}. Los datos no dicen por qué.",s:"Señal en los datos: aquí hay muchas más caídas que en {ref}. Los datos no dicen por qué.",w:"Señal en los datos: aquí hay muchos más atropellos que en {ref}. Los datos no dicen por qué.",d:"Señal en los datos: aquí hay muchos más choques entre bicis y patinetes que en {ref}. Los datos no dicen por qué."},
+pts_lead:(n,b,p,a)=>`<b>${n}</b> siniestros en este lugar: ${b} solo con bici, ${p} solo con patinete y ${a} choques bici–patinete.`,
+uso_lead:(n,m,r,na)=>`Aquí ha habido <b>${n}</b> siniestros en ${na} con datos de tráfico. Con las bicis que pasan, la media de los puntos con un tráfico parecido es de unos <b>${m}</b>${r}.`,
+anys_txt:(na)=>na===1?"el único año":`los ${NUM.es[na]??na} años`,
+uso_r:(r)=>r>=1.15?`: ${fmt(r)} veces la media`:r<=0.85?": aquí hay menos":": aquí hay como la media",
+verd:(lv)=>[["Sin indicios de tener más que los puntos con un tráfico parecido",0],["Quizá por encima de la media de los puntos con un tráfico parecido",1],["Claramente por encima de la media de los puntos con un tráfico parecido",2]][lv],
+obs:"Han pasado",esp:"Media con un tráfico parecido",imd:"Bicis que pasan en un día laborable (media de los años con datos; probablemente también patinetes)",
+uso_nota:(pr)=>`Probabilidad de estar por encima de la media de los puntos con un tráfico parecido, contando los siniestros a 75, 100 y 150 m: ${pr.map(x=>x+" %").join(", ")}.`,
+h_bv:"Bici y patinete, por separado",bv_fila:(n,m)=>`${n} siniestros; la media con un tráfico parecido, unos ${m}`,
+bv_nota:"Cada vehículo con su propio modelo. Un choque bici–patinete cuenta en las dos filas.",
+sv_aviso:"El exceso es solo de patinete: puede deberse a que el contador no cuente los patinetes y que, por tanto, pasen más patinetes de los que dice.",
+h_uso_n:(na)=>`Siniestros en ${na}`,
+uso_com:"Comparamos los siniestros con la media de los puntos con un tráfico parecido, con un modelo estadístico (binomial negativa y Bayes empírico) que tiene en cuenta las bicis y los coches que pasan y cuántos cruces de calles hay a 100 m del contador. Claramente por encima de la media de los puntos con un tráfico parecido: probabilidad de más del 95 % contando los siniestros a 75, a 100 y a 150 m (si solo pasa con una distancia, se queda en quizá); quizá: más del 80 % con 100 m; el resto, como la media. Estar por encima de la media no quiere decir ser una anomalía: es de esperar que muchos puntos lo estén. Los puntos de conteo cuentan bicis y, probablemente, también patinetes, sin separarlos. Solo se cuentan los años con datos de todos los contadores del punto.",
+ley_uso:"Tamaño: siniestros observados.",
+ley_pts:"Tamaño: número de siniestros. Al acercarse, los puntos con siniestros de varias categorías se muestran como quesito.",
+gravTxt:(g,f,r)=>`${g} con heridos graves y ${f} con fallecidos en ${r}. Los heridos graves solo se pueden comparar desde 2024: el cambio de criterio empieza en 2023 y no se aplica del todo hasta 2024.`,
+neg_txt:"Cada lugar es un cruce, con 30 m alrededor (las rotondas y las plazas pequeñas cuentan como uno solo), o un tramo de calle de 150 m como máximo. Que haya muchos siniestros no significa que sea el lugar más peligroso: puede que pase mucha gente. {p1txt} el portal anotaba peor dónde ocurría cada siniestro, y lo tenemos en cuenta.",
+hall:[["{var0}","Suben como en toda la ciudad","Entre {a0} y {a1} los siniestros con bici o patinete han pasado de {t0} a {t1}, y todos los de la ciudad, de {c0} a {c1} ({varc}): su parte se queda en el {cuota1}. Una parte de la subida puede venir de cómo se registran, porque lo que más crece en toda la ciudad son los siniestros sin heridos ({varsin}). Con heridos, los siniestros con bici o patinete suben más que el resto: {varbvh} frente a {varresh}. {hvb}"],
+["{pat1d} de 10","Cada vez más patinete","En {a1}, {pat1w} de cada diez siniestros con bici o patinete tienen un patinete implicado. En {a0} ya eran {pat0w} de cada diez."],
+["{persB}","Los lugares con más siniestros se repiten","Elegimos los {neg} lugares con más siniestros con los datos de {pA} y miramos qué pasa después, en {pB}: suman {persB} siniestros. Es lo que se espera si cada lugar mantuviera su ritmo (entre {persLo} y {persHi}, por azar). Si fueran lugares cualesquiera del mismo barrio, sumarían unos {persLoc}. Que bajen desde {persA} es, sobre todo, porque los elegimos en su peor momento."],
+["−{falta}","Lo que haría falta cada año","Para llegar a la meta de {ameta}, habría que bajar un {falta} cada año desde {adesde}."]],
+lim:["Los heridos graves solo se pueden comparar desde 2024: el cambio de criterio de la policía empieza en 2023 y no se aplica del todo hasta 2024. Lo explica el propio Plan Director. La categoría «baja gravedad» aún crece mucho en 2025, posiblemente por cambios de clasificación.","El tipo de siniestro solo es fiable desde 2025: se muestra el de {tany}.","{p1txt} el portal anotaba peor dónde ocurría cada siniestro: en {a0} se sitúa en el mapa el {cob0}, y en {a1}, el {cob1}. Las cifras por año se calculan con todos los siniestros, también los que no están en el mapa.","Los puntos de conteo cuentan bicis y, probablemente, también patinetes, sin separarlos (pendiente de confirmar con Movilidad)."],
+d3_p:"Cada lugar es un cruce o un tramo de calle de hasta 150 m, y se ordenan por los siniestros de {rang}. En los {uso} puntos de conteo del carril bici, «claramente por encima de la media de los puntos con un tráfico parecido» quiere decir una probabilidad de más del 95 % contando los siniestros a 75, 100 y 150 m. <a href=\"metode.html\">Todo el método →</a>",
+pla_diag_t:"Cómo lo cita el Plan",pla_diag_no:"El Plan no lo pone entre los lugares ni las calles con más siniestros.",
+pla_col:{VMP:"con patinete",bici:"con bici","peatón":"con peatones",todos:""},
+pla_sin:(c)=>c.replace(new RegExp("sinie"+"stros"),"siniestros"),
+pla_diag:(g)=>{ const t=T.es, x=g[0], rk=g.filter(y=>y.rank), nr=g.filter(y=>!y.rank&&y.cifra);
+  const parts=rk.map(y=>`el número ${y.rank} ${t.pla_col[y.col]||""} (${t.pla_sin(y.cifra)})`).join(" y ");
+  const lista=nr.map(y=>`aparece en la lista de calles con más siniestros ${t.pla_col[y.col]||""} (${t.pla_sin(y.cifra)}, sin número de orden)`).join("; ");
+  if (x.tl==="zona") return "El Plan la describe como zona de concentración de uso de patinetes (es un diagnóstico, no una actuación).";
+  if (x.niv==="lugar" && (x.tl||"").startsWith("cruce")) return `Entre los cruces con más siniestros, es ${parts}, según el Plan (${x.per}). El Plan cuenta el cruce de 2019 a 2025; nosotros, el cruce con 30 m alrededor, de ${V.rang}.`;
+  if (x.niv==="lugar") return `Entre las calles y parques con más siniestros, es ${parts}, según el Plan (${x.per}).`;
+  return `${V.cital?"También cita su calle":"El Plan no cita este lugar, sino su calle"}, ${x.lug}: ${[parts?"es "+parts+" entre las calles con más siniestros":"",lista].filter(Boolean).join("; ")} (${x.per}).`; },
+pla_carrer:"en la calle",
+pla_act:{audit_reord:"Auditoría de seguridad vial (2024) y reordenación del cruce (2025)",auditoria:"Auditoría de seguridad vial",reordenacion:"Reordenación del cruce",radar:"Radar pedagógico de velocidad",estudio:"Pendiente de estudio",otra:"Actuación citada por el Plan"}
+});
+// ---------- filtros, descarga y teclado del mapa (06/11; pendiente 37) ----------
+Object.assign(T.va,{
+des_aria:"Des de l'any",fins_aria:"Fins a l'any",
+g_tot:"Totes",g_sin:"Sense ferits",g_her:"Amb ferits",g_greu:"Ferits greus o morts",
+f_net:"Treu els filtres",
+avis_grav:"Compte amb la gravetat: compara-la només dins d'un mateix any.",
+f_res_neg:(n,tu)=>`Amb el filtre, <b>${fmt(n)}</b> sinistres ${T.va.filtre()} en els ${V.neg} llocs i <b>${fmt(tu)}</b> en el Jardí del Túria. Els llocs són els mateixos (triats amb tots els sinistres de ${V.rang}); el formatget i la fitxa mostren només els del filtre.`,
+f_res_pts:(n,np,tot)=>`Amb el filtre, <b>${fmt(n)}</b> sinistres ${T.va.filtre()} en el mapa, en ${fmt(np)} punts (de ${fmt(tot)} situats en ${V.rang}).`,
+f_res_uso:"La vista «Segons el trànsit» no es filtra: el model compara tots els anys amb dades de trànsit.",
+ficha_f:(nf,n)=>`${nf} de ${n} sinistres amb el filtre`,
+ficha0:"Cap sinistre d'aquest lloc amb el filtre triat.",
+pista_tot:"(Calculat amb tots els sinistres del lloc, sense el filtre.)",
+hb_nota_f:"Percentatge sobre els sinistres del lloc amb el filtre; la mitjana de la ciutat, amb el mateix filtre.",
+ley_neg_f:"Amb filtre: la mida és relativa al lloc amb més sinistres del filtre; un cercle buit vol dir cap sinistre.",
+csv:"Descarrega el que veus (CSV en ZIP)",
+csv_vista:{negros:"Llocs amb més sinistres",uso:"Punts de comptatge segons el trànsit",pts:"Sinistres situats en el mapa"},
+csv_fitxer:{negros:"llocs",uso:"punts-comptatge",pts:"sinistres"},
+csv_tit:(v,f)=>`Observatori de la bici i el patinet de València. ${v}. Filtre: ${f}.`,
+csv_sense:"cap (tots els sinistres de bici o patinet)",
+csv_uso_nota:"no es filtra (el model compara tots els anys amb dades de trànsit)",
+csv_font:(c,d)=>`Font: Ajuntament de València - Dades Obertes (opendata.vlci.valencia.es), conjunt ${c}, obtingut el ${d}, i punts de comptatge del carril bici de Mobilitat. Dades modificades per l'observatori: els sinistres se situen en el mapa amb el carrerer. L'Ajuntament de València no participa en aquest treball ni l'avala.`,
+csv_lic:(v)=>`Llicència: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Cita: Observatori de la bici i el patinet de València, versió ${v}.`,
+csv_avis:"Sense dades de les persones implicades. Està prohibit reidentificar persones creuant aquestes dades amb altres fonts (política d'ús del portal de dades obertes de València).",
+csv_fmt:"Format: CSV estàndard (RFC 4180), separat per comes, UTF-8, dates ISO 8601 (AAAA-MM-DDThh:mm), coordenades WGS 84 (EPSG:4326) amb punt decimal; data, hora, adreça i factors són els del portal per a cada accident; les coordenades les ha situades l'observatori a partir de l'adreça (la cruïlla o el número de portal citat en el comunicat, no un domicili).",
+csv_cols:"Columnes",
+csv_mes:"Més dades i mètode",
+csv_llegiu:"LLEGIU-ME.txt",
+
+veh_csv:{b:"bici",p:"patinet",a:"bici i patinet"},
+tipo_csv:{nudo:"cruïlla",tramo:"tram de carrer",zona:"zona"},
+pl_csv:["no l'esmenta","cita aquest lloc","només cita el seu carrer"],
+mapa_aria:"Mapa dels sinistres amb bici i patinet",
+leer_t:"Com es llig el mapa?",
+ley_c:{bici:"Bici",pat:"Patinet",amb:"Xoc bici–patinet",mescla:"Diverses categories",pl:["","El Pla cita el lloc","El Pla cita el carrer"],verd:["Sense indicis d'excés","Potser per damunt","Clarament per damunt"]},
+anillo_l:"Anell continu: el Pla Director cita aquest lloc pel seu nom. Anell de punts: el Pla només cita el seu carrer. Sense anell: el Pla no l'esmenta.",
+teclat:"Teclat: amb el mapa seleccionat (tecla Tab), les fletxes <kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> mouen el mapa, <kbd>+</kbd> i <kbd>−</kbd> apropen i allunyen, <kbd>Intro</kbd> tria el més proper a la mira, <kbd>N</kbd> i <kbd>P</kbd> passen al següent i a l'anterior (de més a menys sinistres) i <kbd>Esc</kbd> desfà la tria.",
+anunci:(nom,lin)=>`Seleccionat: ${nom}, ${lin}. La fitxa és davall del mapa.`,
+cap_prop:"No hi ha res prop de la mira: mou el mapa o apropa't.",
+desfet:"Cap lloc seleccionat."
+});
+Object.assign(T.es,{
+des_aria:"Desde el año",fins_aria:"Hasta el año",
+g_tot:"Todas",g_sin:"Sin heridos",g_her:"Con heridos",g_greu:"Heridos graves o fallecidos",
+f_net:"Quitar los filtros",
+avis_grav:"Cuidado con la gravedad: compárala solo dentro de un mismo año.",
+f_res_neg:(n,tu)=>`Con el filtro, <b>${fmt(n)}</b> siniestros ${T.es.filtre()} en los ${V.neg} lugares y <b>${fmt(tu)}</b> en el Jardín del Turia. Los lugares son los mismos (elegidos con todos los siniestros de ${V.rang}); el quesito y la ficha muestran solo los del filtro.`,
+f_res_pts:(n,np,tot)=>`Con el filtro, <b>${fmt(n)}</b> siniestros ${T.es.filtre()} en el mapa, en ${fmt(np)} puntos (de ${fmt(tot)} situados en ${V.rang}).`,
+f_res_uso:"La vista «Según el tráfico» no se filtra: el modelo compara todos los años con datos de tráfico.",
+ficha_f:(nf,n)=>`${nf} de ${n} siniestros con el filtro`,
+ficha0:"Ningún siniestro de este lugar con el filtro elegido.",
+pista_tot:"(Calculado con todos los siniestros del lugar, sin el filtro.)",
+hb_nota_f:"Porcentaje sobre los siniestros del lugar con el filtro; la media de la ciudad, con el mismo filtro.",
+ley_neg_f:"Con filtro: el tamaño es relativo al lugar con más siniestros del filtro; un círculo vacío quiere decir ningún siniestro.",
+csv:"Descarga lo que ves (CSV en ZIP)",
+csv_vista:{negros:"Lugares con más siniestros",uso:"Puntos de conteo según el tráfico",pts:"Siniestros situados en el mapa"},
+csv_fitxer:{negros:"lugares",uso:"puntos-conteo",pts:"siniestros"},
+csv_tit:(v,f)=>`Observatorio de la bici y el patinete de València. ${v}. Filtro: ${f}.`,
+csv_sense:"ninguno (todos los siniestros de bici o patinete)",
+csv_uso_nota:"no se filtra (el modelo compara todos los años con datos de tráfico)",
+csv_font:(c,d)=>`Fuente: Ajuntament de València - Dades Obertes (opendata.vlci.valencia.es), conjunto ${c}, obtenido el ${d}, y puntos de conteo del carril bici de Movilidad. Datos modificados por el observatorio: los siniestros se sitúan en el mapa con el callejero. El Ajuntament de València no participa en este trabajo ni lo avala.`,
+csv_lic:(v)=>`Licencia: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Cita: Observatorio de la bici y el patinete de València, versión ${v}.`,
+csv_avis:"Sin datos de las personas implicadas. Está prohibido reidentificar personas cruzando estos datos con otras fuentes (política de uso del portal de datos abiertos de València).",
+csv_fmt:"Formato: CSV estándar (RFC 4180), separado por comas, UTF-8, fechas ISO 8601 (AAAA-MM-DDThh:mm), coordenadas WGS 84 (EPSG:4326) con punto decimal; fecha, hora, dirección y factores son los del portal para cada accidente; las coordenadas las ha situado el observatorio a partir de la dirección (el cruce o el número de portal citado en el comunicado, no un domicilio).",
+csv_cols:"Columnas",
+csv_mes:"Más datos y método",
+csv_llegiu:"LEEME.txt",
+
+veh_csv:{b:"bici",p:"patinete",a:"bici y patinete"},
+tipo_csv:{nudo:"cruce",tramo:"tramo de calle",zona:"zona"},
+pl_csv:["no lo menciona","cita este lugar","solo cita su calle"],
+mapa_aria:"Mapa de los siniestros con bici y patinete",
+leer_t:"¿Cómo leer el mapa?",
+ley_c:{bici:"Bici",pat:"Patinete",amb:"Choque bici–patinete",mescla:"Varias categorías",pl:["","El Plan cita el lugar","El Plan cita la calle"],verd:["Sin indicios de exceso","Quizá por encima","Claramente por encima"]},
+anillo_l:"Anillo continuo: el Plan Director cita este lugar por su nombre. Anillo de puntos: el Plan solo cita su calle. Sin anillo: el Plan no lo menciona.",
+teclat:"Teclado: con el mapa seleccionado (tecla Tab), las flechas <kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> mueven el mapa, <kbd>+</kbd> y <kbd>−</kbd> acercan y alejan, <kbd>Intro</kbd> elige el más cercano a la mira, <kbd>N</kbd> y <kbd>P</kbd> pasan al siguiente y al anterior (de más a menos siniestros) y <kbd>Esc</kbd> deshace la elección.",
+anunci:(nom,lin)=>`Seleccionado: ${nom}, ${lin}. La ficha está debajo del mapa.`,
+cap_prop:"No hay nada cerca de la mira: mueve el mapa o acércate.",
+desfet:"Ningún lugar seleccionado."
+});
+let L = "va", vista = "negros", sel = null;
+try{ const s = localStorage.getItem("obs-lang"); if (s==="es"||s==="va") L = s; }catch(e){}
+// textos fijos antes de que lleguen los datos (comun/carga.js): los que no llevan {cifras}; textos() los repinta todos
+(function(){ const t=T[L]; document.documentElement.lang = L==="va"?"ca":"es"; document.title = t.marca;
+  document.querySelectorAll("[data-t]").forEach(e=>{ const v=t[e.dataset.t]; if (typeof v==="string" && !/\{\w+\}/.test(v)) e.innerHTML=v; });
+  document.getElementById("l-va").setAttribute("aria-pressed",L==="va"); document.getElementById("l-es").setAttribute("aria-pressed",L==="es"); })();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js" integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj" crossorigin="anonymous"></script>
+<script>/*DATA*/</script>
+<script>
+const D = window.OBS;
+// un solo formato: miles con punto siempre (1.659), decimales con coma
+const fmt = n => Number.isInteger(n) ? (n<0?"−":"")+String(Math.abs(n)).replace(/\B(?=(\d{3})+(?!\d))/g,".") : n.toLocaleString(L==="va"?"ca-ES":"es-ES",{maximumFractionDigits:1});
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const ns = "http://www.w3.org/2000/svg";
+function el(tag, a, txt){ const e = document.createElementNS(ns, tag); for (const k in a) e.setAttribute(k, a[k]); if (txt!=null) e.textContent = txt; return e; }
+
+// ---------- serie y meta ----------
+const S = D.serie.map(r => ({a:r["año"], b:r.b, p:r.p, m:r.a, t:r.b+r.p+r.a}));
+// meta del Plan (acción 3.2.2): −50 % en 2030. Año base, alternativa y conclusión: de exportar_web.py (META)
+const MT = D.kpi.meta, E0 = MT.esc[0], EALT = MT.esc[1];
+const AÑO_BASE = MT["año_base"], AÑO_META = MT["año_meta"];
+// periodos de la persistencia (lugares_nudos.py → exportar_web.py): A ordena, B mide
+const PER_A = D.kpi.pers.per.A, PER_B = D.kpi.pers.per.B;
+const etqPer = (xs, corto) => xs.length === 1 ? String(xs[0]) : `${xs[0]}-${corto ? String(xs[xs.length-1]).slice(2) : xs[xs.length-1]}`;
+const Sa = a => S.find(r => r.a === a), ult = S[S.length-1];
+const base = E0.base, metaV = E0.meta;
+const senda = a => base*Math.pow(.5,(a-AÑO_BASE)/(AÑO_META-AÑO_BASE));   // senda propuesta: misma proporción cada año
+const faltaAnual = () => Math.round(100*E0.necesaria);   // bajada anual necesaria desde el año siguiente al último con datos
+// ---------- cifras de los textos: {clave} en T se rellena con V (se recalcula al cambiar de idioma) ----------
+const NUM = {va:["zero","un","dos","tres","quatre","cinc","sis","set","huit","nou","deu"],es:["cero","uno","dos","tres","cuatro","cinco","seis","siete","ocho","nueve","diez"]};
+let V = {};
+function valores(){
+  const yr = D.kpi.anys, a0 = yr[0], a1 = yr[yr.length-1], prim = Sa(a0), loc = L==="va"?"ca-ES":"es-ES";
+  const mil = fmt;
+  const nfDec = new Intl.NumberFormat(loc,{minimumFractionDigits:1,maximumFractionDigits:1});   // uno solo: toLocaleString crea uno en cada llamada
+  const pc = x => Math.round(100*x)+" %", dec = x => nfDec.format(x)+" %";
+  const llista = xs => xs.length<2 ? xs.join("") : xs.slice(0,-1).join(", ")+(L==="va"?" i ":" y ")+xs[xs.length-1];
+  const per = Object.values(D.kpi.per).map(([i,f]) => i===f ? String(i) : `${i}-${String(f).slice(2)}`);
+  const pat = r => (r.p+r.m)/r.t, nw = n => NUM[L][n] ?? String(n), v0 = Math.round(100*(ult.t/prim.t-1));
+  V = {a0, a1, rang:`${a0}-${a1}`, ab:AÑO_BASE, ameta:AÑO_META, apend:a1+1, aplan:MT["año_plan"], adesde:MT.desde,
+       aalt:EALT["año"], metaalt:mil(EALT.meta), nb:mil(base),
+       pprev:"un "+pc(Math.abs(MT.previa))+(MT.previa>=0?(L==="va"?" més":" más"):(L==="va"?" menys":" menos")), nany:nw(yr.length), p1:per[0], per:llista(per),
+       nA:etqPer(PER_A), nB:etqPer(PER_B), pA:etqPer(PER_A, true), pB:etqPer(PER_B, true), tany:D.kpi.tipo_any,
+       t0:mil(prim.t), t1:mil(ult.t), var0:(v0<0?"−":"+")+Math.abs(v0)+" %", varb:"un "+dec(Math.abs(100*(ult.t/base-1)))+(ult.t>=base?(L==="va"?" més":" más"):(L==="va"?" menys":" menos")),
+       pat1:pc(pat(ult)), pat1d:Math.round(10*pat(ult)), pat1w:nw(Math.round(10*pat(ult))), pat0w:nw(Math.round(10*pat(prim))),
+       falta:faltaAnual()+" %", meta:mil(metaV), neg:D.kpi.n_neg, uso:D.uso.length, pmin:D.kpi.pista.min,
+       // persistencia fuera de muestra (lugares_nudos.py): ordenar con {pA}, medir en {pB}; perf = si cada lugar mantuviera su ritmo
+       persA:mil(Math.round(D.kpi.pers.ab.A)), persB:mil(Math.round(D.kpi.pers.ab.obs)), persLo:mil(Math.round(D.kpi.pers.ab.perf_lo)),
+       persHi:mil(Math.round(D.kpi.pers.ab.perf_hi)), persLoc:mil(Math.round(D.kpi.pers.ab.loc)),
+       nop:D.kpi.pl3.no, npl:D.kpi.pl3.lugar, npc:D.kpi.pl3.calle, ptop:D.kpi.pl3.top,   // recuentos del anillo y puestos que publica el Plan, de exportar_web.py (PL3)
+       cobp:(()=>{ const v=Object.values(D.kpi.cobd).flatMap(Object.values); return "del "+pc(Math.min(...v))+" al "+pc(Math.max(...v)); })(),   // cobertura por año × tipo de dirección
+       cob0:pc(D.kpi.cob_any[a0]), cob1:pc(D.kpi.cob_any[a1]),   // siniestros situados en el mapa, primer y último año (Limitacions)
+       ncont:D.kpi.n_contadores, ambsolo:pc(D.kpi.amb_solo), cobt:pc(D.cob.geo/D.cob.total)};
+  // meta: comprobación con la media de los años antes del Plan y recuento por vehículo (META de exportar_web.py)
+  Object.assign(V, {etqmed:MT.media.etq, nbmed:mil(MT.media.base), metamed:mil(MT.media.meta), nveh:mil(MT.vehiculo.base), metaveh:mil(MT.vehiculo.meta)});
+  // series de control: todos los siniestros de la ciudad, con y sin heridos (variación del primer al último año)
+  const C = MT.control, n = C.ciudad.length-1, vx = x => { const v = Math.round(100*(x[n]/x[0]-1)); return (v<0?"−":"+")+Math.abs(v)+" %"; };
+  const sinH = C.bv_sin.map((v, i) => v + C.resto_sin[i]);   // sin heridos, toda la ciudad
+  Object.assign(V, {c0:mil(C.ciudad[0]), c1:mil(C.ciudad[n]), varc:vx(C.ciudad), cuota1:dec(100*C.cuota[n]),
+       varsin:vx(sinH), varbvh:vx(C.bv_her), varresh:vx(C.resto_her)});
+  // conclusión del titular, calculada en meta.py: pendiente · debajo · compatible · encima (alerta solo si está por encima)
+  V.concl = O(T[L].concl[E0.concl]); V.alerta = E0.concl==="encima" ? "alerta" : "";
+  V.avismax = MT.max ? O(T[L].avis_max) : "";
+  V.partida = O(T[L][MT.max ? "partida_max" : "partida"]);
+  V.hvb = ult.a>AÑO_BASE ? O(T[L].hall_vb) : "";
+  // accesos de la entradilla: siniestros de los lugares con más siniestros ({a0}-{a1}), tipos que hay entre ellos y el primero
+  // con su nombre publicado (como en la ficha); y estado del indicador (sin años después de la base, la base, la meta y el
+  // año pendiente; con años, el juicio en tres estados de meta.py)
+  const n30 = D.negros.filter(n=>!n.zona), tps = new Set(n30.map(n=>n.tipo)), c1 = n30[0];
+  V.cn = mil(D.kpi.conc.n); V.ctip = T[L].ctip[tps.size>1 ? "ambos" : [...tps][0]];
+  // en la frase, el nombre como en el informe (nomLugar: «Pg. Alameda × Pl. Zaragoza») y sin la letra de lado del nudo
+  // («(S)»: sur, frente al nudo «(N)» del mismo cruce), que solo distingue nudos vecinos; la ficha conserva el nombre congelado
+  const nomFrase = u => u.replace(/ \([NSEO]\)$/,"").toLowerCase().replace(/\b(pg|av|c\/|pl|gv)\b\.?\s*/g, m => ({pg:"Pg. ",av:"Av. ","c/":"C/ ",pl:"Pl. ",gv:"Gran Via "}[m.trim().replace(".","")] || m))
+    .replace(/ cruce /g, " × ").replace(/(^|[\s×\/-])([a-zà-ú])/g, (m,a,b) => a + b.toUpperCase());
+  V.c1nom = nomFrase(L==="es"&&c1.nom_es||c1.nom); V.c1n = mil(c1.n);
+  V.jult = ult.a>AÑO_BASE ? T[L].juicio[E0.juicio[ult.a].estado] : "";
+  V.fun = O(T[L][ult.a>AÑO_BASE ? "fun_ev" : "fun0"]);
+  // «Què s'hi fa?»: recuentos de «El Pla, al dia» (pla.html), de plan_seguimiento.csv vía exportar_web.py (D.pla)
+  const PE = D.pla.por_estado;
+  V.pn = mil(D.pla.n); V.ph = PE.hecha; V.pm = PE.en_marcha; V.pa = PE.anunciada; V.ps = PE.sin_info;
+  // periodos de formato del portal: P1 hasta el mes anterior al primer corte, P2 hasta el anterior al segundo
+  const MES = {va:["gener","febrer","març","abril","maig","juny","juliol","agost","setembre","octubre","novembre","desembre"],
+               es:["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"]};
+  const fin = c => { const [y,m] = c.split("-").map(Number); return m===1 ? [y-1,11] : [y,m-2]; };
+  const [y1,m1] = fin(D.kpi.cortes[0]), [y2,m2] = fin(D.kpi.cortes[1]);
+  V.p1txt = L==="va" ? `Fins a ${MES.va[m1]} de ${y1}, i en menor mesura fins a ${MES.va[m2]} de ${y2},` : `Hasta ${MES.es[m1]} de ${y1}, y en menor medida hasta ${MES.es[m2]} de ${y2},`;
+}
+const O = x => typeof x==="string" ? x.replace(/\{(\w+)\}/g, (m,k) => k in V ? V[k] : m) : x;
+function grafico(){
+  const g = document.getElementById("graf"); [...g.querySelectorAll(":scope > :not(title)")].forEach(n=>n.remove());
+  const W=640,H=330,ml=44,mr=12,mt=16,mb=34, años=[];
+  for (let a=S[0].a; a<=Math.max(AÑO_META,ult.a); a++) años.push(a);
+  const ymax=Math.ceil(Math.max(...S.map(r=>r.t))*1.05/600)*600, x=i=>ml+i*(W-ml-mr)/años.length, bw=(W-ml-mr)/años.length*.62, y=v=>mt+(H-mt-mb)*(1-v/ymax);
+  for (let v=0; v<=ymax; v+=600){ g.append(el("line",{x1:ml,x2:W-mr,y1:y(v),y2:y(v),stroke:css("--line"),"stroke-width":1})); g.append(el("text",{x:ml-6,y:y(v)+4,"text-anchor":"end"},fmt(v))); }
+  años.forEach((a,i)=>{ g.append(el("text",{x:x(i)+bw/2+ (W-ml-mr)/años.length*.19,y:H-12,"text-anchor":"middle"},a)); });
+  const off=(W-ml-mr)/años.length*.19;
+  const iA=a=>años.indexOf(a);
+  S.forEach(r=>{ const i=iA(r.a); let acc=0; [["b","--bici"],["p","--pat"],["m","--amb"]].forEach(([k,c])=>{ g.append(el("rect",{x:x(i)+off,y:y(acc+r[k]),width:bw,height:y(acc)-y(acc+r[k]),fill:css(c)})); acc+=r[k]; });
+    g.append(el("text",{x:x(i)+off+bw/2,y:y(r.t)-6,"text-anchor":"middle","font-weight":"700",style:"fill:var(--ink)"},fmt(r.t))); });
+  // senda propuesta (desde el año base, −50 % en 2030): círculos huecos y línea punteada, como en el informe
+  const cx=i=>x(i)+off+bw/2, iS=[]; for (let i=iA(AÑO_BASE);i<años.length;i++) iS.push(i);
+  // margen del azar (Poisson al 95 %, meta.py) alrededor de la senda de cada año posterior a la base
+  iS.slice(1).forEach(i=>{ const [lo,hi]=E0.banda[años[i]];
+    g.append(el("rect",{x:cx(i)-bw*.32,width:bw*.64,y:y(hi),height:y(lo)-y(hi),fill:css("--meta"),"fill-opacity":.18})); });
+  g.append(el("polyline",{points:iS.map(i=>`${cx(i)},${y(senda(años[i]))}`).join(" "),fill:"none",stroke:css("--meta"),"stroke-width":1.5,"stroke-dasharray":"2 3"}));
+  iS.slice(1).forEach(i=>{ const v=senda(años[i]);
+    g.append(el("circle",{cx:cx(i),cy:y(v),r:4.5,fill:css("--bg"),stroke:css("--meta"),"stroke-width":1.5}));
+    if (años[i]>ult.a && años[i]<AÑO_META) g.append(el("text",{x:cx(i),y:y(E0.banda[años[i]][1])-5,"text-anchor":"middle"},fmt(Math.round(v)))); });
+  // último año con datos, si es posterior a la base: la barra real frente a su hueco de la senda (hoy no hay ninguno);
+  // en rojo solo si está por encima del margen (juicio de meta.py)
+  if (ult.a>AÑO_BASE){ const iu=iA(ult.a), su=Math.round(senda(ult.a)), du=ult.t-su, cj=E0.juicio[ult.a].estado==="encima"?"--warn":"--ink";
+    g.append(el("line",{x1:x(iu)+off+bw+3,x2:x(iu)+off+bw+3,y1:y(su),y2:y(ult.t),stroke:css(cj),"stroke-width":2}));
+    g.append(el("text",{x:x(iu)+off+bw+7,y:y((su+ult.t)/2)+4,"font-weight":"700",style:`fill:var(${cj})`},(du<0?"−":"+")+fmt(Math.abs(du)))); }
+  // año siguiente: pendiente de publicar
+  if (ult.a<AÑO_META){ const ip=iA(ult.a+1), [p0,p1]=O(T[L].p26).split(": ");
+    g.append(el("text",{x:x(ip)+off+bw/2,y:y(senda(ult.a+1)/2),"text-anchor":"middle"},p0));
+    g.append(el("text",{x:x(ip)+off+bw/2,y:y(senda(ult.a+1)/2)+15,"text-anchor":"middle"},p1)); }
+  const im=iA(AÑO_META);
+  g.append(el("text",{x:x(im)+off+bw/2,y:y(metaV)-25,"text-anchor":"middle","font-weight":"700",style:"fill:var(--ink)"},"Meta"));
+  g.append(el("text",{x:x(im)+off+bw/2,y:y(metaV)-9,"text-anchor":"middle","font-weight":"700",style:"fill:var(--ink)"},fmt(metaV)));
+}
+// textos estado/estado0 (T): J = juicio del último año con datos (meta.py): b observados, d respecto a la base, s senda,
+// lo-hi margen, est estado, med comprobación con la media. concl: pendiente · debajo · compatible (dentro del margen del azar) · encima
+function estado(){
+  // juicio del último año con datos (meta.py); sin años después de la base, la senda y el margen del año siguiente
+  const ev = ult.a>AÑO_BASE, a = ev ? ult.a : MT.desde, j = E0.juicio[a], [lo,hi] = E0.banda[a];
+  const dv = (ult.t/base-1)*100, d = Math.abs(dv).toFixed(1).replace(".",",")+" %";
+  const jm = ev ? MT.media.juicio[a] : null, tj = T[L].juicio;
+  const J = {b:fmt(ult.t), d:(dv<0?"−":"+")+d, s:fmt(E0.senda[a]), lo:fmt(lo), hi:fmt(hi), est:ev ? tj[j.estado] : "",
+             med:!ev ? "" : jm.estado===j.estado ? O(T[L].med_igual) : T[L].med_dif(tj[jm.estado])};
+  document.getElementById("estado").innerHTML = T[L][ev ? "estado" : "estado0"](J);
+  // series de control (META.control): siniestros con bici o patinete, con heridos y su parte del total de la ciudad
+  const C = MT.control, h = T[L].ctrl_h, dec = x => x.toLocaleString(L==="va"?"ca-ES":"es-ES",{minimumFractionDigits:1,maximumFractionDigits:1})+" %";
+  document.getElementById("control").innerHTML = `<tr>${h.map(x=>`<th scope="col">${x}</th>`).join("")}</tr>` +
+    C.años.map((y,i)=>`<tr><td>${y}</td><td>${fmt(C.bv[i])}</td><td>${fmt(C.bv_her[i])}</td><td>${dec(100*C.cuota[i])}</td></tr>`).join("");
+}
+
+// ---------- filtros: años (de / a), vehículo y gravedad (06/11) ----------
+// Todo en el navegador, sobre D.pts (siniestros situados: [11] lugar, [12] Turia) y D.sp (sin punto, solo lo que pide el
+// perfil): mapa, leyenda, fichas, minimapa y descarga. Los lugares no cambian (se eligen con todos los siniestros); con un
+// filtro, su recuento y su perfil se rehacen con los siniestros que pasan, igual que perfil() de exportar_web.py.
+const ANYS = D.kpi.anys, F = {a0:ANYS[0], a1:ANYS[ANYS.length-1], v:"t", g:"t"};
+const fAct = ()=>F.a0!==ANYS[0] || F.a1!==ANYS[ANYS.length-1] || F.v!=="t" || F.g!=="t";
+const rangF = ()=>F.a0===F.a1 ? String(F.a0) : `${F.a0}-${F.a1}`;
+const pasaG = g=>F.g==="t" || (F.g==="0" ? g===0 : F.g==="h" ? g>=1 : g>=3);   // -1 (otra) solo pasa sin filtro de gravedad
+const pasa = r=>r.a>=F.a0 && r.a<=F.a1 && (F.v==="t" || r.v===F.v) && pasaG(r.g);
+const pasaP = p=>pasa({a:p[2],v:p[3],g:p[4]});
+// con quién (contrario() de scripts/lugares.py), franja horaria (FR de exportar_web.py) y factores (bits)
+const contrario = u=>{ const us=String(u).split(",").map(x=>x.trim()).filter(Boolean);
+  if (us.some(x=>!["BICICLETA","VMP","PEATÓN"].includes(x))) return "m"; if (us.includes("PEATÓN")) return "w"; return us.length>=2 ? "d" : "s"; };
+const FRB = [0,7,10,14,17,21,24], FB = [["prio",1,"PRIORIDAD"],["dist",2,"DISTRA"],["via",4,"ESTADO O CONDICI"],["vel",8,"VELOCIDAD"]];
+// filas para los filtros: se preparan la primera vez que hacen falta (con un filtro activo); sin filtro, lo exportado tal cual
+let FILAS_ = null;
+const filasF = ()=>FILAS_ || (FILAS_ = D.pts.map(p=>{ const h=+p[8].slice(11,13), dia=new Date(+p[8].slice(6,10),+p[8].slice(3,5)-1,+p[8].slice(0,2)).getDay();
+    return {a:p[2], v:p[3], g:p[4], k:contrario(p[9]), fr:FRB.findIndex((x,i)=>h>=x && h<FRB[i+1]), lab:dia>=1 && dia<=5 ? 1 : 0,
+      b:FB.reduce((s,[,bit,txt])=>s+(p[10].includes(txt) ? bit : 0),0), tipo:p[5], cr:p[7]==="c", l:p[11], t:p[12]}; })
+  .concat((D.sp||[]).map(r=>({a:r[0], v:r[1], g:r[2], k:r[3], fr:r[4], lab:r[5], b:r[6], tipo:r[7], cr:null, l:-1, t:r[8]}))));
+function perfilF(rs){
+  const o={n:rs.length, k:{m:0,w:0,d:0,s:0}, f:{prio:0,dist:0,via:0,vel:0}, nf:0, fr:[0,0,0,0,0,0], lab:0, gr:0, fa:0, pm:0, mix:[0,0,0], nu:0};
+  const vy3=ANYS.map(()=>[0,0,0]), vy3w=ANYS.map(()=>[0,0,0]), tu={};
+  // factores: solo el último año (como el tipo; 07/11/2026): antes de él faltan en uno de cada tres partes
+  rs.forEach(r=>{ o.k[r.k]++; if (r.a===D.kpi.tipo_any){ o.nf++; FB.forEach(([c,bit])=>{ if (r.b&bit) o.f[c]++; }); } o.fr[r.fr]++; o.lab+=r.lab;
+    if (r.g===3) o.gr++; if (r.g===4) o.fa++; if ((r.b&1) && r.k==="m") o.pm++;
+    const j="bpa".indexOf(r.v), ia=ANYS.indexOf(r.a); o.mix[j]++; vy3[ia][j]++;
+    // barras corregidas por la cobertura de su año y tipo de dirección (como vy3w); los sin punto no cuentan
+    if (r.cr!==null) vy3w[ia][j]+=1/D.kpi.cobd[r.a][r.cr ? "cruce" : "portal"];
+    if (r.a===D.kpi.tipo_any && r.tipo){ o.nu++; tu[r.tipo]=(tu[r.tipo]||0)+1; } });
+  o.lab = o.n ? Math.round(100*o.lab/o.n)/100 : 0; o.tu = Object.entries(tu).sort((a,b)=>b[1]-a[1]).slice(0,3);
+  o.vy3 = vy3; o.vy3w = vy3w.map(v=>v.map(x=>Math.round(10*x)/10)); return o;
+}
+// un lugar con el filtro (sin filtro, lo exportado tal cual); ntot: todos sus siniestros
+function lugF(i){ const n=D.negros[i]; if (!fAct()) return n;
+  const rs=filasF().filter(r=>(n.zona ? r.t>0 : r.l===i) && pasa(r)), p=perfilF(rs);
+  return Object.assign({}, n, p, {vy3w:n.zona ? undefined : p.vy3w, ntot:n.n, dentro:n.zona ? rs.filter(r=>r.t===2).length : n.dentro}); }
+let CIU_F = null;
+const ciudadF = ()=>fAct() ? (CIU_F || (CIU_F = perfilF(filasF().filter(pasa)))) : Object.assign({n:D.cob.total}, D.ciudad);
+let NEGF = D.negros, escalaF = 1;
+const NMAX = Math.max(...D.negros.filter(n=>!n.zona).map(n=>n.n));
+// años del filtro (índices en ANYS) para las barras de la ficha
+const iAnys = ()=>ANYS.map((a,i)=>[a,i]).filter(([a])=>a>=F.a0 && a<=F.a1).map(([,i])=>i);
+
+// ---------- mapa ----------
+// «Todos los siniestros» se agrupa por lugar: muchos caen en el mismo punto (centro del cruce o portal)
+let grupos=[], ptGrupo=new Int32Array(D.pts.length).fill(-1);
+function agrupar(){
+  const idx=new Map();
+  grupos=[]; ptGrupo.fill(-1);
+  D.pts.forEach((p,i)=>{ if (!pasaP(p)) return;
+    const k=p[0]+","+p[1]; let g=idx.get(k); if (g===undefined){ g=grupos.length; idx.set(k,g); grupos.push([]); }
+    grupos[g].push(i); ptGrupo[i]=g; });
+  return {type:"FeatureCollection",features:grupos.map((g,j)=>{ const p=D.pts[g[0]], cs=new Set(g.map(i=>D.pts[i][3]));
+    return {type:"Feature",geometry:{type:"Point",coordinates:[p[0],p[1]]},properties:{n:g.length,c:cs.size===1?p[3]:"x",i:j}}; })};
+}
+// anillo del Plan: regla común con el informe (pl_anillo en exportar_web.py): 0 no lo menciona · 1 cita el lugar · 2 solo cita su calle
+const planEst = n=>n.pl;
+const DASH = [null, null, "0.1 3.8"];   // 0 sin anillo (no se dibuja) · 1 continuo · 2 de puntos (con linecap round)
+const anilloAttr = pl => DASH[pl] ? ` stroke-dasharray="${DASH[pl]}"${pl===2?' stroke-linecap="round"':""}` : "";
+const negFC = {type:"FeatureCollection",features:D.negros.map((n,i)=>[n,i]).filter(([n])=>!n.zona).map(([n,i])=>({type:"Feature",geometry:{type:"Point",coordinates:[n.lon,n.lat]},properties:{n:n.n,f:n.pat/n.n,i,pl:planEst(n)}}))};
+const negFCf = ()=>({type:"FeatureCollection",features:negFC.features.map(f=>({...f,properties:{...f.properties,n:Math.max(15,NEGF[f.properties.i].n*escalaF)}}))});
+const usoFC = {type:"FeatureCollection",features:D.uso.map((u,i)=>({type:"Feature",geometry:{type:"Point",coordinates:[u.lon,u.lat]},properties:{N:u.N,lv:u.lv,i}}))};
+const map = new maplibregl.Map({container:"mapa",attributionControl:false,center:[-0.372,39.472],zoom:12.3,minZoom:10.5,maxZoom:18,dragRotate:false,pitchWithRotate:false,
+  style:{version:8,sources:{},layers:[{id:"bg",type:"background",paint:{"background-color":css("--mapbg")}}]}});
+map.touchZoomRotate.disableRotation();
+const CAPA={negros:"neg",uso:"uso",pts:"pts"};
+// ---------- calles del fondo, después del primer pintado (07/11/2026) ----------
+// En la web nueva (construir_sitio.py) van en su propio fichero, datos/web-mapa-calles.<hash>.js (window.OBS_CALLES), con su
+// ruta y su SRI en #mapa (data-calles, data-calles-sri): 1,7 MB que no hacen falta para ver los lugares. Se piden cuando el
+// mapa ya ha cargado y el navegador está libre; mapa y minimapa ponen las calles al llegar. En la página vieja
+// (observatori.html) siguen dentro de los datos (D.calles). Si no llegan, el mapa sigue sin el fondo de calles.
+const FC0 = {type:"FeatureCollection",features:[]};
+let callesFC = D.calles || null;
+const callesEsp = [];
+function conCalles(f){ if (callesFC) f(callesFC); else callesEsp.push(f); }
+function pedirCalles(){
+  const el=document.getElementById("mapa"), src=el.dataset.calles;
+  if (callesFC || pedirCalles.ya || !src) return; pedirCalles.ya=true;
+  const s=document.createElement("script"); s.src=src; s.integrity=el.dataset.callesSri; s.async=true;
+  s.onload=()=>{ callesFC=window.OBS_CALLES||FC0; callesEsp.splice(0).forEach(f=>f(callesFC)); };
+  document.head.append(s);
+}
+// ---------- minimapa de la ficha: la zona elegida, con los siniestros de alrededor ----------
+// siniestros agrupados por punto (muchos caen en el mismo sitio, el centro del cruce); en «Todos los siniestros»,
+// con el mismo filtro que el mapa grande (salvo en los puntos de conteo, que no se filtran)
+function gruposMM(){
+  const filtra = fAct() && sel && sel.tipo!=="uso", m=new Map(), zona = sel && sel.tipo==="negros" && D.negros[sel.i].zona;
+  if (zona && !filtra)        // una zona: solo sus siniestros con punto dentro de ella
+    return (D.negros[sel.i].mm||[]).map(([lo,la,b,p,a])=>({c:[lo,la],n:b+p+a,mix:[b,p,a]}));
+  D.pts.forEach(p=>{ if ((zona && p[12]!==2) || (filtra && !pasaP(p))) return;
+    const k=p[0]+","+p[1]; const g=m.get(k)||{c:[p[0],p[1]],n:0,mix:[0,0,0]}; g.n++; g.mix[p[3]==="b"?0:p[3]==="p"?1:2]++; m.set(k,g); });
+  return [...m.values()];
+}
+function circuloGeo(c,r){ const pts=[]; for(let k=0;k<=48;k++){ const a=2*Math.PI*k/48; pts.push([c[0]+r/(111320*Math.cos(c[1]*Math.PI/180))*Math.cos(a), c[1]+r/110540*Math.sin(a)]); } return pts; }
+const mm = new maplibregl.Map({container:"minimapa",attributionControl:false,interactive:false,center:[-0.372,39.472],zoom:16,
+  style:{version:8,sources:{},layers:[{id:"bg",type:"background",paint:{"background-color":css("--mapbg")}}]}});
+let mmListo=false;
+mm.on("load",()=>{
+  mm.addSource("calles",{type:"geojson",data:callesFC||FC0}); mm.addSource("ciclo",{type:"geojson",data:D.ciclo});
+  if (!callesFC) conCalles(fc=>mm.getSource("calles").setData(fc));
+  mm.addSource("zona",{type:"geojson",data:{type:"FeatureCollection",features:[]}});
+  mm.addLayer({id:"calles",type:"line",source:"calles",paint:{"line-width":["interpolate",["linear"],["zoom"],12,["case",["==",["get","m"],1],1,.2],14,["case",["==",["get","m"],1],2.5,.8],16.4,["case",["==",["get","m"],1],9,4]],"line-opacity":["interpolate",["linear"],["zoom"],12,["case",["==",["get","m"],1],1,.35],15,1]}});
+  mm.addLayer({id:"ciclo",type:"line",source:"ciclo",paint:{"line-width":["interpolate",["linear"],["zoom"],12,.8,16.4,3],"line-opacity":.8}});
+  mm.addLayer({id:"zona-f",type:"fill",source:"zona",paint:{"fill-opacity":.10}});
+  mm.addLayer({id:"zona",type:"line",source:"zona",paint:{"line-width":2,"line-dasharray":[2,1.5]}});
+  mmListo=true; pintarMini(); if (sel) moverMini(coords(sel.tipo,sel.i));
+});
+function pintarMini(){
+  if (!mmListo) return;
+  mm.setPaintProperty("bg","background-color",css("--mapbg"));
+  mm.setPaintProperty("calles","line-color",["case",["==",["get","m"],1],css("--street2"),css("--street")]);
+  mm.setPaintProperty("ciclo","line-color",css("--lane"));
+  mm.setPaintProperty("zona","line-color",css("--ink"));
+  mm.setPaintProperty("zona-f","fill-color",css("--ink"));
+}
+function zonaDe(tipo,i,c){
+  // geometría GeoJSON: el Turia (zona), la zona del nudo (envolvente + 30 m) o la línea del tramo, o un círculo
+  if (tipo==="negros") return D.negros[i].zona ? {type:"Polygon",coordinates:[D.negros[i].zona]} : D.negros[i].geo;
+  if (tipo==="uso" && D.uso[i].geo) return D.uso[i].geo;   // punto con varios contadores: unión de sus círculos
+  return {type:"Polygon",coordinates:[circuloGeo(c,tipo==="uso"?100:18)]};
+}
+let mmQues=[];
+function quesMini(g,r){
+  const tot=g.n, col=["--bici","--pat","--amb"], S=2*r+2; let a0=-Math.PI/2, seg="";
+  g.mix.forEach((v,j)=>{ if(!v) return; const a1=a0+2*Math.PI*v/tot;
+    if (v===tot) seg+=`<circle cx="${S/2}" cy="${S/2}" r="${r}" fill="var(${col[j]})"/>`;
+    else { const x0=S/2+r*Math.cos(a0), y0=S/2+r*Math.sin(a0), x1=S/2+r*Math.cos(a1), y1=S/2+r*Math.sin(a1);
+      seg+=`<path d="M${S/2},${S/2}L${x0.toFixed(2)},${y0.toFixed(2)}A${r},${r} 0 ${a1-a0>Math.PI?1:0} 1 ${x1.toFixed(2)},${y1.toFixed(2)}Z" fill="var(${col[j]})"/>`; }
+    a0=a1; });
+  seg+=`<circle cx="${S/2}" cy="${S/2}" r="${r}" fill="none" stroke="var(--surface)" stroke-width="1"/>`;
+  const e=document.createElement("div"); e.className="ques"; e.setAttribute("role","img"); e.innerHTML=`<svg viewBox="0 0 ${S} ${S}" width="${S}" height="${S}" aria-hidden="true">${seg}</svg>`; return e;
+}
+function quesitosMini(){
+  mmQues.forEach(m=>m.remove()); mmQues=[];
+  const b=mm.getBounds(), z=mm.getZoom(), k=z<13?.7:z<15?1.4:2.4, base=z<13?1.5:3;
+  gruposMM().filter(g=>b.contains(g.c)).sort((a,b)=>b.n-a.n).forEach(g=>{
+    mmQues.push(new maplibregl.Marker({element:quesMini(g, base+k*Math.sqrt(g.n)),anchor:"center"}).setLngLat(g.c).addTo(mm)); });
+}
+function moverMini(c){
+  const caja=document.getElementById("mm-caja"), w=document.getElementById("ficha-wrap");
+  caja.hidden=false; w.classList.remove("sin"); mm.resize();
+  mmLey();
+  if (!mmListo) return;
+  const z=sel&&sel.tipo==="negros"&&D.negros[sel.i].zona;
+  if (z){ const xs=z.map(p=>p[0]), ys=z.map(p=>p[1]); mm.fitBounds([[Math.min(...xs),Math.min(...ys)],[Math.max(...xs),Math.max(...ys)]],{padding:8,duration:0}); }
+  else mm.jumpTo({center:c,zoom:sel&&sel.tipo==="uso"?15.6:16.4});
+  quesitosMini();   // también tras encuadrar una zona (Turia)
+  mm.getSource("zona").setData({type:"FeatureCollection",features:[{type:"Feature",geometry:zonaDe(sel.tipo,sel.i,c),properties:{}}]});
+}
+// leyenda del minimapa (se rehace también al cambiar de idioma o de filtro)
+function mmLey(){
+  const t=T[L], z=sel&&sel.tipo==="negros"&&D.negros[sel.i].zona;
+  V.filtre = t.filtre();
+  document.getElementById("mm-ley").innerHTML = z ? t.mm_ley.zona(NEGF[sel.i].dentro) : O(t.mm_ley[sel?sel.tipo:"pts"]);
+}
+function ocultarMini(){ document.getElementById("mm-caja").hidden=true; document.getElementById("ficha-wrap").classList.add("sin"); }
+function pintar(){
+  if (!map.getLayer("calles")) return;
+  map.setPaintProperty("bg","background-color",css("--mapbg"));
+  map.setPaintProperty("calles","line-color",["case",["==",["get","m"],1],css("--street2"),css("--street")]);
+  map.setPaintProperty("ciclo","line-color",css("--lane"));
+  map.setPaintProperty("pts","circle-color",["match",["get","c"],"b",css("--bici"),"p",css("--pat"),"a",css("--amb"),css("--mix")]);
+  map.setPaintProperty("pts","circle-stroke-color",css("--surface"));
+  map.setPaintProperty("zonas","fill-color",css("--mix")); map.setPaintProperty("zonas-l","line-color",css("--ink2"));
+  map.setPaintProperty("lugs-f","fill-color",css("--ink")); map.setPaintProperty("lugs-l","line-color",css("--ink"));
+  // por encima de la media de los puntos con un tráfico parecido: escala de un solo tono (claramente: --ink; quizá: --ink2; como la media: hueco con borde --ink2)
+  // nivel lv (exportar_web.py): 2 claramente (con 75, 100 y 150 m), 1 quizá, 0 como la media
+  // 07/11/2026: igual que el mapa del informe: «claramente», relleno rojo; «quizá», anillo grueso de tinta; el resto, hueco fino
+  map.setPaintProperty("uso","circle-color",["case",["==",["get","lv"],2],css("--warn"),css("--surface")]);
+  map.setPaintProperty("uso","circle-opacity",["case",[">",["get","lv"],0],.95,0]);
+  map.setPaintProperty("uso","circle-stroke-color",["case",[">",["get","lv"],0],css("--ink"),css("--ink2")]);
+  map.setPaintProperty("uso","circle-stroke-width",["case",["==",["get","lv"],2],1.5,["==",["get","lv"],1],3.5,1.5]);
+  map.setPaintProperty("selg","circle-stroke-color",css("--mapbg"));
+  map.setPaintProperty("selh","circle-stroke-color",css("--sel"));
+  hacerQuesitos();
+}
+// ---------- quesitos de los lugares: proporción real de bici, patinete y los dos en el mismo siniestro ----------
+function radioNeg(n){ return 7+(Math.min(Math.max(n,15),48)-15)/(48-15)*12; }
+// con filtro, tamaño relativo (escalaF: el lugar con más siniestros del filtro, tan grande como el mayor sin filtro); sin ninguno, hueco
+const radioLug = n=>n.n ? radioNeg(n.n*escalaF) : 6;
+// 07/11/2026: una capa de símbolos del mapa (antes, un marcador HTML con un SVG por lugar, que el navegador recolocaba en cada
+// fotograma). Cada quesito se dibuja una vez en un lienzo (Canvas 2D) con el mismo dibujo que el SVG de antes: sectores de
+// bici, patinete y los dos; borde del color del fondo; anillo del Plan (continuo o de puntos) y, sin siniestros con el
+// filtro, círculo hueco discontinuo. Se rehace al filtrar y al cambiar de tema (los colores salen de las variables CSS).
+const PR = Math.min(2, Math.max(1, Math.ceil(window.devicePixelRatio||1)));
+function quesito(n){
+  const r=radioLug(n), tot=n.mix[0]+n.mix[1]+n.mix[2], col=["--bici","--pat","--amb"], pl=planEst(n);
+  const R=r+5, S=2*R+2, c=S/2, W=Math.ceil(S*PR), cv=document.createElement("canvas"); cv.width=cv.height=W;
+  const x=cv.getContext("2d"); x.scale(PR,PR);
+  const aro=(rr,color,ancho,dash,cap)=>{ x.beginPath(); x.arc(c,c,rr,0,2*Math.PI); x.strokeStyle=color; x.lineWidth=ancho; x.setLineDash(dash||[]); x.lineCap=cap||"butt"; x.stroke(); };
+  if (!tot){ x.beginPath(); x.arc(c,c,r,0,2*Math.PI); x.fillStyle=css("--surface"); x.fill(); aro(r,css("--ink2"),1.5,[2,2]); }
+  let a0=-Math.PI/2;
+  n.mix.forEach((v,j)=>{ if(!v) return; const a1=a0+2*Math.PI*v/tot;
+    x.beginPath(); if (v===tot) x.arc(c,c,r,0,2*Math.PI); else { x.moveTo(c,c); x.arc(c,c,r,a0,a1); x.closePath(); }
+    x.fillStyle=css(col[j]); x.fill(); a0=a1; });
+  aro(r,css("--surface"),1.2);
+  if (pl) aro(r+3,css("--ink"),2.2,pl===2?[0.1,3.8]:[],pl===2?"round":"butt");   // sin anillo si el Plan no lo menciona
+  return {img:{width:W,height:W,data:new Uint8Array(x.getImageData(0,0,W,W).data.buffer)},S};
+}
+function hacerQuesitos(){
+  if (!map.getSource("ques")) return;
+  const fs=[];
+  NEGF.forEach((n,i)=>{ if (n.zona) return; const id="ques-"+i, {img}=quesito(n);
+    if (map.hasImage(id)) map.removeImage(id);
+    map.addImage(id,img,{pixelRatio:PR});
+    fs.push({type:"Feature",geometry:{type:"Point",coordinates:[n.lon,n.lat]},properties:{q:id,s:-n.n}}); });
+  map.getSource("ques").setData({type:"FeatureCollection",features:fs});
+}
+function mostrarQuesitos(si){ if (map.getLayer("ques")) map.setLayoutProperty("ques","visibility",si?"visible":"none"); }
+map.on("load",()=>{
+  map.addSource("calles",{type:"geojson",data:callesFC||FC0});
+  if (!callesFC){ conCalles(fc=>map.getSource("calles").setData(fc));
+    window.requestIdleCallback ? requestIdleCallback(pedirCalles,{timeout:1500}) : setTimeout(pedirCalles,300); }
+  map.addSource("ciclo",{type:"geojson",data:D.ciclo});
+  map.addSource("pts",{type:"geojson",data:agrupar()});
+  map.addSource("neg",{type:"geojson",data:negFC});
+  map.addSource("uso",{type:"geojson",data:usoFC});
+  map.addSource("selh",{type:"geojson",data:{type:"FeatureCollection",features:[]}});
+  map.addSource("lugs",{type:"geojson",data:{type:"FeatureCollection",features:D.negros.map((n,i)=>[n,i]).filter(([n])=>!n.zona).map(([n,i])=>({type:"Feature",geometry:n.geo,properties:{i}}))}});
+  map.addSource("zonas",{type:"geojson",data:{type:"FeatureCollection",features:D.negros.map((n,i)=>[n,i]).filter(([n])=>n.zona).map(([n,i])=>({type:"Feature",geometry:{type:"Polygon",coordinates:[n.zona]},properties:{i}}))}});
+  map.addLayer({id:"calles",type:"line",source:"calles",paint:{"line-width":["interpolate",["linear"],["zoom"],11,["case",["==",["get","m"],1],1,.4],16,["case",["==",["get","m"],1],7,3]]}});
+  map.addLayer({id:"ciclo",type:"line",source:"ciclo",paint:{"line-width":["interpolate",["linear"],["zoom"],11,.8,16,3],"line-opacity":.75}});
+  map.addLayer({id:"pts",type:"circle",source:"pts",layout:{"circle-sort-key":["get","n"]},paint:{"circle-radius":["interpolate",["linear"],["zoom"],11,["+",1.5,["*",.9,["sqrt",["get","n"]]]],16,["+",4,["*",2.6,["sqrt",["get","n"]]]]],"circle-stroke-width":.8,"circle-opacity":.85}});
+  map.addLayer({id:"zonas",type:"fill",source:"zonas",paint:{"fill-opacity":.22}});
+  map.addLayer({id:"zonas-l",type:"line",source:"zonas",paint:{"line-width":1.5,"line-dasharray":[2,1.5]}});
+  map.addLayer({id:"lugs-f",type:"fill",source:"lugs",filter:["==",["geometry-type"],"Polygon"],paint:{"fill-opacity":.18}});
+  map.addLayer({id:"lugs-l",type:"line",source:"lugs",paint:{"line-width":["interpolate",["linear"],["zoom"],12,1,16,2.5],"line-dasharray":[2,1.5]}});
+  map.addLayer({id:"neg",type:"circle",source:"neg",layout:{"circle-sort-key":["-",0,["get","n"]]},paint:{"circle-opacity":0,"circle-stroke-opacity":0,"circle-radius":["interpolate",["linear"],["get","n"],15,7,48,19],"circle-stroke-width":1.5}});
+  map.addLayer({id:"uso",type:"circle",source:"uso",paint:{"circle-radius":["interpolate",["linear"],["get","N"],0,4,36,15]}});
+  // lugar seleccionado: halo de color de resalte con un hueco del color del fondo (no se confunde con el anillo del Plan)
+  const rSel=d=>["interpolate",["linear"],["zoom"],11,["case",["has","n"],["+",1.5+d,["*",.9,["sqrt",["get","n"]]]],["+",["get","r"],d]],
+                                                   16,["case",["has","n"],["+",4+d,["*",2.6,["sqrt",["get","n"]]]],["+",["get","r"],d]]];
+  map.addLayer({id:"selg",type:"circle",source:"selh",paint:{"circle-radius":rSel(2.5),"circle-color":"rgba(0,0,0,0)","circle-stroke-width":3}});
+  map.addLayer({id:"selh",type:"circle",source:"selh",paint:{"circle-radius":rSel(5.5),"circle-color":"rgba(0,0,0,0)","circle-stroke-width":3.5}});
+  // quesitos de los lugares, por encima de todo (como los marcadores de antes): los grandes debajo de los pequeños
+  map.addSource("ques",{type:"geojson",data:FC0});
+  map.addLayer({id:"ques",type:"symbol",source:"ques",layout:{"icon-image":["get","q"],"icon-allow-overlap":true,"icon-ignore-placement":true,"symbol-sort-key":["get","s"]}});
+  pintar(); aplicar();
+  // enlace directo (#lloc=… o #punt=…): abre esa ficha; si no, el primer lugar, sin tocar la URL
+  if (abrirHash()) document.getElementById("donde").scrollIntoView();
+  else { elegir("negros",0,false,true); volverY(); }
+});
+addEventListener("hashchange",()=>{ if (abrirHash()) document.getElementById("donde").scrollIntoView(); });
+// clic con margen: el elemento visible más cercano a 12 px o menos del clic
+function cercano(pt,r=12){
+  const capa=CAPA[vista];
+  const fs=map.queryRenderedFeatures([[pt.x-r,pt.y-r],[pt.x+r,pt.y+r]],{layers:[capa]});
+  if (!fs.length){
+    if (vista==="negros"){ const z=map.queryRenderedFeatures(pt,{layers:["zonas"]}); if (z.length) return z[0]; }
+    return null;
+  }
+  let best=null, bd=1e9;
+  for (const f of fs){ const q=map.project(f.geometry.coordinates), d=(q.x-pt.x)**2+(q.y-pt.y)**2; if (d<bd){ bd=d; best=f; } }
+  return best;
+}
+map.on("click",e=>{ const f=cercano(e.point); if (f) elegir(vista,+f.properties.i); });
+// «Todos los siniestros»: al acercarse, los puntos con varios siniestros se dibujan como quesitos con su mezcla real
+let ptsQues=[];
+function quesitosPts(){
+  ptsQues.forEach(m=>m.remove()); ptsQues=[];
+  if (vista!=="pts" || !map.getLayer("pts")) return;
+  const z=map.getZoom(); if (z<14) return;
+  const b=map.getBounds(), f=Math.min(1,(z-11)/5), r0=1.5+(4-1.5)*f, k=.9+(2.6-.9)*f;
+  const vis=grupos.map((g,j)=>[g,j]).filter(([g])=>g.length>1 && b.contains([D.pts[g[0]][0],D.pts[g[0]][1]]));
+  vis.sort((a,b)=>b[0].length-a[0].length).slice(0,400).forEach(([g])=>{
+    const mix=[0,0,0]; g.forEach(i=>mix[D.pts[i][3]==="b"?0:D.pts[i][3]==="p"?1:2]++);
+    ptsQues.push(new maplibregl.Marker({element:quesMini({n:g.length,mix}, r0+k*Math.sqrt(g.length)),anchor:"center"}).setLngLat([D.pts[g[0]][0],D.pts[g[0]][1]]).addTo(map)); });
+}
+map.on("moveend",quesitosPts);
+map.on("mousemove",e=>{ map.getCanvas().style.cursor = cercano(e.point)?"pointer":""; });
+document.getElementById("c-pla").onchange=e=>{ plaOn=e.target.checked; if (!plaOn) plaSel=null; leyenda(); };
+document.getElementById("zin").onclick=()=>map.zoomIn();
+document.getElementById("zout").onclick=()=>map.zoomOut();
+const VISTA0={center:[-0.372,39.472],zoom:12.3};
+document.getElementById("zhome").onclick=()=>map.flyTo({...VISTA0,duration:matchMedia("(prefers-reduced-motion: reduce)").matches?0:800});
+function aplicar(){
+  if (!map.getLayer("pts")) return;
+  map.getSource("pts").setData(agrupar());
+  for (const v in CAPA) map.setLayoutProperty(CAPA[v],"visibility",vista===v?"visible":"none");
+  ["zonas","zonas-l","lugs-f","lugs-l"].forEach(l=>map.setLayoutProperty(l,"visibility",vista==="negros"?"visible":"none"));
+  mostrarQuesitos(vista==="negros");
+  quesitosPts();
+  document.getElementById("filtros").hidden = vista==="uso";
+  leyenda(); resumenFiltro();
+}
+function leyenda(){
+  // una línea de símbolos con etiqueta corta, según la vista; lo que explica cada marca, en «¿Cómo leer el mapa?»
+  const t=T[L], c=t.ley_c, m=document.getElementById("mapley"), lee=[];
+  document.getElementById("expl").textContent=O(t.expl[vista]);
+  const dot=(c,extra="")=>`<i class="dot" style="background:var(${c});${extra}"></i>`;
+  const ico=svg=>`<svg class="ico" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">${svg}</svg>`;
+  const lane=`<span><i class="dot" style="border-radius:0;height:3px;width:16px;background:var(--lane)"></i>${t.lane}</span>`;
+  const selI=ico('<circle cx="9" cy="9" r="7" fill="none" stroke="var(--sel)" stroke-width="2.5"/><circle cx="9" cy="9" r="4" fill="var(--ink2)"/>');
+  const cats=(extra=[])=>[["--bici",c.bici],["--pat",c.pat],["--amb",c.amb]].concat(extra).map(([k,l])=>`<span>${dot(k)}${l}</span>`).join("");
+  const anillo=pl=>ico(`<circle cx="9" cy="9" r="7" fill="none" stroke="var(--ink)" stroke-width="2"${anilloAttr(pl)}/><circle cx="9" cy="9" r="4" fill="var(--ink2)"/>`);
+  let ex="";
+  if (vista==="negros"){
+    ex=cats()+[1,2].map(pl=>`<span>${anillo(pl)}${c.pl[pl]}</span>`).join("");
+    lee.push(O(t.ques_ley));
+    if (fAct()) lee.push(t.ley_neg_f);
+    lee.push(`<i class="dot" style="background:none;border-radius:2px;outline:1.5px dashed var(--ink)"></i>${t.lug_ley}.`,
+             `<i class="dot" style="background:var(--mix);opacity:.45;border-radius:2px;outline:1px dashed var(--ink2)"></i>${t.zona_ley}.`, t.anillo_l);
+  } else if (vista==="uso"){
+    const st=[[0,"background:none;border:1.5px solid var(--ink2);box-sizing:border-box"],[1,"background:var(--surface);border:3.5px solid var(--ink);box-sizing:border-box"],[2,"background:var(--warn);border:1.5px solid var(--ink);box-sizing:border-box"]];
+    ex=st.slice().reverse().map(([p,x])=>`<span><i class="dot" style="${x}"></i>${c.verd[p]}</span>`).join("");
+    lee.push(...st.slice().reverse().map(([p,x])=>`<i class="dot" style="${x}"></i>${t.verd(p)[0]}.`), O(t.ley_uso));
+  } else {
+    ex=cats([["--mix",c.mescla]]);
+    lee.push(`${dot("--mix")}${t.mescla}.`, O(t.ley_pts));
+  }
+  lee.push(`${selI}${t.sel_ley}.`);
+  const plaL = plaOn ? D.pla.estados.map(e=>`<span><i class="rombo" style="--c:var(${PLA_COL[e]})" aria-hidden="true"></i>${t.pla_est[e]} (${D.pla.pts.filter(p=>p[2]===e).length})</span>`).join("") : "";
+  if (plaOn) lee.push(t.pla_ley.replace(/:$/,"")+": "+D.pla.estados.map(e=>t.pla_est[e].toLowerCase()).join(", ")+".");
+  m.innerHTML=O(ex)+lane+plaL;
+  const ll=document.getElementById("leer"); if (ll) ll.innerHTML=lee.map(x=>`<li>${x}</li>`).join("");
+  plaMarcadores();
+}
+function barras(vals, lab){
+  const W=280,H=110,mb=20,mt=16, mx=Math.max(...vals,1), bw=W/vals.length*.6;
+  const s=el("svg",{viewBox:`0 0 ${W} ${H}`,class:"mini-svg",role:"img","aria-label":vals.map((v,i)=>`${lab[i]}: ${v}`).join(", ")});
+  vals.forEach((v,i)=>{ const x=i*W/vals.length+(W/vals.length-bw)/2, h=(H-mb-mt)*v/mx;
+    s.append(el("rect",{x,y:H-mb-h,width:bw,height:h,fill:css(i?"--ink2":"--ink")}));
+    s.append(el("text",{x:x+bw/2,y:H-mb-h-4,"text-anchor":"middle",style:"fill:var(--ink)","font-weight":"700"},v));
+    s.append(el("text",{x:x+bw/2,y:H-5,"text-anchor":"middle",style:"fill:var(--ink)"},lab[i])); });
+  return s;
+}
+function hb(rows){
+  const ciu=T[L].ciu_c;
+  return `<p class="ref hb-ley">${T[L].llegenda}</p><div class="hb">${rows.map(([l,v,n,c])=>`<span>${l}</span><span class="tr"><span class="br" style="width:${Math.min(100,100*v/n)}%"></span><span class="ct" style="left:${Math.min(99,100*c)}%"></span></span><span class="nv"><b>${Math.round(100*v/n)} %</b><small>${ciu}: ${Math.round(100*c)} %</small></span>`).join("")}</div>`;
+}
+function apiladas(vy, lab){
+  // orden fijo de abajo arriba: bici, patinete, choque bici–patinete (igual que la portada y el informe)
+  const W=280,H=120,mb=20,mt=16, tot=v=>v.reduce((a,b)=>a+b,0), mx=Math.max(...vy.map(tot),1), bw=W/vy.length*.6, col=["--bici","--pat","--amb"];
+  const s=el("svg",{viewBox:`0 0 ${W} ${H}`,class:"mini-svg",role:"img","aria-label":vy.map((v,i)=>`${lab[i]}: ${Math.round(tot(v))}`).join(", ")});
+  vy.forEach((v,i)=>{ const x=i*W/vy.length+(W/vy.length-bw)/2; let acc=0;
+    v.forEach((n,j)=>{ if(!n) return; const h=(H-mb-mt)*n/mx; s.append(el("rect",{x,y:H-mb-acc-h,width:bw,height:h,fill:css(col[j])})); acc+=h; });
+    s.append(el("text",{x:x+bw/2,y:H-mb-acc-4,"text-anchor":"middle",style:"fill:var(--ink)","font-weight":"700"},Math.round(tot(v))));
+    s.append(el("text",{x:x+bw/2,y:H-5,"text-anchor":"middle",style:"fill:var(--ink)"},lab[i])); });
+  return s;
+}
+// nombres como los escribe una persona (window.NOMS: nombre de los datos → [va, es], de scripts/nombres.py)
+// tipo de accidente del portal (en castellano y en mayúsculas): en valenciano, traducido; en castellano, en minúsculas
+const TIPO_VA={"ALCANCE":"xoc per darrere","ATROPELLO A ANIMAL":"atropellament d'un animal","ATROPELLO A PERSONA":"atropellament d'una persona","CAÍDA":"caiguda",
+  "CHOQUE CONTRA OBSTÁCULO O ELEMENTO DE LA VÍA":"xoc contra un obstacle o un element de la via","COLISIÓN FRONTAL":"col·lisió frontal",
+  "COLISIÓN FRONTOLATERAL":"col·lisió frontolateral","COLISIÓN LATERAL":"col·lisió lateral","COLISIÓN MÚLTIPLE":"col·lisió múltiple","OTROS, VMP":"altres (patinet)"};
+function tipoTxt(k){ return L==="es" ? k.toLowerCase() : (TIPO_VA[k] || (/^OTRO/.test(k) ? "altres" : `<span lang="es">${k.toLowerCase()}</span>`)); }
+function nombre(u){ const k=window.NOMS&&NOMS[u]; return k ? k[L==="es"?1:0] : u.replace(" cruce "," × ").replace(/^P\d+ /,""); }
+function planHTML(pl){
+  const t=T[L];
+  if (!pl || !pl.length) return `<p class="vac">${t.pla_no}</p>`;
+  const diag=pl.filter(x=>x.kind==="diag"), act=pl.filter(x=>x.kind==="act");
+  V.cital = pl.some(x=>x.niv==="lugar");   // si cita el lugar, las citas de la calle se presentan como «también cita su calle»
+  // una frase por lugar: cruces primero, luego calles; los colectivos se juntan
+  const porLug=new Map(); diag.forEach(x=>{ if(!porLug.has(x.lug)) porLug.set(x.lug,[]); porLug.get(x.lug).push(x); });
+  const orden=[...porLug.values()].sort((a,b)=>((b[0].tl||"").startsWith("cruce")?1:0)-((a[0].tl||"").startsWith("cruce")?1:0));
+  const izq=`<div><h5>${t.pla_diag_t}</h5>${diag.length?`<ul class="plan">${orden.map(g=>`<li>${t.pla_diag(g)}</li>`).join("")}</ul>`:`<p class="vac">${t.pla_diag_no}</p>`}</div>`;
+  const der=`<div><h5>${t.pla_act_t}</h5>${act.length?`<ul class="plan">${act.map(x=>`<li><b>${t.pla_act[x.act]||t.pla_act.otra}</b>${x.act!=="audit_reord"&&x.per&&x.per!=="—"?" ("+x.per+")":""} · ${x.niv==="calle"?t.pla_carrer+": ":""}${x.lug}</li>`).join("")}</ul>`:`<p class="vac">${t.pla_act_no}</p>`}</div>`;
+  return `<div class="plan-cols">${izq}${der}</div><p class="ref">${t.pla_ref}, ${L==="es"?pl[0].ref:String(pl[0].ref).replace(/pág\./g,"pàg.")}</p>`;
+}
+// ---------- actuaciones del Plan («El Pla, al dia», pla.html; D.pla y n.pla de exportar_web.py) ----------
+const PLA_COL={hecha:"--e-hecha",en_marcha:"--e-marcha",anunciada:"--e-anun",sin_info:"--e-sin"};
+const escP=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const dmaP=f=>f?f.split("-").reverse().join("/"):"";
+function plaFila(id,acc,est,act,f){ const t=T[L];
+  return `<i class="rombo" style="--c:var(${PLA_COL[est]})" aria-hidden="true"></i><b>${t.pla_est[est]}</b>${f?` (${dmaP(f)})`:""} · ${t.accio} ${escP(acc)}: ${plaTit(id,act)} · <a href="pla.html#a-${encodeURIComponent(id)}">${t.pla_veure}</a>`; }
+// en la ficha: las actuaciones asignadas a este lugar (misma regla que los siniestros: a 30 m o menos del nudo)
+function plaTit(id,act){ const x=window.PLA_T&&PLA_T[id]; return x ? escP(x[L==="es"?1:0]) : `<span lang="es">${escP(act)}</span>`; }
+function plaLug(id,lug){ const x=window.PLA_T&&PLA_T[id]; return x&&x[2] ? escP(x[L==="es"?3:2]) : (lug?`<span lang="es">${escP(lug)}</span>`:""); }
+function plaAqui(pl){ if (!pl || !pl.length) return "";
+  return `<h5>${T[L].pla_aqui_t}</h5><ul class="pla-aqui">${pl.map(([id,acc,est,act,f])=>`<li>${plaFila(id,acc,est,act,f)}</li>`).join("")}</ul>`; }
+// en el mapa: un botón por actuación con coordenadas (accesible con teclado); al pulsarlo, su estado debajo del mapa
+let plaOn=false, plaMk=[], plaSel=null;
+function plaMarcadores(){
+  plaMk.forEach(m=>m.remove()); plaMk=[];
+  const info=document.getElementById("pla-info");
+  if (!plaOn || typeof map==="undefined"){ info.hidden=true; return; }
+  const t=T[L];
+  D.pla.pts.forEach(([lon,lat,est,acc,act,lug,f,id])=>{
+    const b=document.createElement("button"); b.type="button"; b.className="pla-m"; b.setAttribute("aria-pressed",String(plaSel===id));
+    const tt=window.PLA_T&&PLA_T[id], lab=`${t.accio} ${acc} · ${t.pla_est[est]}${f?" ("+dmaP(f)+")":""}: ${tt?tt[L==="es"?1:0]:act}${tt&&tt[2]?" · "+tt[L==="es"?3:2]:lug?" · "+lug:""}`;
+    b.setAttribute("aria-label",lab); b.title=lab; b.innerHTML=`<i style="--c:var(${PLA_COL[est]})"></i>`;
+    b.onclick=e=>{ e.stopPropagation(); plaSel=id; info.innerHTML=plaFila(id,acc,est,act,f)+(plaLug(id,lug)?` <span class="ref">(${plaLug(id,lug)})</span>`:""); info.hidden=false;
+      plaMk.forEach(m=>m.getElement().setAttribute("aria-pressed","false")); b.setAttribute("aria-pressed","true"); };
+    plaMk.push(new maplibregl.Marker({element:b,anchor:"center"}).setLngLat([lon,lat]).addTo(map));
+  });
+  if (plaSel){ const a=D.pla.pts.find(x=>x[7]===plaSel); if (a){ info.innerHTML=plaFila(a[7],a[3],a[2],a[4],a[6]); info.hidden=false; } }
+}
+function seccion(cont, titulo, html, nodo){
+  const d=document.createElement("div"); d.innerHTML=`<h4>${titulo}</h4>`+(html||""); if (nodo) d.insertBefore(nodo, d.children[1]||null); cont.append(d); return d;
+}
+function mini(titulo, linea){
+  const m=document.getElementById("mini");
+  miniTxt=[titulo,linea];
+  m.innerHTML=`<span class="et">${T[L].selec}</span><b>${titulo}</b><span>${linea}</span><button type="button" id="ver">${T[L].veure}</button>`; m.hidden=false;
+  // el foco va con la vista: al título de la ficha (prueba de teclado del 07/11/2026: se quedaba en el botón, fuera de la vista)
+  document.getElementById("ver").onclick=e=>{ e.preventDefault(); const h=document.querySelector("#ficha h3")||document.getElementById("ficha-wrap");
+    h.setAttribute("tabindex","-1"); h.focus({preventScroll:true});
+    document.getElementById("ficha-wrap").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}); };
+}
+function ficha(){
+  fichaCuerpo();
+  const f=document.getElementById("ficha"), cab=f.querySelector(".cab"), top=document.getElementById("ficha-top");
+  top.innerHTML=""; if (cab) top.append(cab); else { top.append(...f.childNodes); }
+  // compartir el enlace directo de la ficha (lugares y puntos de conteo)
+  if (sel && sel.tipo===vista && sel.tipo!=="pts"){ const t=T[L], neg=sel.tipo==="negros", x=neg?D.negros[sel.i]:D.uso[sel.i];
+    const nom=nombre(neg&&L==="es"&&x.nom_es||x.nom), txt=`${nom}: ${neg?t.comp_neg:t.comp_uso}`;
+    const p=document.createElement("p"); p.className="compartir";
+    p.innerHTML=`<button type="button" id="b-comp" class="b-comp" aria-label="${t.comp_aria}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="3.5" r="2"/><circle cx="4" cy="8" r="2"/><circle cx="12" cy="12.5" r="2"/><path d="M5.8 7l4.4-2.5M5.8 9l4.4 2.5"/></svg>${t.comp}</button><span class="comp-ok" id="comp-ok" role="status" aria-live="polite"></span>`;
+    p.querySelector("button").dataset.txt=txt; p.querySelector("button").onclick=compartir; top.append(p); }
+}
+function fichaCuerpo(){
+  const t=T[L], f=document.getElementById("ficha"); f.innerHTML="";
+  if (!sel || sel.tipo!==vista){ document.getElementById("mini").hidden=true; ocultarMini(); f.innerHTML=`<p class="eyebrow">${t["f_"+vista]}</p><p class="vac">${t.f_vac[vista]}</p>`; return; }
+  const pc=x=>Math.round(100*x);
+  if (sel.tipo==="negros"){ const n=NEGF[sel.i], C=ciudadF(), NC=C.n, fa=fAct(), nomL0=L==="es"&&n.nom_es||n.nom;
+    // con filtro: recuento y perfil de los siniestros que pasan; la media de la ciudad, con el mismo filtro
+    const etqN = fa ? t.ficha_f(n.n,n.ntot)+" ("+t.filtre()+")" : `${n.n} ${L==="va"?"sinistres en":"siniestros en"} ${V.rang}`;
+    if (!n.n){ mini(nombre(nomL0), `0 ${L==="va"?"sinistres":"siniestros"}`);
+      f.innerHTML=`<div class="cab"><p class="eyebrow">${t.f_negros} · ${etqN}</p><h3>${nombre(nomL0)}</h3><p class="lead">${t.ficha0}</p></div>`;
+      const s=document.createElement("div"); s.className="secs"; f.append(s);
+      seccion(s,t.h_pla,planHTML(n.plan)+plaAqui(n.pla)).classList.add("ancho"); return; }
+    const mx=Math.max(...Object.values(n.k)), tops=Object.keys(t.k).filter(c=>n.k[c]===mx);
+    const base = mx/n.n>.5 && tops.length===1 ? t.resum_may[tops[0]] : t.resum_fre(tops.map(c=>t.resum_n[c]));
+    const extra = tops.includes("m") && n.k.m && n.pm/n.k.m>=.5 ? t.resum_prio(Math.round(10*n.pm/n.k.m)) : n.nf>=5 && n.f.dist/n.nf>=.5 ? t.resum_dist : "";
+    const resum = base+extra+".";
+    const de10=x=>Math.round(10*x);
+    const lead=t.lead(n.k.m,n.n)+" "+t.compara(de10(n.k.m/n.n),de10(C.k.m/NC));
+    const nomL=L==="es"&&n.nom_es||n.nom;   // nombre oficial (va) o traducción del callejero (es)
+    mini(nombre(nomL), `${n.n} ${L==="va"?"sinistres":"siniestros"}`);
+    f.innerHTML=`<div class="cab"><p class="eyebrow">${t.f_negros} · ${etqN}</p><h3>${nombre(nomL)}</h3><p class="resum">${resum}</p><p class="lead">${lead}</p>${n.pista?`<div class="pista">${t.pista[n.pista].replace("{ref}",t.pref[n.tipo])}${fa?" "+t.pista_tot:""}</div>`:""}${n.zona?`<div class="lugar"><h4>${t.h_lloc}</h4><p class="ref">${t.zona_txt(n.dentro,n.n)}</p></div>`:`<div class="lugar"><h4>${t.h_lloc}</h4><div class="chips"><span class="chip">${t.tipo_l[n.tipo]}</span><span class="chip">${t.sem(n.sem)}</span><span class="chip">${t.cb(n.cb)}</span></div><p class="ref">${t.inclou}: ${n.ubis.map(([u,v])=>nombre(u)+" ("+v+")").join(" · ")}</p>`}</div></div>`;
+    const s=document.createElement("div"); s.className="secs"; f.append(s);
+    seccion(s,t.h_evo,`<p class="ley-ap">${[["--bici",t.bici],["--pat",t.pat],["--amb",t.amb_mismo]].map(([c,l])=>`<span><i style="background:var(${c})"></i>${l}</span>`).join("")}</p><p class="ref">${t.evo_nota}</p>`,apiladas(iAnys().map(i=>n.vy3[i]),iAnys().map(i=>ANYS[i])));
+    seccion(s,t.h_qui,hb(Object.keys(t.k).map(c=>[t.k[c],n.k[c],n.n,C.k[c]/NC])));
+    seccion(s,t.h_que,(n.nf>=5 ? hb(Object.keys(t.fac).map(c=>[t.fac[c],n.f[c],n.nf,C.f[c]/Math.max(C.nf,1)])) : `<p>${t.fac_pocs(D.kpi.tipo_any)}</p>`)+`<p class="ref">${t.fac_any(D.kpi.tipo_any,n.nf)} ${fa?t.hb_nota_f:t.hb_nota}</p>`
+      +(n.nu?`<p class="ref">${t.t_ult(D.kpi.tipo_any, n.nu)}</p><div class="chips">${n.tu.map(([k,v])=>`<span class="chip">${tipoTxt(k)} · ${v}</span>`).join("")}</div>`:""));
+    seccion(s,t.h_quan,hb(t.fr.map((l,i)=>[l,n.fr[i],n.n,C.fr[i]/NC]))+`<p class="ref">${t.lab(pc(n.lab))} (${t.ciutat}: ${pc(C.lab)} %)</p>`);
+    seccion(s,t.h_pla,planHTML(n.plan)+plaAqui(n.pla)).classList.add("ancho");
+    f.insertAdjacentHTML("beforeend",`<details class="com"><summary>${t.com}</summary><p>${O(t.neg_txt)}</p>${n.pista?`<p>${O(t.pista_nota).replace("{ref}",t.pref[n.tipo])}</p>`:""}<p>${t.gravTxt(n.gr,n.fa,fa?rangF():V.rang)}</p></details>`);
+  } else if (sel.tipo==="uso"){ const u=D.uso[sel.i];
+    const r=Math.round(10*u.N/Math.max(u.mu,.1))/10, [vt,vn]=t.verd(u.lv), na=t.anys_txt(u.na);
+    const lead=t.uso_lead(u.N,fmt(Math.round(u.mu)),t.uso_r(r),na);
+    mini(nombre(u.nom), vt);
+    f.innerHTML=`<div class="cab"><p class="eyebrow">${t.f_uso}${u.nc>1?` · ${u.nc} ${L==="va"?"comptadors":"contadores"}`:""}</p><h3>${nombre(u.nom)}</h3><span class="verd n${vn}">${vt}</span><p class="lead">${lead}</p></div>`;
+    const s=document.createElement("div"); s.className="secs"; f.append(s);
+    seccion(s,t.h_uso_n(na),"",barras([u.N,Math.round(u.mu)],[t.obs,t.esp]));
+    // bici y patinete por separado, cada uno con su modelo (revisión metodológica A1)
+    seccion(s,t.h_bv,`<dl class="kv">${[[t.bici,u.b],[t.pat,u.v]].map(([l,[n,m]])=>`<dt>${l}</dt><dd>${t.bv_fila(n,fmt(m<10?Math.round(10*m)/10:Math.round(m)))}</dd>`).join("")}</dl><p class="ref">${t.bv_nota}</p>${u.sv?`<p class="ref"><b>${t.sv_aviso}</b></p>`:""}`);
+    seccion(s,t.h_pla,planHTML(u.plan)).classList.add("ancho");
+    seccion(s,L==="va"?"El trànsit":"El tráfico",`<dl class="kv"><dt>${t.imd}</dt><dd>${fmt(u.imd)}</dd></dl>`);
+    f.insertAdjacentHTML("beforeend",`<details class="com"><summary>${t.com}</summary><p>${t.uso_com}</p><p>${t.uso_nota(u.pr)} ${u.nom.split(" ")[0]}.</p></details>`);
+  } else { const g=grupos[sel.i]; if (!g){ sel=null; return fichaCuerpo(); }
+    const ps=g.map(i=>D.pts[i]).sort((a,b)=>b[8].slice(6,10)+b[8].slice(3,5)+b[8].slice(0,2)>a[8].slice(6,10)+a[8].slice(3,5)+a[8].slice(0,2)?1:-1);
+    const cnt=v=>ps.filter(p=>p[3]===v).length;
+    const ubis={}; ps.forEach(p=>ubis[p[6]]=(ubis[p[6]]||0)+1);
+    const nom=nombre(Object.entries(ubis).sort((a,b)=>b[1]-a[1])[0][0]);
+    const lead=t.pts_lead(ps.length,cnt("b"),cnt("p"),cnt("a"));
+    mini(nom, `${ps.length} ${L==="va"?"sinistres":"siniestros"}`);
+    f.innerHTML=`<div class="cab"><p class="eyebrow">${t.f_pts} · ${t.geo[ps[0][7]]}</p><h3>${nom}</h3><p class="lead">${lead}</p></div>`;
+    const vn={b:t.bici,p:t.pat,a:t.amb};
+    seccion(f,t.h_lista,`<div class="lista-wrap" tabindex="0" role="region" aria-label="${t.h_lista}"><table class="lista"><thead><tr>${t.th.map(h=>`<th>${O(h)}</th>`).join("")}</tr></thead><tbody>${ps.map(p=>`<tr><td>${p[8]}</td><td>${vn[p[3]]}<br><span class="ref">${p[9].toLowerCase()}</span></td><td>${(p[5]||"—").toLowerCase()}</td><td>${p[4]>=0?t.gravs[p[4]]:"—"}</td></tr>`).join("")}</tbody></table></div><p class="ref">${O(t.lim[0])}</p>`);
+  }
+}
+function coords(tipo,i){
+  if (tipo==="negros") return [D.negros[i].lon,D.negros[i].lat];
+  if (tipo==="uso") return [D.uso[i].lon,D.uso[i].lat];
+  const p=D.pts[grupos[i][0]]; return [p[0],p[1]];
+}
+// ---------- enlace directo a cada ficha: identificadores estables entre builds ----------
+// lugar: #lloc=<nombre congelado (data/processed/nombres_lugares.csv) sin acentos>; punto de conteo: #punt=<P + idpm de Movilidad>.
+// No se usa el índice de posición, que cambia con datos nuevos. Los siniestros sueltos (vista «pts») no tienen enlace.
+const slug = s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const hashDe = (tipo,i)=> tipo==="negros" ? "lloc="+slug(D.negros[i].nom) : tipo==="uso" ? "punt="+((D.uso[i].nom.match(/^P\d+/)||[])[0]||slug(D.uso[i].nom)) : "";
+const HASHES = new Map();
+D.negros.forEach((n,i)=>HASHES.set(hashDe("negros",i),{tipo:"negros",i})); D.uso.forEach((u,i)=>HASHES.set(hashDe("uso",i),{tipo:"uso",i}));
+function ponerHash(h){ const u=location.pathname+location.search+(h?"#"+h:"");
+  if (u!==location.pathname+location.search+location.hash) history.replaceState(null,"",u); }   // sin llenar el historial
+function abrirHash(){ let h=""; try{ h=decodeURIComponent(location.hash.slice(1)); }catch(e){}
+  if (!h){ const c=new URLSearchParams(location.search).get("cerca"); if (c) h="cerca="+c; }    // el formulario sin JavaScript envía ?cerca=
+
+  // 07/11/2026: sin elegir nada por defecto (antes abría el lugar n.º 1 y parecía la ficha de la calle buscada)
+  if (h.startsWith("cerca=")){ q.value=h.slice(6); q.dispatchEvent(new Event("input")); q.focus(); return true; }
+  if (h.startsWith("vista=") && ["negros","uso","pts"].includes(h.slice(6))){ vista=h.slice(6);
+    document.querySelectorAll("[data-vista]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.vista===vista));
+    if (sel && sel.tipo!==vista) limpiarSel(); aplicar(); ficha(); return true; }
+
+  const l=HASHES.get(h); if (!l) return false;
+  vista=l.tipo; document.querySelectorAll("[data-vista]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.vista===vista));
+  aplicar(); elegir(l.tipo,l.i,true); return true; }
+async function compartir(){
+  const t=T[L], b=document.getElementById("b-comp"), ok=document.getElementById("comp-ok"); if (!sel||!b) return;
+  const url=location.href, text=b.dataset.txt;
+  if (navigator.share){ try{ await navigator.share({title:document.title,text,url}); }catch(e){} return; }
+  let msg=t.copiat; try{ await navigator.clipboard.writeText(url); }catch(e){ msg=t.copia_no; }
+  ok.textContent=msg; clearTimeout(compartir.tm); compartir.tm=setTimeout(()=>{ ok.textContent=""; },2500);
+}
+function elegir(tipo,i,volar,sinHash){
+  sel={tipo,i};
+  if (!sinHash) ponerHash(hashDe(tipo,i));
+  const c=coords(tipo,i);
+  const esZona = tipo==="negros" && D.negros[i].zona;
+  const pr = tipo==="negros" ? {r:radioLug(NEGF[i])+5} : tipo==="uso" ? {r:4+11*Math.min(D.uso[i].N,36)/36} : {n:grupos[i].length};
+  map.getSource("selh")?.setData({type:"FeatureCollection",features:esZona?[]:[{type:"Feature",geometry:{type:"Point",coordinates:c},properties:pr}]});
+  if (volar) map.flyTo({center:c,zoom:Math.max(map.getZoom(),15.5),duration:matchMedia("(prefers-reduced-motion: reduce)").matches?0:900});
+  moverMini(c);
+  ficha();
+}
+function limpiarSel(){ sel=null; if (/^#(lloc|punt)=/.test(location.hash)) ponerHash(""); map.getSource("selh")?.setData({type:"FeatureCollection",features:[]}); }
+document.querySelectorAll("[data-vista]").forEach(b=>b.onclick=()=>{
+  vista=b.dataset.vista; document.querySelectorAll("[data-vista]").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  if (sel && sel.tipo!==vista) limpiarSel();
+  aplicar(); ficha(); });
+// ---------- filtros: aplicar, quitar y resumen ----------
+const fDes=document.getElementById("f-des"), fFins=document.getElementById("f-fins"), fVeh=document.getElementById("f-veh"), fGrav=document.getElementById("f-grav");
+fDes.innerHTML=fFins.innerHTML=ANYS.map(a=>`<option>${a}</option>`).join(""); fDes.value=F.a0; fFins.value=F.a1;
+function filtrar(origen){
+  if (origen===fDes && +fDes.value>+fFins.value) fFins.value=fDes.value;     // «de» después de «a»: se mueve el otro
+  if (origen===fFins && +fFins.value<+fDes.value) fDes.value=fFins.value;
+  Object.assign(F,{a0:+fDes.value, a1:+fFins.value, v:fVeh.value, g:fGrav.value}); CIU_F=null;
+  NEGF = D.negros.map((n,i)=>lugF(i));
+  escalaF = fAct() ? NMAX/Math.max(1,...NEGF.filter(n=>!n.zona).map(n=>n.n)) : 1;
+  if (map.getSource("neg")) map.getSource("neg").setData(negFCf());
+  hacerQuesitos();
+  if (sel && sel.tipo==="pts") limpiarSel();
+  aplicar();
+  if (sel){ elegir(sel.tipo,sel.i,false,true); } else ficha();
+  avisos();
+}
+function avisos(){ const t=T[L], a=document.getElementById("avis-grav");
+  a.hidden = F.g==="t"; a.innerHTML = F.g==="t" ? "" : `${t.avis_grav} ${O(t.lim[0])}`;
+  document.getElementById("f-net").hidden = !fAct(); }
+function resumenFiltro(){ const t=T[L], r=document.getElementById("f-resum");
+  if (!fAct()){ r.innerHTML=""; return; }
+  if (vista==="uso") r.innerHTML=t.f_res_uso;
+  else if (vista==="pts") r.innerHTML=t.f_res_pts(grupos.reduce((s,g)=>s+g.length,0),grupos.length,D.pts.length);
+  else r.innerHTML=t.f_res_neg(NEGF.filter(n=>!n.zona).reduce((s,n)=>s+n.n,0),NEGF.filter(n=>n.zona).reduce((s,n)=>s+n.n,0)); }
+function netejar(){ fDes.value=ANYS[0]; fFins.value=ANYS[ANYS.length-1]; fVeh.value="t"; fGrav.value="t"; filtrar(); }
+[fDes,fFins,fVeh,fGrav].forEach(e=>e.onchange=()=>filtrar(e));
+document.getElementById("f-net").onclick=()=>{ netejar(); fDes.focus(); };
+
+// ---------- descarga en CSV de lo que se ve (solo campos ya públicos en la web) ----------
+// Se descarga un ZIP con el CSV y un LLEGIU-ME / LEEME (fuente, licencia CC BY 4.0, aviso de no reidentificar, formato
+// y columnas). No es el dataset versionado (pendiente 74).
+// nombres de columna FIJOS, iguales en las dos lenguas y sin ñ ni acentos (revisión de datos del 07/11/2026: antes cambiaban
+// con el idioma y un script que leyera el CSV fallaba al cambiar de lengua). Los valores sí van en la lengua de la página.
+const CSV_COLS={pts:["fecha_hora","anyo","vehiculo","gravedad","tipo_ultimo_anyo","ubicacion","localizacion","vehiculos_implicados","factores","lat","lon"],
+  negros:["orden","lugar","tipo","siniestros_filtro","solo_bici","solo_patinete","bici_y_patinete","siniestros_todos","plan_director","lat","lon","ficha"],
+  uso:["punto_conteo","siniestros","media_trafico_parecido","resultado","siniestros_bici","siniestros_patinete","bicis_dia_laborable","anyos","contadores","lat","lon","ficha"]};
+// ZIP mínimo sin compresión (método «store», PKWARE APPNOTE): cabecera local, directorio central y fin; CRC-32 y nombres en UTF-8.
+const CRC_T=(()=>{ const t=new Uint32Array(256); for(let n=0;n<256;n++){ let c=n; for(let k=0;k<8;k++) c=c&1?0xEDB88320^(c>>>1):c>>>1; t[n]=c>>>0; } return t; })();
+const crc32=b=>{ let c=0xFFFFFFFF; for(let i=0;i<b.length;i++) c=CRC_T[(c^b[i])&0xFF]^(c>>>8); return (c^0xFFFFFFFF)>>>0; };
+function zipStore(ficheros){
+  const enc=new TextEncoder(), d=new Date(), partes=[], central=[];
+  const hora=(d.getHours()<<11)|(d.getMinutes()<<5)|(d.getSeconds()>>1), dia=((d.getFullYear()-1980)<<9)|((d.getMonth()+1)<<5)|d.getDate();
+  let off=0;
+  for (const [n,txt] of ficheros){
+    const nb=enc.encode(n), db=enc.encode(txt), crc=crc32(db);
+    const loc=new DataView(new ArrayBuffer(30));
+    [[0,0x04034b50,4],[4,20,2],[6,0x0800,2],[8,0,2],[10,hora,2],[12,dia,2],[14,crc,4],[18,db.length,4],[22,db.length,4],[26,nb.length,2],[28,0,2]]
+      .forEach(([o,v,s])=>s===4?loc.setUint32(o,v,true):loc.setUint16(o,v,true));
+    const cen=new DataView(new ArrayBuffer(46));
+    [[0,0x02014b50,4],[4,20,2],[6,20,2],[8,0x0800,2],[10,0,2],[12,hora,2],[14,dia,2],[16,crc,4],[20,db.length,4],[24,db.length,4],
+     [28,nb.length,2],[30,0,2],[32,0,2],[34,0,2],[36,0,2],[38,0,4],[42,off,4]].forEach(([o,v,s])=>s===4?cen.setUint32(o,v,true):cen.setUint16(o,v,true));
+    partes.push(new Uint8Array(loc.buffer),nb,db); central.push(new Uint8Array(cen.buffer),nb);
+    off+=30+nb.length+db.length;
+  }
+  const tam=central.reduce((s,x)=>s+x.length,0), fin=new DataView(new ArrayBuffer(22));
+  [[0,0x06054b50,4],[4,0,2],[6,0,2],[8,ficheros.length,2],[10,ficheros.length,2],[12,tam,4],[16,off,4],[20,0,2]]
+    .forEach(([o,v,s])=>s===4?fin.setUint32(o,v,true):fin.setUint16(o,v,true));
+  return new Blob([...partes,...central,new Uint8Array(fin.buffer)]);
+}
+const csvCampo = x=>{ const s=String(x??""); return /[",\n\r]/.test(s) ? `"${s.replace(/"/g,'""')}"` : s; };
+function descargarCSV(){
+  const t=T[L], I=window.PIE_INFO||{}, base=location.origin+location.pathname+"#", filas=[];
+  if (vista==="pts"){
+    const ord=f=>f.slice(6,10)+f.slice(3,5)+f.slice(0,2)+f.slice(11);
+    grupos.flat().map(i=>D.pts[i]).sort((a,b)=>ord(a[8])<ord(b[8])?-1:1).forEach(p=>filas.push(
+      [p[8].slice(6,10)+"-"+p[8].slice(3,5)+"-"+p[8].slice(0,2)+(p[8].length>10?"T"+p[8].slice(11):""),p[2],t.veh_csv[p[3]],
+p[4]>=0?t.gravs[p[4]]:"",p[5],p[6],t.geo[p[7]],p[9],p[10],p[1],p[0]]));
+  } else if (vista==="negros"){
+    NEGF.forEach((n,i)=>filas.push([n.zona?"":i+1, n.zona?(L==="es"?n.nom_es:n.nom):nombre(L==="es"&&n.nom_es||n.nom), t.tipo_csv[n.tipo],
+      n.n, n.mix[0], n.mix[1], n.mix[2], D.negros[i].n, t.pl_csv[n.pl], n.lat, n.lon, base+hashDe("negros",i)]));
+  } else {
+    D.uso.forEach((u,i)=>filas.push([u.nom, u.N, u.mu, t.verd(u.lv)[0], u.b[0], u.v[0], u.imd, u.na, u.nc, u.lat, u.lon, base+hashDe("uso",i)]));
+  }
+  const filtro = vista==="uso" ? t.csv_uso_nota : fAct() ? t.filtre() : t.csv_sense;
+  // CSV estándar (RFC 4180): la cabecera de columnas en la primera línea, coma, comillas dobles, CRLF y UTF-8 con BOM (para
+  // que Excel lea los acentos). Sin líneas «# …» delante (07/11/2026: las hojas de cálculo adivinaban el espacio como
+  // separador). La fuente, la licencia, el aviso de no reidentificar, el formato y las columnas van en el LLEGIU-ME / LEEME.
+  const txt = "﻿"+[CSV_COLS[vista],...filas].map(r=>r.map(csvCampo).join(",")).join("\r\n")+"\r\n";
+  const leeme = [t.csv_tit(t.csv_vista[vista],filtro), "", t.csv_font(I.conjunto,I.descarga), "", t.csv_lic(I.version), "",
+    t.csv_avis, "", t.csv_fmt, "", t.csv_cols+": "+CSV_COLS[vista].join(", "), "", t.csv_mes+": "+location.origin+"/dades/", ""].join("\r\n");
+  const nom=`observatori-${t.csv_fitxer[vista]}${vista!=="uso"&&fAct()?`-${rangF()}-${F.v}-${F.g}`:""}`;
+  const zip=zipStore([[nom+".csv",txt],[t.csv_llegiu,"﻿"+leeme]]);
+
+  const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([zip],{type:"application/zip"}));
+  a.download=nom+".zip";
+  document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+}
+document.getElementById("b-csv").onclick=descargarCSV;
+
+// ---------- teclado en el mapa ----------
+// Flechas y + / − son de MapLibre (sin girar); Intro elige lo más cercano a la mira (centro del mapa, 40 px);
+// N / P recorren los elementos de la vista de más a menos siniestros; Esc quita la selección. Se anuncia en #anunci.
+const lienzo=map.getCanvas(), mapaEl=document.getElementById("mapa");
+map.keyboard.disableRotation();
+lienzo.setAttribute("aria-describedby","teclat"); lienzo.setAttribute("role","application");
+lienzo.addEventListener("blur",()=>mapaEl.classList.remove("teclado"));
+lienzo.addEventListener("focus",()=>{ if (lienzo.matches(":focus-visible")) mapaEl.classList.add("teclado"); });
+const anunciar = txt=>{ const a=document.getElementById("anunci"); a.textContent=""; setTimeout(()=>{ a.textContent=txt; },50); };
+let miniTxt=["",""];
+function ordenVista(){
+  if (vista==="negros") return D.negros.map((n,i)=>i);
+  if (vista==="uso") return D.uso.map((u,i)=>i).sort((a,b)=>D.uso[b].lv-D.uso[a].lv || D.uso[b].N-D.uso[a].N);
+  return grupos.map((g,i)=>i).sort((a,b)=>grupos[b].length-grupos[a].length);
+}
+lienzo.addEventListener("keydown",e=>{
+  if (e.altKey || e.ctrlKey || e.metaKey) return;
+  mapaEl.classList.add("teclado");
+  const t=T[L], k=e.key.toLowerCase();
+  if (k==="enter" || k===" "){ e.preventDefault();
+    const f=cercano({x:lienzo.clientWidth/2,y:lienzo.clientHeight/2},40);
+    if (f){ elegir(vista,+f.properties.i); anunciar(t.anunci(...miniTxt)); } else anunciar(t.cap_prop); }
+  else if (k==="n" || k==="p"){ e.preventDefault(); const o=ordenVista(); if (!o.length) return;
+    const j=sel && sel.tipo===vista ? o.indexOf(sel.i) : -1, nx=j<0 ? (k==="n" ? 0 : o.length-1) : (j+(k==="n" ? 1 : -1)+o.length)%o.length;
+    elegir(vista,o[nx],true); anunciar(t.anunci(...miniTxt)); }
+  else if (k==="escape" && sel){ e.preventDefault(); limpiarSel(); ficha(); anunciar(t.desfet); }
+});
+
+// ---------- búsqueda ----------
+const lugares = new Map();
+D.negros.forEach((n,i)=>{ lugares.set(n.nom,{tipo:"negros",i}); if(n.nom_es&&n.nom_es!==n.nom) lugares.set(n.nom_es,{tipo:"negros",i}); });
+D.uso.forEach((u,i)=>{ const k=u.nom.replace(/^P\d+ /,""); if(!lugares.has(k)) lugares.set(k,{tipo:"uso",i}); });
+D.pts.forEach((p,i)=>{ if(!lugares.has(p[6])) lugares.set(p[6],{tipo:"pts",pt:i}); });
+const etqBusca = k=>{ const l=lugares.get(k); if (l.tipo!=="negros") return nombre(k); const n=D.negros[l.i]; return nombre(L==="es"&&n.nom_es||n.nom); };
+const sinT = s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const claves=[...lugares.keys()].map(k=>[k,sinT(k)]);
+const q=document.getElementById("q"), res=document.getElementById("res");
+q.addEventListener("input",()=>{ const v=sinT(q.value.trim()); res.innerHTML="";
+  if (v.length<3){ res.hidden=true; return; }
+  // un lugar sale una vez aunque coincidan su nombre oficial y el castellano, y siempre con el nombre del idioma (pendiente 87)
+  const B=window.OBS_BUSCA, ws=B?B.palabras(q.value):v.split(/\s+/), cumple=s=>B?B.coincide(s,ws):ws.every(w=>s.includes(w));
+  const vistos=new Set(), hits=claves.filter(([k,s])=>cumple(s))
+    .filter(([k])=>{ const l=lugares.get(k), id=l.tipo+":"+(l.tipo==="pts"?l.pt:l.i); if (vistos.has(id)) return false; vistos.add(id); return true; }).slice(0,8);
+  hits.forEach(([k])=>{ const li=document.createElement("li"), b=document.createElement("button"); b.textContent=etqBusca(k);
+    b.onclick=()=>{ const l=lugares.get(k); vista=l.tipo; document.querySelectorAll("[data-vista]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.vista===vista));
+      if (vista==="pts" && fAct()) netejar();     // un siniestro suelto puede no pasar el filtro
+      aplicar(); elegir(l.tipo, l.tipo==="pts"?ptGrupo[l.pt]:l.i, true); res.hidden=true; q.value=etqBusca(k); };
+    li.append(b); res.append(li); });
+  const fs=fichasDe(v,cumple);
+  fs.forEach(f=>{ const li=document.createElement("li"), a=document.createElement("a"), s=document.createElement("span");
+    a.href=f[0]+"/"+f[1]+"/"; a.textContent=(L==="es"?f[3]:f[2])+" "; s.className="ref"; s.textContent="· "+T[L].fitxa[f[0]]; a.append(s); li.append(a); res.append(li); });
+  if (!hits.length && !fs.length){ const li=document.createElement("li"); li.className="sin"; li.textContent=T[L].sin_res(q.value.trim()); res.append(li); anunciar(li.textContent); }
+  else anunciar(`${hits.length+fs.length} ${L==="es"?"resultados; flecha abajo para elegir":"resultats; fletxa avall per a triar"}`);
+
+  res.hidden=false; });
+// fichas estáticas por lugar (≥ 5 siniestros) y por calle: datos/fichas_indice.<hash>.js (lo escribe scripts/fichas.py; lo carga
+// construir_web.py con SRI), window.FICHAS = [[clase, slug, nombre va, nombre es, n], …]. Se busca en los dos nombres y se
+// enlaza a <clase>/<slug>/ (lloc o carrer), de más a menos siniestros. Sin el índice, el buscador sigue como antes.
+const FICHAS_B=(window.FICHAS||[]).map(f=>[f,sinT(f[2]+" "+f[3])]);
+function fichasDe(v,cumple){ const ws=v.split(/\s+/); cumple=cumple||(s=>ws.every(w=>s.includes(w))); return FICHAS_B.filter(([f,s])=>cumple(s)).map(x=>x[0]).sort((a,b)=>b[4]-a[4]).slice(0,6); }
+document.addEventListener("click",e=>{ if(!e.target.closest(".buscar")) res.hidden=true; });
+// teclado en la lista: flecha abajo desde el campo, flechas para moverse, Esc para cerrar
+q.addEventListener("keydown",e=>{ if (e.key==="ArrowDown" && !res.hidden){ e.preventDefault(); res.querySelector("button,a")?.focus(); } else if (e.key==="Escape") res.hidden=true; });
+res.addEventListener("keydown",e=>{ const xs=[...res.querySelectorAll("button,a")], j=xs.indexOf(document.activeElement);
+  if (e.key==="ArrowDown"||e.key==="ArrowUp"){ e.preventDefault(); const k=j+(e.key==="ArrowDown"?1:-1); if (k<0) q.focus(); else xs[Math.min(k,xs.length-1)].focus(); }
+  else if (e.key==="Escape"){ res.hidden=true; q.focus(); } });
+
+// ---------- textos ----------
+function textos(){
+  const t=T[L]; document.documentElement.lang = L==="va"?"ca":"es"; document.title = t.marca; valores();
+  document.querySelectorAll("[data-t]").forEach(e=>{ const v=t[e.dataset.t]; if (typeof v==="string") e.innerHTML=O(v); });
+  q.placeholder=t.cerca; q.setAttribute("aria-label",t.q_aria);
+  fDes.setAttribute("aria-label",t.des_aria); fFins.setAttribute("aria-label",t.fins_aria);
+  lienzo.setAttribute("aria-label",t.mapa_aria); document.getElementById("teclat").innerHTML=t.teclat;
+  [["zin",t.z_in],["zout",t.z_out],["zhome",t.z_home]].forEach(([id,l])=>{ const b=document.getElementById(id); b.setAttribute("aria-label",l); b.title=l; });
+  document.getElementById("hall").innerHTML=t.hall.concat([t.hall_plan]).map(a=>a.map(O)).map(([c,h,p])=>`<article><div class="cifra">${c}</div><h3>${h}</h3><p>${p}</p></article>`).join("");
+  document.getElementById("lim").innerHTML=t.lim.map(x=>`<li>${O(x)}</li>`).join("");
+  document.getElementById("l-va").setAttribute("aria-pressed",L==="va"); document.getElementById("l-es").setAttribute("aria-pressed",L==="es");
+  estado(); grafico(); leyenda(); ficha(); if (sel) mmLey(); avisos(); resumenFiltro();
+}
+["va","es"].forEach(l=>document.getElementById("l-"+l).onclick=()=>{ L=l; try{localStorage.setItem("obs-lang",l)}catch(e){} textos(); });
+textos(); volverY();
+// el primer lugar con más siniestros, seleccionado de partida para que la ficha no salga vacía
+
+// tema
+const repintar=()=>{ grafico(); pintar(); pintarMini(); ficha(); };
+// tema.js avisa con «tema-cambiado» al pulsar el botón y, en Automático, al cambiar el sistema
+document.addEventListener("tema-cambiado",repintar);
+</script>

@@ -1,0 +1,503 @@
+/* FONDO GRIS O CUADRO BLANCO (regla del 07/11/2026, la guía interna de estilo, sec. 5): va en cuadro blanco (--surface) solo
+   lo que es una unidad cerrada o se puede tocar: tarjetas de cifras, mapas y gráficos, la ficha de un lugar, cada medida
+   desplegable, tablas de datos, buscador y controles. Lo que se lee (titulares, párrafos, listas, explicaciones) va sobre
+   el fondo gris de la página. */
+/* Web pública (06/11/2026): estilos comunes de todas las páginas y de las fichas. Diseño de los bocetos aceptados
+   (los bocetos de diseño (internos) y fichas.css): paleta, escala tipográfica y piezas. Lo publica scripts/construir_sitio.py en
+   build/datos/sitio.<hash8>.css con SRI. Las fuentes (woff2, subconjunto latino) en build/fuentes/, con preload.
+   Lengua: una URL con las dos lenguas; todo texto va dos veces (data-l="va" / data-l="es") y lo muestra el atributo lang
+   de <html> («ca» o «es»), que fija un script en <head> antes del primer pintado: sin saltos al cargar ni al cambiar. */
+@font-face{font-family:"Barlow Semi Condensed";font-weight:600;font-display:swap;src:url(../fuentes/barlow-600.woff2) format("woff2")}
+@font-face{font-family:"Barlow Semi Condensed";font-weight:700;font-display:swap;src:url(../fuentes/barlow-700.woff2) format("woff2")}
+@font-face{font-family:"Barlow Semi Condensed";font-weight:800;font-display:swap;src:url(../fuentes/barlow-800.woff2) format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:400;font-display:swap;src:url(../fuentes/public-400.woff2) format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:500;font-display:swap;src:url(../fuentes/public-500.woff2) format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:600;font-display:swap;src:url(../fuentes/public-600.woff2) format("woff2")}
+/* respaldos con métricas ajustadas (size-adjust y ascent/descent-override calculados con fontTools sobre Arial/Liberation
+   Sans): mientras llega la fuente, el texto ocupa casi lo mismo y la cabecera no salta */
+@font-face{font-family:"Barlow fb";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("Arial"),local("Liberation Sans");font-weight:600 800;size-adjust:82.7%;ascent-override:121%;descent-override:24.2%;line-gap-override:0%}
+@font-face{font-family:"Public fb";src:local("Arial"),local("ArialMT"),local("Liberation Sans");size-adjust:103.5%;ascent-override:91.8%;descent-override:21.7%;line-gap-override:0%}
+
+:root{
+  --bg:#EEF1F2; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
+  --bici:#2a78d6; --pat:#C94B17; --amb:#14875E; --mix:#8A949D; --warn:#B42318; --meta:#15202B;
+  --mapbg:#F7F8F8; --calle:#C9D0D4; --calle-sel:#15202B;
+  --e-hecha:#6E1470; --e-marcha:#A23A9E; --e-anun:#B865B4; --e-sin:#6B7680;
+  --capa-bg:#15202B; --capa-ink:#EEF1F2;
+  --e-hecha-bg:#F3E6F3; --e-marcha-bg:#F6EAF5; --e-anun-bg:#FBF1FA;
+  --tint:#E4E9EB;
+  --t-meta:1rem; --t-body:1.125rem; --t-lead:clamp(1.3125rem,2.2vw,1.5rem); --t-menu:1.25rem; --t-h3:1.375rem;
+  --t-h2:clamp(1.75rem,3.2vw,2.25rem); --t-h1:clamp(2.25rem,5vw,3.5rem);
+  --t-cifra:clamp(2.75rem,6vw,3.75rem); --t-cifra-xl:clamp(3.5rem,8vw,5rem);
+  --display:"Barlow Semi Condensed","Barlow fb","Arial Narrow",system-ui,sans-serif;
+  --body:"Public Sans","Public fb",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --cab-alto:60px; --menu-alto:48px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F151B; --surface:#17212A; --line:#3A4954; --ink:#E7ECEF; --ink2:#9AA7B2;
+  --bici:#3987e5; --pat:#d95926; --amb:#199e70; --mix:#6F7B86; --warn:#F97066; --meta:#E7ECEF;
+  --mapbg:#121A21; --calle:#2C3843; --calle-sel:#E7ECEF;
+  --e-hecha:#E7A6E3; --e-marcha:#B657B2; --e-anun:#A050A6; --e-sin:#7D8892;
+  --capa-bg:#17212A; --capa-ink:#E7ECEF;
+  --e-hecha-bg:#2E2233; --e-marcha-bg:#2A2030; --e-anun-bg:#241D2B; --tint:#1B2731; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F151B; --surface:#17212A; --line:#3A4954; --ink:#E7ECEF; --ink2:#9AA7B2;
+  --bici:#3987e5; --pat:#d95926; --amb:#199e70; --mix:#6F7B86; --warn:#F97066; --meta:#E7ECEF;
+  --mapbg:#121A21; --calle:#2C3843; --calle-sel:#E7ECEF;
+  --e-hecha:#E7A6E3; --e-marcha:#B657B2; --e-anun:#A050A6; --e-sin:#7D8892;
+  --capa-bg:#17212A; --capa-ink:#E7ECEF;
+  --e-hecha-bg:#2E2233; --e-marcha-bg:#2A2030; --e-anun-bg:#241D2B; --tint:#1B2731; color-scheme:dark}
+
+/* ---------- lengua: lo decide <html lang> ---------- */
+:root:not([lang="es"]) [data-l="es"],:root[lang="es"] [data-l="va"]{display:none!important}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scrollbar-gutter:stable}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--t-body);line-height:1.55;overflow-x:hidden}
+img{max-width:100%}
+[hidden]{display:none!important}
+@media (min-width:1100px){:root{--t-body:1.1875rem}}
+a{color:var(--ink);text-underline-offset:3px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.1}
+h1{font-size:var(--t-h1);font-weight:800;line-height:1.05}
+h2{font-size:var(--t-h2);font-weight:700}
+h3{font-size:var(--t-h3);font-weight:700;line-height:1.15}
+p{margin:0 0 .6em}
+code{font-size:max(.95em,15px);overflow-wrap:anywhere}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.nota{font-size:var(--t-meta);color:var(--ink2);line-height:1.45}
+/* un párrafo de nota es texto de lectura: al tamaño del cuerpo (textos_grandes); las notas dentro de tarjetas (.tc-nota) siguen a --t-meta */
+p.nota{font-size:var(--t-body)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.salta{position:absolute;left:8px;top:-60px;z-index:50;background:var(--ink);color:var(--bg);padding:8px 12px;border-radius:6px}
+.salta:focus{top:8px}
+/* foco: azul de 3 px con un halo del fondo, visible sobre los botones de tinta y sobre el fondo (07/11/2026) */
+:focus-visible{outline:3px solid var(--bici);outline-offset:2px;box-shadow:0 0 0 2px var(--bg)}
+
+/* ---------- cabecera común: altura fija, sin transiciones; idéntica en todas las páginas y en las dos lenguas ---------- */
+.cabecera{position:sticky;top:0;z-index:30;background:var(--bg);border-bottom:1px solid var(--line);transition:none}
+.cabecera .fila{display:flex;align-items:center;gap:14px;height:var(--cab-alto)}
+.marca{display:flex;align-items:center;gap:10px;min-width:0;flex:1 1 auto;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:800;font-size:var(--t-body);line-height:1.05;text-transform:uppercase;letter-spacing:.01em}
+.marca .txt{min-width:0;display:flex;flex-direction:column;gap:2px}
+.marca .nom,.marca .subt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.marca .subt{font-family:var(--body);font-weight:500;font-size:.9375rem;text-transform:none;letter-spacing:0;color:var(--ink2)}
+.senal{width:30px;height:30px;border-radius:50%;background:var(--ink);display:grid;place-items:center;flex:none}
+.senal svg{width:19px;height:19px}
+.busca-row{flex:0 0 340px;min-width:0}
+.busca-cab{position:relative;display:flex;width:100%}
+.busca-cab input[type=search]{flex:1;min-width:0;font:inherit;font-size:var(--t-meta);height:38px;padding:0 12px;border:1.5px solid var(--ink);border-right:0;border-radius:6px 0 0 6px;background:var(--surface);color:var(--ink)}
+.busca-cab button{flex:none;width:86px;font-family:var(--display);font-weight:700;font-size:var(--t-meta);text-transform:uppercase;letter-spacing:.04em;border:1.5px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:0 6px 6px 0;cursor:pointer;height:38px}
+.sug{position:absolute;top:100%;left:0;right:0;z-index:40;list-style:none;margin:4px 0 0;padding:4px 0;background:var(--surface);border:1px solid var(--ink);border-radius:8px;max-height:60vh;overflow:auto;box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.sug a{display:block;padding:7px 12px;text-decoration:none;font-size:var(--t-meta);line-height:1.3}
+.sug a:hover{background:var(--tint)}
+.sug a:focus{background:var(--tint);outline:3px solid var(--bici);outline-offset:-3px}
+.sug li.sin{padding:8px 12px;color:var(--ink2);font-size:var(--t-meta);line-height:1.35}
+.sug .k{color:var(--ink2)}
+.lenguas{flex:none;display:flex;gap:4px;font-family:var(--display);font-weight:700;font-size:var(--t-meta)}
+.lenguas button{font:inherit;width:34px;height:32px;border:0;background:none;color:var(--ink2);border-radius:4px;cursor:pointer;padding:0}
+.lenguas button[aria-pressed="true"]{color:var(--bg);background:var(--ink)}
+.cabecera button[data-tema]{flex:none;width:34px;height:32px;padding:0;justify-content:center;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:4px;cursor:pointer}
+.cabecera .fila button[data-tema] .tema-txt{display:none}
+button[data-tema]{display:inline-flex;align-items:center;gap:6px}
+button[data-tema] svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.b-menu{display:none;flex:none;height:36px;width:40px;place-items:center;font-family:var(--display);font-weight:700;font-size:var(--t-meta);text-transform:uppercase;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;cursor:pointer;padding:0}
+.menu{display:flex;align-items:center;gap:2px;height:var(--menu-alto);white-space:nowrap;overflow:hidden}
+.menu a{font-family:var(--display);font-weight:600;font-size:var(--t-menu);line-height:1;text-decoration:none;color:var(--ink);padding:8px 12px;border-radius:6px;flex:none}
+.menu a:hover{background:var(--tint)}
+.menu a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+.menu .tema-menu{display:none}
+.menu .tema-menu .tema-txt{position:static!important;width:auto!important;height:auto!important;clip:auto!important}
+@media (max-width:1060px){.busca-row{flex-basis:260px}}
+@media (max-width:900px){
+  :root{--cab-alto:52px}
+  .cabecera .fila{flex-wrap:wrap;height:auto;row-gap:0}
+  .marca{font-size:var(--t-meta);height:var(--cab-alto);flex:1 1 0;gap:8px;letter-spacing:0}
+  .senal{width:26px;height:26px}
+  .marca .subt{display:none}
+  .marca .nom{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.05}
+  .fila > button[data-tema]{display:none}
+  .menu .tema-menu{display:flex;padding:8px 12px}
+  .menu .tema-menu button[data-tema]{width:auto;height:36px;padding:0 12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;font:inherit;font-size:var(--t-meta)}
+  .b-menu{display:grid}
+  .lenguas button{width:30px}
+  .busca-row{order:9;flex:0 0 100%;height:50px}
+  .menu-caja{position:relative;height:0}
+  /* el menú abierto se superpone al contenido: no lo desplaza */
+  .menu{position:absolute;left:-16px;right:-16px;top:0;height:auto;flex-direction:column;align-items:stretch;gap:0;padding:6px 16px 12px;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 10px 20px rgba(0,0,0,.12);display:none}
+  .cabecera.abierto .menu{display:flex}
+  .menu a{padding:12px;font-size:var(--t-menu)}
+}
+
+/* ---------- migas de pan ---------- */
+.migas{font-size:var(--t-meta);color:var(--ink2);margin:0 0 12px}
+.migas ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:2px 6px}
+.migas li{display:inline-flex;gap:6px;min-width:0}
+.migas li+li::before{content:"›";color:var(--ink2)}
+.migas a{color:var(--ink2)}
+.migas [aria-current]{color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60ch}
+@media (max-width:600px){
+  .migas li:not(:nth-last-child(-n+2)){display:none}
+  .migas li:nth-last-child(2)::before{content:"‹";}
+  .migas li:nth-last-child(2):first-child::before{content:"‹"}
+  .migas [aria-current]{max-width:22ch}
+}
+
+/* ---------- piezas comunes ---------- */
+main{padding:24px 0 48px;display:block}
+.kicker{font-family:var(--display);font-weight:700;font-size:var(--t-meta);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);margin:0 0 6px}
+.h1-pag{font-size:var(--t-h1);font-weight:800}
+.sub{font-size:var(--t-lead);line-height:1.4;color:var(--ink);margin:12px 0 0}
+section.bloque{margin:44px 0 0}
+section.bloque > h2{margin:0 0 6px}
+section.bloque > .intro{color:var(--ink2);margin:0 0 16px}
+.tarjeta{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px}
+.cifra{font-family:var(--display);font-weight:800;font-size:var(--t-cifra);line-height:1;letter-spacing:-.01em}
+.cifra small{font-size:.5em;font-weight:700}
+.etq{font-size:var(--t-body);line-height:1.35;margin-top:6px}
+.mas{display:inline-flex;align-items:center;gap:6px;font-weight:600;margin-top:10px}
+.saber{margin:18px 0 0;border-top:1px solid var(--line);padding-top:10px}
+.saber summary{cursor:pointer;font-weight:600;list-style:none;display:flex;align-items:center;gap:8px}
+.saber summary::-webkit-details-marker{display:none}
+.saber summary::before{content:"+";font-family:var(--display);font-weight:800;display:inline-grid;place-items:center;flex:none;width:22px;height:22px;border:1.5px solid var(--ink);border-radius:50%;font-size:var(--t-meta);line-height:1}
+.saber[open] summary::before{content:"−"}
+.saber > div{padding:10px 0 0 30px;font-size:var(--t-body);color:var(--ink2)}
+.capa-sig{margin:48px 0 0;background:var(--capa-bg);color:var(--capa-ink);border:1px solid var(--line);border-radius:12px;padding:22px}
+.capa-sig h2{font-size:var(--t-h2);margin:0 0 10px}
+.capa-sig a{color:var(--capa-ink);display:block;font-weight:600;font-size:var(--t-body);padding:6px 0}
+.capa-sig .nota{color:var(--capa-ink);opacity:.8;margin-top:8px}
+.ley{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-size:var(--t-meta);margin:10px 0 0}
+.ley span{display:inline-flex;align-items:center;gap:6px}
+.pt{width:12px;height:12px;border-radius:50%;display:inline-block;flex:none;border:1.5px solid var(--surface);box-shadow:0 0 0 1px var(--line)}
+.pt.b{background:var(--bici)} .pt.p{background:var(--pat)} .pt.a{background:var(--amb)} .pt.x{background:var(--mix)}
+.est{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-weight:700;font-size:var(--t-meta);letter-spacing:.04em;text-transform:uppercase;padding:2px 10px 2px 6px;border-radius:999px;white-space:nowrap}
+.est i{width:14px;height:14px;border-radius:50%;flex:none;display:inline-block}
+.est.hecha{background:var(--e-hecha-bg)} .est.hecha i{background:var(--e-hecha)}
+.est.en_marcha{background:var(--e-marcha-bg)} .est.en_marcha i{background:linear-gradient(90deg,var(--e-marcha) 50%,transparent 50%);border:2px solid var(--e-marcha)}
+.est.anunciada{background:var(--e-anun-bg)} .est.anunciada i{border:2px solid var(--e-anun);background:var(--e-anun-bg)}
+.est.sin_info{background:transparent;border:1px dashed var(--e-sin);color:var(--ink2)} .est.sin_info i{border:2px dashed var(--e-sin)}
+.est.aun_no{background:transparent;border:1px solid var(--line);color:var(--ink2)} .est.aun_no i{border:2px solid var(--line)}
+.chip{font:inherit;font-size:var(--t-meta);display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 12px;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);font-weight:600}
+/* chips de estado con su color y su número: la barra fija de la lista hace de resumen al bajar */
+.chip>i{width:14px;height:14px;border-radius:50%;flex:none;display:inline-block}
+.chip.hecha>i{background:var(--e-hecha)} .chip.en_marcha>i{background:linear-gradient(90deg,var(--e-marcha) 50%,transparent 50%);border:2px solid var(--e-marcha)}
+.chip.anunciada>i{border:2px solid var(--e-anun);background:var(--e-anun-bg)} .chip.sin_info>i{border:2px dashed var(--e-sin)}
+.chip b{font-family:var(--display);font-weight:800}
+/* con un filtro de estado, el total por tema y el aviso «de N no hemos encontrado…» no cuadran con lo que se ve: se ocultan */
+#llista.filtrada .tema h3 .n,#llista.filtrada .tema > p.nota{display:none}
+
+/* gráficos SVG en línea: texto en tinta, nunca en el color de la serie */
+svg.graf{display:block;width:100%;height:auto;overflow:visible;font-family:var(--body)}
+svg.graf text{fill:currentColor;font-size:15px}
+svg.graf .eje{stroke:var(--line);stroke-width:1}
+svg.graf .rej{stroke:var(--line);stroke-width:1;stroke-dasharray:2 3}
+svg.graf .tn{fill:var(--ink2)}
+svg.graf .b{fill:var(--bici)} svg.graf .p{fill:var(--pat)} svg.graf .a{fill:var(--amb)} svg.graf .k{fill:var(--ink)} svg.graf .g{fill:var(--mix)}
+svg.graf .lb{stroke:var(--bici);fill:none;stroke-width:2.5} svg.graf .lp{stroke:var(--pat);fill:none;stroke-width:2.5}
+svg.graf .lk{stroke:var(--ink);fill:none;stroke-width:2.5} svg.graf .lg{stroke:var(--ink2);fill:none;stroke-width:2;stroke-dasharray:6 5}
+svg.graf .banda{fill:var(--ink2);fill-opacity:.16;stroke:var(--ink2);stroke-width:1.5;stroke-opacity:1;stroke-dasharray:4 3}
+svg.graf .val{font-weight:600}
+svg.graf.w600 text{font-size:16.5px} svg.graf.w440 text{font-size:13px} svg.graf.w960 text{font-size:13.5px} svg.graf.w360 text{font-size:16.5px}
+.graf-t{font-family:var(--display);font-weight:700;font-size:var(--t-h3);margin:0 0 2px}
+.graf-f{font-size:var(--t-meta);color:var(--ink2);margin:6px 0 0}
+@media (max-width:600px){
+  svg.graf.w440 text{font-size:26px} svg.graf.w520 text{font-size:28px} svg.graf.w360 text{font-size:19px}
+  svg.graf.w600 text,svg.graf.w640 text{font-size:28px} svg.graf.w960 text{font-size:38px}
+}
+.solo-mov{display:none}@media (max-width:600px){.solo-esc{display:none}.solo-mov{display:block}}
+
+/* barras horizontales «de cada 10» */
+.comp{display:grid;gap:12px}
+.comp .fila{display:grid;grid-template-columns:minmax(150px,260px) 1fr;gap:10px;align-items:center}
+.comp .nom{font-size:var(--t-meta);line-height:1.25}
+.comp .barras{display:grid;gap:3px}
+/* la barra en su pista (1.ª columna) y la cifra fuera (2.ª): así el 100 % mide lo mismo en las dos barras (07/11/2026) */
+.comp .br{display:grid;grid-template-columns:minmax(0,1fr) 7.5em;align-items:center;gap:8px;font-size:var(--t-meta)}
+.comp .br i{display:block;height:14px;border-radius:0 4px 4px 0;background:var(--ink);min-width:2px}
+.comp .br.c i{height:8px;background:var(--mix)}
+.comp .br b{font-weight:600;white-space:nowrap}
+.comp .br b small{font-weight:400;font-size:var(--t-meta);color:var(--ink2)}
+
+/* mapas */
+.mapa{position:relative;background:var(--mapbg);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.mapa img{display:block;width:100%;height:auto}
+/* mapas del informe recorribles (sitio.js): anillo y etiqueta en HTML (texto a 15-16 px a cualquier ancho) */
+.mapa[data-explora]{cursor:default}.mapa[data-explora]:focus-visible{outline:3px solid var(--bici);outline-offset:2px}
+.mapa-rot{position:absolute;transform:translate(-30%,-75%);font:700 15px/1 var(--body);color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:2px 6px;pointer-events:none}
+.exp-anillo{position:absolute;border:3px solid var(--bici);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;transition:left .15s,top .15s,width .15s,height .15s}
+.exp-etq{position:absolute;max-width:min(72%,340px);font:600 16px/1.3 var(--body);color:var(--ink);background:var(--surface);border:1px solid var(--ink);border-radius:6px;padding:4px 8px;pointer-events:none;box-shadow:0 3px 10px rgba(0,0,0,.18)}
+.exp-anillo[hidden],.exp-etq[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.exp-anillo{transition:none}}
+.mapa.mm{height:380px}
+.mapa .maplibregl-map{position:absolute;inset:0}
+.maplibregl-ctrl-attrib,.maplibregl-ctrl-logo{display:none}
+.mapa-sin{display:grid;place-items:center;height:100%;padding:18px;text-align:center;color:var(--ink2);font-size:var(--t-meta)}
+@media (max-width:860px){.mapa.mm{height:300px}}
+
+/* ---------- pie común ---------- */
+.pie{border-top:1px solid var(--line);margin-top:56px;padding:24px 0 40px;font-size:var(--t-meta);color:var(--ink2)}
+.pie nav{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0 0 12px}
+.pie nav a{font-weight:600;color:var(--ink)}
+.pie p{margin:0 0 8px;max-width:110ch}
+.pie a{color:var(--ink)}
+
+/* ---------- inicio ---------- */
+.portada{padding:6px 0 4px}
+.portada h1{font-size:var(--t-h1);font-weight:800;line-height:1.02}
+.portada .apoyo{font-size:var(--t-lead);line-height:1.4;margin:16px 0 0}
+.portada .quien{font-size:var(--t-meta);color:var(--ink2);margin:12px 0 0}
+.gran-busca{margin:20px 0 0;position:relative}
+.gran-busca label{display:block;font-family:var(--display);font-weight:700;font-size:var(--t-h3);margin:0 0 8px}
+.gran-busca .caja{display:flex;position:relative}
+.gran-busca input{flex:1;min-width:0;font:inherit;font-size:var(--t-lead);padding:14px 16px;border:2px solid var(--ink);border-right:0;border-radius:10px 0 0 10px;background:var(--surface);color:var(--ink)}
+.gran-busca button{font-family:var(--display);font-weight:800;font-size:var(--t-lead);text-transform:uppercase;letter-spacing:.04em;border:2px solid var(--ink);background:var(--ink);color:var(--bg);padding:0 22px;border-radius:0 10px 10px 0;cursor:pointer}
+.gran-busca .ej{font-size:var(--t-meta);color:var(--ink2);margin:8px 0 0}
+.gran-busca .ej a{color:var(--ink2)}
+/* tarjetas de cifras (portada, Ayuntamiento; para reutilizar en el informe): siempre el mismo orden, etiqueta corta →
+   cifra sola → una frase completa y la nota (en .tc-texto) → enlace al pie. La rejilla usa subgrid: en cada fila de tarjetas, las
+   etiquetas, las cifras, las frases y los enlaces quedan a la misma altura, sin que dependa del largo de cada texto. */
+.rej-cifras{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:0;padding:0;list-style:none}
+.rej-cifras > li{display:grid;grid-row:span 5;grid-template-rows:subgrid;row-gap:0}
+.rej-cifras > li > .tc{grid-row:1 / -1;display:grid;grid-template-rows:subgrid;row-gap:0}
+.tc{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px 20px;color:var(--ink);min-width:0}
+a.tc{text-decoration:none}
+a.tc:hover{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.tc-preg{grid-row:1;display:block;font-family:var(--display);font-weight:700;font-size:var(--t-h3);line-height:1.15;margin:0 0 14px}
+.tc-etq{grid-row:2;display:block;font-size:var(--t-meta);font-weight:600;line-height:1.3;color:var(--ink2);margin:0;text-wrap:balance}
+.tc-cifra{grid-row:3;display:block;font-family:var(--display);font-weight:800;font-size:var(--t-cifra);line-height:1;letter-spacing:-.01em;margin:6px 0 10px;white-space:nowrap}
+.tc-cifra small{font-size:.5em;font-weight:700}
+.tc-texto{grid-row:4;display:block}
+.tc-frase{display:block;font-size:var(--t-body);line-height:1.45;margin:0}
+.tc-nota{display:block;font-size:var(--t-meta);line-height:1.45;color:var(--ink2);margin:10px 0 0}
+.tc .mas{grid-row:5;align-self:end;margin:0;padding-top:16px;font-weight:600;font-size:var(--t-body)}
+a.tc .mas{text-decoration:underline;text-underline-offset:3px}
+/* tarjeta con varios enlaces dentro (portada, «¿Qué está haciendo el Ayuntamiento?»): la cifra y las cifras de la frase llevan a la lista filtrada */
+div.tc a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+div.tc a:hover{text-decoration-thickness:2px}
+div.tc a.tc-cifra{text-decoration-thickness:3px;text-underline-offset:6px;width:max-content}
+.puertas{grid-template-columns:repeat(3,minmax(0,1fr));margin:28px 0 0}
+.puertas .tc{border-top:6px solid var(--ink)}
+.frase{display:block;font-size:var(--t-body);line-height:1.4}
+.frase .cg{font-family:var(--display);font-weight:800;font-size:1.9em;line-height:1;letter-spacing:-.01em;white-space:nowrap}
+.par-frase{font-size:var(--t-lead);margin:18px 0 0}
+.minibarra{display:flex;gap:2px;height:12px;margin:10px 0 0;border-radius:3px;overflow:hidden}
+.minibarra i{display:block;height:100%}
+.vista{display:block;text-decoration:none;color:var(--ink);position:relative}
+.vista .abrir{position:absolute;right:14px;bottom:14px;background:var(--ink);color:var(--bg);font-family:var(--display);font-weight:700;font-size:var(--t-body);padding:10px 16px;border-radius:8px}
+.vista .mapa img{max-height:560px;object-fit:cover;object-position:50% 30%}
+.datos4{margin-top:16px}
+@media (max-width:1179px){.rej-cifras{grid-template-columns:repeat(2,minmax(0,1fr))}.rej-cifras.puertas{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:899px){.rej-cifras.puertas{grid-template-columns:1fr}}
+@media (max-width:599px){.rej-cifras{grid-template-columns:1fr}.gran-busca button{padding:0 14px}.vista .mapa img{max-height:380px}}
+
+/* ---------- ¿Qué está haciendo el Ayuntamiento? ---------- */
+.estado{display:grid;grid-template-columns:260px 1fr;gap:20px;align-items:stretch;margin:26px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.estado .total .cifra,.estado .total .tc-cifra{font-size:var(--t-cifra-xl)}
+.estado .total .nota{margin-top:10px}
+.cuatro{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.cuatro button{font:inherit;text-align:left;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:10px solid var(--c);border-radius:10px;padding:12px 14px;cursor:pointer;display:flex;flex-direction:column;gap:6px}
+.cuatro button:hover,.cuatro button[aria-pressed="true"]{border-color:var(--ink);border-top-color:var(--c);box-shadow:0 0 0 1px var(--ink)}
+.cuatro .est{align-self:flex-start;white-space:normal;border-radius:12px;line-height:1.15;padding-top:3px;padding-bottom:3px}
+.cuatro .ir{font-size:var(--t-meta);font-weight:600;margin-top:auto;text-decoration:underline;text-underline-offset:3px}
+.unidades{display:grid;grid-template-columns:repeat(23,1fr);gap:3px;margin:14px 0 0}
+.unidades i{aspect-ratio:1;border-radius:3px;display:block}
+.u-hecha{background:var(--e-hecha)}.u-en_marcha{background:var(--e-marcha)}.u-anunciada{background:var(--e-anun)}.u-sin_info{border:1.5px dashed var(--e-sin)}
+.filtro-lista{position:sticky;top:calc(var(--cab-alto) + var(--menu-alto) + 1px);z-index:5;background:var(--bg);display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.filtro-lista .cuenta{margin-left:auto;font-size:var(--t-meta);color:var(--ink2)}
+.tema{margin:22px 0 0}
+.tema h3{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.tema h3 .n{font-family:var(--body);font-weight:400;font-size:var(--t-meta);color:var(--ink2)}
+.medidas{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.medidas details{background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.medidas summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:11.5rem 1fr;gap:4px 12px;padding:10px 12px;align-items:start}
+.medidas summary::-webkit-details-marker{display:none}
+.medidas summary .est{grid-row:span 3;white-space:normal;justify-self:start;border-radius:12px;line-height:1.15;padding-top:3px;padding-bottom:3px}
+.medidas .tit{font-weight:600}
+.medidas .donde,.medidas .cuando{font-size:var(--t-meta);color:var(--ink2);grid-column:2}
+.medidas .det{padding:0 12px 12px;font-size:var(--t-body)}
+.medidas .det p{margin:8px 0 0}
+.medidas li:target details{box-shadow:0 0 0 2px var(--ink)}
+.tema.vacio{display:none}
+.mapa-med{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:start}
+.med-mapa{height:520px}
+.mk{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1rem;cursor:pointer;border:2.5px solid var(--e-marcha);background:var(--surface);color:var(--ink);padding:0;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.mk.hecha{background:var(--e-hecha);border-color:var(--e-hecha);color:var(--bg)}
+.mk.en_marcha{background:linear-gradient(90deg,var(--e-marcha) 50%,var(--surface) 50%);color:var(--ink);text-shadow:0 0 3px var(--surface)}
+.mk.anunciada{background:var(--e-anun-bg);border-color:var(--e-anun)}
+.mk.sin_info{border:2.5px dashed var(--e-sin)}
+.mk.sel{outline:3px solid var(--ink);outline-offset:2px}
+.ver-mapa{font:inherit;font-weight:600;background:none;border:0;padding:0;text-decoration:underline;text-underline-offset:3px;color:var(--ink);cursor:pointer}
+.maplibregl-cooperative-gesture-screen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);color:#fff;font-size:1.125rem;padding:20px;text-align:center;opacity:0;pointer-events:none;transition:opacity .2s;z-index:5}
+.maplibregl-cooperative-gesture-screen.maplibregl-show{opacity:1}
+.maplibregl-cooperative-gesture-screen .maplibregl-mobile-message{display:none}
+@media (hover:none),(max-width:480px){.maplibregl-cooperative-gesture-screen .maplibregl-desktop-message{display:none}.maplibregl-cooperative-gesture-screen .maplibregl-mobile-message{display:block}}
+.maplibregl-ctrl-top-right{position:absolute;top:8px;right:8px;z-index:2}
+.maplibregl-ctrl-group{background:var(--surface);border:1px solid var(--line);border-radius:6px;display:flex;flex-direction:column}
+.maplibregl-ctrl-group button{width:32px;height:32px;border:0;background:none;cursor:pointer;color:var(--ink);font-size:20px}
+.maplibregl-ctrl-zoom-in::after{content:"+"}.maplibregl-ctrl-zoom-out::after{content:"−"}
+.maplibregl-marker{position:absolute;top:0;left:0;will-change:transform}
+@media (max-width:860px){.med-mapa{height:420px}}
+.mapa-med ol{margin:0;padding-left:1.4em;font-size:var(--t-meta);display:grid;gap:4px}
+.publica{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.publica li{display:flex;gap:10px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:8px 0}
+.ley-est{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+.escribe{margin:30px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.h-tarjeta{font-size:var(--t-h3)}
+@media (max-width:900px){.estado{grid-template-columns:1fr}.cuatro{grid-template-columns:repeat(2,minmax(0,1fr))}.mapa-med,.escribe{grid-template-columns:1fr}.filtro-lista{top:calc(var(--cab-alto) + 51px)}}
+@media (max-width:520px){.unidades{grid-template-columns:repeat(16,1fr)}.medidas summary{grid-template-columns:1fr}.medidas summary .est{grid-row:auto;justify-self:start}.medidas .donde,.medidas .cuando{grid-column:1}.filtro-lista{position:static}}
+
+/* ---------- informe ---------- */
+.inf-cab h1{font-size:var(--t-h1);font-weight:800;line-height:1.04}
+.par{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 26px;margin:22px 0 0}
+.par .cifra{font-size:var(--t-cifra-xl)}
+.par .flecha{font-family:var(--display);font-weight:800;font-size:var(--t-cifra);color:var(--ink2);padding-bottom:22px}
+.texto{font-size:var(--t-lead);line-height:1.45;margin:20px 0 0}
+.texto p{margin:0 0 .5em}
+.indice{margin:26px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+.indice h2{font-size:var(--t-h3);margin:0 0 6px}
+.indice ol{margin:0;padding-left:1.4em;display:grid;gap:4px}
+.seccion{margin:52px 0 0;padding:26px 0 0;border-top:3px solid var(--ink)}
+.seccion .num{font-family:var(--display);font-weight:800;font-size:var(--t-meta);color:var(--ink2);letter-spacing:.08em;text-transform:uppercase}
+.seccion > h2{margin:6px 0 14px}
+.seccion .cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:26px;align-items:start}
+.graf-caja{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.ritmo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 0}
+.ley-l{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:var(--t-meta);margin:8px 0 0}
+.ley-l span{display:inline-flex;gap:6px;align-items:center}
+.ley-l i{display:inline-block;width:22px;height:0;border-top:3px solid var(--ink)}
+.ley-l i.disc{border-top:2px dashed var(--ink2)}
+.ley-l i.ban{height:10px;border:1.5px dashed var(--ink2);background:color-mix(in srgb,var(--ink2) 25%,transparent)}
+.seccion.con-ejemplo{background:var(--tint);border-radius:0 0 14px 14px;padding:26px 22px 22px}
+.ejemplo{margin:22px 0 0;background:var(--surface);border:1px solid var(--line);border-left:8px solid var(--ink);border-radius:10px;padding:16px 18px}
+.ejemplo .etiqueta{display:inline-block;font-family:var(--display);font-weight:700;font-size:var(--t-meta);letter-spacing:.05em;text-transform:uppercase;background:var(--ink);color:var(--bg);padding:3px 10px;border-radius:4px}
+.ejemplo .donde{font-family:var(--display);font-weight:700;font-size:var(--t-h3);margin:10px 0 4px}
+.ejemplo .cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.vuelta{margin:18px 0 0;border-top:1px dashed var(--ink2);padding-top:12px}
+.lista-pts{margin:8px 0 0;padding-left:1.4em;font-size:var(--t-body);display:grid;gap:4px}
+.ediciones{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:10px}
+@media (max-width:900px){.seccion .cols,.ejemplo .cols{grid-template-columns:1fr}.ritmo{grid-template-columns:1fr}}
+@media (max-width:520px){.seccion.con-ejemplo{padding:20px 12px 16px}}
+
+/* ---------- datos y método ---------- */
+.lado{display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px;align-items:start;margin:26px 0 0}
+.toc{position:sticky;top:calc(var(--cab-alto) + var(--menu-alto) + 12px);font-size:var(--t-meta);max-height:calc(100vh - 140px);overflow:auto}
+.toc p{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);margin:0 0 6px}
+.toc ol{margin:0 0 12px;padding-left:2em;display:grid;gap:4px}
+.toc a[aria-current]{font-weight:700}
+.cinco{margin:0;padding-left:1.4em;display:grid;gap:6px}
+.descarga{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.descarga .tarjeta{display:flex;flex-direction:column;gap:6px}
+.descarga .fmt{font-family:var(--display);font-weight:800;font-size:var(--t-h3)}
+.descarga .btn{align-self:flex-start;margin-top:auto}
+.descarga .pendiente{align-self:flex-start;margin-top:auto;font-family:var(--display);font-weight:700;border:1.5px dashed var(--ink2);color:var(--ink);border-radius:8px;padding:6px 12px}
+.cita{border-left:3px solid var(--ink);padding:4px 0 4px 12px;margin:12px 0 0}
+.limites{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.dades-sec{margin:40px 0 0;scroll-margin-top:calc(var(--cab-alto) + var(--menu-alto) + 12px)}
+.dades-sec > h2,.dades-sec section > h2{margin:0 0 10px;text-transform:none;letter-spacing:0;font-size:var(--t-h2)}
+.dades-sec:first-child{margin-top:0}
+.cambios{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:0}
+.cambios li{display:grid;grid-template-columns:110px 80px 1fr;gap:10px;border-bottom:1px solid var(--line);padding:8px 0;font-size:var(--t-meta)}
+.cambios .t{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink2)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.lado>*{min-width:0}
+@media (max-width:900px){.lado{grid-template-columns:minmax(0,1fr)}.toc{position:static;max-height:none}.descarga{grid-template-columns:1fr}.cambios li{grid-template-columns:100px 1fr}.cambios li > :last-child{grid-column:1/-1}}
+
+/* ---------- índices de lugares y calles ---------- */
+.idx-ctrl{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:18px 0 0;position:sticky;top:calc(var(--cab-alto) + var(--menu-alto) + 1px);background:var(--bg);padding:10px 0;z-index:4;border-bottom:1px solid var(--line)}
+.idx-ctrl input{font:inherit;font-size:var(--t-meta);height:38px;padding:0 12px;border:1.5px solid var(--ink);border-radius:6px;background:var(--surface);color:var(--ink);width:min(100%,340px)}
+.idx-ctrl .cuenta{font-size:var(--t-meta);color:var(--ink2)}
+.letras{display:flex;flex-wrap:wrap;gap:4px;margin:14px 0 0;padding:0;list-style:none;font-family:var(--display);font-weight:700}
+.letras a{display:inline-grid;place-items:center;min-width:32px;height:32px;border:1px solid var(--line);border-radius:6px;background:var(--surface);text-decoration:none}
+.idx-grupo{margin:22px 0 0;scroll-margin-top:calc(var(--cab-alto) + var(--menu-alto) + 70px)}
+.idx-grupo h2{font-size:var(--t-h3);border-bottom:2px solid var(--ink);padding-bottom:4px}
+.idx{list-style:none;margin:8px 0 0;padding:0;columns:2;column-gap:28px}
+.idx li{break-inside:avoid;display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px solid var(--line);font-size:var(--t-meta)}
+.idx li b{font-family:var(--display);font-weight:800;flex:none}
+.idx-plano .idx{columns:2}
+@media (max-width:700px){.idx{columns:1}}
+
+/* ---------- mapa (página de la herramienta) ---------- */
+.volver-mapa{margin:0;padding:8px 12px 0}
+.volver-mapa button{font:inherit;font-size:var(--t-meta);font-weight:600;background:none;border:0;padding:4px 0;color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+@keyframes resalta{from{box-shadow:0 0 0 4px var(--ink);background:var(--tint)}to{box-shadow:0 0 0 0 transparent}}
+.ficha-wrap.resalta{animation:resalta 1.4s ease-out}
+@media (prefers-reduced-motion:reduce){.ficha-wrap.resalta{animation:none;box-shadow:0 0 0 3px var(--ink)}}
+.mapa-pag .h1-pag{font-size:var(--t-h2)}
+
+/* ---------- ficha de lugar y de calle ---------- */
+.ficha-cab{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:start;margin:6px 0 0}
+.ficha-cab .tipo{display:inline-block;font-family:var(--display);font-weight:700;font-size:var(--t-meta);letter-spacing:.05em;text-transform:uppercase;border:1.5px solid var(--ink);padding:2px 10px;border-radius:4px;margin:0 0 10px}
+.ficha-cab .tipo.top{background:var(--ink);color:var(--bg)}
+.grande{display:flex;align-items:baseline;gap:12px;margin:18px 0 0;flex-wrap:wrap}
+.grande .cifra{font-size:var(--t-cifra-xl)}
+.grande .etq{font-size:var(--t-lead);margin:0}
+.mix{display:flex;height:14px;border-radius:4px;overflow:hidden;gap:2px;margin:14px 0 6px;max-width:460px}
+.mix i{display:block}
+.acciones{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0;align-items:center}
+.btn{font-family:var(--display);font-weight:700;font-size:var(--t-body);border:1.5px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:8px;padding:8px 14px;cursor:pointer;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
+.btn.claro{background:var(--surface);color:var(--ink)}
+.aviso-exp{margin:14px 0 0;border-left:3px solid var(--ink2);padding:2px 0 2px 10px}
+.rejilla{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0 0}
+.rejilla .tarjeta h2{font-size:var(--t-h3);margin:0 0 4px}
+.rejilla .tarjeta .intro{color:var(--ink2);font-size:var(--t-body);margin:0 0 12px}
+.lead{font-size:var(--t-lead);margin:0 0 12px}
+.ley-comp{display:flex;gap:16px;font-size:var(--t-meta);color:var(--ink2);margin:0 0 10px;flex-wrap:wrap}
+.ley-comp span{display:inline-flex;align-items:center;gap:6px}
+.ley-comp i{display:inline-block;width:18px;border-radius:0 3px 3px 0}
+.revisar{margin:12px 0 0;font-size:var(--t-meta);border-left:3px solid var(--ink);padding:4px 0 4px 10px}
+.medida{display:grid;gap:8px;border:1px solid var(--line);border-left:6px solid var(--e-sin);border-radius:8px;padding:12px 14px;margin:10px 0 0}
+.medida.hecha{border-left-color:var(--e-hecha)} .medida.en_marcha{border-left-color:var(--e-marcha)} .medida.anunciada{border-left-color:var(--e-anun)}
+.medida .tit{font-weight:600;font-size:var(--t-body)}
+.cruces{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.cruces li{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:4px 0 8px}
+.cruces .n{font-family:var(--display);font-weight:800;font-size:var(--t-h3)}
+.tabla{width:100%;border-collapse:collapse;font-size:var(--t-body)}
+.tabla th{text-align:left;font-weight:600;color:var(--ink2);font-size:var(--t-meta);border-bottom:1.5px solid var(--ink);padding:6px 8px 6px 0}
+.tabla td{border-bottom:1px solid var(--line);padding:8px 8px 8px 0;vertical-align:top}
+.tabla .v{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+.ancho{grid-column:1/-1}
+.rejilla>*,.ficha-cab>*{min-width:0}
+.tabla-caja{overflow-x:auto}
+@media (max-width:860px){.ficha-cab,.rejilla{grid-template-columns:1fr}}
+
+/* ---------- revisión de UX, datos y diseño + accesibilidad (WCAG 2.1 AA), 07/11/2026 ----------
+   Objetivos táctiles de 44 px en el móvil (2.5.5 como buena práctica), preguntas de la portada como h2, cifra doble,
+   mapa de medidas fijo al bajar, separación lista/nota, movimiento reducido y texto ampliable sin cortes. */
+.tc h2.tc-preg{font-size:var(--t-h3);margin:0 0 14px}
+.tc-cifra-par small{font-size:.55em;font-weight:700;white-space:nowrap}
+.lista-pts + .nota,ul + p.nota,ol + p.nota{margin-top:14px}
+@media (min-width:901px){.mapa-med > :first-child{position:sticky;top:calc(var(--cab-alto) + var(--menu-alto) + 12px)}}
+@media (max-width:900px){
+  .lenguas button,.cabecera button[data-tema]{width:44px;height:44px}
+  .b-menu{height:44px;width:48px}
+  .busca-cab input[type=search],.busca-cab button{height:44px}
+  .chip{min-height:44px;padding:6px 14px}
+  .menu a{padding:12px 14px}
+  .btn{min-height:44px}
+  body[data-pag="inici"] .busca-row{display:none}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+/* 320 px (WCAG 1.4.10, reflujo): nada se sale; los gráficos SVG mantienen ≥ 15 px de texto real */
+.mapa-med > *{min-width:0}
+@media (max-width:520px){.est{white-space:normal}}
+@media (max-width:360px){
+  svg.graf.w520 text{font-size:34px} svg.graf.w440 text{font-size:34px} svg.graf.w360 text{font-size:23px}
+}
+.vieja code,main code{font-size:max(.95em,15px)}
+@media (max-width:520px){.comp .fila{grid-template-columns:1fr;gap:4px}}
+.ley .pt.pt-g{width:18px;height:18px} .ley .pt.pt-m{width:15px;height:15px}
+/* gráfico por franjas en el móvil: etiquetas alternas en dos alturas para que no se pisen */
+@media (max-width:600px){svg.graf.hora text.et.o{transform:translateY(30px)}}
+.descarga + .nota{margin-top:14px}
+/* prueba de teclado (07/11/2026): la cabecera fija no tapa lo enfocado (2.4.7 / 2.4.11) y el destino del salto no pinta anillo */
+html{scroll-padding-top:calc(var(--cab-alto) + var(--menu-alto) + 16px)}
+@media (max-width:900px){html{scroll-padding-top:calc(var(--cab-alto) + 16px)}}
+main#contingut:focus{outline:none;box-shadow:none}
+/* prueba visual (07/11/2026): a 320-380 px las tarjetas de estado van en una columna (la etiqueta no cabe en media) */
+@media (max-width:380px){.cuatro{grid-template-columns:1fr}}
+input[type=search]::placeholder{color:var(--ink2);opacity:1}
+/* pestañas de «Dades i mètode»: Dades · Mètode · Sobre l'observatori (07/11/2026) */
+.pest-dm{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 14px}
+.pest-dm a{font-family:var(--display);font-weight:700;font-size:var(--t-body);text-decoration:none;color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;padding:8px 16px;min-height:44px;display:inline-flex;align-items:center}
+.pest-dm a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+.pest-dm a:hover{background:var(--tint)}.pest-dm a[aria-current="page"]:hover{background:var(--ink)}

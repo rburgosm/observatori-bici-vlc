@@ -1,0 +1,341 @@
+<title>El Pla, al dia · Observatori de la bici i el patinet de València</title>
+<meta name="description" content="Seguim els sinistres amb bici i patinet a València amb les dades obertes de l'Ajuntament: on passen, què s'està fent i si el Pla Director de Seguretat Viària 2026-2030 funciona.">
+<meta name="theme-color" content="#EEF1F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F151B" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='11.5'%20fill='%2315202B'%20stroke='%2355626E'/%3E%3Cg%20fill='none'%20stroke='%23EEF1F2'%20stroke-width='2.2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Ccircle%20cx='6.5'%20cy='15'%20r='3.3'/%3E%3Ccircle%20cx='17.5'%20cy='15'%20r='3.3'/%3E%3Cpath%20d='M6.5%2015l3.8-6.5h4.7l2.5%206.5M10.3%208.5%209.3%206.2'/%3E%3C/g%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Observatori de la bici i el patinet de València">
+<meta property="og:url" content="https://observatoribicivlc.org/pla.html">
+<meta property="og:title" content="El Pla, al dia · Observatori de la bici i el patinet de València">
+<meta property="og:description" content="Les actuacions del Pla Director de Seguretat Viària que afecten la bici i el patinet: estat, data i font de cadascuna.">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:image" content="https://observatoribicivlc.org/og/pla.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Nombre d&#x27;actuacions del Pla seguides i el seu repartiment per estat.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="El Pla, al dia · Observatori de la bici i el patinet de València">
+<meta name="twitter:description" content="Les actuacions del Pla Director de Seguretat Viària que afecten la bici i el patinet: estat, data i font de cadascuna.">
+<meta name="twitter:image" content="https://observatoribicivlc.org/og/pla.png">
+<meta name="twitter:image:alt" content="Nombre d&#x27;actuacions del Pla seguides i el seu repartiment per estat.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* «El Pla, al dia / El Plan, al día»: seguimiento de las actuaciones del Plan Director de Seguridad Vial 2026-2030 que afectan
+   a la bici y al patinete. Datos: window.PLA (scripts/exportar_web.py, desde data/processed/plan_seguimiento.csv, el validado).
+   Base de estilos: la de cambios.plantilla.html (paleta común de las páginas). */
+:root{
+  --bg:#EEF1F2; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
+  --bici:#2a78d6; --pat:#C94B17; --amb:#14875E; --lane:#9DB8AE; --sel:#b87a00; --warn:#B42318; --mute:#AEB7BD; --hl:#FFE58A;
+  --display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F151B; --surface:#17212A; --line:#2A3641; --ink:#E7ECEF; --ink2:#9AA7B2;
+  --bici:#3987e5; --pat:#d95926; --amb:#199e70; --lane:#4E6A60; --sel:#c98500; --warn:#F97066; --mute:#3D4B57; --hl:#5C4A00; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F151B; --surface:#17212A; --line:#2A3641; --ink:#E7ECEF; --ink2:#9AA7B2;
+  --bici:#3987e5; --pat:#d95926; --amb:#199e70; --lane:#4E6A60; --sel:#c98500; --warn:#F97066; --mute:#3D4B57; --hl:#5C4A00; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.salta{position:absolute;left:-9999px}.salta:focus{left:16px;top:8px;z-index:50;background:var(--surface);padding:6px 10px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding-block:10px;flex-wrap:wrap}
+.marca{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:.01em;text-transform:uppercase}
+.senal{width:28px;height:28px;border-radius:50%;background:var(--ink);display:grid;place-items:center;flex:none}
+.senal svg{width:18px;height:18px}
+.top nav{margin-left:auto;display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+.navlink{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-right:8px}
+.top nav button{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 10px;cursor:pointer;border-radius:3px}
+.top nav button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--bici);outline-offset:2px}
+.intro{padding-block:36px 8px;max-width:780px}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:0}
+h1,h2,h3{font-family:var(--display);text-wrap:balance}
+.intro h1{font-weight:800;text-transform:uppercase;font-size:clamp(34px,5.5vw,58px);line-height:1;margin:8px 0 12px}
+.intro p{font-size:18px;color:var(--ink2);max-width:62ch;margin:0 0 10px}
+.cuerpo{display:grid;grid-template-columns:230px minmax(0,1fr);gap:40px;padding-bottom:60px}
+.indice{position:sticky;top:calc(env(safe-area-inset-top,0px) + 66px);align-self:start;font-family:var(--display);font-size:15px}
+.indice p{margin:0 0 6px}
+.indice ol{list-style:none;margin:0;padding:0;counter-reset:i}
+.indice li{counter-increment:i;margin:0}
+.indice a{display:grid;grid-template-columns:26px 1fr;padding:4px 6px;color:var(--ink2);text-decoration:none;border-left:3px solid transparent;font-weight:600}
+.indice a::before{content:counter(i);color:var(--ink2);font-weight:800}
+.indice a:hover{color:var(--ink)}
+.indice a[aria-current="true"]{color:var(--ink);border-left-color:var(--ink)}
+main{min-width:0}
+main section{max-width:760px;padding-block:22px 18px;border-top:1px solid var(--line);scroll-margin-top:70px}
+main section:first-child{border-top:0}
+main h2{font-size:30px;font-weight:800;text-transform:uppercase;line-height:1.05;margin:0 0 12px;display:flex;gap:10px;align-items:baseline}
+main h2 .n{font-size:18px;color:var(--ink2)}
+main h3{font-size:19px;font-weight:700;margin:18px 0 6px}
+main p{margin:0 0 12px}
+main ul{margin:0 0 12px;padding-left:20px}
+main li{margin-bottom:6px}
+b,td,th{font-variant-numeric:tabular-nums}
+.k{font-family:var(--display);font-weight:800;font-size:1.12em;letter-spacing:.01em}
+.cita{border-left:3px solid var(--line);padding:2px 0 2px 14px;color:var(--ink2);font-style:italic;margin:0 0 12px}
+.aviso{font-size:14.5px;color:var(--ink2);border-top:1px dashed var(--line);padding-top:8px}
+.tw{overflow-x:auto;margin:6px 0 14px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--surface);border:1px solid var(--line)}
+caption{caption-side:top;text-align:left;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.04em;color:var(--ink2);padding:0 0 4px}
+th,td{padding:5px 9px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+th{font-family:var(--display);font-weight:700;font-size:13.5px;letter-spacing:.03em;color:var(--ink2)}
+th:first-child,td:first-child{text-align:left}
+tr.dest td{font-weight:600}
+td.t{text-align:left}
+.sw{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.cats{display:flex;flex-wrap:wrap;gap:8px 18px;margin:4px 0 14px;font-family:var(--display);font-weight:600;font-size:15px}
+details.tec{margin:8px 0 6px;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:0 14px;font-size:14.5px}
+details.tec summary{cursor:pointer;padding:9px 0;font-family:var(--display);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:13.5px;color:var(--ink2)}
+details.tec[open]{padding-bottom:10px}
+details.tec p,details.tec li{color:var(--ink)}
+code{font-size:.9em;background:var(--bg);padding:1px 4px;border-radius:3px;overflow-wrap:anywhere}
+a{color:var(--ink)}
+.peu{font-size:13px;color:var(--ink2);padding-block:20px 50px;border-top:1px solid var(--line)}
+@media (max-width:860px){
+  .cuerpo{grid-template-columns:minmax(0,1fr);gap:0}
+  .indice{position:static;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:10px 12px;margin:10px 0 8px}
+  .indice ol{columns:2;column-gap:14px}
+  main h2{font-size:25px}
+}
+.intro{max-width:1180px}
+/* resumen */
+.kpis{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:flex-end;margin:6px 0 10px}
+.kpi .v{font-family:var(--display);font-weight:800;font-size:46px;line-height:1}
+.kpi .l{font-size:14px;color:var(--ink2);max-width:28ch}
+.barra{display:flex;height:14px;border-radius:3px;overflow:hidden;background:var(--line);margin:10px 0 8px;max-width:640px}
+.barra span{display:block;height:100%}
+.ley{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:4px 18px;font-size:14.5px}
+.ley li{margin:0}
+.rev{font-size:14.5px;color:var(--ink2);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:8px 12px;max-width:640px}
+.rev b{color:var(--ink)}
+/* estados: el color siempre va con su texto */
+.est{display:inline-block;font-family:var(--display);font-weight:700;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;padding:1px 7px;border:1px solid;white-space:nowrap}
+.est::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor;margin-right:6px;vertical-align:1px}
+.e-hecha{color:var(--amb)} .e-en_marcha{color:var(--bici)} .e-anunciada{color:var(--sel)} .e-sin_info{color:var(--ink2)}
+.c-hecha{background:var(--amb)} .c-en_marcha{background:var(--bici)} .c-anunciada{background:var(--sel)} .c-sin_info{background:var(--mute)}
+/* lista */
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.filtros button{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.04em;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 10px;cursor:pointer;border-radius:3px;min-height:34px}
+.filtros button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cuantas{font-size:14px;color:var(--ink2);margin:4px 0 10px}
+.eje h3{font-size:21px;font-weight:800;text-transform:uppercase;margin:22px 0 8px;border-bottom:2px solid var(--ink);padding-bottom:3px}
+.eje h3 .n{color:var(--ink2)}
+ul.acts{list-style:none;padding:0;margin:0}
+ul.acts>li{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:10px 14px;margin:0 0 10px}
+.cab{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-bottom:4px}
+.acc{font-family:var(--display);font-weight:800;font-size:15px;color:var(--ink2)}
+.cab time{font-size:13.5px;color:var(--ink2)}
+.act h4{font-family:var(--body);font-size:16.5px;font-weight:600;margin:0 0 6px;line-height:1.35}
+.act dl{display:grid;grid-template-columns:110px minmax(0,1fr);gap:3px 12px;margin:0;font-size:14.5px}
+.act dt{color:var(--ink2);font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;padding-top:2px}
+.act dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.top30{display:inline-block;font-size:13.5px;background:var(--hl);color:var(--ink);border-radius:3px;padding:0 6px}
+.ref{font-variant-numeric:tabular-nums;white-space:nowrap}
+.falta{list-style:none;padding:0;margin:0 0 12px}
+.falta li{border-left:3px solid var(--mute);padding:4px 0 4px 12px;margin:0 0 10px}
+.falta b{display:block}
+.falta span{font-size:14.5px;color:var(--ink2)}
+ol.fonts{padding-left:34px;font-size:14.5px}
+ol.fonts li{margin-bottom:6px;overflow-wrap:anywhere}
+ol.fonts li:target{background:var(--hl)}
+.pregunta{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--bici);border-radius:4px;padding:10px 14px;margin:14px 0}
+.pregunta p{margin:0}
+@media (max-width:640px){.act dl{grid-template-columns:minmax(0,1fr);gap:0}.act dd{margin-bottom:6px}.kpi .v{font-size:38px}}
+/*TEMA_CSS*/
+</style>
+<script>/*TEMA_JS*/</script>
+<script>/*PIE_JS*/</script>
+
+<a class="salta" href="#contingut" data-t="salta"></a>
+<header class="top"><div class="wrap">
+  <div class="marca"><span class="senal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" style="stroke:var(--bg)" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="16" r="3.5"/><circle cx="18" cy="16" r="3.5"/><path d="M6 16l4-7h5l3 7M10 9l-1-2.5H7.5M13 9l2 0"/></svg></span><span data-t="marca"></span></div>
+  <nav aria-label="Navegació"><a class="navlink" href="observatori.html" data-t="nav_obs"></a><a class="navlink" href="informe.html" data-t="nav_inf"></a><a class="navlink" href="metode.html" data-t="nav_met"></a><button data-tema></button><button id="l-va" aria-pressed="true" lang="ca">VA</button><button id="l-es" aria-pressed="false" lang="es">ES</button></nav>
+</div></header>
+
+<div class="wrap intro">
+  <p class="eyebrow" data-t="ey"></p>
+  <h1 data-t="h1"></h1>
+  <p data-t="sub"></p>
+</div>
+<div class="wrap cuerpo">
+  <nav class="indice" aria-labelledby="indice-t"><p class="eyebrow" id="indice-t" data-t="toc"></p><ol id="toc"></ol></nav>
+  <main id="contingut">
+    <section id="resum" aria-labelledby="h-resum"><h2 id="h-resum" data-t="h_resum"></h2><div id="resum-c"></div></section>
+    <section id="sense-info" aria-labelledby="h-sense"><h2 id="h-sense" data-t="h_sense"></h2><p data-t="sense_intro"></p><ul class="falta" id="falta"></ul><p class="aviso" data-t="sense_aviso"></p></section>
+    <section id="actuacions" aria-labelledby="h-acts"><h2 id="h-acts" data-t="h_acts"></h2><p data-t="acts_intro"></p>
+      <div class="filtros" id="filtros" role="group" aria-labelledby="filtros-t"><span id="filtros-t" class="salta" data-t="filtra"></span></div>
+      <p class="cuantas" id="cuantas" role="status" aria-live="polite"></p>
+      <div id="llista"></div></section>
+    <section id="metode" aria-labelledby="h-met"><h2 id="h-met" data-t="h_met"></h2><div id="metode-c"></div></section>
+    <section id="referencies" aria-labelledby="h-ref"><h2 id="h-ref" data-t="h_ref"></h2><div id="ref-c"></div></section>
+  </main>
+</div>
+<footer class="wrap" data-pie></footer>
+
+<script>/*DATA*/</script>
+<script>
+"use strict";
+const P = window.PLA;   // scripts/exportar_web.py: {rev, estados, n, por_estado, ejes, acts, fuentes, plan_doc, tipos, radio, cerca, top_k, con_coord}
+let L = "va", F = "tots";
+const CORREU = "hola@observatoribicivlc.org";
+const T = {
+va:{marca:"Observatori de la bici i el patinet de València", nav_obs:"Observatori", nav_inf:"Informe", nav_met:"Mètode", salta:"Salta al contingut",
+  ey:"Seguiment del Pla Director de Seguretat Viària", h1:"El Pla, al dia",
+  sub:"Les actuacions del Pla Director de Seguretat Viària 2026-2030 que afecten la bici i el patinet: què s'ha fet, què està en marxa, què s'ha anunciat i de què no hi ha informació pública. Cada estat porta la seua data i la seua font.",
+  toc:"En aquesta pàgina", h_resum:"Resum", h_sense:"El que el Pla preveu i no s'ha publicat", h_acts:"Actuacions per eix", h_met:"Mètode", h_ref:"Referències",
+  est:{hecha:"Feta", en_marcha:"En marxa", anunciada:"Anunciada", sin_info:"Sense informació pública"},
+  tots:"Totes", filtra:"Filtra per estat",
+  n_l:"actuacions de bici i patinet del Pla que seguim", n_l1:"actuació de bici i patinet del Pla que seguim",
+  rev:(u, p) => `Última revisió validada: <b>${u}</b> · Propera revisió (trimestral): <b>${p}</b>`,
+  pend:(n, a, f) => `La comprovació del ${f} ha deixat ${n} propostes de canvi (estats, notes i actuacions noves) pendents de validar: no es mostren fins que una persona les revise.`,
+  cerca:(n, k, r) => `${n} dels ${k} llocs amb més sinistres de l'<a href="observatori.html">observatori</a> tenen al costat (a ${r} m o menys) una actuació del Pla amb lloc.`,
+  sense_intro:n => `El Pla preveu publicar dades, informes i eines de seguiment. D'aquestes ${n} no hem trobat cap informació pública. Això no vol dir que no s'estiguen fent: vol dir que no les podem consultar.`,
+  sense_aviso:"Si l'Ajuntament ho ha publicat i no ho hem trobat, ens ho pots dir i ho corregim.",
+  acts_intro:"Ordenades per eix i acció del Pla. Cada fitxa porta la cita del Pla (pàgina del PDF), la font que justifica l'estat, numerada com en les referències, i una nota.",
+  cuantas:(n, t) => n === t ? `${n} actuacions` : `${n} de ${t} actuacions`,
+  eix:"Eix", accio:"Acció", d_meta:"Meta del Pla", d_lloc:"Lloc", d_cita:"Cita del Pla", d_font:"Font", d_nota:"Nota", d_comp:"Comprovat",
+  top:(n, nom, d) => `Al costat del lloc n.º ${n} de l'observatori (${nom}${d ? `, a ${d} m` : ""})`,
+data_prova:"data de la prova", aprovat:"aprovat en Ple", sense_data:"sense data",
+  tipus:{plan:"Pla", nota_prensa:"nota de premsa", prensa:"premsa", documento_municipal:"document municipal", contratacion:"contractació", bop:"BOP", junta_gobierno:"Junta de Govern", respuesta_movilidad:"resposta del Servei de Mobilitat"},
+  met:(p, r, d) => `<h3>Què seguim</h3><p>Les actuacions del Pla Director de Seguretat Viària de València 2026-2030 (aprovat el ${d}) que afecten directament la bici i el patinet (carril bici, ciclocarrers, aparcabicis, comptadors, controls de patinets i l'acció 3.2.2 amb les seues línies), les que en depenen clarament (zones 30, auditories, senyalització d'obres) i les de dades i seguiment que el Pla preveu (mapa de sinistres, informes, quadre de comandament, memòria, convenis). També els llocs que el Pla cita per als sinistres amb bici o patinet.</p>
+<h3>Com decidim l'estat</h3><ul>
+<li><span class="est e-hecha">Feta</span>: acabada o en servei.</li>
+<li><span class="est e-en_marcha">En marxa</span>: contracte adjudicat, obra començada o servei que ja funciona en part.</li>
+<li><span class="est e-anunciada">Anunciada</span>: hi ha un compromís públic concret, però ni obra ni contracte adjudicat. <b>Una licitació aprovada i encara sense adjudicar compta com a anunciada.</b></li>
+<li><span class="est e-sin_info">Sense informació pública</span>: no hem trobat cap font pública. No vol dir que no s'estiga fent.</li></ul>
+<p>Sense font no hi ha estat. Si la prova és dubtosa, triem l'estat més baix i ho expliquem en la nota. El que és anterior a l'aprovació del Pla només compta si continua funcionant o si l'Ajuntament mateix l'emmarca en el Pla. La data de cada fitxa és la de la prova, no la de la comprovació.</p>
+<h3>Com ho comprovem</h3><p>Les comprovacions segueixen un procediment estandarditzat: un agent verificador recorre les fonts (notes i documents de l'Ajuntament, com la Memòria d'actuacions de mobilitat, els anuncis de la Plataforma de Contractació del Sector Públic, premsa i, pròximament, el BOP) i proposa canvis; cada proposta queda registrada amb la seua font. Una persona revisa i valida les propostes <b>cada trimestre</b>, i només es publica el que s'ha validat. El procediment està documentat en el repositori del projecte (<code>docs/plan_seguimiento.md</code>).</p>
+<p>Les actuacions amb lloc s'enllacen amb els llocs de l'observatori amb la mateixa regla que els sinistres: compten en una cruïlla si estan a ${r} m o menys del seu contorn. Les actuacions de carrer (un carril bici sencer) encara no tenen la seua línia i no s'enllacen.</p>
+<p>Les actuacions, les notes i les cites es mostren en la llengua original de la font.</p>
+<p>És un seguiment, no una auditoria: és el que hem trobat publicat, amb la font, i està obert al fet que l'Ajuntament el corregisca o el complete.</p>
+<div class="pregunta"><p><b>Saps alguna cosa que falta?</b> Escriu-nos a <a href="mailto:${CORREU}">${CORREU}</a> amb l'enllaç a la font.</p></div>`,
+  ref_plan:(t, n) => `<h3>Document de referència</h3><p>${t} <span class="ref">[${n}]</span>.</p>`,
+  ref_tipus:"Fonts consultades per tipus", t_tipus:"Tipus", t_cons:"Consultada", t_n:"Fonts citades", t_comp:"Última comprovació",
+  si:"Sí", pendent:"Encara no (pendent)", via_notes:"A través de les notes municipals",
+  ref_llista:"Fonts citades", ref_llista_t:"Numerades per ordre d'aparició i sense repetir (una per adreça). Les fitxes hi remeten amb [n].",
+  mes:["de gener","de febrer","de març","d'abril","de maig","de juny","de juliol","d'agost","de setembre","d'octubre","de novembre","de desembre"]},
+es:{marca:"Observatorio de la bici y el patinete de València", nav_obs:"Observatorio", nav_inf:"Informe", nav_met:"Método", salta:"Salta al contenido",
+  ey:"Seguimiento del Plan Director de Seguridad Vial", h1:"El Plan, al día",
+  sub:"Las actuaciones del Plan Director de Seguridad Vial 2026-2030 que afectan a la bici y al patinete: qué se ha hecho, qué está en marcha, qué se ha anunciado y de qué no hay información pública. Cada estado lleva su fecha y su fuente.",
+  toc:"En esta página", h_resum:"Resumen", h_sense:"Lo que el Plan prevé y no se ha publicado", h_acts:"Actuaciones por eje", h_met:"Método", h_ref:"Referencias",
+  est:{hecha:"Hecha", en_marcha:"En marcha", anunciada:"Anunciada", sin_info:"Sin información pública"},
+  tots:"Todas", filtra:"Filtra por estado",
+  n_l:"actuaciones de bici y patinete del Plan que seguimos", n_l1:"actuación de bici y patinete del Plan que seguimos",
+  rev:(u, p) => `Última revisión validada: <b>${u}</b> · Próxima revisión (trimestral): <b>${p}</b>`,
+  pend:(n, a, f) => `La comprobación del ${f} ha dejado ${n} propuestas de cambio (estados, notas y actuaciones nuevas) pendientes de validar: no se muestran hasta que una persona las revise.`,
+  cerca:(n, k, r) => `${n} de los ${k} lugares con más siniestros del <a href="observatori.html">observatorio</a> tienen al lado (a ${r} m o menos) una actuación del Plan con lugar.`,
+  sense_intro:n => `El Plan prevé publicar datos, informes y herramientas de seguimiento. De estas ${n} no hemos encontrado información pública. Eso no quiere decir que no se estén haciendo: quiere decir que no las podemos consultar.`,
+  sense_aviso:"Si el Ajuntament lo ha publicado y no lo hemos encontrado, puedes decírnoslo y lo corregimos.",
+  acts_intro:"Ordenadas por eje y acción del Plan. Cada ficha lleva la cita del Plan (página del PDF), la fuente que justifica el estado, numerada como en las referencias, y una nota.",
+  cuantas:(n, t) => n === t ? `${n} actuaciones` : `${n} de ${t} actuaciones`,
+  eix:"Eje", accio:"Acción", d_meta:"Meta del Plan", d_lloc:"Lugar", d_cita:"Cita del Plan", d_font:"Fuente", d_nota:"Nota", d_comp:"Comprobado",
+  top:(n, nom, d) => `Junto al lugar n.º ${n} del observatorio (${nom}${d ? `, a ${d} m` : ""})`,
+data_prova:"fecha de la prueba", aprovat:"aprobado en Pleno", sense_data:"sin fecha",
+  tipus:{plan:"Plan", nota_prensa:"nota de prensa", prensa:"prensa", documento_municipal:"documento municipal", contratacion:"contratación", bop:"BOP", junta_gobierno:"Junta de Gobierno", respuesta_movilidad:"respuesta del Servicio de Movilidad"},
+  met:(p, r, d) => `<h3>Qué seguimos</h3><p>Las actuaciones del Plan Director de Seguridad Vial de València 2026-2030 (aprobado el ${d}) que afectan directamente a la bici y al patinete (carril bici, ciclocalles, aparcabicis, contadores, controles de patinetes y la acción 3.2.2 con sus líneas), las que dependen claramente de ellas (zonas 30, auditorías, señalización de obras) y las de datos y seguimiento que el Plan prevé (mapa de siniestros, informes, cuadro de mando, memoria, convenios). También los lugares que el Plan cita para los siniestros con bici o patinete.</p>
+<h3>Cómo decidimos el estado</h3><ul>
+<li><span class="est e-hecha">Hecha</span>: terminada o en servicio.</li>
+<li><span class="est e-en_marcha">En marcha</span>: contrato adjudicado, obra empezada o servicio que ya funciona en parte.</li>
+<li><span class="est e-anunciada">Anunciada</span>: hay un compromiso público concreto, pero ni obra ni contrato adjudicado. <b>Una licitación aprobada y aún sin adjudicar cuenta como anunciada.</b></li>
+<li><span class="est e-sin_info">Sin información pública</span>: no hemos encontrado ninguna fuente pública. No quiere decir que no se esté haciendo.</li></ul>
+<p>Sin fuente no hay estado. Si la prueba es dudosa, elegimos el estado más bajo y lo explicamos en la nota. Lo anterior a la aprobación del Plan solo cuenta si sigue funcionando o si el propio Ajuntament lo enmarca en el Plan. La fecha de cada ficha es la de la prueba, no la de la comprobación.</p>
+<h3>Cómo lo comprobamos</h3><p>Las comprobaciones siguen un procedimiento estandarizado: un agente verificador recorre las fuentes (notas y documentos del Ajuntament, como la Memoria de actuaciones de movilidad, los anuncios de la Plataforma de Contratación del Sector Público, prensa y, próximamente, el BOP) y propone cambios; cada propuesta queda registrada con su fuente. Una persona revisa y valida las propuestas <b>cada trimestre</b>, y solo se publica lo validado. El procedimiento está documentado en el repositorio del proyecto (<code>docs/plan_seguimiento.md</code>).</p>
+<p>Las actuaciones con lugar se enlazan con los lugares del observatorio con la misma regla que los siniestros: cuentan en un cruce si están a ${r} m o menos de su contorno. Las actuaciones de calle (un carril bici entero) aún no tienen su línea y no se enlazan.</p>
+<p>Es un seguimiento, no una auditoría: es lo que hemos encontrado publicado, con su fuente, y está abierto a que el Ajuntament lo corrija o lo complete.</p>
+<div class="pregunta"><p><b>¿Sabes algo que falta?</b> Escríbenos a <a href="mailto:${CORREU}">${CORREU}</a> con el enlace a la fuente.</p></div>`,
+  ref_plan:(t, n) => `<h3>Documento de referencia</h3><p>${t} <span class="ref">[${n}]</span>.</p>`,
+  ref_tipus:"Fuentes consultadas por tipo", t_tipus:"Tipo", t_cons:"Consultada", t_n:"Fuentes citadas", t_comp:"Última comprobación",
+  si:"Sí", pendent:"Aún no (pendiente)", via_notes:"A través de las notas municipales",
+  ref_llista:"Fuentes citadas", ref_llista_t:"Numeradas por orden de aparición y sin repetir (una por dirección). Las fichas remiten a ellas con [n].",
+  mes:["de enero","de febrero","de marzo","de abril","de mayo","de junio","de julio","de agosto","de septiembre","de octubre","de noviembre","de diciembre"]}};
+
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fecha = f => { if (!f) return ""; const [y, m, d] = f.split("-").map(Number); return `${d} ${T[L].mes[m - 1]} de ${y}`; };
+const dma = f => f ? f.split("-").reverse().join("/") : "";
+const FN = {}; P.fuentes.forEach(f => FN[f.n] = f);
+const enl = (n, txt) => `<a href="#font-${n}" class="ref" aria-label="${T[L].d_font} ${n}">${txt ?? `[${n}]`}</a>`;
+const ext = (url, txt) => `<a href="${esc(url)}" target="_blank" rel="noopener">${txt}</a>`;
+const chip = e => `<span class="est e-${e}">${T[L].est[e]}</span>`;
+// nota: las direcciones dentro del texto pasan a [n] (las mismas que extrae exportar_web.py, en el mismo orden)
+function nota(a){
+  let t = esc(a.nota);
+  a.fnotas.forEach(n => { t = t.split(esc(FN[n].url)).join(enl(n)); });
+  return t;
+}
+// actuaciones, notas y citas: en la lengua original de la fuente (castellano), sin traducir (decisión del usuario, 04/11/2026)
+const tit = a => `<span lang="es">${esc(a.es)}</span>`;
+
+function resum(){
+  const t = T[L], tot = P.n;
+  const seg = P.estados.map(e => P.por_estado[e] ? `<span class="c-${e}" style="width:${100 * P.por_estado[e] / tot}%"></span>` : "").join("");
+  const ley = P.estados.map(e => `<li>${chip(e)} <b>${P.por_estado[e]}</b></li>`).join("");
+  const nc = Object.keys(P.cerca).length;
+  document.getElementById("resum-c").innerHTML =
+    `<div class="kpis"><div class="kpi"><div class="v">${tot}</div><div class="l">${tot === 1 ? t.n_l1 : t.n_l}</div></div></div>`
+    + `<div class="barra" aria-hidden="true">${seg}</div><ul class="ley">${ley}</ul>`
+    + `<p class="rev">${t.rev(fecha(P.rev.ult), fecha(P.rev.prox))}${P.rev.pend && P.rev.pend.n ? `<br>${t.pend(P.rev.pend.n, P.rev.pend.act, fecha(P.rev.pend.f))}` : ""}</p>`
+    + `<p>${t.cerca(nc, P.top_k, P.radio)}</p>`;
+}
+function falta(){
+  const t = T[L], xs = P.acts.filter(a => a.transp);
+  document.querySelector('[data-t="sense_intro"]').innerHTML = t.sense_intro(xs.length);
+  document.getElementById("falta").innerHTML = xs.map(a =>
+    `<li><b>${esc(a.transp[L === "va" ? 0 : 1])}</b><span>${t.accio} ${esc(a.acc)}${a.meta ? ` · ${t.d_meta}: <span lang="es">${esc(a.meta)}</span>` : ""} · ${chip(a.est)} · ${enl(a.fn)}</span></li>`).join("");
+}
+function filtros(){
+  const t = T[L], b = [["tots", t.tots, P.n], ...P.estados.map(e => [e, t.est[e], P.por_estado[e]])];
+  const g = document.getElementById("filtros");
+  g.querySelectorAll("button").forEach(x => x.remove());
+  g.insertAdjacentHTML("beforeend", b.map(([k, v, n]) => `<button type="button" data-f="${k}" aria-pressed="${F === k}">${v} (${n})</button>`).join(""));
+  g.querySelectorAll("button").forEach(x => x.onclick = () => { F = x.dataset.f; filtros(); llista(); });
+}
+function ficha(a){
+  const t = T[L];
+  const f = FN[a.fn];
+  const dl = [
+    a.meta && [t.d_meta, `<span lang="es">${esc(a.meta)}</span>`],
+    a.lugar && [t.d_lloc, `<span lang="es">${esc(a.lugar)}</span>${a.top ? `<br><span class="top30">${t.top(a.top[0], esc(a.top[L === "va" ? 1 : 2]), a.top[3])}</span>` : ""}`],
+    a.cita && [t.d_cita, `<span lang="es">${esc(a.cita)}</span> ${enl(P.plan_doc.n)}`],
+    f && [t.d_font, `${enl(f.n)} ${ext(f.url, `<span lang="es">${esc(f.tit)}</span>`)} (${t.tipus[f.tipo] || f.tipo}${a.f ? `, ${dma(a.f)}` : ""})`],
+    a.nota && [t.d_nota, `<span lang="es">${nota(a)}</span>`],
+    a.comp && [t.d_comp, dma(a.comp)],
+  ].filter(Boolean).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
+  return `<li class="act" id="a-${esc(a.id)}"><div class="cab"><span class="acc">${esc(a.acc)}</span>${chip(a.est)}${a.f ? `<time datetime="${a.f}">${fecha(a.f)}</time>` : ""}</div>`
+    + `<h4>${tit(a)}</h4><dl>${dl}</dl></li>`;
+}
+function llista(){
+  const t = T[L], xs = P.acts.filter(a => F === "tots" || a.est === F);
+  document.getElementById("cuantas").textContent = t.cuantas(xs.length, P.n);
+  const ejes = [...new Set(xs.map(a => a.eje))].sort((a, b) => a - b);
+  document.getElementById("llista").innerHTML = ejes.map(e => { const ys = xs.filter(a => a.eje === e), nom = P.ejes[e] ? P.ejes[e][L] : "";
+    return `<div class="eje"><h3><span class="n">${t.eix} ${e}</span> · ${esc(nom)}</h3><ul class="acts">${ys.map(ficha).join("")}</ul></div>`; }).join("");
+}
+function refs(){
+  const t = T[L], pd = P.plan_doc;
+  const filas = P.tipos.map(x => `<tr><td>${x[L === "va" ? "va" : "es"]}</td><td class="t">${x.consultada ? t.si : x.k === "junta_gobierno" ? t.via_notes : t.pendent}</td><td>${x.n}</td><td>${x.consultada && x.n ? dma(P.rev.comprobado) : "—"}</td></tr>`).join("");
+  document.getElementById("ref-c").innerHTML = t.ref_plan(`${ext(pd.url, `<span lang="es">${esc(pd.tit)}</span>`)}`, pd.n)
+    + `<h3>${t.ref_tipus}</h3><div class="tw"><table><thead><tr><th scope="col">${t.t_tipus}</th><th scope="col" class="t">${t.t_cons}</th><th scope="col">${t.t_n}</th><th scope="col">${t.t_comp}</th></tr></thead><tbody>${filas}</tbody></table></div>`
+    + `<h3>${t.ref_llista}</h3><p>${t.ref_llista_t}</p><ol class="fonts">${P.fuentes.map(f =>
+        `<li id="font-${f.n}">${ext(f.url, `<span lang="es">${esc(f.tit)}</span>`)}. <span style="color:var(--ink2)">${t.tipus[f.tipo] || f.tipo}${f.tipo === "plan" && P.plan_doc.aprob ? ` · ${t.aprovat}: ${dma(P.plan_doc.aprob)}` : f.f ? ` · ${t.data_prova}: ${dma(f.f)}` : ""}</span></li>`).join("")}</ol>`;
+}
+function pintar(){
+  const t = T[L];
+  document.documentElement.lang = L === "va" ? "ca" : "es";
+  document.title = `${t.h1} · ${t.marca}`;
+  document.querySelectorAll("[data-t]").forEach(el => { const v = t[el.dataset.t]; if (typeof v === "string") el.innerHTML = v; });
+  document.getElementById("toc").innerHTML = [["resum", t.h_resum], ["sense-info", t.h_sense], ["actuacions", t.h_acts], ["metode", t.h_met], ["referencies", t.h_ref]]
+    .map(([id, x]) => `<li><a href="#${id}">${x}</a></li>`).join("");
+  document.getElementById("metode-c").innerHTML = t.met(P, P.radio, fecha(P.plan_doc.aprob));
+  resum(); falta(); filtros(); llista(); refs();
+  ["va", "es"].forEach(l => document.getElementById("l-" + l).setAttribute("aria-pressed", L === l));
+}
+try { const s = localStorage.getItem("obs-lang"); if (s === "va" || s === "es") L = s; } catch(e){}
+["va", "es"].forEach(l => document.getElementById("l-" + l).onclick = () => { L = l; try { localStorage.setItem("obs-lang", l); } catch(e){} pintar(); });
+pintar();
+</script>

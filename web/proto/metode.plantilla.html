@@ -1,0 +1,739 @@
+<title>Mètode · Observatori de la bici i el patinet de València</title>
+<meta name="description" content="Seguim els sinistres amb bici i patinet a València amb les dades obertes de l'Ajuntament: on passen, què s'està fent i si el Pla Director de Seguretat Viària 2026-2030 funciona.">
+<meta name="theme-color" content="#EEF1F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F151B" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='11.5'%20fill='%2315202B'%20stroke='%2355626E'/%3E%3Cg%20fill='none'%20stroke='%23EEF1F2'%20stroke-width='2.2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Ccircle%20cx='6.5'%20cy='15'%20r='3.3'/%3E%3Ccircle%20cx='17.5'%20cy='15'%20r='3.3'/%3E%3Cpath%20d='M6.5%2015l3.8-6.5h4.7l2.5%206.5M10.3%208.5%209.3%206.2'/%3E%3C/g%3E%3C/svg%3E">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Observatori de la bici i el patinet de València">
+<meta property="og:url" content="https://observatoribicivlc.org/metode.html">
+<meta property="og:title" content="Mètode · Observatori de la bici i el patinet de València">
+<meta property="og:description" content="Com situem els sinistres en el mapa, com triem els llocs amb més sinistres i com seguim l&#x27;indicador de l&#x27;acció 3.2.2 del Pla: dades, decisions i limitacions.">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:image" content="https://observatoribicivlc.org/og/metode.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sinistres amb bici i patinet situats en el mapa amb el carrerer municipal.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mètode · Observatori de la bici i el patinet de València">
+<meta name="twitter:description" content="Com situem els sinistres en el mapa, com triem els llocs amb més sinistres i com seguim l&#x27;indicador de l&#x27;acció 3.2.2 del Pla: dades, decisions i limitacions.">
+<meta name="twitter:image" content="https://observatoribicivlc.org/og/metode.png">
+<meta name="twitter:image:alt" content="Sinistres amb bici i patinet situats en el mapa amb el carrerer municipal.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* Página de método: texto llano por sección y detalle técnico plegable. Mismos tokens que observatori e informe
+   (paleta común de las páginas). Todas las cifras salen de window.MET (scripts/exportar_web.py). */
+:root{
+  --bg:#EEF1F2; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
+  --bici:#2a78d6; --pat:#C94B17; --amb:#14875E; --lane:#9DB8AE; --sel:#b87a00; --warn:#B42318; --mute:#AEB7BD; --hl:#FFE58A;
+  --display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F151B; --surface:#17212A; --line:#2A3641; --ink:#E7ECEF; --ink2:#9AA7B2;
+  --bici:#3987e5; --pat:#d95926; --amb:#199e70; --lane:#4E6A60; --sel:#c98500; --warn:#F97066; --mute:#3D4B57; --hl:#5C4A00; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F151B; --surface:#17212A; --line:#2A3641; --ink:#E7ECEF; --ink2:#9AA7B2;
+  --bici:#3987e5; --pat:#d95926; --amb:#199e70; --lane:#4E6A60; --sel:#c98500; --warn:#F97066; --mute:#3D4B57; --hl:#5C4A00; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.salta{position:absolute;left:-9999px}.salta:focus{left:16px;top:8px;z-index:50;background:var(--surface);padding:6px 10px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding-block:10px;flex-wrap:wrap}
+.marca{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:.01em;text-transform:uppercase}
+.senal{width:28px;height:28px;border-radius:50%;background:var(--ink);display:grid;place-items:center;flex:none}
+.senal svg{width:18px;height:18px}
+.top nav{margin-left:auto;display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+.navlink{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-right:8px}
+.top nav button{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 10px;cursor:pointer;border-radius:3px}
+.top nav button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--bici);outline-offset:2px}
+.intro{padding-block:36px 8px;max-width:780px}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:0}
+h1,h2,h3{font-family:var(--display);text-wrap:balance}
+.intro h1{font-weight:800;text-transform:uppercase;font-size:clamp(34px,5.5vw,58px);line-height:1;margin:8px 0 12px}
+.intro p{font-size:18px;color:var(--ink2);max-width:62ch;margin:0 0 10px}
+.cuerpo{display:grid;grid-template-columns:230px minmax(0,1fr);gap:40px;padding-bottom:60px}
+.indice{position:sticky;top:calc(env(safe-area-inset-top,0px) + 66px);align-self:start;font-family:var(--display);font-size:15px}
+.indice p{margin:0 0 6px}
+.indice ol{list-style:none;margin:0;padding:0;counter-reset:i}
+.indice li{counter-increment:i;margin:0}
+.indice a{display:grid;grid-template-columns:26px 1fr;padding:4px 6px;color:var(--ink2);text-decoration:none;border-left:3px solid transparent;font-weight:600}
+.indice a::before{content:counter(i);color:var(--ink2);font-weight:800}
+.indice a:hover{color:var(--ink)}
+.indice a[aria-current="true"]{color:var(--ink);border-left-color:var(--ink)}
+main{min-width:0}
+main section{max-width:760px;padding-block:22px 18px;border-top:1px solid var(--line);scroll-margin-top:70px}
+main section:first-child{border-top:0}
+main h2{font-size:30px;font-weight:800;text-transform:uppercase;line-height:1.05;margin:0 0 12px;display:flex;gap:10px;align-items:baseline}
+main h2 .n{font-size:18px;color:var(--ink2)}
+main h3{font-size:19px;font-weight:700;margin:18px 0 6px}
+main p{margin:0 0 12px}
+main ul{margin:0 0 12px;padding-left:20px}
+main li{margin-bottom:6px}
+b,td,th{font-variant-numeric:tabular-nums}
+.k{font-family:var(--display);font-weight:800;font-size:1.12em;letter-spacing:.01em}
+.cita{border-left:3px solid var(--line);padding:2px 0 2px 14px;color:var(--ink2);font-style:italic;margin:0 0 12px}
+.aviso{font-size:14.5px;color:var(--ink2);border-top:1px dashed var(--line);padding-top:8px}
+.tw{overflow-x:auto;margin:6px 0 14px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--surface);border:1px solid var(--line)}
+caption{caption-side:top;text-align:left;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.04em;color:var(--ink2);padding:0 0 4px}
+th,td{padding:5px 9px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+th{font-family:var(--display);font-weight:700;font-size:13.5px;letter-spacing:.03em;color:var(--ink2)}
+th:first-child,td:first-child{text-align:left}
+tr.dest td{font-weight:600}
+td.t{text-align:left}
+.sw{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.cats{display:flex;flex-wrap:wrap;gap:8px 18px;margin:4px 0 14px;font-family:var(--display);font-weight:600;font-size:15px}
+details.tec{margin:8px 0 6px;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:0 14px;font-size:14.5px}
+details.tec summary{cursor:pointer;padding:9px 0;font-family:var(--display);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:13.5px;color:var(--ink2)}
+details.tec[open]{padding-bottom:10px}
+details.tec p,details.tec li{color:var(--ink)}
+code{font-size:.9em;background:var(--bg);padding:1px 4px;border-radius:3px;overflow-wrap:anywhere}
+a{color:var(--ink)}
+.peu{font-size:13px;color:var(--ink2);padding-block:20px 50px;border-top:1px solid var(--line)}
+@media (max-width:860px){
+  .cuerpo{grid-template-columns:minmax(0,1fr);gap:0}
+  .indice{position:static;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:10px 12px;margin:10px 0 8px}
+  .indice ol{columns:2;column-gap:14px}
+  main h2{font-size:25px}
+}
+@media (max-width:420px){.indice ol{columns:1}}
+table.inc td{text-align:left}
+table.inc .est{white-space:nowrap;font-family:var(--display);font-weight:600}
+@media (max-width:640px){
+  table.inc thead{display:none}
+  table.inc tr{display:block;border-bottom:1px solid var(--line);padding:6px 0}
+  table.inc th,table.inc td{display:block;border:0;padding:2px 10px}
+  table.inc td::before{content:attr(data-l) ": ";font-family:var(--display);font-weight:700;font-size:13px;color:var(--ink2)}
+}
+/*TEMA_CSS*/
+</style>
+<script>/*TEMA_JS*/</script>
+<script>/*PIE_JS*/</script>
+
+<a class="salta" href="#contingut" data-t="salta"></a>
+<header class="top"><div class="wrap">
+  <div class="marca"><span class="senal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" style="stroke:var(--bg)" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="16" r="3.5"/><circle cx="18" cy="16" r="3.5"/><path d="M6 16l4-7h5l3 7M10 9l-1-2.5H7.5M13 9l2 0"/></svg></span><span data-t="marca"></span></div>
+  <nav aria-label="Navegació"><a class="navlink" href="observatori.html" data-t="nav_obs"></a><a class="navlink" href="informe.html" data-t="nav_inf"></a><a class="navlink" href="pla.html" data-t="nav_pla"></a><button data-tema></button><button id="l-va" aria-pressed="true" lang="ca">VA</button><button id="l-es" aria-pressed="false" lang="es">ES</button></nav>
+</div></header>
+
+<div class="wrap intro">
+  <p class="eyebrow" data-t="ey"></p>
+  <h1 data-t="h1"></h1>
+  <p data-t="sub"></p>
+</div>
+
+<div class="wrap cuerpo">
+  <nav class="indice" id="indice" aria-labelledby="indice-t"><p class="eyebrow" id="indice-t" data-t="toc"></p><ol id="toc"></ol></nav>
+  <main id="contingut"></main>
+</div>
+<footer class="wrap" data-pie></footer>
+
+<script>/*DATA*/</script>
+<script>
+"use strict";
+const M = window.MET;
+const A0 = M.anys[0], A1 = M.anys[M.anys.length - 1];
+let L = "va";
+const fmt = (n, d=0) => Number(n).toLocaleString(L === "va" ? "ca-ES" : "es-ES", {minimumFractionDigits:d, maximumFractionDigits:d, useGrouping:"always"});
+const pc = (x, d=0) => fmt(x * 100, d) + " %";
+const MES = {va:["gener","febrer","març","abril","maig","juny","juliol","agost","setembre","octubre","novembre","desembre"],
+             es:["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"]};
+const mes = ym => { const [y, m] = ym.split("-"); return `${MES[L][+m - 1]} de ${y}`; };
+const PER = ["P1", "P2", "P3"];
+const perTxt = p => `${mes(M.per[p][0])} – ${mes(M.per[p][1])}`;
+const tabla = (cap, head, rows, dest) => `<div class="tw" tabindex="0" role="region" aria-label="${cap ? String(cap).replace(/<[^>]+>/g, "").replace(/"/g, "") : "Taula"}"><table>${cap ? `<caption>${cap}</caption>` : ""}<thead><tr>${head.map(h => `<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>${
+  rows.map((r, i) => `<tr${dest && dest(i) ? ' class="dest"' : ""}>${r.map((c, j) => j === 0 ? `<th scope="row" style="font-family:var(--body);font-weight:500;font-size:14.5px;color:var(--ink)">${c}</th>` : `<td${/^(<b>)?[\d−+-]/.test(String(c)) ? "" : ' class="t"'}>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+// errores detectados en los datos del Ajuntament (M.inc, de data/processed/incidencias_datos.csv vía exportar_web.py)
+const INC = M.inc, CORREU = "hola@observatoribicivlc.org";
+const EST_INC = {va:{detectada:"Detectada", comunicada:"Comunicada", respondida:"Amb resposta", corregida:"Corregida", no_se_corrige:"No es corregirà"},
+                 es:{detectada:"Detectada", comunicada:"Comunicada", respondida:"Con respuesta", corregida:"Corregida", no_se_corrige:"No se corregirá"}};
+const tablaInc = (cap, head) => { const k = L === "va" ? 0 : 1; return `<div class="tw" tabindex="0" role="region" aria-label="${String(cap).replace(/<[^>]+>/g, "").replace(/"/g, "")}"><table class="inc"><caption>${cap}</caption><thead><tr>${head.map(h => `<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>${
+  INC.filas.map(f => `<tr><th scope="row" style="font-family:var(--body);font-weight:500;font-size:14.5px;color:var(--ink)">${f[1 + k]}</th><td data-l="${head[1]}">${f[3 + k]}</td><td data-l="${head[2]}">${f[5 + k]}</td><td data-l="${head[3]}" class="est">${EST_INC[L][f[7]]}</td></tr>`).join("")}</tbody></table></div>`; };
+const sw = c => `<i class="sw" style="background:var(--${c})" aria-hidden="true"></i>`;
+const SER = Object.fromEntries(M.serie.map(r => [r["año"], r]));
+const MT = M.meta, E0 = M.esc[0], E1 = M.esc[1], B = MT["año_base"];   // E0: base principal (AÑO_BASE de exportar_web.py); E1: alternativa
+// EM: comprobación con la media de los años antes del Plan; CT: series de control (META de exportar_web.py y scripts/meta.py)
+const EM = MT.media, CT = MT.control;
+const VAR = x => x[x.length - 1] / x[0] - 1, SINH = CT.bv_sin.map((v, i) => v + CT.resto_sin[i]);   // variación primer → último año; sin heridos, toda la ciudad
+const ESC = () => [[E0, L === "va" ? "la nostra" : "la nuestra"], [EM, L === "va" ? "comprovació" : "comprobación"], [E1, "alternativa"]];
+const JZ = (e, l) => ({va:{pendiente:"pendent", debajo:"per davall de la senda", compatible:"no es pot descartar que vaja al ritme", encima:"per damunt de la senda"},
+                       es:{pendiente:"pendiente", debajo:"por debajo de la senda", compatible:"no se puede descartar que vaya al ritmo", encima:"por encima de la senda"}})[l][e.concl];
+const EB = M.eb, V = M.eb.val;
+// lugares (nudos y tramos), estabilidad, persistencia fuera de muestra y pista (exportar_web.py ← lugares_nudos.py)
+const LG = M.lug, ES = M.lug.estab, PS = M.pers, PI = M.pista;
+const ESmin = () => Math.min(...ES.variantes.map(v => v.ret)), ESmax = () => Math.max(...ES.variantes.map(v => v.ret));
+// periodos de la persistencia (lugares_nudos.py): A ordena, B mide; C7: mes del segundo corte (cambio de registro)
+const etqPer = xs => xs.length === 1 ? String(xs[0]) : `${xs[0]}-${xs[xs.length - 1]}`;
+const EPA = etqPer(PS.per.A), EPB = etqPer(PS.per.B), C7 = PS.per.corte7;
+const mesAnt = ym => { const [y, m] = ym.split("-").map(Number); return m === 1 ? `${y - 1}-12` : `${y}-${String(m - 1).padStart(2, "0")}`; };
+// panel de uso (scripts/meta.py, uso): hasta el último año con IMD (UA1), que puede ser anterior al último de siniestros (A1)
+// TD: primer año con el tipo de siniestro completo (>= 95 % de filas con tipo)
+const TD = M.anys.find(a => M.tipo_lleno[a] >= 0.95) ?? A1;
+const UA0 = M.uso_a0, UA1 = M.uso_a1, fmtU = (x, d) => x == null ? "—" : fmt(x, d);
+const varU = (x, l) => (x >= 0 ? (l === "va" ? "puja" : "sube") : (l === "va" ? "baixa" : "baja")) + " un " + pc(Math.abs(x), 1);
+// segundo verbo (siniestros, en plural) solo si va en otra dirección que el tráfico: «sube un 8,9 % y los siniestros un 10,5 %»
+const varS = l => (M.sin_ult >= 0) === (M.uso_ult >= 0) ? "un " + pc(Math.abs(M.sin_ult), 1)
+  : (M.sin_ult >= 0 ? (l === "va" ? "pugen" : "suben") : (l === "va" ? "baixen" : "bajan")) + " un " + pc(Math.abs(M.sin_ult), 1);
+const parU = l => Math.abs(M.uso_ult - M.sin_ult) < 0.03 ? (l === "va" ? ": quasi a la par" : ": casi a la par")
+  : M.sin_ult > M.uso_ult ? (l === "va" ? ": els sinistres, més" : ": los siniestros, más") : (l === "va" ? ": el trànsit, més" : ": el tráfico, más");
+const PSbajo = () => PS.todas.filter(p => p.obs < p.perf_lo);   // cortes y K por debajo de su intervalo de persistencia perfecta
+const sumUlt = M.vmp[A1] + M.bici[A1];
+const resto = EB.sitios - EB.alta - EB.quiza;
+// cruces en el círculo (A2), criterio de «claramente» (A3-A4), desglose bici / VMP (A1) y franja NB (B1): cribado_eb.py → exportar_web.py
+const CR = EB.cruces, CR0 = CR.sin, CRN = CR["nodos (principal)"], CRF = CR["nudos fundidos"], CRW = CR["nudos de la web"], RG = EB.reglas, SIM = EB.sim, DG = EB.desglose;
+const pval = x => x < .001 ? "p < 0,001" : `p = ${fmt(x, 3)}`;
+const R3 = l => EB.crit.radios.slice(0, -1).join(", ") + (l === "va" ? " i " : " y ") + EB.crit.radios.at(-1);
+const CLARO = l => EB.claro.map(([n, cod, N, mu, sv]) => `${n} (${cod}: ${N} / ${fmt(mu, 1)}${sv ? (l === "va" ? "; només patinet" : "; solo patinete") : ""})`).join("; ");
+
+// ---------- textos: mismas claves en va y es; las cifras, de M ----------
+const T = {
+va:{
+marca:"Observatori de la bici i el patinet de València", nav_obs:"Observatori", nav_inf:"Informe", nav_pla:"El Pla, al dia", salta:"Salta al contingut", toc:"Índex", tec:"Detall tècnic",
+ey:"Mètode", h1:"Com ho hem fet",
+sub:"Cada decisió del projecte, explicada en llenguatge planer. El detall tècnic, en les caixes plegables. Totes les xifres d'esta pàgina es calculen amb les mateixes dades i el mateix codi que la resta de la web.",
+sec:{
+datos:{h:"Les dades",
+cos:()=>`<p>Partim del conjunt <b>«Sinistres de trànsit»</b> del portal de dades obertes de l'Ajuntament. Té <b>${fmt(M.filas)}</b> files: una per sinistre que registra la Policia Local.</p>
+<p>Només fem servir anys complets: <b>${A0}-${A1}</b>. Les ${fmt(M.fuera)} files de ${M.fuera_anys.join(", ")} queden fora fins que l'any estiga complet. Hi ha <b>${fmt(M.dup)}</b> files repetides, iguals en tot menys l'identificador: les comptem una sola vegada.</p>
+<p>De cada sinistre, el portal dona la data i l'hora, la gravetat, el tipus, els vehicles i els factors. El lloc ve escrit, com una adreça («AV DEL PUERTO 12» o «C/ X cruce AV Y»). <b>No porta coordenades.</b> Les posem nosaltres amb el carrerer municipal.</p>
+${tabla("Fonts", ["Conjunt", "Per a què", "Mida"], [
+  ["Sinistres de trànsit (portal)", "comptar i situar cada sinistre", `${fmt(M.filas)} files`],
+  ["Carrerer: vies, eixos i portals (portal)", "posar coordenades a l'adreça", `${fmt(M.n_ejes)} trams d'eix`],
+  ["Carril bici, capa 189 (portal)", "xarxa ciclista i Jardí del Túria", `${fmt(M.km_ciclo, 1)} km de trams`],
+  ["Comptadors de bici (espires), capa 225 (portal), i el seu trànsit mitjà diari (IMD), de Mobilitat (valencia.es)", "trànsit en el carril bici", `${fmt(M.n_cont)} comptadors amb dades`],
+  [`Trànsit mitjà diari de vehicles (IMD) de ${M.imd_veh}, de Mobilitat, i trams, capa 188 (portal)`, "trànsit de cotxes al voltant", "—"],
+  ["Cruïlles amb semàfor (reguladors), capa 182 (portal)", "context de cada lloc", `${fmt(M.n_reg)} reguladors`],
+  ["OpenStreetMap (complement extern)", "semàfors que falten en la capa 182", `${fmt(M.n_osm)} semàfors`]])}
+<h3>Quants sinistres podem posar en el mapa</h3>
+<p>Situem en el mapa el <b>${pc(M.cob_bv_tot)}</b> dels sinistres amb bici o patinet (${fmt(M.n_geo)} de ${fmt(M.n_bv)}). Però el percentatge canvia amb els anys, perquè depén de com s'anotava el lloc en el portal. Hi ha tres etapes.</p>
+${tabla("Sinistres situats en el mapa, per etapa del portal", ["Etapa", "Amb bici o patinet", "Tots els sinistres", "Només el nom del carrer", "Cruïlla que no existeix"],
+  PER.map(p => [perTxt(p), pc(M.cob_bv[p]), pc(M.cob_todos[p]), pc(M.solo_calle[p]), pc(M.cruce_fallo[p])]))}
+<ul><li>Fins a ${mes(M.per.P1[1])}, moltes files porten només el nom del carrer, sense número ni cruïlla. No es poden situar.</li>
+<li>Fins a ${mes(M.per.P2[1])}, algunes «cruïlles» són de dos carrers que no es toquen, de vegades a més d'un quilòmetre. Sembla que volen dir «a l'altura de».</li>
+<li>Des de ${mes(M.per.P3[0])}, gairebé totes porten número o una cruïlla real.</li></ul>
+<p>Conseqüència: <b>qualsevol tendència feta només amb els sinistres del mapa creix de manera artificial.</b> Per això el seguiment de l'indicador del Pla el fem amb tots els sinistres, situats o no. I en el mapa, cada sinistre pesa segons com de bé se situaven els del seu any i tipus d'adreça (secció 5).</p>`,
+tec:()=>`<p><b>Geocodificació</b>, és a dir, com posem coordenades a cada adreça (<code>scripts/geocodificar.py</code>, shapely i pyproj en EPSG:25830):</p>
+<ul><li><b>Cruïlla</b>: punt mitjà dels dos vèrtexs més pròxims dels eixos de les dues vies, si estan a 40 m o menys. Si no, la distància entre segments, amb el mateix llindar. Ho fem en eixe ordre perquè cap cruïlla ja situada es moga.</li>
+<li><b>Portal</b>: coordenades del número en la capa de portals. <b>Portal pròxim</b>: el número més pròxim del mateix carrer.</li>
+<li>Nom normalitzat (sense accents, «PROFESSOR» = «PROFESOR», «L·L» = «L.L», parèntesis truncats) i una taula de 4 equivalències de carrers reanomenats (<code>data/processed/equivalencias_calles.csv</code>).</li></ul>
+<p>Dels sinistres amb bici o patinet situats: ${pc(M.metodo.cruce)} per cruïlla, ${pc(M.metodo.portal)} per portal i ${pc(M.metodo.portal_cercano || 0, 1)} per portal pròxim.</p>
+<p>Etapes del portal: talls en ${M.cortes.join(" i ")} (inici de la segona i la tercera). Duplicats: files iguals en totes les columnes llevat de <code>_id</code>. Dada crua trencada: ${fmt(M.unidades_rotas)} files amb els vehicles buits («[»).</p>
+<p>Validació: mostra de 50 punts contrastada amb OpenStreetMap (Nominatim). Comprova el nom del carrer, no l'error en metres.</p>`},
+
+contar:{h:"Com comptem",
+cos:()=>`<p>Un sinistre pot implicar diversos vehicles. Cada sinistre amb bici o patinet va a una sola de tres categories:</p>
+<div class="cats"><span>${sw("bici")}Només bici</span><span>${sw("pat")}Només patinet</span><span>${sw("amb")}Xoc bici–patinet</span></div>
+<ul><li><b>Només bici</b>: hi ha almenys una bici i cap patinet. Pot haver-hi cotxes o vianants.</li>
+<li><b>Només patinet</b>: hi ha almenys un patinet elèctric (VMP) i cap bici.</li>
+<li><b>Xoc bici–patinet</b>: hi ha almenys una bici i un patinet. El <b>${pc(M.amb_solo)}</b> són xocs només entre ells, sense cap cotxe ni vianant.</li></ul>
+${tabla("Sinistres per any i categoria", ["Any", "Només bici", "Només patinet", "Xoc bici–patinet", "Total (cada un una vegada)", "Amb bici", "Amb patinet"],
+  M.anys.map(a => [a, fmt(SER[a].b), fmt(SER[a].p), fmt(SER[a].a), `<b>${fmt(M.bv[a])}</b>`, fmt(M.bici[a]), fmt(M.vmp[a])]))}
+<p><b>Dues maneres de comptar, cada una en el seu lloc:</b></p>
+<ul><li>En les <b>barres i els formatges</b>, cada sinistre compta <b>una vegada</b>. És el total amb què seguim la meta.</li>
+<li>En les <b>línies «bici» i «patinet»</b>, el xoc bici–patinet compta <b>en les dues</b>, com fa el Pla. Per això, en ${A1}, bici més patinet suma ${fmt(sumUlt)}, i el total és ${fmt(M.bv[A1])}.</li></ul>
+<p><b>Colors en ordre fix</b> en totes les pàgines: bici, patinet i xoc bici–patinet. S'han triat perquè es distingisquen també amb daltonisme. El taronja i el verd tenen poc contrast sobre fons clar: per això sempre van amb etiqueta o llegenda.</p>`,
+tec:()=>`<p>Bici = «BICICLETA» en el camp de vehicles; patinet = «VMP» (vehicle de mobilitat personal). Les sèries «amb bici» i «amb patinet» coincideixen amb les del Pla, amb diferències d'1 o 2 sinistres per any (el Pla les trau del sistema de la Policia Local en una altra data). El Pla no dona mai la unió: sumar les seues dues sèries compta dues vegades els xocs bici–patinet.</p>
+<p>Paleta validada amb un comprovador de contrast i daltonisme (deuteranopia, protanopia i tritanopia), en mode clar i fosc.</p>`},
+
+meta:{h:"La meta i la línia base",
+cos:()=>`<p>L'acció 3.2.2 del Pla Director de Seguretat Viària posa este indicador:</p>
+<p class="cita">«Reducció de sinistres amb ciclistes/VMP: −50 %». Línia base: «—». Fórmula: «Comparació anual».</p>
+<p><b>És l'indicador d'una acció, no la meta global del Pla</b>, que és de persones mortes i ferides greus (ho expliquem en el detall tècnic). Com la majoria dels indicadors del Pla (${fmt(M.plan.sin_base)} de ${fmt(M.plan.ind)}), té la línia base buida, i tampoc diu com es compta ni com es jutja cada any. Ho hem de decidir nosaltres, i ho expliquem ací.</p>
+<h3>La línia base: ${B}</h3>
+<p>Prenem <b>${B}</b>, l'últim any abans del Pla. Per què:</p>
+<ul><li>el Pla es planteja «con el año ${MT["año_plan"]} como punto de partida» i val per a ${MT["año_plan"]}-2030;</li>
+<li>el seu diagnòstic ja analitza ${B}: estudia l'evolució «entre los años 2019 hasta 2025» i en detall 2023, 2024 i 2025 (apartat 2.3.2);</li>
+<li>el Pla tria ${E1["año"]} només per als ferits greus, per la <b>qualitat de la dada de gravetat</b>: des de ${E1["año"]} la Policia Local adapta cada sinistre als criteris estatals (nota 2 de la pàg. 23, que remet a l'apartat 2.3.2). Este motiu no afecta el recompte de sinistres, que és el que mesura l'acció 3.2.2.</li></ul>
+${MT.max ? `<p class="aviso"><b>${B} és el pitjor any de la sèrie.</b> Partir del pitjor any afavoreix el Pla: després d'un any molt alt, el següent sol ser més baix encara que no canvie res (és la tornada a la mitjana). Per això ho comprovem també amb la <b>mitjana ${EM.etq}</b>: ${fmt(EM.base_x)} sinistres de mitjana, meta ${fmt(EM.meta)}. Si amb base ${B} es compleix i amb la mitjana no, ho direm.</p>` : ""}
+${tabla("Línies base", ["Línia base", "Sinistres en la base", "Meta 2030 (−50 %)", "Senda: baixada cada any", `Baixada anual necessària des de ${MT.desde}`, `Marge per a ${MT.desde}`],
+  ESC().map(([e, n]) => [`${e.etq} (${n})`, fmt(e.base), fmt(e.meta), pc(e.senda_anual, 1), pc(e.necesaria, 1), e.banda[MT.desde] ? `${fmt(e.banda[MT.desde][0])}-${fmt(e.banda[MT.desde][1])}` : "—"]), i => i === 0)}
+<ul><li><b>La senda és una proposta nostra</b>: la mateixa baixada en percentatge cada any, fins a arribar a la meta en 2030. No és del Pla.</li>
+<li><b>La línia base i la senda les hauria de fixar l'Ajuntament.</b> Si en fixa unes altres, l'observatori les canviarà.</li>
+<li>${E1["año"]} queda com a alternativa a la vista, però ja no és la comparació principal.</li></ul>
+<h3>Com comptem</h3>
+<p>Cada sinistre amb almenys una bici o un patinet, situat o no en el mapa, compta <b>una vegada</b>: en ${B}, ${fmt(E0.base)}, i la meta, ${fmt(E0.meta)}. Les taules del Pla compten per vehicle (bici i VMP per separat), així que un xoc bici–patinet compta dues vegades (${fmt(MT.vehiculo.dobles)} en ${B}). Amb eixe criteri, la base seria ${fmt(MT.vehiculo.base)} i la meta, ${fmt(MT.vehiculo.meta)}.</p>
+<h3>Com es jutja cada any</h3>
+<p>Encara que el Pla anara exactament per la senda, el nombre de sinistres d'un any variaria per atzar. Per això no comparem amb la xifra exacta de la senda, sinó amb un <b>marge</b>: el 95 % dels valors que donaria l'atzar al voltant de la senda. Hi ha tres resultats, que es calculen amb les dades:</p>
+<ul><li><b>«per davall de la senda»</b>: menys sinistres que el mínim del marge;</li>
+<li><b>«no es pot descartar que vaja al ritme»</b>: dins del marge (no vol dir que hi vaja);</li>
+<li><b>«per damunt de la senda»</b>: més que el màxim del marge.</li></ul>
+<p>Per a ${MT.desde}, la senda marca ${fmt(E0.senda[MT.desde])}, i el marge va de ${fmt(E0.banda[MT.desde][0])} a ${fmt(E0.banda[MT.desde][1])}. A més, cada any es compara amb la base, amb el seu marge d'error (interval de confiança).</p>
+<p>Ara mateix: <b>${E0.evaluados.length ? JZ(E0, "va") : `el primer any del Pla, ${MT["año_plan"]}, encara no està publicat`}</b>. ${E0.evaluados.length ? `En ${A1} hi ha hagut ${fmt(M.bv[A1])} sinistres; la senda en preveu ${fmt(E0.senda[A1])}. Respecte a ${B}: ${fmt(E0.juicio[A1].base.razon * 100 - 100, 1)} % (interval de confiança ${fmt(E0.juicio[A1].base.ic[0] * 100 - 100, 1)} a ${fmt(E0.juicio[A1].base.ic[1] * 100 - 100, 1)} %). Amb la mitjana ${EM.etq}: ${JZ(EM, "va")}.` : `${B} és el punt de partida: ${fmt(E0.base)} sinistres${MT.max ? ", el pitjor any de la sèrie" : ""}, un ${pc(MT.previa)} més que en ${A0}. Encara no es pot avaluar el Pla.`}</p>
+<h3>Dues sèries de control</h3>
+<p>El nombre de sinistres pot canviar per coses que no són la seguretat de la bici i el patinet. Per això, al costat de la meta, publiquem dues sèries:</p>
+${tabla("Sèries de control", ["Any", "Amb bici o patinet", "Dels quals, amb ferits", "Tots els sinistres de la ciutat", "Part de bici o patinet"],
+  CT.años.map((a, i) => [a, fmt(CT.bv[i]), fmt(CT.bv_her[i]), fmt(CT.ciudad[i]), pc(CT.cuota[i], 1)]))}
+<ul><li><b>Sinistres amb ferits</b> (tots menys «sense ferits»): depenen menys de com es registren. El sistema de registre de la Policia Local (SIASV) es va crear al juliol de 2024, i el que més creix en tota la ciutat són els sinistres sense ferits. Si baixa el total però no els sinistres amb ferits, probablement és el registre.</li>
+<li><b>Part de tots els sinistres de la ciutat</b>: si baixa, la bici i el patinet milloren més que la resta del trànsit; si el total baixa però la part no, baixa tot igual.</li></ul>`,
+tec:()=>`<p>Senda de l'any <i>a</i>: base × 0,5<sup>(a − any base) / (2030 − any base)</sup>. Baixada anual necessària: 1 − (meta / sinistres de ${A1})<sup>1 / (2030 − ${A1})</sup>. Meta = base / 2, arredonida a l'enter més pròxim. L'any base es canvia en un sol paràmetre (<code>AÑO_BASE</code> de <code>scripts/exportar_web.py</code>) i el fan servir l'observatori, l'informe i esta pàgina.</p>
+<p>Marge de cada any: les xifres x per a les quals l'interval de confiança del ${pc(MT.nivel)} de la raó x / base (<code>statsmodels confint_poisson_2indep</code>, mètode score) conté la raó que marca la senda. Així té en compte l'atzar de l'any i el de la base. No inclou la sobredispersió (variació entre anys més enllà de l'atzar), així que un any «compatible» no prova que el Pla funcione. Abans el marge només comptava l'atzar de l'any (<code>poisson.ppf</code>) i era més estret. Comparació amb la base: raó de taxes amb <code>statsmodels.stats.rates.test_poisson_2indep</code> (prova <i>score</i>) i el seu interval de confiança. Amb la mitjana ${EM.etq} com a base, la base són els ${EM.años.length} anys junts (exposició ${EM.años.length}). Codi: <code>scripts/meta.py</code>; <code>make comprobar</code> prova el juí amb un any simulat.</p>
+<p>Amb la base alternativa (${E1["año"]}), ${A1} quedaria ${fmt(E1.sobre)} sinistres per damunt de la seua senda (${fmt(E1.senda_ult)}; marge ${fmt(E1.banda[A1][0])}-${fmt(E1.banda[A1][1])}): ${JZ(E1, "va")}. Caldria baixar un ${pc(E1.necesaria, 1)} cada any des de ${MT.desde}.</p>
+<p>La meta global del Pla (apartat 4.4) és una altra: −50 % de persones mortes respecte a 2019 i de ferides greus respecte a 2024, per a tots els col·lectius. L'indicador de l'acció 3.2.2 és de sinistres, no de víctimes.</p>`},
+
+uso:{h:"Ús i sinistres",
+cos:()=>`<p>Més sinistres no vol dir per força més perill: pot ser que hi haja més gent en bici i en patinet. Ho mirem amb els comptadors del carril bici.</p>
+<p><b>Tampoc és una pujada pròpia de la bici i el patinet.</b> Tots els sinistres de la ciutat passen de ${fmt(M.todos[A0])} en ${A0} a ${fmt(M.todos[A1])} en ${A1} (${pc(M.todos[A1] / M.todos[A0] - 1, 1)} més), i els que porten bici o patinet, de ${fmt(M.bv[A0])} a ${fmt(M.bv[A1])} (${pc(M.bv[A1] / M.bv[A0] - 1, 1)}): la seua part es queda en el ${pc(M.bv[A0] / M.todos[A0], 1)} en ${A0} i el ${pc(M.bv[A1] / M.todos[A1], 1)} en ${A1}. El que sí és propi és la composició: el patinet puja un ${pc(M.vmp[A1] / M.vmp[A0] - 1)} i la bici ${M.bici[A1] < M.bici[A0] ? "baixa" : "puja"} un ${pc(Math.abs(M.bici[A1] / M.bici[A0] - 1))}.</p>
+<p>Una part de la pujada pot vindre de com es registren els sinistres: el que més creix en tota la ciutat són els sinistres sense ferits (+${pc(VAR(SINH), 0)}), i el Pla explica que el sistema de registre de la Policia Local (SIASV) es va crear al juliol de 2024, després d'integrar i normalitzar totes les fonts. Amb ferits, els sinistres amb bici o patinet sí que creixen més que la resta: un ${pc(VAR(CT.bv_her), 0)} més, davant d'un ${pc(VAR(CT.resto_her), 0)}. Són les sèries de control de la meta (apartat «La meta i la línia base»).</p>
+<p>En els <b>${fmt(M.uso_n)} comptadors</b> que tenen dades de trànsit tots els anys (${UA0}-${UA1}), el trànsit passa de 100 en ${UA0} a <b>${fmt(M.uso_ix[UA1])}</b> en ${UA1}. Els sinistres amb bici o patinet, de 100 a <b>${fmt(M.sin_ix[UA1])}</b>.${UA1 < A1 ? ` Les dades de trànsit de Mobilitat arriben fins a ${UA1} i les de sinistres, fins a ${A1}: per això la comparació amb l'ús acaba en ${UA1}.` : ""}</p>
+${tabla(`Índexs, ${UA0} = 100`, ["Any", "Trànsit en el carril bici", "Sinistres amb bici o patinet"], M.anys.filter(a => a >= UA0).map(a => [a, fmtU(M.uso_ix[a]), fmtU(M.sin_ix[a])]))}
+<p>En ${UA1}, el trànsit ${varU(M.uso_ult, "va")} i els sinistres ${varS("va")}${parU("va")}.</p>
+<p><b>La meta del Pla es mesura en nombre de sinistres, no en sinistres per viatge.</b> Si l'ús creix, el risc de cada viatge ha de baixar més de la meitat:</p>
+<ul><li>si l'ús es queda com en ${UA1}, el risc per viatge hauria de baixar un <b>${pc(M.riesgo.igual)}</b> respecte a ${B};</li>
+<li>si continua creixent com fins ara (${pc(M.uso_g, 1)} l'any), un <b>${pc(M.riesgo.sigue)}</b>.</li></ul>
+<p class="aviso">Els comptadors estan en el carril bici: no veuen qui va per la calçada, pels ciclocarrers o pel Túria. I probablement compten bicis i patinets junts, sense separar-los. Són escenaris, no prediccions.</p>`,
+tec:()=>`<p>IMD (intensitat mitjana diària) de dies laborables, per mes, dels fulls de càlcul de Mobilitat. Mitjana dels mesos amb dada (> 0), amb un mínim de 6 mesos per any. Cada comptador (codi P) se situa amb el camp <code>idpm</code> de la capa 225. Índex = suma de la IMD dels ${fmt(M.uso_n)} comptadors amb dada tots els anys amb intensitats (${UA0}-${UA1}) / suma de ${UA0}.</p>
+<p>Escenaris: ús ${MT["año_meta"]} / ús ${B} = ${UA1 !== B ? `(índex ${UA1} / índex ${B}) × ` : ""}(1 + g)<sup>${MT["año_meta"]} − ${UA1}</sup>, on g és el creixement anual mitjà de ${UA0}-${UA1} (${pc(M.uso_g, 1)}) o g = 0 (l'ús es queda igual). Baixada necessària del risc per viatge = 1 − 0,5 / (ús ${MT["año_meta"]} / ús ${B}). En els dos escenaris, l'ús de ${MT["año_meta"]} és ${fmt(M.uso30.igual, 2)} i ${fmt(M.uso30.sigue, 2)} vegades el de ${B}.</p>`},
+
+lugares:{h:"Llocs amb més sinistres",
+cos:()=>`<p>Un «lloc» és una <b>cruïlla</b> o un <b>tram de carrer</b>, no un quadrat fix del mapa:</p>
+<ul><li><b>Cruïlla</b>: cada encreuament del carrerer municipal. Els encreuaments a menys de ${LG.F} m (les dues calçades d'una avinguda, un carrer que entra desplaçat) fan una sola cruïlla. Les rotondes i places de fins a ${LG.plaza_max} m (${fmt(LG.n_plazas)} en tota la ciutat) són una sola cruïlla; les places grans, com la de l'Ajuntament o la d'Amèrica, no: cada entrada és una cruïlla amb el seu semàfor, i fondre-les crearia un lloc que guanya només per ser gran. La cruïlla inclou ${LG.R} m al voltant.</li>
+<li><b>Tram</b>: la resta de cada carrer, en trossos iguals de ${LG.pieza} m com a màxim. Les dues calçades d'una avinguda fan un sol tram.</li>
+<li>Cada sinistre va a la cruïlla si està a ${LG.R} m o menys; si no, al tram més pròxim.</li></ul>
+<p>Així, la ciutat té ${fmt(LG.n_nudos)} cruïlles i ${fmt(LG.n_tramos)} trams. El ${pc(LG.en_nudo / LG.n_geo)} dels sinistres situats cau en una cruïlla. Els <b>${M.n_neg}</b> llocs amb més sinistres de ${A0} a ${A1} són els «llocs amb més sinistres» del mapa: ${M.tipos30.tramo ? `${M.tipos30.nudo} cruïlles i ${M.tipos30.tramo} trams` : "totes són cruïlles"}. El tram amb més sinistres en té ${LG.tramo_max.n} (és el lloc n.º ${LG.tramo_max.rank}).</p>
+<h3>Per què ja no fem quadrats de 100 m</h3>
+<p>Fins al novembre de 2026, els llocs eren els quadrats d'una quadrícula de 100 m. La llista depenia d'on queien les línies: si movíem la quadrícula entre 25 i 75 m, dels 30 llocs se'n mantenien entre ${ES.rejilla.ret[0]} i ${ES.rejilla.ret[1]}. Amb cruïlles i trams, si canviem els ${LG.R} m del voltant o la distància per a fondre encreuaments (20 o 40 m en lloc de 30), se'n mantenen entre ${ESmin()} i ${ESmax()}. A més, una cruïlla és on es pot actuar.</p>
+${tabla("Estabilitat dels 30 llocs amb més sinistres", ["Variant", "Llocs que es mantenen (de 30)", "Sinistres en comú (índex de Jaccard: 1 = iguals)"],
+  [["Quadrícula de 100 m, desplaçada 25-75 m (15 variants)", `${ES.rejilla.ret[0]}-${ES.rejilla.ret[1]}`, `${fmt(ES.rejilla.jac[0], 2)}-${fmt(ES.rejilla.jac[1], 2)}`],
+   ...ES.variantes.map(v => [`Cruïlles i trams: ${v.R !== LG.R ? `${v.R} m al voltant (en lloc de ${LG.R})` : `fondre a ${v.F} m (en lloc de ${LG.F})`}`, v.ret, fmt(v.jac, 2)])])}
+<p>Un matís: per a situar les cruïlles grans usem també els punts on el nostre programa de localització (el geocodificador) situa els sinistres de cruïlla de tota la ciutat (de tots els vehicles, no només de bici o patinet). Són posicions, no recomptes: en les cruïlles grans, com Abril Martorell amb Malilla, el punt del geocodificador queda a 30-100 m de l'encreuament del carrerer. Com que són de tots els sinistres, no trien els llocs pel resultat.</p>
+<h3>Correcció per la cobertura</h3>
+<p>Cada any se situen més sinistres, i no igual els de cruïlla que els de portal. Per a no afavorir els anys recents, cada sinistre pesa 1 / (part situada dels sinistres amb bici o patinet del seu any i tipus d'adreça):</p>
+${tabla("", ["Any", "Cruïlla: part situada", "Pes", "Portal: part situada", "Pes"], M.anys.map(a => [a, pc(M.cobd[a].cruce, 1), fmt(M.pesos[a].cruce, 2), pc(M.cobd[a].portal, 1), fmt(M.pesos[a].portal, 2)]))}
+<p>Amb pes o sense, la llista quasi no canvia: coincideixen <b>${M.igual_sinpeso} de ${M.n_neg}</b>. Si els triàrem només amb ${EPA}, en canviarien ${M.cambia_A}: per això usem tot el període.</p>
+<p class="aviso">Des de juliol de 2024 la policia anota més sinistres pel número de portal i menys «en la cruïlla». Un sinistre al costat d'una cruïlla pot passar de la cruïlla al tram del costat sense que hi canvie res. El pes corregeix poc aquest canvi; per això les barres per any de cada fitxa porten un avís.</p>
+<h3>Es repeteixen?</h3>
+<p>Un lloc pot entrar en la llista per un mal any. Per a saber-ho sense fer trampa, triem els ${PS.ab.k} llocs <b>només amb ${EPA}</b> i mirem què hi passa <b>en ${EPB}</b>. Ho comparem amb dues referències: <b>si cada lloc mantinguera el seu ritme</b> (l'atzar fa que, encara així, els triats en el seu pitjor moment baixen una mica) i <b>llocs qualssevol</b> (de tota la ciutat o del mateix barri).</p>
+${tabla("Triats amb uns anys, mirats en uns altres (sinistres corregits per la cobertura)", ["Triats amb → mirats en", "Llocs", "Abans", "Després", "Si mantingueren el seu ritme (90 %)", "Llocs qualssevol", "Qualssevol del mateix barri"],
+  PS.todas.map(p => [p.corte === "AB" ? `${EPA} → ${EPB}` : `${mes(M.anys[0] + "-01")}-${mes(mesAnt(C7))} → ${mes(C7)}-${mes(A1 + "-12")}`, p.k, fmt(p.A), fmt(p.obs), `${fmt(p.perf)} (${fmt(p.perf_lo)}-${fmt(p.perf_hi)})`, fmt(p.glob), fmt(p.loc)]), i => PS.todas[i].k === PS.ab.k)}
+<p>Els ${PS.ab.k} primers de ${EPA} sumen ${fmt(PS.ab.A)} sinistres; en ${EPB}, <b>${fmt(PS.ab.obs)}</b>. És el que s'espera si cada lloc mantinguera el seu ritme (entre ${fmt(PS.ab.perf_lo)} i ${fmt(PS.ab.perf_hi)}): la baixada és, sobretot, tornada a la mitjana. Llocs qualssevol en sumarien uns ${fmt(PS.ab.glob)}, i llocs qualssevol del mateix barri, ${fmt(PS.ab.loc)}. Tallant al juliol de 2024, quan canvia el format de l'adreça, el resultat és el mateix. ${PS.top_ab} dels ${PS.ab.k} primers de ${EPA} continuen entre els ${PS.ab.k} primers de ${EPB}.</p>
+<p class="aviso">Superar «llocs qualssevol» és fàcil: la majoria de cruïlles i trams no tenen cap sinistre. La comparació exigent és amb «si mantingueren el seu ritme». ${PSbajo().length ? `Hi ha excepcions: ${PSbajo().map(p => `els ${p.k} primers (${p.corte === "AB" ? `${EPA} → ${EPB}` : "tall de juliol de 2024"})`).join(" i ")} queden una mica per davall del seu interval, coherent amb el canvi de format de 2024, que fa que les cruïlles perden casos cap als trams.` : ""}</p>
+<h3>El Jardí del Túria, com a zona</h3>
+<p>El Pla posa el Jardí del Túria com a «carrer» n.º ${M.tur.pr} en sinistres amb bici. Però els seus <b>${fmt(M.tur.n)}</b> sinistres no porten un punt exacte («JARDÍN DEL TURIA», «S/N»): ${M.tur.geo === 0 ? "cap no es pot situar" : `només ${fmt(M.tur.geo)} es poden situar`}. Per això el mostrem com a <b>zona</b>: la xarxa ciclista del jardí amb un marge de ${M.tur.buffer} m, amb tots els seus sinistres. Només comptem el jardí: no la Gran Via Marqués del Túria ni el carrer Camp de Túria.</p>
+<h3>Límits</h3>
+<ul><li><b>No és risc per ús.</b> Un lloc pot tindre molts sinistres perquè hi passa molta gent.</li>
+<li><b>La posició tendeix a concentrar-se en el centre de la cruïlla.</b> Tots els sinistres d'una cruïlla van al mateix punt. En els ${M.n_neg} llocs, el ${pc(M.cruce_30)} dels sinistres estan situats com a cruïlla; en tota la ciutat, el ${pc(M.cruce_ciudad)}.</li>
+<li><b>Des de juliol de 2024 la policia anota menys sinistres «en la cruïlla»</b> i més per número de portal. Una cruïlla pot perdre casos sense que canvie res. És el cas de l'Albereda amb Saragossa: la seua cruïlla baixa, però en tot el passeig els sinistres amb bici o patinet quasi no canvien (${M.ala_paseo.map((v, i) => `${M.anys[i]}: ${fmt(v)}`).join("; ")}). A més, el lloc es va triar per ser el pitjor, i un lloc així sol millorar una mica per si sol. Sense un grup de comparació no atribuïm cap canvi a una obra.</li>
+<li><b>El nom de cada lloc ve del carrerer</b> (nom oficial i tipus de via abreujat), no de l'adreça més repetida, que de vegades era un portal. Cruïlla: els dos carrers que hi passen i que més anomenen les adreces de tots els sinistres del lloc (de qualsevol vehicle); en una rotonda o plaça xicoteta, el nom de la plaça, si l'anomenen almenys el ${pc(LG.plaza_votos)} dels seus sinistres. Tram: el carrer i els que el tanquen. Quan dos llocs es dirien igual (les dues calçades d'una avinguda), s'hi afig on és cadascun (N, S, E, O). Amb només ${EPA} o només ${EPB}, ${LG.nombres.top} dels ${LG.nombres.k} primers es dirien igual; en els altres canvia algun carrer de la mateixa cruïlla, o només la lletra de posició.</li>
+<li><b>Els noms publicats no canvien en silenci.</b> Un nom publicat és una referència (fitxes, enllaços, premsa). Es guarden en <code>data/processed/nombres_lugares.csv</code> amb la posició de cada lloc i, quan arriben dades noves, un lloc del mateix tipus (i, si és un tram, de la mateixa via) a ${LG.congela_tol} m o menys conserva el nom guardat; els llocs nous reben el nom calculat i s'hi afigen. Si en un dels ${M.n_neg} primers el nom calculat ja no coincideix amb el publicat, ho decideix una persona i, si es canvia, queda en el <a href="cambios.html">registre de canvis</a>.</li></ul>`,
+tec:()=>`<p>Càlcul en EPSG:25830 amb geopandas, shapely i scipy; el codi és comú per a l'anàlisi i la web (<code>scripts/lugares.py</code>; l'anàlisi, en <code>scripts/lugares_nudos.py</code>). Llavors de cruïlla: els ${fmt(LG.n_nodos)} nodes de grau 3 o més del graf de carrers (<code>ejes.geojson</code>, ja trossejat en els encreuaments) i els punts de cruïlla del geocodificador de tots els sinistres de la ciutat: ${fmt(LG.n_semillas)} llavors. Fusió: <i>buffer</i> de F/2 i dissolució (F = ${LG.F} m, enllaç simple). Rotondes: places (PLAÇA) de diàmetre ≤ ${LG.plaza_max} m amb les llavors a ≤ F/2, sense encadenar. Zona de la cruïlla: envolupant convexa de les seues llavors + R (R = ${LG.R} m). Trams: la resta de cada via, en peces iguals de ≤ ${LG.pieza} m; les peces de la mateixa via amb el punt mitjà a ≤ ${LG.paralela} m s'agrupen per enllaç complet (no encadena). Ordre: suma de pesos i, en empat, nombre de sinistres. El mapa dibuixa la zona de la cruïlla o la línia del tram.</p>
+<p>Persistència: s'ordena amb el període A (pesos) i es mesura la suma ponderada en B dels K primers, entre tots els ${fmt(LG.n_unid)} llocs del carrerer (també els que no tenen cap sinistre). Llocs qualssevol: ${fmt(PS.nsim)} permutacions dels valors de B, en tota la ciutat i dins de quadrats de ${PS.bloque} m («mateix barri»); en tots els casos, p &lt; 0,001. «Si mantingueren el seu ritme»: cada lloc conserva el seu total i el reparteix entre A i B amb una binomial (proporció del seu tipus); en cada simulació es tornen a triar els K primers amb A i se'n mesura B (interval del 90 %).</p>
+<p>Pista («a revisar»): prova binomial unilateral de cada categoria «amb qui» davant de la resta de llocs del mateix tipus, sense el lloc (cruïlles: vehicle ${pc(PI.ref.nudo.m)}, vianant ${pc(PI.ref.nudo.w)}, entre bicis o patinets ${pc(PI.ref.nudo.d)}, sol ${pc(PI.ref.nudo.s)}; trams: ${pc(PI.ref.tramo.m)}, ${pc(PI.ref.tramo.w)}, ${pc(PI.ref.tramo.d)} i ${pc(PI.ref.tramo.s)}); el Túria, davant de la resta de la ciutat. Holm sobre les ${PI.familia} proves del mapa (4 per lloc; els llocs amb menys de ${PI.min} sinistres compten com p = 1): ${PI.probadas} proves en ${PI.lugares_prob} llocs, i en passen ${PI.holm}. És un indici per a una visita, no un diagnòstic.</p>
+<p>Zona del Túria: trams de tipus «Jardín del Turia» (estat 4) de la capa 189, amb un marge de ${M.tur.buffer} m, i text de l'adreça amb la frase completa («JARDÍN DEL TURIA», «CAUCE DEL TURIA»…). ${M.dup_turia ? `${M.dup_turia} sinistres del Túria compten també en un dels ${M.n_neg} llocs.` : `Cap sinistre del Túria compta també en un dels ${M.n_neg} llocs.`}</p>`},
+
+normal:{h:"Per damunt de la mitjana dels punts amb un trànsit semblant",
+cos:()=>`<p>En <b>${EB.sitios} punts de comptatge</b> sabem quantes bicis passen (${EB.cont} comptadors). Els comptadors que miren el mateix lloc fan un sol punt: els que estan a menys de ${EB.agrupa} m i els del mateix tros de carrer sense cap encreuament entre ells, com els dos sentits del pont de l'Assut de l'Or, que abans eren dos punts. Això ens permet comparar cada punt amb altres de trànsit semblant.</p>
+<ol><li>Cada sinistre va al punt de comptatge més pròxim, si està a ${EB.radio} m o menys.</li>
+<li>Un model estadístic calcula quants sinistres té, de mitjana, un punt amb eixe trànsit de bicis i de cotxes i amb tants <b>encreuaments de carrers</b> a ${EB.radio} m: és <b>«la mitjana dels punts amb un trànsit semblant»</b>.</li>
+<li>Ajustem el recompte (Bayes empíric): si un punt té pocs sinistres, ens fiem més de la mitjana; si en té molts, més del seu propi recompte.</li>
+<li>Calculem la <b>probabilitat d'estar per damunt d'eixa mitjana</b> comptant els sinistres a ${R3("va")} m, cada distància amb el seu model.</li>
+<li>Ho repetim per a la <b>bici</b> i per al <b>patinet</b> per separat.</li></ol>
+${tabla("Tres nivells", ["Nivell", "Probabilitat d'estar per damunt de la mitjana", "Punts"], [
+  ["Clarament per damunt de la mitjana dels punts amb un trànsit semblant", `més de 0,95 a ${R3("va")} m`, fmt(EB.alta)], ["Potser per damunt", `més de 0,80 a ${EB.radio} m`, fmt(EB.quiza)], ["Com la mitjana", "la resta", fmt(resto)]])}
+<p>Clarament per damunt (sinistres / mitjana dels punts amb un trànsit semblant): ${CLARO("va")}.</p>
+<p><b>Per què aquest criteri:</b></p>
+<ul><li><b>Els encreuaments.</b> Molts sinistres se situen al centre de l'encreuament. Un comptador a meitat d'illa té pocs encreuaments dins del cercle de ${EB.radio} m; un al costat d'una plaça, molts. Sense tenir-ho en compte, part de l'«excés» era només això. Amb els encreuaments el model millora clarament (${pval(CRN.p)}), i els punts amb una probabilitat de més de 0,95 a ${EB.radio} m passen de ${CR0.p95} a ${CRN.p95}.</li>
+<li><b>Que no depenga de la distància.</b> Amb només ${EB.radio} m, ${RG.p1_100} punts superen 0,95, però la llista canvia molt si es compten els sinistres a 75 o a 150 m (les llistes s'assemblen poc: índex de Jaccard de ${fmt(EB.jaccard["75"], 2)} i ${fmt(EB.jaccard["150"], 2)}, on 1 vol dir idèntiques). Per això demanem que es mantinga amb les tres distàncies: en queden ${EB.alta}.</li>
+<li><b>Per damunt de la mitjana no vol dir anomalia.</b> El model ja preveu que els punts varien entre ells: d'entrada, el ${pc(SIM.a_priori_1)} està per damunt de la mitjana. Si simulem ${fmt(EB.crit.n_sim)} vegades la ciutat només amb eixa variació, sense cap punt «especial», ixen de mitjana ${fmt(SIM.p1, 1)} punts amb probabilitat de més de 0,95 a ${EB.radio} m (n'observem ${SIM.obs_p1}), i quasi cap dels marcats no està en realitat per davall de la mitjana (${fmt(SIM.fd1, 1)}). «Clarament» vol dir, doncs, que el punt està per damunt de la mitjana, no que siga una anomalia. Si demanem almenys un ${pc(EB.crit.umbral - 1)} més que la mitjana, en queden ${RG.pu_100} a ${EB.radio} m i ${RG.pu_3r} amb les tres distàncies: les dades no permeten parlar de punts anòmals.</li>
+<li><b>Bici i patinet per separat.</b> Amb el model de només bici, ${EB.bici_p95} punts superen 0,95 a ${EB.radio} m i ${EB.bici_claro} ho fan amb les tres distàncies; amb el de només patinet, ${EB.vmp_p95} i ${EB.vmp_claro}. Dels ${EB.alta} punts clarament per damunt, en ${DG.claro_solo_vmp} l'excés és només de patinet (amb la bici estan com la mitjana). Com que no sabem si els comptadors compten patinets, aquest excés pot ser només que hi passen més patinets dels que el comptador veu. Cada fitxa ho diu.</li>
+<li>Només cobreix els sinistres pròxims a un comptador: ${fmt(EB.asig)} de ${fmt(EB.geo)} situats (${pc(EB.asig / EB.geo)}).</li>
+<li><b>No prediu millor que el simple recompte.</b> Si ordenem amb dos anys i mirem els altres dos, el mètode guanya al recompte en ${V.top10.eb_gana} de ${V.particiones} combinacions.</li>
+<li>Suposem que els comptadors compten <b>bicis i, probablement, també patinets</b>, sense separar-los. Mobilitat no ho ha confirmat.</li>
+<li>No és un risc per persona. Entre punts de comptatge, els que tenen el doble de trànsit no tenen el doble de sinistres (elasticitat de ${fmt(EB.elast, 2)}; amb 1, els sinistres creixerien en la mateixa proporció que el trànsit). Amb només bici la diferència quasi desapareix (${fmt(EB.elast_bici, 2)}, compatible amb 1), així que pot vindre de la barreja de bicis i patinets que compten els comptadors. És una associació entre punts: no diu què passarà si creix el trànsit d'un punt.</li>
+<li>La franja del gràfic de l'informe és la <b>variació habitual entre punts amb un trànsit semblant</b>, segons el mateix model (95 %): ${EB.banda.encima} punts en queden per damunt i ${EB.banda.debajo} per davall. El color dels punts segueix la regla de la taula, no la franja.</li></ul>`,
+tec:()=>`<p><b>Model</b> (statsmodels): binomial negativa (NB2) per punt i any, log μ = b<sub>0</sub> + b<sub>1</sub> log IMD bici + b<sub>2</sub> log IMD vehicles + b<sub>3</sub> log(1 + encreuaments) + indicador «sense tram aforat» + efecte d'any. IMD de vehicles: màxim dels trams a ${EB.radio} m o menys, només ${M.imd_veh}. Elasticitat de la IMD bici: ${fmt(EB.elast, 2)} (amb només bici, ${fmt(EB.elast_bici, 2)}, compatible amb 1; és una elasticitat entre punts, no dins de cada punt); b<sub>3</sub> = ${fmt(EB.cruces_coef, 2)}; α = ${fmt(EB.alpha, 3)} (bici, ${fmt(EB.alpha_bici, 3)}; patinet, ${fmt(EB.alpha_vmp, 3)}). Els efectes d'any no es publiquen: recullen també la cobertura creixent del mapa.</p>
+<p><b>Encreuaments</b>: nodes de grau 3 o més del graf de carrers (<code>ejes.geojson</code>; ${fmt(EB.crit.nodos)} a tota la ciutat) a ${EB.radio} m o menys del punt (en cada radi, els del seu radi); mediana de ${fmt(CR.mediana)} per punt (de ${CR.rango[0]} a ${CR.rango[1]}). No usen cap sinistre. Comparació amb el model sense encreuaments (raó de versemblança, 1 gl): nodes, LR = ${fmt(CRN.lr, 1)} (${pval(CRN.p)}; AIC ${fmt(CRN.aic, 1)} davant de ${fmt(CR0.aic, 1)}); nusos de <code>scripts/lugares.py</code> fets només amb el carrerer (els nodes fosos a 30 m; ${fmt(EB.crit.nudos)}), LR = ${fmt(CRF.lr, 1)} (AIC ${fmt(CRF.aic, 1)}); nusos de la web, que hi afigen els punts de cruïlla del geocodificador (és a dir, posicions de sinistres), LR = ${fmt(CRW.lr, 1)} (AIC ${fmt(CRW.aic, 1)}). Triem els nodes: no depenen dels sinistres i ajusten molt millor que els nusos fosos, perquè en fondre es perd la mida de l'encreuament (una cruïlla d'avinguda amb dues calçades i carril bici té diversos nodes, i més punts de conflicte). El semàfor a ${EB.radio} m no millora el model.</p>
+<p><b>Bayes empíric</b> (Hauer; Highway Safety Manual, cap. 9): w = 1 / (1 + α Σμ); EB = w Σμ + (1 − w) ΣN. Probabilitat d'excés: P(θ > 1) amb la posterior gamma(1/α + N, 1/α + Σμ) (scipy); també P(θ > ${fmt(EB.crit.umbral, 1)}). La posterior tracta μ i α com a coneguts.</p>
+<p><b>Calibratge per simulació</b> (${fmt(EB.crit.n_sim)} vegades, amb μ i α fixos): θ<sub>i</sub> ~ gamma(1/α, α) i N<sub>iy</sub> ~ Poisson(θ<sub>i</sub> μ<sub>iy</sub>). Regla P(θ > 1) > 0,95 a ${EB.radio} m: s'esperen ${fmt(SIM.p1, 1)} punts, dels quals ${fmt(SIM.fd1, 1)} amb θ < 1; s'observen ${SIM.obs_p1}. Regla P(θ > ${fmt(EB.crit.umbral, 1)}) > 0,95: s'esperen ${fmt(SIM.pu, 1)} i s'observen ${SIM.obs_pu}.</p>
+<p><b>Franja</b> del gràfic: quantils 2,5 % i 97,5 % de la predictiva del model, NB(1/α, Σμ) (el total dels anys d'un punt amb θ fix).</p>
+<p>Un punt-any només compta si tots els seus comptadors tenen dada: ${EB.na4} de ${EB.sitios} punts tenen tots els anys amb intensitats (${M.anys_eb[0]}-${M.anys_eb[M.anys_eb.length - 1]}).</p>
+<p><b>Punts de comptatge</b>: s'ajunten els comptadors a menys de ${EB.agrupa} m i els del mateix enllaç d'una via: el mateix carrer (eix més pròxim a ≤ ${EB.enlace.via_tol} m), a ≤ ${EB.enlace.misma_via} m i sense cap node de grau 3 o més en un passadís de ${EB.enlace.pasillo} m a cada costat del segment que els uneix (amb 10 m hi passaven parelles de blocs diferents de Blasco Ibáñez, perquè el segment va pel bulevard). Així s'ajunten ${EB.enlace.enlace.map(g => g.join(" + ")).join("; ")}. IMD del punt: la suma dels seus comptadors, llevat que un del mateix enllaç diga «ambdós sentits», que ja ho compta tot (${EB.enlace.ambos.join(", ")}: sumar-los duplicaria la IMD). Zona del punt: la unió dels cercles dels seus comptadors; cada sinistre va al comptador més pròxim i compta per al seu punt, de manera que cap sinistre no compta en dos punts. Amb el centre, el cercle de l'Assut quedaria al mig del pont, a 164 m de cada comptador, i deixaria fora els dos extrems.</p>
+<p><b>Validació fora de mostra</b> sense fuga: les ${V.particiones} particions dels quatre anys en 2 + 2; s'ordena amb un model ajustat només amb els dos primers i es mesura l'excés en els altres dos. Top 10: el mètode supera el recompte en ${V.top10.eb_gana} de ${V.particiones}; diferència per bootstrap pareat de punts (IC 95 %) de ${fmt(V.top10.ic95[0], 1)} a ${fmt(V.top10.ic95[1], 1)} sinistres, que inclou el zero. Spearman mitjà entre l'excés estimat i el que es veu després: ${fmt(V.spearman_AB, 2)}. Codi: <code>scripts/cribado_eb.py</code>.</p>`},
+
+plan:{h:"Què diu el Pla",
+cos:()=>`<p>Hem transcrit el Pla Director de Seguretat Viària 2026-2030: <b>${M.plan.ind} indicadors</b> i <b>${M.plan.lugares} llocs</b> que cita (${M.plan.diag} com a diagnòstic i ${M.plan.act} amb una actuació). Dels indicadors, amb dades obertes en podem calcular ${M.plan.calc["sí"]}, ${M.plan.calc.parcial} en part i ${M.plan.calc.no} no.</p>
+<h3>Quan diem que el Pla «cita aquest lloc»</h3>
+<p>L'anell del mapa té tres nivells (fins al 04/11/2026, el tercer era un anell discontinu, que costava distingir del de punts):</p>
+<ul><li><b>Continu, «el Pla cita aquest lloc»</b>: nomena eixa cruïlla o plaça (o la zona, com el Túria), amb actuació o sense.</li>
+<li><b>De punts, «el Pla només cita el seu carrer»</b>: el Pla nomena el seu carrer: en els rànquings de carrers amb més sinistres (amb patinet, amb bici o amb vianants) o per alguna actuació, com un radar. La fitxa de cada lloc explica el motiu.</li>
+<li><b>Sense anell, «el Pla no l'esmenta»</b>: el Pla no nomena ni el lloc ni el seu carrer.</li></ul>
+<p><b>Què no prova l'anell.</b> El Pla només publica els ${M.plan.pl3.top} primers de cada rànquing (encreuaments i carrers amb més sinistres amb patinet, amb bici i amb vianants). Que no esmente un lloc no vol dir que el desconega: potser és el quart de la seua llista. Per això demanem la llista completa.</p>
+<p><b>Què no compta com a cita.</b> El Pla ha de nomenar el lloc o el seu carrer en un rànquing o amb una actuació. No compten una foto d'exemple (l'avinguda de Peris i Valero apareix només en una foto d'un pas de vianants accessible; per això el lloc de Peris i Valero amb la plaça de Manuel Sanchis Guarner figura com a «no l'esmenta») ni l'Anell Ciclista, que el Pla cita com la via ciclista amb més ús: és una infraestructura, no un rànquing de sinistres ni una actuació en eixe lloc.</p>
+<h3>Diagnòstic no és actuació</h3>
+<ul><li><b>Diagnòstic</b>: el Pla diu que el lloc té molts sinistres.</li>
+<li><b>Actuació</b>: el Pla diu que s'hi ha fet o s'hi farà alguna cosa (auditoria, reordenació, radar o estudi).</li></ul>
+${tabla(`Els ${M.plan.pl3.n} llocs amb més sinistres, segons el Pla`, ["El Pla…", "Llocs"], [
+  ["cita aquest lloc", fmt(M.plan.pl3.lugar)], ["només cita el seu carrer", fmt(M.plan.pl3.calle)], ["no l'esmenta", fmt(M.plan.pl3.no)]])}
+<p>Dels ${fmt(M.plan.pl3.lugar)} llocs citats, ${fmt(M.plan.pl3.lugar_act)} té a més una actuació (l'Albereda amb la plaça de Saragossa). ${M.plan.alguna} dels ${M.n_neg} apareixen en el Pla d'alguna manera, també en les llistes de vianants o amb un radar en el carrer.</p>`,
+tec:()=>`<p>Transcripció: <code>scripts/transcribir_pdsv.py</code> → <code>data/processed/pdsv_indicadores.csv</code> i <code>pdsv_lugares.csv</code>. Si una cita és diagnòstic o actuació ho diu la columna <code>kind</code>, escrita a mà en llegir el Pla; no es dedueix del text.</p>
+<p>Correspondència: cada lloc del Pla té unes paraules clau (sense accents, en majúscules); totes han d'aparéixer en alguna adreça dels sinistres del lloc. La regla de l'anell està en <code>scripts/exportar_web.py</code> i és la mateixa per a l'observatori i per a l'informe.</p>
+<p>Tots els ${M.plan.lugares} llocs del Pla estan decidits: o tenen paraules clau (<code>CLAVES</code>) o un motiu per a no emparellar-los (<code>SIN_CLAVE</code>); si n'apareix un sense decidir, el script s'atura i <code>make comprobar</code> dona error. Sense paraules clau (${M.plan.sin_clave.length}):</p>
+<ul>${M.plan.sin_clave.map(([n, m]) => `<li>${n}: ${m.va}.</li>`).join("")}</ul>
+<p>Fins al 04/11/2026, 12 llocs no tenien paraules clau i se saltaven sense avís; per això el repartiment era 4 · 11 · 15 i, per exemple, Tres Creus amb Campos Crespo (n.º 3 dels encreuaments amb vianants del Pla) eixia com «no l'esmenta».</p>`},
+
+gravedad:{h:"Gravetat",
+cos:()=>`<p>El portal classifica cada sinistre per la seua lesió més greu: sense ferits, lleus, de baixa gravetat, greus i morts.</p>
+<p>Durant 2023 es va aplicar a poc a poc el criteri estatal (Ordre INT/2223/2014): <b>ferit greu és qui està hospitalitzat més de 24 hores</b>. Abans, «greu» era només per a lesions molt severes. El mateix Pla ho explica.</p>
+${tabla("Sinistres amb ferits greus", ["Any", "Tota la ciutat", "Amb bici o patinet"], M.anys.map(a => [a, fmt(M.grav_todos[a]), fmt(M.grav_bv[a])]))}
+<p>El salt de ${fmt(M.grav_todos[A0])} a ${fmt(M.grav_todos[A1])} és, sobretot, el canvi de criteri. <b>Els ferits greus només són comparables des de 2024.</b> I no tota la gravetat s'ha estabilitzat: els sinistres «de baixa gravetat» amb bici o patinet encara pugen un ${pc(M.baja_bv[A1] / M.baja_bv[A1 - 1] - 1)} entre ${A1 - 1} i ${A1}, molt més que el total de sinistres. El mateix Pla en dona tres xifres per a 2024 (${M.plan_graves_2024.map(x => fmt(x)).join(", ")}), segons la font i segons si compta persones o sinistres.</p>
+<p class="aviso">La gravetat és la del sinistre (inclou vianants i ocupants d'altres vehicles), no la de qui anava en bici o patinet.</p>`,
+tec:()=>`<p>Categories del portal: SIN HERIDOS, CON HERIDOS LEVES, CON HERIDOS BAJA GRAVEDAD, CON HERIDOS GRAVES i CON FALLECIDOS. «Baixa gravetat» també creix any rere any (amb bici o patinet: ${M.anys.map(a => fmt(M.baja_bv[a])).join(", ")}), cosa que apunta a una reclassificació. Per això les comparacions de gravetat entre bici i patinet es fan dins de cada any.</p>`},
+
+limites:{h:"El que no es pot saber amb estes dades",
+cos:()=>`<ul><li><b>Si el patinet és més perillós que la bici per viatge.</b> No hi ha comptadors que els separen.</li>
+<li><b>Persones.</b> El portal dona sinistres, no persones ferides, ni edat ni sexe.</li>
+<li><b>Qui conduïa què o de qui és la culpa.</b> Els factors són del sinistre, no de cada vehicle.</li>
+<li><b>El tipus de sinistre abans de ${TD}.</b> Ve complet ${TD === A1 ? "només en" : "des de"} ${TD}: en ${A0}, el ${pc(M.tipo_lleno[A0])}.</li>
+<li><b>Els sinistres sense punt.</b> El ${pc(1 - M.cob_bv_tot)} no es poden situar, i el Túria només com a zona.</li>
+<li><b>La gravetat abans de 2024</b>, per canvi de criteri.</li>
+<li><b>L'ús fora del carril bici</b>: calçada, ciclocarrers i Túria.</li>
+<li><b>Causes.</b> Si una obra o una norma ha fet baixar els sinistres, sense un grup de comparació.</li>
+<li><b>Llocs dolents només per al patinet.</b> Amb pocs sinistres per lloc, no es detecta cap diferència. «No detectable» no vol dir «no existeix».</li>
+<li><b>Els sinistres que no registra la Policia Local</b>, com moltes caigudes sense intervenció.</li>
+<li><b>Si canvia quant es vigila o es denuncia.</b> Només entren els sinistres amb atestat, i això no afecta igual la bici i el patinet: caigudes sense atestat, controls al patinet, casc obligatori en patinet des de l'1 d'octubre de 2026 (<a href="https://www.boe.es/buscar/act.php?id=BOE-A-2026-13889">Real Decreto 518/2026</a>). Si canvia, pot canviar el nombre registrat sense que canvie el risc, i també la part de sinistres amb patinet.</li></ul>`,
+tec:()=>`<p>Comparacions entre bici i patinet que sí es poden fer, condicionades al sinistre (proporcions entre sinistres, sense exposició): pluja, nit, tipus (${A1}) i gravetat dins de l'any. Codi: <code>scripts/vmp_vs_bici_condicionado.py</code>. A escala de cruïlla o tram, sense diferència detectable (<code>scripts/vmp_vs_bici.py</code>).</p>`},
+
+errores:{h:"Errors detectats en les dades",
+cos:()=>`<p>En treballar amb les dades de l'Ajuntament hem trobat <b>${INC.n}</b> incidències: files repetides, camps buits, canvis de criteri entre anys, dades que falten o fitxers difícils de reutilitzar. No és una crítica: les tenim en compte en l'anàlisi i les comuniquem a l'Ajuntament perquè es puguen corregir. Sense el portal de dades obertes, este observatori no seria possible.</p>
+${tablaInc("Incidències en les dades de l'Ajuntament", ["Conjunt", "Què passa", "Com ho tractem", "Estat"])}
+<p class="aviso">Estat: «Detectada» vol dir que encara no l'hem comunicada; després pot ser «Comunicada», «Amb resposta», «Corregida» o «No es corregirà».</p>
+<p><b>Has vist un altre error en les dades o en esta web?</b> Escriu-nos a <a href="mailto:${CORREU}">${CORREU}</a>.</p>`,
+tec:()=>`<p>Registre: <code>data/processed/incidencias_datos.csv</code>, amb l'exemple, l'abast, l'impacte, com ho tractem, el suggeriment i la prova reproduïble de cada incidència. <code>scripts/incidencias.py</code> (<code>make incidencias</code>) en torna a comprovar ${INC.auto} automàticament amb cada descàrrega de dades, per a saber si continuen o s'han corregit, i escriu l'informe per a l'Ajuntament; les altres ${INC.n - INC.auto} es comproven a mà. Cap exemple conté dades personals: són identificadors de fila o valors dels camps.</p>`},
+
+revisiones:{h:"Revisions i reproducibilitat",
+cos:()=>`<p>Hem fet revisions automàtiques pròpies: agents d'intel·ligència artificial llançats pel mateix projecte, que no veien les nostres notes, han recalculat les xifres des de les dades. No són una revisió externa.</p>
+<h3>Què va canviar per la revisió independent</h3>
+<ul><li>Retirem l'augment del patinet «amb el mateix ús»: estava inflat per la cobertura creixent del mapa.</li>
+<li>Retirem la targeta que deia que en cap cruïlla el patinet ix pitjor: era falta de dades, no una prova.</li>
+<li>Els llocs amb més sinistres es trien amb tot el període i amb pes per cobertura.</li>
+<li>La marca «a revisar» de les fitxes només ix amb una prova estadística i amb prou casos.</li>
+<li>El trànsit mitjà diari (IMD) de cada punt es divideix pels anys amb dada, no sempre per ${M.anys_eb.length}.</li>
+<li>La línia base: primer 2024, l'any dels ferits greus; rellegit el text del Pla, passa a ${B}, l'últim any abans del Pla, i 2024 queda com a alternativa.</li></ul>
+<h3>Què va canviar per la revisió de coherència</h3>
+<ul><li>Túria: només el jardí. Abans hi entraven la Gran Via Marqués del Túria i el carrer Camp de Túria.</li>
+<li>Un color, un significat, i l'ordre fix bici, patinet i xoc bici–patinet.</li>
+<li>Termes únics en les dues pàgines: «llocs amb més sinistres», «el normal per al trànsit», «senda proposada».</li>
+<li>L'anell del Pla, en tres nivells: cita el lloc, només cita el seu carrer o no l'esmenta.</li>
+<li>Els tres nivells de «més del normal», iguals en l'observatori i en l'informe.</li></ul>
+<h3>Què va canviar per la revisió metodològica</h3>
+<ul><li>L'anell del Pla passa de 4 · 11 · 15 a 5 · 12 · 13 (cita el lloc · només el carrer · no l'esmenta), i amb els llocs per cruïlla i tram, a ${M.plan.pl3.lugar} · ${M.plan.pl3.calle} · ${M.plan.pl3.no}: alguns llocs del Pla se saltaven sense avís. I com que el Pla només publica els primers de cada llista, que no esmente un lloc no vol dir que el deixe fora.</li>
+<li>La pujada de 2022-2025 es compara amb la de tota la ciutat, que és la mateixa.</li>
+<li><b>Els llocs</b>: ja no són quadrats de 100 m, sinó cruïlles i trams de carrer, perquè la llista depenia de com es dibuixava la quadrícula (es mantenien entre ${ES.rejilla.ret[0]} i ${ES.rejilla.ret[1]} de 30; ara, entre ${ESmin()} i ${ESmax()}). Desapareix la marca «entre els primers en les tres etapes», que es mesurava amb les mateixes dades que trien els llocs; en el seu lloc, comprovem si es repeteixen en anys diferents dels que servixen per a triar-los. La marca «a revisar» es compara amb llocs del mateix tipus i amb una correcció per fer moltes proves alhora (Holm) en tot el mapa (passa de 8 llocs, amb el Túria, a ${M.pista.con.length ? new Set(M.pista.con.map(c => c[0])).size : 0}). L'anell del Pla s'ha recalculat amb els llocs nous. Les barres per any de les fitxes estan corregides per la cobertura.</li>
+<li>L'Albereda amb Saragossa: la baixada de la seua cruïlla no s'atribueix a l'obra (canvi en com s'anota l'adreça i tornada a la mitjana).</li>
+<li>Les fitxes ja no marquen «no es manté entre els primers»: és compatible amb un lloc que sí es repeteix.</li>
+<li>«Més del normal» passa a «per damunt de la mitjana dels punts amb un trànsit semblant»; l'elasticitat és una associació entre punts.</li>
+<li><b>Per damunt de la mitjana dels punts amb un trànsit semblant</b> (abans, «més del normal per al trànsit»): el model té en compte els encreuaments a ${EB.radio} m; «clarament» s'ha de mantindre comptant els sinistres a ${R3("va")} m (passen de 21 punts a ${EB.alta}); cada fitxa dona la bici i el patinet per separat i avisa quan l'excés és només de patinet (${DG.claro_solo_vmp} dels ${EB.alta}); la franja del gràfic és la variació entre punts semblants del mateix model, i no la del simple atzar (Poisson), que en deixava fora 46 de 145; i ja no es calculen els índexs d'any del model, que recollien la cobertura creixent del mapa.</li>
+<li>Els exemples de l'informe es trien per regla: el punt amb més sinistres dels que estan com la mitjana, el «clarament» només de patinet amb més sinistres i el «clarament» que no és només de patinet amb menys sinistres. Abans eren Xàtiva amb Russafa, que ara és «potser», i Balaciart amb Primado Reig, que ja no es manté amb les tres distàncies.</li>
+<li>El mapa diu «On s'acumulen», no «On actuar».</li>
+<li><b>La meta</b>: es parla de «l'indicador de l'acció 3.2.2», no d'un compromís de la ciutat; s'avisa que ${B} és el pitjor any de la sèrie i es comprova amb la mitjana ${EM.etq} (meta ${fmt(EM.meta)}); s'explica el recompte per vehicle del Pla (meta ${fmt(MT.vehiculo.meta)}); cada any es jutja amb un marge de l'atzar (per davall, compatible o per damunt de la senda) i no amb la xifra exacta; i s'hi afigen dues sèries de control (amb ferits i part de la ciutat). ${E1["año"]} queda com a alternativa, no com a comparació principal.</li>
+<li>Limitacions noves: la infradeclaració i la vigilància, diferents per a bici i patinet, i la «baixa gravetat» en ${A1}.</li></ul>
+<h3>Reproducibilitat</h3>
+<ul><li>El codi (scripts en Python que llegeixen les dades descarregades) es publicarà amb la versió definitiva; encara no és públic.</li>
+<li><code>make</code> ho refà tot des de les dades; <code>make web</code> només la web.</li>
+<li><code>make comprobar</code> revisa les dades noves (anys, cobertura, categories noves, totals comparats amb el Pla) i que la web tinga les mateixes claus en valencià i castellà.</li>
+<li><b>Cap xifra calculada està escrita a mà</b>: les calcula <code>scripts/exportar_web.py</code>. Les excepcions són xifres transcrites i citades de documents: les del Pla Director (com els ferits greus de 2024), la de premsa sobre 2026 i els conteos manuals de patinets.</li></ul>`,
+tec:()=>`${tabla("Versions", ["Programa", "Versió"], [["Python", M.python], ...Object.entries(M.libs)])}
+<p>Informes: <code>docs/revision_independiente.md</code>, <code>docs/revision_coherencia.md</code> i <code>docs/revision_metodologica/</code>.</p>`},
+
+futuro:{h:"Línies futures",
+cos:()=>`<ul><li><b>Registre de vehicles personals lleugers de la DGT</b> (Reial Decret 52/2026). Si publica dades per municipi, servirà per a mesurar l'exposició del patinet: sinistres per patinet registrat.</li>
+<li><b>Dades de ${A1 + 1}.</b> Quan el portal publique l'any complet, <code>make</code> l'afig sense tocar el codi i <code>make comprobar</code> avisa si canvia el format.${A1 + 1 === MT["año_plan"] ? " Serà el primer any del Pla, amb casc obligatori en patinet des d'octubre." : ""}</li>
+<li><b>Coordenades en origen.</b> Si el portal publicara la posició de cada sinistre, el mapa no dependria de l'adreça escrita.</li>
+<li><b>Comptadors que separen bici i patinet</b>, per a calcular el risc per viatge de cada un.</li></ul>`,
+tec:()=>`<p>Els anys es dedueixen de les dades (anys amb els 12 mesos). La meta (−50 % en 2030) és del Pla; l'any base (${B}) és una proposta nostra i es canvia en <code>AÑO_BASE</code> de <code>scripts/exportar_web.py</code>.</p>`}
+}},
+
+es:{
+marca:"Observatorio de la bici y el patinete de València", nav_obs:"Observatorio", nav_inf:"Informe", nav_pla:"El Plan, al día", salta:"Salta al contenido", toc:"Índice", tec:"Detalle técnico",
+ey:"Método", h1:"Cómo lo hemos hecho",
+sub:"Cada decisión del proyecto, explicada en lenguaje llano. El detalle técnico, en las cajas plegables. Todas las cifras de esta página se calculan con los mismos datos y el mismo código que el resto de la web.",
+sec:{
+datos:{h:"Los datos",
+cos:()=>`<p>Partimos del conjunto <b>«Siniestros de tráfico»</b> del portal de datos abiertos del Ayuntamiento. Tiene <b>${fmt(M.filas)}</b> filas: una por siniestro que registra la Policía Local.</p>
+<p>Solo usamos años completos: <b>${A0}-${A1}</b>. Las ${fmt(M.fuera)} filas de ${M.fuera_anys.join(", ")} quedan fuera hasta que el año esté completo. Hay <b>${fmt(M.dup)}</b> filas repetidas, iguales en todo salvo el identificador: las contamos una sola vez.</p>
+<p>De cada siniestro, el portal da la fecha y la hora, la gravedad, el tipo, los vehículos y los factores. El lugar viene escrito, como una dirección («AV DEL PUERTO 12» o «C/ X cruce AV Y»). <b>No trae coordenadas.</b> Las ponemos nosotros con el callejero municipal.</p>
+${tabla("Fuentes", ["Conjunto", "Para qué", "Tamaño"], [
+  ["Siniestros de tráfico (portal)", "contar y situar cada siniestro", `${fmt(M.filas)} filas`],
+  ["Callejero: vías, ejes y portales (portal)", "poner coordenadas a la dirección", `${fmt(M.n_ejes)} tramos de eje`],
+  ["Carril bici, capa 189 (portal)", "red ciclista y Jardín del Turia", `${fmt(M.km_ciclo, 1)} km de tramos`],
+  ["Contadores de bici (espiras), capa 225 (portal), y su tráfico medio diario (IMD), de Movilidad (valencia.es)", "tráfico en el carril bici", `${fmt(M.n_cont)} contadores con datos`],
+  [`Tráfico medio diario de vehículos (IMD) de ${M.imd_veh}, de Movilidad, y tramos, capa 188 (portal)`, "tráfico de coches alrededor", "—"],
+  ["Cruces con semáforo (reguladores), capa 182 (portal)", "contexto de cada lugar", `${fmt(M.n_reg)} reguladores`],
+  ["OpenStreetMap (complemento externo)", "semáforos que faltan en la capa 182", `${fmt(M.n_osm)} semáforos`]])}
+<h3>Cuántos siniestros podemos poner en el mapa</h3>
+<p>Situamos en el mapa el <b>${pc(M.cob_bv_tot)}</b> de los siniestros con bici o patinete (${fmt(M.n_geo)} de ${fmt(M.n_bv)}). Pero el porcentaje cambia con los años, porque depende de cómo se anotaba el lugar en el portal. Hay tres etapas.</p>
+${tabla("Siniestros situados en el mapa, por etapa del portal", ["Etapa", "Con bici o patinete", "Todos los siniestros", "Solo el nombre de la calle", "Cruce que no existe"],
+  PER.map(p => [perTxt(p), pc(M.cob_bv[p]), pc(M.cob_todos[p]), pc(M.solo_calle[p]), pc(M.cruce_fallo[p])]))}
+<ul><li>Hasta ${mes(M.per.P1[1])}, muchas filas traen solo el nombre de la calle, sin número ni cruce. No se pueden situar.</li>
+<li>Hasta ${mes(M.per.P2[1])}, algunos «cruces» son de dos calles que no se tocan, a veces a más de un kilómetro. Parece que quieren decir «a la altura de».</li>
+<li>Desde ${mes(M.per.P3[0])}, casi todas traen número o un cruce real.</li></ul>
+<p>Consecuencia: <b>cualquier tendencia hecha solo con los siniestros del mapa crece de forma artificial.</b> Por eso el seguimiento del indicador del Plan lo hacemos con todos los siniestros, situados o no. Y en el mapa, cada siniestro pesa según lo bien que se situaban los de su año y tipo de dirección (sección 5).</p>`,
+tec:()=>`<p><b>Geocodificación</b>, es decir, cómo ponemos coordenadas a cada dirección (<code>scripts/geocodificar.py</code>, shapely y pyproj en EPSG:25830):</p>
+<ul><li><b>Cruce</b>: punto medio de los dos vértices más cercanos de los ejes de las dos vías, si están a 40 m o menos. Si no, la distancia entre segmentos, con el mismo umbral. Se hace en ese orden para que ningún cruce ya situado se mueva.</li>
+<li><b>Portal</b>: coordenadas del número en la capa de portales. <b>Portal cercano</b>: el número más cercano de la misma calle.</li>
+<li>Nombre normalizado (sin tildes, «PROFESSOR» = «PROFESOR», «L·L» = «L.L», paréntesis truncados) y una tabla de 4 equivalencias de calles renombradas (<code>data/processed/equivalencias_calles.csv</code>).</li></ul>
+<p>De los siniestros con bici o patinete situados: ${pc(M.metodo.cruce)} por cruce, ${pc(M.metodo.portal)} por portal y ${pc(M.metodo.portal_cercano || 0, 1)} por portal cercano.</p>
+<p>Etapas del portal: cortes en ${M.cortes.join(" y ")} (inicio de la segunda y la tercera). Duplicados: filas iguales en todas las columnas salvo <code>_id</code>. Dato crudo roto: ${fmt(M.unidades_rotas)} filas con los vehículos vacíos («[»).</p>
+<p>Validación: muestra de 50 puntos contrastada con OpenStreetMap (Nominatim). Comprueba el nombre de la calle, no el error en metros.</p>`},
+
+contar:{h:"Cómo contamos",
+cos:()=>`<p>Un siniestro puede implicar varios vehículos. Cada siniestro con bici o patinete va a una sola de tres categorías:</p>
+<div class="cats"><span>${sw("bici")}Solo bici</span><span>${sw("pat")}Solo patinete</span><span>${sw("amb")}Choque bici–patinete</span></div>
+<ul><li><b>Solo bici</b>: hay al menos una bici y ningún patinete. Puede haber coches o peatones.</li>
+<li><b>Solo patinete</b>: hay al menos un patinete eléctrico (VMP) y ninguna bici.</li>
+<li><b>Choque bici–patinete</b>: hay al menos una bici y un patinete. El <b>${pc(M.amb_solo)}</b> son choques solo entre ellos, sin ningún coche ni peatón.</li></ul>
+${tabla("Siniestros por año y categoría", ["Año", "Solo bici", "Solo patinete", "Choque bici–patinete", "Total (cada uno una vez)", "Con bici", "Con patinete"],
+  M.anys.map(a => [a, fmt(SER[a].b), fmt(SER[a].p), fmt(SER[a].a), `<b>${fmt(M.bv[a])}</b>`, fmt(M.bici[a]), fmt(M.vmp[a])]))}
+<p><b>Dos formas de contar, cada una en su sitio:</b></p>
+<ul><li>En las <b>barras y los quesitos</b>, cada siniestro cuenta <b>una vez</b>. Es el total con el que seguimos la meta.</li>
+<li>En las <b>líneas «bici» y «patinete»</b>, el choque bici–patinete cuenta <b>en las dos</b>, como hace el Plan. Por eso, en ${A1}, bici más patinete suma ${fmt(sumUlt)}, y el total es ${fmt(M.bv[A1])}.</li></ul>
+<p><b>Colores en orden fijo</b> en todas las páginas: bici, patinete y choque bici–patinete. Se han elegido para que se distingan también con daltonismo. El naranja y el verde tienen poco contraste sobre fondo claro: por eso siempre van con etiqueta o leyenda.</p>`,
+tec:()=>`<p>Bici = «BICICLETA» en el campo de vehículos; patinete = «VMP» (vehículo de movilidad personal). Las series «con bici» y «con patinete» coinciden con las del Plan, con diferencias de 1 o 2 siniestros por año (el Plan las saca del sistema de la Policía Local en otra fecha). El Plan nunca da la unión: sumar sus dos series cuenta dos veces los choques bici–patinete.</p>
+<p>Paleta validada con un comprobador de contraste y daltonismo (deuteranopía, protanopía y tritanopía), en modo claro y oscuro.</p>`},
+
+meta:{h:"La meta y la línea base",
+cos:()=>`<p>La acción 3.2.2 del Plan Director de Seguridad Vial pone este indicador:</p>
+<p class="cita">«Reducción de siniestros con ciclistas/VMP: −50 %». Línea base: «—». Fórmula: «Comparación anual».</p>
+<p><b>Es el indicador de una acción, no la meta global del Plan</b>, que es de personas fallecidas y heridas graves (lo explicamos en el detalle técnico). Como la mayoría de los indicadores del Plan (${fmt(M.plan.sin_base)} de ${fmt(M.plan.ind)}), tiene la línea base vacía, y tampoco dice cómo se cuenta ni cómo se juzga cada año. Lo tenemos que decidir nosotros, y lo explicamos aquí.</p>
+<h3>La línea base: ${B}</h3>
+<p>Tomamos <b>${B}</b>, el último año antes del Plan. Por qué:</p>
+<ul><li>el Plan se plantea «con el año ${MT["año_plan"]} como punto de partida» y vale para ${MT["año_plan"]}-2030;</li>
+<li>su diagnóstico ya analiza ${B}: estudia la evolución «entre los años 2019 hasta 2025» y en detalle 2023, 2024 y 2025 (apartado 2.3.2);</li>
+<li>el Plan elige ${E1["año"]} solo para los heridos graves, por la <b>calidad del dato de gravedad</b>: desde ${E1["año"]} la Policía Local adapta cada siniestro a los criterios estatales (nota 2 de la pág. 23, que remite al apartado 2.3.2). Ese motivo no afecta al recuento de siniestros, que es lo que mide la acción 3.2.2.</li></ul>
+${MT.max ? `<p class="aviso"><b>${B} es el peor año de la serie.</b> Partir del peor año favorece al Plan: después de un año muy alto, el siguiente suele ser más bajo aunque no cambie nada (es la vuelta a la media). Por eso lo comprobamos también con la <b>media ${EM.etq}</b>: ${fmt(EM.base_x)} siniestros de media, meta ${fmt(EM.meta)}. Si con base ${B} se cumple y con la media no, lo diremos.</p>` : ""}
+${tabla("Líneas base", ["Línea base", "Siniestros en la base", "Meta 2030 (−50 %)", "Senda: bajada cada año", `Bajada anual necesaria desde ${MT.desde}`, `Margen para ${MT.desde}`],
+  ESC().map(([e, n]) => [`${e.etq} (${n})`, fmt(e.base), fmt(e.meta), pc(e.senda_anual, 1), pc(e.necesaria, 1), e.banda[MT.desde] ? `${fmt(e.banda[MT.desde][0])}-${fmt(e.banda[MT.desde][1])}` : "—"]), i => i === 0)}
+<ul><li><b>La senda es una propuesta nuestra</b>: la misma bajada en porcentaje cada año, hasta llegar a la meta en 2030. No es del Plan.</li>
+<li><b>La línea base y la senda las debería fijar el Ayuntamiento.</b> Si fija otras, el observatorio las cambiará.</li>
+<li>${E1["año"]} queda como alternativa a la vista, pero ya no es la comparación principal.</li></ul>
+<h3>Cómo contamos</h3>
+<p>Cada siniestro con al menos una bici o un patinete, situado o no en el mapa, cuenta <b>una vez</b>: en ${B}, ${fmt(E0.base)}, y la meta, ${fmt(E0.meta)}. Las tablas del Plan cuentan por vehículo (bici y VMP por separado), así que un choque bici–patinete cuenta dos veces (${fmt(MT.vehiculo.dobles)} en ${B}). Con ese criterio, la base sería ${fmt(MT.vehiculo.base)} y la meta, ${fmt(MT.vehiculo.meta)}.</p>
+<h3>Cómo se juzga cada año</h3>
+<p>Aunque el Plan fuera exactamente por la senda, el número de siniestros de un año variaría por azar. Por eso no comparamos con la cifra exacta de la senda, sino con un <b>margen</b>: el 95 % de los valores que daría el azar alrededor de la senda. Hay tres resultados, que se calculan con los datos:</p>
+<ul><li><b>«por debajo de la senda»</b>: menos siniestros que el mínimo del margen;</li>
+<li><b>«no se puede descartar que vaya al ritmo»</b>: dentro del margen (no quiere decir que vaya);</li>
+<li><b>«por encima de la senda»</b>: más que el máximo del margen.</li></ul>
+<p>Para ${MT.desde}, la senda marca ${fmt(E0.senda[MT.desde])}, y el margen va de ${fmt(E0.banda[MT.desde][0])} a ${fmt(E0.banda[MT.desde][1])}. Además, cada año se compara con la base, con su margen de error (intervalo de confianza).</p>
+<p>Ahora mismo: <b>${E0.evaluados.length ? JZ(E0, "es") : `el primer año del Plan, ${MT["año_plan"]}, aún no está publicado`}</b>. ${E0.evaluados.length ? `En ${A1} ha habido ${fmt(M.bv[A1])} siniestros; la senda prevé ${fmt(E0.senda[A1])}. Respecto a ${B}: ${fmt(E0.juicio[A1].base.razon * 100 - 100, 1)} % (intervalo de confianza ${fmt(E0.juicio[A1].base.ic[0] * 100 - 100, 1)} a ${fmt(E0.juicio[A1].base.ic[1] * 100 - 100, 1)} %). Con la media ${EM.etq}: ${JZ(EM, "es")}.` : `${B} es el punto de partida: ${fmt(E0.base)} siniestros${MT.max ? ", el peor año de la serie" : ""}, un ${pc(MT.previa)} más que en ${A0}. Aún no se puede evaluar el Plan.`}</p>
+<h3>Dos series de control</h3>
+<p>El número de siniestros puede cambiar por cosas que no son la seguridad de la bici y el patinete. Por eso, junto a la meta, publicamos dos series:</p>
+${tabla("Series de control", ["Año", "Con bici o patinete", "De ellos, con heridos", "Todos los siniestros de la ciudad", "Parte de bici o patinete"],
+  CT.años.map((a, i) => [a, fmt(CT.bv[i]), fmt(CT.bv_her[i]), fmt(CT.ciudad[i]), pc(CT.cuota[i], 1)]))}
+<ul><li><b>Siniestros con heridos</b> (todos menos «sin heridos»): dependen menos de cómo se registran. El sistema de registro de la Policía Local (SIASV) se creó en julio de 2024, y lo que más crece en toda la ciudad son los siniestros sin heridos. Si baja el total pero no los siniestros con heridos, probablemente es el registro.</li>
+<li><b>Parte de todos los siniestros de la ciudad</b>: si baja, la bici y el patinete mejoran más que el resto del tráfico; si el total baja pero la parte no, baja todo igual.</li></ul>`,
+tec:()=>`<p>Senda del año <i>a</i>: base × 0,5<sup>(a − año base) / (2030 − año base)</sup>. Bajada anual necesaria: 1 − (meta / siniestros de ${A1})<sup>1 / (2030 − ${A1})</sup>. Meta = base / 2, redondeada al entero más cercano. El año base se cambia en un solo parámetro (<code>AÑO_BASE</code> de <code>scripts/exportar_web.py</code>) y lo usan el observatorio, el informe y esta página.</p>
+<p>Margen de cada año: las cifras x para las que el intervalo de confianza del ${pc(MT.nivel)} de la razón x / base (<code>statsmodels confint_poisson_2indep</code>, método score) contiene la razón que marca la senda. Así tiene en cuenta el azar del año y el de la base. No incluye la sobredispersión (variación entre años más allá del azar), así que un año «compatible» no prueba que el Plan funcione. Antes el margen solo contaba el azar del año (<code>poisson.ppf</code>) y era más estrecho. Comparación con la base: razón de tasas con <code>statsmodels.stats.rates.test_poisson_2indep</code> (prueba <i>score</i>) y su intervalo de confianza. Con la media ${EM.etq} como base, la base son los ${EM.años.length} años juntos (exposición ${EM.años.length}). Código: <code>scripts/meta.py</code>; <code>make comprobar</code> prueba el juicio con un año simulado.</p>
+<p>Con la base alternativa (${E1["año"]}), ${A1} quedaría ${fmt(E1.sobre)} siniestros por encima de su senda (${fmt(E1.senda_ult)}; margen ${fmt(E1.banda[A1][0])}-${fmt(E1.banda[A1][1])}): ${JZ(E1, "es")}. Habría que bajar un ${pc(E1.necesaria, 1)} cada año desde ${MT.desde}.</p>
+<p>La meta global del Plan (apartado 4.4) es otra: −50 % de personas fallecidas respecto a 2019 y de heridas graves respecto a 2024, para todos los colectivos. El indicador de la acción 3.2.2 es de siniestros, no de víctimas.</p>`},
+
+uso:{h:"Uso frente a siniestros",
+cos:()=>`<p>Más siniestros no quiere decir por fuerza más peligro: puede que haya más gente en bici y en patinete. Lo miramos con los contadores del carril bici.</p>
+<p><b>Tampoco es una subida propia de la bici y el patinete.</b> Todos los siniestros de la ciudad pasan de ${fmt(M.todos[A0])} en ${A0} a ${fmt(M.todos[A1])} en ${A1} (${pc(M.todos[A1] / M.todos[A0] - 1, 1)} más), y los que llevan bici o patinete, de ${fmt(M.bv[A0])} a ${fmt(M.bv[A1])} (${pc(M.bv[A1] / M.bv[A0] - 1, 1)}): su parte se queda en el ${pc(M.bv[A0] / M.todos[A0], 1)} en ${A0} y el ${pc(M.bv[A1] / M.todos[A1], 1)} en ${A1}. Lo que sí es propio es la composición: el patinete sube un ${pc(M.vmp[A1] / M.vmp[A0] - 1)} y la bici ${M.bici[A1] < M.bici[A0] ? "baja" : "sube"} un ${pc(Math.abs(M.bici[A1] / M.bici[A0] - 1))}.</p>
+<p>Una parte de la subida puede venir de cómo se registran los siniestros: lo que más crece en toda la ciudad son los siniestros sin heridos (+${pc(VAR(SINH), 0)}), y el Plan explica que el sistema de registro de la Policía Local (SIASV) se creó en julio de 2024, tras integrar y normalizar todas las fuentes. Con heridos, los siniestros con bici o patinete sí crecen más que el resto: un ${pc(VAR(CT.bv_her), 0)} más, frente a un ${pc(VAR(CT.resto_her), 0)}. Son las series de control de la meta (apartado «La meta y la línea base»).</p>
+<p>En los <b>${fmt(M.uso_n)} contadores</b> que tienen datos de tráfico todos los años (${UA0}-${UA1}), el tráfico pasa de 100 en ${UA0} a <b>${fmt(M.uso_ix[UA1])}</b> en ${UA1}. Los siniestros con bici o patinete, de 100 a <b>${fmt(M.sin_ix[UA1])}</b>.${UA1 < A1 ? ` Los datos de tráfico de Movilidad llegan hasta ${UA1} y los de siniestros, hasta ${A1}: por eso la comparación con el uso acaba en ${UA1}.` : ""}</p>
+${tabla(`Índices, ${UA0} = 100`, ["Año", "Tráfico en el carril bici", "Siniestros con bici o patinete"], M.anys.filter(a => a >= UA0).map(a => [a, fmtU(M.uso_ix[a]), fmtU(M.sin_ix[a])]))}
+<p>En ${UA1}, el tráfico ${varU(M.uso_ult, "es")} y los siniestros ${varS("es")}${parU("es")}.</p>
+<p><b>La meta del Plan se mide en número de siniestros, no en siniestros por viaje.</b> Si el uso crece, el riesgo de cada viaje tiene que bajar más de la mitad:</p>
+<ul><li>si el uso se queda como en ${UA1}, el riesgo por viaje debería bajar un <b>${pc(M.riesgo.igual)}</b> respecto a ${B};</li>
+<li>si sigue creciendo como hasta ahora (${pc(M.uso_g, 1)} al año), un <b>${pc(M.riesgo.sigue)}</b>.</li></ul>
+<p class="aviso">Los contadores están en el carril bici: no ven a quien va por la calzada, por las ciclocalles o por el Turia. Y probablemente cuentan bicis y patinetes juntos, sin separarlos. Son escenarios, no predicciones.</p>`,
+tec:()=>`<p>IMD (intensidad media diaria) de días laborables, por mes, de las hojas de cálculo de Movilidad. Media de los meses con dato (> 0), con un mínimo de 6 meses por año. Cada contador (código P) se sitúa con el campo <code>idpm</code> de la capa 225. Índice = suma de la IMD de los ${fmt(M.uso_n)} contadores con dato todos los años con intensidades (${UA0}-${UA1}) / suma de ${UA0}.</p>
+<p>Escenarios: uso ${MT["año_meta"]} / uso ${B} = ${UA1 !== B ? `(índice ${UA1} / índice ${B}) × ` : ""}(1 + g)<sup>${MT["año_meta"]} − ${UA1}</sup>, donde g es el crecimiento anual medio de ${UA0}-${UA1} (${pc(M.uso_g, 1)}) o g = 0 (el uso se queda igual). Bajada necesaria del riesgo por viaje = 1 − 0,5 / (uso ${MT["año_meta"]} / uso ${B}). En los dos escenarios, el uso de ${MT["año_meta"]} es ${fmt(M.uso30.igual, 2)} y ${fmt(M.uso30.sigue, 2)} veces el de ${B}.</p>`},
+
+lugares:{h:"Lugares con más siniestros",
+cos:()=>`<p>Un «lugar» es un <b>cruce</b> o un <b>tramo de calle</b>, no un cuadrado fijo del mapa:</p>
+<ul><li><b>Cruce</b>: cada cruce del callejero municipal. Los cruces a menos de ${LG.F} m (las dos calzadas de una avenida, una calle que entra desplazada) forman uno solo. Las rotondas y plazas de hasta ${LG.plaza_max} m (${fmt(LG.n_plazas)} en toda la ciudad) son un solo cruce; las plazas grandes, como la del Ayuntamiento o la de América, no: cada entrada es un cruce con su semáforo, y fundirlas crearía un lugar que gana solo por ser grande. El cruce incluye ${LG.R} m alrededor.</li>
+<li><b>Tramo</b>: el resto de cada calle, en trozos iguales de ${LG.pieza} m como máximo. Las dos calzadas de una avenida forman un solo tramo.</li>
+<li>Cada siniestro va al cruce si está a ${LG.R} m o menos; si no, al tramo más cercano.</li></ul>
+<p>Así, la ciudad tiene ${fmt(LG.n_nudos)} cruces y ${fmt(LG.n_tramos)} tramos. El ${pc(LG.en_nudo / LG.n_geo)} de los siniestros situados cae en un cruce. Los <b>${M.n_neg}</b> lugares con más siniestros de ${A0} a ${A1} son los «lugares con más siniestros» del mapa: ${M.tipos30.tramo ? `${M.tipos30.nudo} cruces y ${M.tipos30.tramo} tramos` : "todos son cruces"}. El tramo con más siniestros tiene ${LG.tramo_max.n} (es el lugar n.º ${LG.tramo_max.rank}).</p>
+<h3>Por qué ya no usamos cuadrados de 100 m</h3>
+<p>Hasta noviembre de 2026, los lugares eran los cuadrados de una cuadrícula de 100 m. La lista dependía de dónde caían las líneas: si movíamos la cuadrícula entre 25 y 75 m, de los 30 lugares se mantenían entre ${ES.rejilla.ret[0]} y ${ES.rejilla.ret[1]}. Con cruces y tramos, si cambiamos los ${LG.R} m de alrededor o la distancia para fundir cruces (20 o 40 m en lugar de 30), se mantienen entre ${ESmin()} y ${ESmax()}. Además, un cruce es donde se puede actuar.</p>
+${tabla("Estabilidad de los 30 lugares con más siniestros", ["Variante", "Lugares que se mantienen (de 30)", "Siniestros en común (índice de Jaccard: 1 = iguales)"],
+  [["Cuadrícula de 100 m, desplazada 25-75 m (15 variantes)", `${ES.rejilla.ret[0]}-${ES.rejilla.ret[1]}`, `${fmt(ES.rejilla.jac[0], 2)}-${fmt(ES.rejilla.jac[1], 2)}`],
+   ...ES.variantes.map(v => [`Cruces y tramos: ${v.R !== LG.R ? `${v.R} m alrededor (en lugar de ${LG.R})` : `fundir a ${v.F} m (en lugar de ${LG.F})`}`, v.ret, fmt(v.jac, 2)])])}
+<p>Un matiz: para situar los cruces grandes usamos también los puntos donde nuestro programa de localización (el geocodificador) sitúa los siniestros de cruce de toda la ciudad (de todos los vehículos, no solo de bici o patinete). Son posiciones, no recuentos: en los cruces grandes, como Abril Martorell con Malilla, el punto del geocodificador queda a 30-100 m del cruce del callejero. Como son de todos los siniestros, no eligen los lugares por el resultado.</p>
+<h3>Corrección por la cobertura</h3>
+<p>Cada año se sitúan más siniestros, y no igual los de cruce que los de portal. Para no favorecer los años recientes, cada siniestro pesa 1 / (parte situada de los siniestros con bici o patinete de su año y tipo de dirección):</p>
+${tabla("", ["Año", "Cruce: parte situada", "Peso", "Portal: parte situada", "Peso"], M.anys.map(a => [a, pc(M.cobd[a].cruce, 1), fmt(M.pesos[a].cruce, 2), pc(M.cobd[a].portal, 1), fmt(M.pesos[a].portal, 2)]))}
+<p>Con peso o sin él, la lista casi no cambia: coinciden <b>${M.igual_sinpeso} de ${M.n_neg}</b>. Si los eligiéramos solo con ${EPA}, cambiarían ${M.cambia_A}: por eso usamos todo el periodo.</p>
+<p class="aviso">Desde julio de 2024 la policía anota más siniestros por el número de portal y menos «en el cruce». Un siniestro junto a un cruce puede pasar del cruce al tramo de al lado sin que cambie nada. El peso corrige poco este cambio; por eso las barras por año de cada ficha llevan un aviso.</p>
+<h3>¿Se repiten?</h3>
+<p>Un lugar puede entrar en la lista por un mal año. Para saberlo sin hacer trampa, elegimos los ${PS.ab.k} lugares <b>solo con ${EPA}</b> y miramos qué pasa <b>en ${EPB}</b>. Lo comparamos con dos referencias: <b>si cada lugar mantuviera su ritmo</b> (el azar hace que, aun así, los elegidos en su peor momento bajen algo) y <b>lugares cualesquiera</b> (de toda la ciudad o del mismo barrio).</p>
+${tabla("Elegidos con unos años, mirados en otros (siniestros corregidos por la cobertura)", ["Elegidos con → mirados en", "Lugares", "Antes", "Después", "Si mantuvieran su ritmo (90 %)", "Lugares cualesquiera", "Cualesquiera del mismo barrio"],
+  PS.todas.map(p => [p.corte === "AB" ? `${EPA} → ${EPB}` : `${mes(M.anys[0] + "-01")}-${mes(mesAnt(C7))} → ${mes(C7)}-${mes(A1 + "-12")}`, p.k, fmt(p.A), fmt(p.obs), `${fmt(p.perf)} (${fmt(p.perf_lo)}-${fmt(p.perf_hi)})`, fmt(p.glob), fmt(p.loc)]), i => PS.todas[i].k === PS.ab.k)}
+<p>Los ${PS.ab.k} primeros de ${EPA} suman ${fmt(PS.ab.A)} siniestros; en ${EPB}, <b>${fmt(PS.ab.obs)}</b>. Es lo que se espera si cada lugar mantuviera su ritmo (entre ${fmt(PS.ab.perf_lo)} y ${fmt(PS.ab.perf_hi)}): la bajada es, sobre todo, vuelta a la media. Lugares cualesquiera sumarían unos ${fmt(PS.ab.glob)}, y lugares cualesquiera del mismo barrio, ${fmt(PS.ab.loc)}. Cortando en julio de 2024, cuando cambia el formato de la dirección, el resultado es el mismo. ${PS.top_ab} de los ${PS.ab.k} primeros de ${EPA} siguen entre los ${PS.ab.k} primeros de ${EPB}.</p>
+<p class="aviso">Superar a «lugares cualesquiera» es fácil: la mayoría de cruces y tramos no tienen ningún siniestro. La comparación exigente es con «si mantuvieran su ritmo». ${PSbajo().length ? `Hay excepciones: ${PSbajo().map(p => `los ${p.k} primeros (${p.corte === "AB" ? `${EPA} → ${EPB}` : "corte de julio de 2024"})`).join(" y ")} quedan algo por debajo de su intervalo, coherente con el cambio de formato de 2024, que hace que los cruces pierdan casos hacia los tramos.` : ""}</p>
+<h3>El Jardín del Turia, como zona</h3>
+<p>El Plan pone el Jardín del Turia como «calle» n.º ${M.tur.pr} en siniestros con bici. Pero sus <b>${fmt(M.tur.n)}</b> siniestros no traen un punto exacto («JARDÍN DEL TURIA», «S/N»): ${M.tur.geo === 0 ? "ninguno se puede situar" : `solo ${fmt(M.tur.geo)} se pueden situar`}. Por eso lo mostramos como <b>zona</b>: la red ciclista del jardín con un margen de ${M.tur.buffer} m, con todos sus siniestros. Solo contamos el jardín: no la Gran Vía Marqués del Turia ni la calle Camp de Túria.</p>
+<h3>Límites</h3>
+<ul><li><b>No es riesgo por uso.</b> Un lugar puede tener muchos siniestros porque pasa mucha gente.</li>
+<li><b>La posición tiende a concentrarse en el centro del cruce.</b> Todos los siniestros de un cruce van al mismo punto. En los ${M.n_neg} lugares, el ${pc(M.cruce_30)} de los siniestros están situados como cruce; en toda la ciudad, el ${pc(M.cruce_ciudad)}.</li>
+<li><b>Desde julio de 2024 la policía anota menos siniestros «en el cruce»</b> y más por número de portal. Un cruce puede perder casos sin que cambie nada. Es el caso de la Alameda con Zaragoza: su cruce baja, pero en todo el paseo los siniestros con bici o patinete apenas cambian (${M.ala_paseo.map((v, i) => `${M.anys[i]}: ${fmt(v)}`).join("; ")}). Además, el lugar se eligió por ser el peor, y un lugar así suele mejorar algo por sí solo. Sin un grupo de comparación no atribuimos ningún cambio a una obra.</li>
+<li><b>El nombre de cada lugar viene del callejero</b> (nombre oficial y tipo de vía abreviado), no de la dirección más repetida, que a veces era un portal. Cruce: las dos calles que pasan por él y que más nombran las direcciones de todos los siniestros del lugar (de cualquier vehículo); en una rotonda o plaza pequeña, el nombre de la plaza, si la nombra al menos el ${pc(LG.plaza_votos)} de sus siniestros. Tramo: la calle y las que lo cierran. Cuando dos lugares se llamarían igual (las dos calzadas de una avenida), se añade dónde está cada uno (N, S, E, O). Con solo ${EPA} o solo ${EPB}, ${LG.nombres.top} de los ${LG.nombres.k} primeros se llamarían igual; en los demás cambia alguna calle del mismo cruce, o solo la letra de posición.</li>
+<li><b>Los nombres publicados no cambian en silencio.</b> Un nombre publicado es una referencia (fichas, enlaces, prensa). Se guardan en <code>data/processed/nombres_lugares.csv</code> con la posición de cada lugar y, cuando llegan datos nuevos, un lugar del mismo tipo (y, si es un tramo, de la misma vía) a ${LG.congela_tol} m o menos conserva el nombre guardado; los lugares nuevos reciben el nombre calculado y se añaden. Si en uno de los ${M.n_neg} primeros el nombre calculado ya no coincide con el publicado, lo decide una persona y, si se cambia, queda en el <a href="cambios.html">registro de cambios</a>.</li></ul>`,
+tec:()=>`<p>Cálculo en EPSG:25830 con geopandas, shapely y scipy; el código es común para el análisis y la web (<code>scripts/lugares.py</code>; el análisis, en <code>scripts/lugares_nudos.py</code>). Semillas de cruce: los ${fmt(LG.n_nodos)} nodos de grado 3 o más del grafo de calles (<code>ejes.geojson</code>, ya troceado en los cruces) y los puntos de cruce del geocodificador de todos los siniestros de la ciudad: ${fmt(LG.n_semillas)} semillas. Fusión: <i>buffer</i> de F/2 y disolución (F = ${LG.F} m, enlace simple). Rotondas: plazas (PLAÇA) de diámetro ≤ ${LG.plaza_max} m con las semillas a ≤ F/2, sin encadenar. Zona del cruce: envolvente convexa de sus semillas + R (R = ${LG.R} m). Tramos: el resto de cada vía, en piezas iguales de ≤ ${LG.pieza} m; las piezas de la misma vía con el punto medio a ≤ ${LG.paralela} m se agrupan por enlace completo (no encadena). Orden: suma de pesos y, en empate, número de siniestros. El mapa dibuja la zona del cruce o la línea del tramo.</p>
+<p>Persistencia: se ordena con el periodo A (pesos) y se mide la suma ponderada en B de los K primeros, entre todos los ${fmt(LG.n_unid)} lugares del callejero (también los que no tienen ningún siniestro). Lugares cualesquiera: ${fmt(PS.nsim)} permutaciones de los valores de B, en toda la ciudad y dentro de cuadrados de ${PS.bloque} m («mismo barrio»); en todos los casos, p &lt; 0,001. «Si mantuvieran su ritmo»: cada lugar conserva su total y lo reparte entre A y B con una binomial (proporción de su tipo); en cada simulación se vuelven a elegir los K primeros con A y se mide B (intervalo del 90 %).</p>
+<p>Pista («a revisar»): prueba binomial unilateral de cada categoría «con quién» frente al resto de lugares del mismo tipo, sin el propio lugar (cruces: vehículo ${pc(PI.ref.nudo.m)}, peatón ${pc(PI.ref.nudo.w)}, entre bicis o patinetes ${pc(PI.ref.nudo.d)}, solo ${pc(PI.ref.nudo.s)}; tramos: ${pc(PI.ref.tramo.m)}, ${pc(PI.ref.tramo.w)}, ${pc(PI.ref.tramo.d)} y ${pc(PI.ref.tramo.s)}); el Turia, frente al resto de la ciudad. Holm sobre las ${PI.familia} pruebas del mapa (4 por lugar; los lugares con menos de ${PI.min} siniestros cuentan como p = 1): ${PI.probadas} pruebas en ${PI.lugares_prob} lugares, y pasan ${PI.holm}. Es un indicio para una visita, no un diagnóstico.</p>
+<p>Zona del Turia: tramos de tipo «Jardín del Turia» (estado 4) de la capa 189, con un margen de ${M.tur.buffer} m, y texto de la dirección con la frase completa («JARDÍN DEL TURIA», «CAUCE DEL TURIA»…). ${M.dup_turia ? `${M.dup_turia} siniestros del Turia cuentan también en uno de los ${M.n_neg} lugares.` : `Ningún siniestro del Turia cuenta también en uno de los ${M.n_neg} lugares.`}</p>`},
+
+normal:{h:"Por encima de la media de los puntos con un tráfico parecido",
+cos:()=>`<p>En <b>${EB.sitios} puntos de conteo</b> sabemos cuántas bicis pasan (${EB.cont} contadores). Los contadores que miran el mismo sitio forman un solo punto: los que están a menos de ${EB.agrupa} m y los del mismo trozo de calle sin ningún cruce entre ellos, como los dos sentidos del puente de l'Assut de l'Or, que antes eran dos puntos. Eso nos permite comparar cada punto con otros de tráfico parecido.</p>
+<ol><li>Cada siniestro va al punto de conteo más cercano, si está a ${EB.radio} m o menos.</li>
+<li>Un modelo estadístico calcula cuántos siniestros tiene, de media, un punto con ese tráfico de bicis y de coches y con tantos <b>cruces de calles</b> a ${EB.radio} m: es <b>«la media de los puntos con un tráfico parecido»</b>.</li>
+<li>Ajustamos el recuento (Bayes empírico): si un punto tiene pocos siniestros, nos fiamos más de la media; si tiene muchos, más de su propio recuento.</li>
+<li>Calculamos la <b>probabilidad de estar por encima de esa media</b> contando los siniestros a ${R3("es")} m, cada distancia con su modelo.</li>
+<li>Lo repetimos para la <b>bici</b> y para el <b>patinete</b> por separado.</li></ol>
+${tabla("Tres niveles", ["Nivel", "Probabilidad de estar por encima de la media", "Puntos"], [
+  ["Claramente por encima de la media de los puntos con un tráfico parecido", `más de 0,95 a ${R3("es")} m`, fmt(EB.alta)], ["Quizá por encima", `más de 0,80 a ${EB.radio} m`, fmt(EB.quiza)], ["Como la media", "el resto", fmt(resto)]])}
+<p>Claramente por encima (siniestros / media de los puntos con un tráfico parecido): ${CLARO("es")}.</p>
+<p><b>Por qué este criterio:</b></p>
+<ul><li><b>Los cruces.</b> Muchos siniestros se sitúan en el centro del cruce. Un contador a mitad de manzana tiene pocos cruces dentro del círculo de ${EB.radio} m; uno junto a una plaza, muchos. Sin tenerlo en cuenta, parte del «exceso» era solo eso. Con los cruces el modelo mejora claramente (${pval(CRN.p)}), y los puntos con una probabilidad de más de 0,95 a ${EB.radio} m pasan de ${CR0.p95} a ${CRN.p95}.</li>
+<li><b>Que no dependa de la distancia.</b> Con solo ${EB.radio} m, ${RG.p1_100} puntos superan 0,95, pero la lista cambia mucho si se cuentan los siniestros a 75 o a 150 m (las listas se parecen poco: índice de Jaccard de ${fmt(EB.jaccard["75"], 2)} y ${fmt(EB.jaccard["150"], 2)}, donde 1 quiere decir idénticas). Por eso pedimos que se mantenga con las tres distancias: quedan ${EB.alta}.</li>
+<li><b>Por encima de la media no quiere decir anomalía.</b> El modelo ya prevé que los puntos varían entre sí: de entrada, el ${pc(SIM.a_priori_1)} está por encima de la media. Si simulamos ${fmt(EB.crit.n_sim)} veces la ciudad solo con esa variación, sin ningún punto «especial», salen de media ${fmt(SIM.p1, 1)} puntos con probabilidad de más de 0,95 a ${EB.radio} m (observamos ${SIM.obs_p1}), y casi ninguno de los marcados está en realidad por debajo de la media (${fmt(SIM.fd1, 1)}). «Claramente» quiere decir, pues, que el punto está por encima de la media, no que sea una anomalía. Si pedimos al menos un ${pc(EB.crit.umbral - 1)} más que la media, quedan ${RG.pu_100} a ${EB.radio} m y ${RG.pu_3r} con las tres distancias: los datos no permiten hablar de puntos anómalos.</li>
+<li><b>Bici y patinete por separado.</b> Con el modelo de solo bici, ${EB.bici_p95} puntos superan 0,95 a ${EB.radio} m y ${EB.bici_claro} lo hacen con las tres distancias; con el de solo patinete, ${EB.vmp_p95} y ${EB.vmp_claro}. De los ${EB.alta} puntos claramente por encima, en ${DG.claro_solo_vmp} el exceso es solo de patinete (con la bici están como la media). Como no sabemos si los contadores cuentan patinetes, ese exceso puede ser solo que pasan más patinetes de los que el contador ve. Cada ficha lo dice.</li>
+<li>Solo cubre los siniestros cercanos a un contador: ${fmt(EB.asig)} de ${fmt(EB.geo)} situados (${pc(EB.asig / EB.geo)}).</li>
+<li><b>No predice mejor que el simple recuento.</b> Si ordenamos con dos años y miramos los otros dos, el método gana al recuento en ${V.top10.eb_gana} de ${V.particiones} combinaciones.</li>
+<li>Suponemos que los contadores cuentan <b>bicis y, probablemente, también patinetes</b>, sin separarlos. Movilidad no lo ha confirmado.</li>
+<li>No es un riesgo por persona. Entre puntos de conteo, los que tienen el doble de tráfico no tienen el doble de siniestros (elasticidad de ${fmt(EB.elast, 2)}; con 1, los siniestros crecerían en la misma proporción que el tráfico). Con solo bici la diferencia casi desaparece (${fmt(EB.elast_bici, 2)}, compatible con 1), así que puede venir de la mezcla de bicis y patinetes que cuentan los contadores. Es una asociación entre puntos: no dice qué pasará si crece el tráfico de un punto.</li>
+<li>La franja del gráfico del informe es la <b>variación habitual entre puntos con un tráfico parecido</b>, según el mismo modelo (95 %): ${EB.banda.encima} puntos quedan por encima y ${EB.banda.debajo} por debajo. El color de los puntos sigue la regla de la tabla, no la franja.</li></ul>`,
+tec:()=>`<p><b>Modelo</b> (statsmodels): binomial negativa (NB2) por punto y año, log μ = b<sub>0</sub> + b<sub>1</sub> log IMD bici + b<sub>2</sub> log IMD vehículos + b<sub>3</sub> log(1 + cruces) + indicador «sin tramo aforado» + efecto de año. IMD de vehículos: máximo de los tramos a ${EB.radio} m o menos, solo ${M.imd_veh}. Elasticidad de la IMD bici: ${fmt(EB.elast, 2)} (con solo bici, ${fmt(EB.elast_bici, 2)}, compatible con 1; es una elasticidad entre puntos, no dentro de cada punto); b<sub>3</sub> = ${fmt(EB.cruces_coef, 2)}; α = ${fmt(EB.alpha, 3)} (bici, ${fmt(EB.alpha_bici, 3)}; patinete, ${fmt(EB.alpha_vmp, 3)}). Los efectos de año no se publican: recogen también la cobertura creciente del mapa.</p>
+<p><b>Cruces</b>: nodos de grado 3 o más del grafo de calles (<code>ejes.geojson</code>; ${fmt(EB.crit.nodos)} en toda la ciudad) a ${EB.radio} m o menos del punto (en cada radio, los de su radio); mediana de ${fmt(CR.mediana)} por punto (de ${CR.rango[0]} a ${CR.rango[1]}). No usan ningún siniestro. Comparación con el modelo sin cruces (razón de verosimilitud, 1 gl): nodos, LR = ${fmt(CRN.lr, 1)} (${pval(CRN.p)}; AIC ${fmt(CRN.aic, 1)} frente a ${fmt(CR0.aic, 1)}); nudos de <code>scripts/lugares.py</code> hechos solo con el callejero (los nodos fundidos a 30 m; ${fmt(EB.crit.nudos)}), LR = ${fmt(CRF.lr, 1)} (AIC ${fmt(CRF.aic, 1)}); nudos de la web, que añaden los puntos de cruce del geocodificador (es decir, posiciones de siniestros), LR = ${fmt(CRW.lr, 1)} (AIC ${fmt(CRW.aic, 1)}). Elegimos los nodos: no dependen de los siniestros y ajustan mucho mejor que los nudos fundidos, porque al fundir se pierde el tamaño del cruce (un cruce de avenida con dos calzadas y carril bici tiene varios nodos, y más puntos de conflicto). El semáforo a ${EB.radio} m no mejora el modelo.</p>
+<p><b>Bayes empírico</b> (Hauer; Highway Safety Manual, cap. 9): w = 1 / (1 + α Σμ); EB = w Σμ + (1 − w) ΣN. Probabilidad de exceso: P(θ > 1) con la posterior gamma(1/α + N, 1/α + Σμ) (scipy); también P(θ > ${fmt(EB.crit.umbral, 1)}). La posterior trata μ y α como conocidos.</p>
+<p><b>Calibración por simulación</b> (${fmt(EB.crit.n_sim)} veces, con μ y α fijos): θ<sub>i</sub> ~ gamma(1/α, α) y N<sub>iy</sub> ~ Poisson(θ<sub>i</sub> μ<sub>iy</sub>). Regla P(θ > 1) > 0,95 a ${EB.radio} m: se esperan ${fmt(SIM.p1, 1)} puntos, de los que ${fmt(SIM.fd1, 1)} con θ < 1; se observan ${SIM.obs_p1}. Regla P(θ > ${fmt(EB.crit.umbral, 1)}) > 0,95: se esperan ${fmt(SIM.pu, 1)} y se observan ${SIM.obs_pu}.</p>
+<p><b>Franja</b> del gráfico: cuantiles 2,5 % y 97,5 % de la predictiva del modelo, NB(1/α, Σμ) (el total de los años de un punto con θ fijo).</p>
+<p>Un punto-año solo cuenta si todos sus contadores tienen dato: ${EB.na4} de ${EB.sitios} puntos tienen todos los años con intensidades (${M.anys_eb[0]}-${M.anys_eb[M.anys_eb.length - 1]}).</p>
+<p><b>Puntos de conteo</b>: se juntan los contadores a menos de ${EB.agrupa} m y los del mismo enlace de una vía: la misma calle (eje más cercano a ≤ ${EB.enlace.via_tol} m), a ≤ ${EB.enlace.misma_via} m y sin ningún nodo de grado 3 o más en un pasillo de ${EB.enlace.pasillo} m a cada lado del segmento que los une (con 10 m pasaban parejas de bloques distintos de Blasco Ibáñez, porque el segmento va por el bulevar). Así se juntan ${EB.enlace.enlace.map(g => g.join(" + ")).join("; ")}. IMD del punto: la suma de sus contadores, salvo que uno del mismo enlace diga «ambos sentidos», que ya lo cuenta todo (${EB.enlace.ambos.join(", ")}: sumarlos duplicaría la IMD). Zona del punto: la unión de los círculos de sus contadores; cada siniestro va al contador más cercano y cuenta para su punto, así que ningún siniestro cuenta en dos puntos. Con el centro, el círculo del Assut quedaría en mitad del puente, a 164 m de cada contador, y dejaría fuera los dos extremos.</p>
+<p><b>Validación fuera de muestra</b> sin fuga: las ${V.particiones} particiones de los cuatro años en 2 + 2; se ordena con un modelo ajustado solo con los dos primeros y se mide el exceso en los otros dos. Top 10: el método supera al recuento en ${V.top10.eb_gana} de ${V.particiones}; diferencia por bootstrap pareado de puntos (IC 95 %) de ${fmt(V.top10.ic95[0], 1)} a ${fmt(V.top10.ic95[1], 1)} siniestros, que incluye el cero. Spearman medio entre el exceso estimado y el que se ve después: ${fmt(V.spearman_AB, 2)}. Código: <code>scripts/cribado_eb.py</code>.</p>`},
+
+plan:{h:"Qué dice el Plan",
+cos:()=>`<p>Hemos transcrito el Plan Director de Seguridad Vial 2026-2030: <b>${M.plan.ind} indicadores</b> y <b>${M.plan.lugares} lugares</b> que cita (${M.plan.diag} como diagnóstico y ${M.plan.act} con una actuación). De los indicadores, con datos abiertos podemos calcular ${M.plan.calc["sí"]}, ${M.plan.calc.parcial} en parte y ${M.plan.calc.no} no.</p>
+<h3>Cuándo decimos que el Plan «cita este lugar»</h3>
+<p>El anillo del mapa tiene tres niveles (hasta el 04/11/2026, el tercero era un anillo discontinuo, que costaba distinguir del de puntos):</p>
+<ul><li><b>Continuo, «el Plan cita este lugar»</b>: nombra ese cruce o plaza (o la zona, como el Turia), con actuación o sin ella.</li>
+<li><b>De puntos, «el Plan solo cita su calle»</b>: el Plan nombra su calle: en los rankings de calles con más siniestros (con patinete, con bici o con peatones) o por alguna actuación, como un radar. La ficha de cada lugar explica el motivo.</li>
+<li><b>Sin anillo, «el Plan no lo menciona»</b>: el Plan no nombra ni el lugar ni su calle.</li></ul>
+<p><b>Qué no prueba el anillo.</b> El Plan solo publica los ${M.plan.pl3.top} primeros de cada ranking (cruces y calles con más siniestros con patinete, con bici y con peatones). Que no mencione un lugar no quiere decir que no lo conozca: puede ser el cuarto de su lista. Por eso pedimos la lista completa.</p>
+<p><b>Qué no cuenta como cita.</b> El Plan tiene que nombrar el lugar o su calle en un ranking o con una actuación. No cuentan una foto de ejemplo (la avenida de Peris y Valero solo aparece en una foto de un paso de peatones accesible; por eso el lugar de Peris y Valero con la plaza de Manuel Sanchis Guarner figura como «no lo menciona») ni el Anillo Ciclista, que el Plan cita como la vía ciclista con más uso: es una infraestructura, no un ranking de siniestros ni una actuación en ese lugar.</p>
+<h3>Diagnóstico no es actuación</h3>
+<ul><li><b>Diagnóstico</b>: el Plan dice que el lugar tiene muchos siniestros.</li>
+<li><b>Actuación</b>: el Plan dice que se ha hecho o se hará algo (auditoría, reordenación, radar o estudio).</li></ul>
+${tabla(`Los ${M.plan.pl3.n} lugares con más siniestros, según el Plan`, ["El Plan…", "Lugares"], [
+  ["cita este lugar", fmt(M.plan.pl3.lugar)], ["solo cita su calle", fmt(M.plan.pl3.calle)], ["no lo menciona", fmt(M.plan.pl3.no)]])}
+<p>De los ${fmt(M.plan.pl3.lugar)} lugares citados, ${fmt(M.plan.pl3.lugar_act)} tiene además una actuación (la Alameda con la plaza de Zaragoza). ${M.plan.alguna} de los ${M.n_neg} aparecen en el Plan de alguna forma, también en las listas de peatones o con un radar en la calle.</p>`,
+tec:()=>`<p>Transcripción: <code>scripts/transcribir_pdsv.py</code> → <code>data/processed/pdsv_indicadores.csv</code> y <code>pdsv_lugares.csv</code>. Si una cita es diagnóstico o actuación lo dice la columna <code>kind</code>, escrita a mano al leer el Plan; no se deduce del texto.</p>
+<p>Correspondencia: cada lugar del Plan tiene unas palabras clave (sin tildes, en mayúsculas); todas deben aparecer en alguna dirección de los siniestros del lugar. La regla del anillo está en <code>scripts/exportar_web.py</code> y es la misma para el observatorio y para el informe.</p>
+<p>Los ${M.plan.lugares} lugares del Plan están todos decididos: o tienen palabras clave (<code>CLAVES</code>) o un motivo para no emparejarlos (<code>SIN_CLAVE</code>); si aparece uno sin decidir, el script se para y <code>make comprobar</code> da error. Sin palabras clave (${M.plan.sin_clave.length}):</p>
+<ul>${M.plan.sin_clave.map(([n, m]) => `<li>${n}: ${m.es}.</li>`).join("")}</ul>
+<p>Hasta el 04/11/2026, 12 lugares no tenían palabras clave y se saltaban sin aviso; por eso el reparto era 4 · 11 · 15 y, por ejemplo, Tres Cruces con Campos Crespo (n.º 3 de los cruces con peatones del Plan) salía como «no lo menciona».</p>`},
+
+gravedad:{h:"Gravedad",
+cos:()=>`<p>El portal clasifica cada siniestro por su lesión más grave: sin heridos, leves, de baja gravedad, graves y fallecidos.</p>
+<p>Durante 2023 se aplicó poco a poco el criterio estatal (Orden INT/2223/2014): <b>herido grave es quien está hospitalizado más de 24 horas</b>. Antes, «grave» era solo para lesiones muy severas. El propio Plan lo explica.</p>
+${tabla("Siniestros con heridos graves", ["Año", "Toda la ciudad", "Con bici o patinete"], M.anys.map(a => [a, fmt(M.grav_todos[a]), fmt(M.grav_bv[a])]))}
+<p>El salto de ${fmt(M.grav_todos[A0])} a ${fmt(M.grav_todos[A1])} es, sobre todo, el cambio de criterio. <b>Los heridos graves solo son comparables desde 2024.</b> Y no toda la gravedad se ha estabilizado: los siniestros «de baja gravedad» con bici o patinete aún suben un ${pc(M.baja_bv[A1] / M.baja_bv[A1 - 1] - 1)} entre ${A1 - 1} y ${A1}, mucho más que el total de siniestros. El propio Plan da tres cifras para 2024 (${M.plan_graves_2024.map(x => fmt(x)).join(", ")}), según la fuente y según cuente personas o siniestros.</p>
+<p class="aviso">La gravedad es la del siniestro (incluye peatones y ocupantes de otros vehículos), no la de quien iba en bici o patinete.</p>`,
+tec:()=>`<p>Categorías del portal: SIN HERIDOS, CON HERIDOS LEVES, CON HERIDOS BAJA GRAVEDAD, CON HERIDOS GRAVES y CON FALLECIDOS. «Baja gravedad» también crece año a año (con bici o patinete: ${M.anys.map(a => fmt(M.baja_bv[a])).join(", ")}), lo que apunta a una reclasificación. Por eso las comparaciones de gravedad entre bici y patinete se hacen dentro de cada año.</p>`},
+
+limites:{h:"Lo que no se puede saber con estos datos",
+cos:()=>`<ul><li><b>Si el patinete es más peligroso que la bici por viaje.</b> No hay contadores que los separen.</li>
+<li><b>Personas.</b> El portal da siniestros, no personas heridas, ni edad ni sexo.</li>
+<li><b>Quién conducía qué o de quién es la culpa.</b> Los factores son del siniestro, no de cada vehículo.</li>
+<li><b>El tipo de siniestro antes de ${TD}.</b> Viene completo ${TD === A1 ? "solo en" : "desde"} ${TD}: en ${A0}, el ${pc(M.tipo_lleno[A0])}.</li>
+<li><b>Los siniestros sin punto.</b> El ${pc(1 - M.cob_bv_tot)} no se pueden situar, y el Turia solo como zona.</li>
+<li><b>La gravedad antes de 2024</b>, por cambio de criterio.</li>
+<li><b>El uso fuera del carril bici</b>: calzada, ciclocalles y Turia.</li>
+<li><b>Causas.</b> Si una obra o una norma ha hecho bajar los siniestros, sin un grupo de comparación.</li>
+<li><b>Lugares malos solo para el patinete.</b> Con pocos siniestros por lugar, no se detecta ninguna diferencia. «No detectable» no quiere decir «no existe».</li>
+<li><b>Los siniestros que no registra la Policía Local</b>, como muchas caídas sin intervención.</li>
+<li><b>Si cambia cuánto se vigila o se denuncia.</b> Solo entran los siniestros con atestado, y eso no afecta igual a la bici y al patinete: caídas sin atestado, controles al patinete, casco obligatorio en patinete desde el 1 de octubre de 2026 (<a href="https://www.boe.es/buscar/act.php?id=BOE-A-2026-13889">Real Decreto 518/2026</a>). Si cambia, puede cambiar el número registrado sin que cambie el riesgo, y también la parte de siniestros con patinete.</li></ul>`,
+tec:()=>`<p>Comparaciones bici frente a patinete que sí se pueden hacer, condicionadas al siniestro (proporciones entre siniestros, sin exposición): lluvia, noche, tipo (${A1}) y gravedad dentro del año. Código: <code>scripts/vmp_vs_bici_condicionado.py</code>. A escala de cruce o tramo, sin diferencia detectable (<code>scripts/vmp_vs_bici.py</code>).</p>`},
+
+errores:{h:"Errores detectados en los datos",
+cos:()=>`<p>Al trabajar con los datos del Ayuntamiento hemos encontrado <b>${INC.n}</b> incidencias: filas repetidas, campos vacíos, cambios de criterio entre años, datos que faltan o ficheros difíciles de reutilizar. No es una crítica: las tenemos en cuenta en el análisis y se las comunicamos al Ayuntamiento para que se puedan corregir. Sin el portal de datos abiertos, este observatorio no sería posible.</p>
+${tablaInc("Incidencias en los datos del Ayuntamiento", ["Conjunto", "Qué pasa", "Cómo lo tratamos", "Estado"])}
+<p class="aviso">Estado: «Detectada» quiere decir que aún no la hemos comunicado; después puede ser «Comunicada», «Con respuesta», «Corregida» o «No se corregirá».</p>
+<p><b>¿Has visto otro error en los datos o en esta web?</b> Escríbenos a <a href="mailto:${CORREU}">${CORREU}</a>.</p>`,
+tec:()=>`<p>Registro: <code>data/processed/incidencias_datos.csv</code>, con el ejemplo, el alcance, el impacto, cómo lo tratamos, la sugerencia y la prueba reproducible de cada incidencia. <code>scripts/incidencias.py</code> (<code>make incidencias</code>) vuelve a comprobar ${INC.auto} automáticamente con cada descarga de datos, para saber si siguen o se han corregido, y escribe el informe para el Ayuntamiento; las otras ${INC.n - INC.auto} se comprueban a mano. Ningún ejemplo contiene datos personales: son identificadores de fila o valores de los campos.</p>`},
+
+revisiones:{h:"Revisiones y reproducibilidad",
+cos:()=>`<p>Hemos hecho revisiones automáticas propias: agentes de inteligencia artificial lanzados por el propio proyecto, que no veían nuestras notas, han recalculado las cifras desde los datos. No son una revisión externa.</p>
+<h3>Qué cambió por la revisión independiente</h3>
+<ul><li>Retiramos el aumento del patinete «con el mismo uso»: estaba inflado por la cobertura creciente del mapa.</li>
+<li>Retiramos la tarjeta que decía que en ningún cruce el patinete sale peor: era falta de datos, no una prueba.</li>
+<li>Los lugares con más siniestros se eligen con todo el periodo y con peso por cobertura.</li>
+<li>La marca «a revisar» de las fichas solo sale con una prueba estadística y con casos suficientes.</li>
+<li>El tráfico medio diario (IMD) de cada punto se divide por los años con dato, no siempre por ${M.anys_eb.length}.</li>
+<li>La línea base: primero 2024, el año de los heridos graves; releído el texto del Plan, pasa a ${B}, el último año antes del Plan, y 2024 queda como alternativa.</li></ul>
+<h3>Qué cambió por la revisión de coherencia</h3>
+<ul><li>Turia: solo el jardín. Antes entraban la Gran Vía Marqués del Turia y la calle Camp de Túria.</li>
+<li>Un color, un significado, y el orden fijo bici, patinete y choque bici–patinete.</li>
+<li>Términos únicos en las dos páginas: «lugares con más siniestros», «lo normal para el tráfico», «senda propuesta».</li>
+<li>El anillo del Plan, en tres niveles: cita el lugar, solo cita su calle o no lo menciona.</li>
+<li>Los tres niveles de «más de lo normal», iguales en el observatorio y en el informe.</li></ul>
+<h3>Qué cambió por la revisión metodológica</h3>
+<ul><li>El anillo del Plan pasa de 4 · 11 · 15 a 5 · 12 · 13 (cita el lugar · solo la calle · no lo menciona), y con los lugares por cruce y tramo, a ${M.plan.pl3.lugar} · ${M.plan.pl3.calle} · ${M.plan.pl3.no}: algunos lugares del Plan se saltaban sin aviso. Y como el Plan solo publica los primeros de cada lista, que no mencione un lugar no quiere decir que lo deje fuera.</li>
+<li>La subida de 2022-2025 se compara con la de toda la ciudad, que es la misma.</li>
+<li><b>Los lugares</b>: ya no son cuadrados de 100 m, sino cruces y tramos de calle, porque la lista dependía de cómo se dibujaba la cuadrícula (se mantenían entre ${ES.rejilla.ret[0]} y ${ES.rejilla.ret[1]} de 30; ahora, entre ${ESmin()} y ${ESmax()}). Desaparece la marca «entre los primeros en las tres etapas», que se medía con los mismos datos que eligen los lugares; en su lugar, comprobamos si se repiten en años distintos de los que sirven para elegirlos. La marca «a revisar» se compara con lugares del mismo tipo y con una corrección por hacer muchas pruebas a la vez (Holm) en todo el mapa (pasa de 8 lugares, con el Turia, a ${M.pista.con.length ? new Set(M.pista.con.map(c => c[0])).size : 0}). El anillo del Plan se ha recalculado con los lugares nuevos. Las barras por año de las fichas están corregidas por la cobertura.</li>
+<li>La Alameda con Zaragoza: la bajada de su cruce no se atribuye a la obra (cambio en cómo se anota la dirección y vuelta a la media).</li>
+<li>Las fichas ya no marcan «no se mantiene entre los primeros»: es compatible con un lugar que sí se repite.</li>
+<li>«Más de lo normal» pasa a «por encima de la media de los puntos con un tráfico parecido»; la elasticidad es una asociación entre puntos.</li>
+<li><b>Por encima de la media de los puntos con un tráfico parecido</b> (antes, «más de lo normal para el tráfico»): el modelo tiene en cuenta los cruces a ${EB.radio} m; «claramente» tiene que mantenerse contando los siniestros a ${R3("es")} m (pasan de 21 puntos a ${EB.alta}); cada ficha da la bici y el patinete por separado y avisa cuando el exceso es solo de patinete (${DG.claro_solo_vmp} de los ${EB.alta}); la franja del gráfico es la variación entre puntos parecidos del mismo modelo, y no la del simple azar (Poisson), que dejaba fuera 46 de 145; y ya no se calculan los índices de año del modelo, que recogían la cobertura creciente del mapa.</li>
+<li>Los ejemplos del informe se eligen por regla: el punto con más siniestros de los que están como la media, el «claramente» solo de patinete con más siniestros y el «claramente» que no es solo de patinete con menos siniestros. Antes eran Xàtiva con Ruzafa, que ahora es «quizá», y Balaciart con Primado Reig, que ya no se mantiene con las tres distancias.</li>
+<li>El mapa dice «Dónde se acumulan», no «Dónde actuar».</li>
+<li><b>La meta</b>: se habla de «el indicador de la acción 3.2.2», no de un compromiso de la ciudad; se avisa de que ${B} es el peor año de la serie y se comprueba con la media ${EM.etq} (meta ${fmt(EM.meta)}); se explica el recuento por vehículo del Plan (meta ${fmt(MT.vehiculo.meta)}); cada año se juzga con un margen del azar (por debajo, compatible o por encima de la senda) y no con la cifra exacta; y se añaden dos series de control (con heridos y parte de la ciudad). ${E1["año"]} queda como alternativa, no como comparación principal.</li>
+<li>Limitaciones nuevas: la infradeclaración y la vigilancia, distintas para bici y patinete, y la «baja gravedad» en ${A1}.</li></ul>
+<h3>Reproducibilidad</h3>
+<ul><li>El código (scripts en Python que leen los datos descargados) se publicará con la versión definitiva; aún no es público.</li>
+<li><code>make</code> lo rehace todo desde los datos; <code>make web</code> solo la web.</li>
+<li><code>make comprobar</code> revisa los datos nuevos (años, cobertura, categorías nuevas, totales frente al Plan) y que la web tenga las mismas claves en valenciano y castellano.</li>
+<li><b>Ninguna cifra calculada está escrita a mano</b>: las calcula <code>scripts/exportar_web.py</code>. Las excepciones son cifras transcritas y citadas de documentos: las del Plan Director (como los heridos graves de 2024), la de prensa sobre 2026 y los conteos manuales de patinetes.</li></ul>`,
+tec:()=>`${tabla("Versiones", ["Programa", "Versión"], [["Python", M.python], ...Object.entries(M.libs)])}
+<p>Informes: <code>docs/revision_independiente.md</code>, <code>docs/revision_coherencia.md</code> y <code>docs/revision_metodologica/</code>.</p>`},
+
+futuro:{h:"Líneas futuras",
+cos:()=>`<ul><li><b>Registro de vehículos personales ligeros de la DGT</b> (Real Decreto 52/2026). Si publica datos por municipio, servirá para medir la exposición del patinete: siniestros por patinete registrado.</li>
+<li><b>Datos de ${A1 + 1}.</b> Cuando el portal publique el año completo, <code>make</code> lo añade sin tocar el código y <code>make comprobar</code> avisa si cambia el formato.${A1 + 1 === MT["año_plan"] ? " Será el primer año del Plan, con casco obligatorio en patinete desde octubre." : ""}</li>
+<li><b>Coordenadas en origen.</b> Si el portal publicara la posición de cada siniestro, el mapa no dependería de la dirección escrita.</li>
+<li><b>Contadores que separen bici y patinete</b>, para calcular el riesgo por viaje de cada uno.</li></ul>`,
+tec:()=>`<p>Los años se deducen de los datos (años con los 12 meses). La meta (−50 % en 2030) es del Plan; el año base (${B}) es una propuesta nuestra y se cambia en <code>AÑO_BASE</code> de <code>scripts/exportar_web.py</code>.</p>`}
+}}
+};
+const SECS = Object.keys(T.va.sec);
+if (typeof window !== "undefined") window.METODE_T = T;
+
+// ---------- pintar ----------
+function pintar(){
+  const t = T[L];
+  document.documentElement.lang = L === "va" ? "ca" : "es";
+  document.title = `${t.ey} · ${t.marca}`;
+  document.querySelectorAll("[data-t]").forEach(el => { const v = t[el.dataset.t]; el.innerHTML = typeof v === "function" ? v() : v; });
+  document.getElementById("toc").innerHTML = SECS.map(id => `<li><a href="#${id}">${t.sec[id].h}</a></li>`).join("");
+  const abiertos = new Set([...document.querySelectorAll("details.tec[open]")].map(d => d.dataset.s));
+  document.getElementById("contingut").innerHTML = SECS.map((id, i) => { const s = t.sec[id];
+    return `<section id="${id}" aria-labelledby="h-${id}"><h2 id="h-${id}"><span class="n">${i + 1}</span>${s.h}</h2>${s.cos()}<details class="tec" data-s="${id}"${abiertos.has(id) ? " open" : ""}><summary>${t.tec}</summary>${s.tec()}</details></section>`; }).join("");
+  ["va", "es"].forEach(l => document.getElementById("l-" + l).setAttribute("aria-pressed", L === l));
+  marcar();
+}
+// índice: marca la sección visible
+let obs = null;
+function marcar(){
+  if (obs) obs.disconnect();
+  if (!("IntersectionObserver" in window)) return;
+  const enlaces = Object.fromEntries([...document.querySelectorAll("#toc a")].map(a => [a.getAttribute("href").slice(1), a]));
+  obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){
+    Object.values(enlaces).forEach(a => a.removeAttribute("aria-current")); enlaces[e.target.id]?.setAttribute("aria-current", "true"); } }),
+    {rootMargin: "-20% 0px -70% 0px"});
+  document.querySelectorAll("main section").forEach(s => obs.observe(s));
+}
+if (typeof document !== "undefined"){
+  try { const s = localStorage.getItem("obs-lang"); if (s === "va" || s === "es") L = s; } catch(e){}
+  ["va", "es"].forEach(l => document.getElementById("l-" + l).onclick = () => { L = l; try { localStorage.setItem("obs-lang", l); } catch(e){} pintar(); });
+  pintar();
+  if (location.hash){ const el = document.getElementById(location.hash.slice(1)); if (el) el.scrollIntoView(); }
+}
+</script>

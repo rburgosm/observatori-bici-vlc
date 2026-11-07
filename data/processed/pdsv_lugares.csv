@@ -1,0 +1,38 @@
+nombre,tipo_lugar,colectivo,cifra_plan,periodo,accion_o_contexto,ref,kind
+Av. de Blasco Ibáñez,calle,VMP,196 siniestros,2019-2025,2.3.4 Conclusiones: calles con más siniestros con VMP (n.º 1),PDF p.22 (pág. 19); txt l.862,diag
+Av. del Puerto,calle,VMP,167 siniestros,2019-2025,2.3.4: calles con más siniestros con VMP (n.º 2),PDF p.22 (pág. 19); txt l.862,diag
+Paseo de la Alameda,calle,VMP,166 siniestros,2019-2025,2.3.4: calles con más siniestros con VMP (n.º 3),PDF p.22 (pág. 19); txt l.862,diag
+Paseo de la Alameda - Plaza de Zaragoza,cruce,VMP,32 siniestros,2019-2025,2.3.4: cruces con más siniestros con VMP (n.º 1),PDF p.22 (pág. 19); txt l.863,diag
+Ausiàs March - Fernando Abril Martorell,cruce,VMP,25 siniestros,2019-2025,2.3.4: cruces con más siniestros con VMP (n.º 2),PDF p.22 (pág. 19); txt l.863,diag
+Av. dels Tarongers (Naranjos) - Luis Peixó,cruce,VMP,22 siniestros,2019-2025,2.3.4: cruces con más siniestros con VMP (n.º 3),PDF p.22 (pág. 19); txt l.863,diag
+Jardín del Turia,calle/parque,bici,185 siniestros,2019-2025,"2.3.4: calles con más siniestros con bicicleta (n.º 1). En 2.3.3: 39 (2024) y 27 (2025), -30,76 %",PDF p.22 (pág. 19); txt l.867,diag
+Av. de Blasco Ibáñez,calle,bici,154 siniestros,2019-2025,2.3.4: calles con más siniestros con bicicleta (n.º 2),PDF p.22 (pág. 19); txt l.867,diag
+Av. del Puerto,calle,bici,110 siniestros,2019-2025,2.3.4: calles con más siniestros con bicicleta (n.º 3),PDF p.22 (pág. 19); txt l.867,diag
+Paseo de la Alameda - Plaza de Zaragoza,cruce,bici,22 siniestros,2019-2025,2.3.4: cruces con más siniestros con bicicleta (n.º 1),PDF p.22 (pág. 19); txt l.868,diag
+Av. dels Tarongers (Naranjos) - Luis Peixó,cruce,bici,15 siniestros,2019-2025,2.3.4: cruces con más siniestros con bicicleta (n.º 2),PDF p.22 (pág. 19); txt l.868,diag
+Fernando Abril Martorell - Ctra. de Malilla,cruce,bici,14 siniestros,2019-2025,2.3.4: cruces con más siniestros con bicicleta (n.º 3),PDF p.22 (pág. 19); txt l.870,diag
+C/ San Vicente Mártir,calle,peatón,87 siniestros,2019-2025,2.3.4: calles con más siniestros con peatón,PDF p.22 (pág. 19); txt l.873,diag
+Av. de Blasco Ibáñez,calle,peatón,68 siniestros,2019-2025,2.3.4: calles con más siniestros con peatón,PDF p.22 (pág. 19); txt l.873,diag
+C/ Colón,calle,peatón,65 siniestros,2019-2025,2.3.4: calles con más siniestros con peatón,PDF p.22 (pág. 19); txt l.873,diag
+Peset Aleixandre - Camí de Montcada,cruce,peatón,10 siniestros,2019-2025,2.3.4: cruces con más siniestros con peatón,PDF p.22 (pág. 19); txt l.873,diag
+Giorgeta - Jesús,cruce,peatón,8 siniestros,2019-2025,2.3.4: cruces con más siniestros con peatón,PDF p.22 (pág. 19); txt l.875,diag
+Tres Cruces - Campos Crespo,cruce,peatón,7 siniestros,2019-2025,2.3.4: cruces con más siniestros con peatón,PDF p.22 (pág. 19); txt l.875,diag
+Av. de Blasco Ibáñez - Av. Cardenal Benlloch,cruce,todos,,2024,"Auditoría de seguridad vial (una de las 4 primeras, 'intersecciones de mayor siniestralidad'). Indicador 3.7: auditorías en tramos en servicio 4 -> 30",PDF p.23 (pág. 20); txt l.909,act
+Av. Cardenal Benlloch - Av. del Puerto,cruce,todos,,2024,Auditoría de seguridad vial (acción 3.7),PDF p.23 (pág. 20); txt l.911,act
+Plaza de Zaragoza,cruce/plaza,todos,,2024-2025,Auditoría de seguridad vial 2024 y reordenación de intersección crítica 2025 (acción 3.7),PDF p.23 (pág. 20); txt l.909,act
+Gran Vía Fernando el Católico - C/ Àngel Guimerà,cruce,todos,,2024-2025,Auditoría de seguridad vial 2024 y reordenación de intersección crítica 2025,PDF p.23 (pág. 20); txt l.948,act
+Blasco Ibáñez - Cardenal Benlloch - Clariano,cruce,todos,,2025,"Reordenación de intersección crítica: marcas viales, fin del ámbar intermitente, visibilidad peatonal",PDF p.23 (pág. 20); txt l.948,act
+Paseo de la Ciutadella,punto,todos,,2025,Radar didáctico en 'punto sensible' (limitaciones de velocidad),PDF p.23 (pág. 20); txt l.917,act
+Av. del General Avilés,punto,todos,,2025,Radar didáctico en 'punto sensible',PDF p.23 (pág. 20); txt l.918,act
+C/ Enginyer Fausto Elío,punto,todos,,2025,Radar didáctico en 'punto sensible',PDF p.23 (pág. 20); txt l.918,act
+Ronda Norte,tramo,peatón,,2025,Iluminación LED en pasos de peatones de alta siniestralidad,PDF p.23 (pág. 20); txt l.910,act
+C/ Xàtiva - C/ Jesús,cruce,bici,,—,Configuración ciclista pendiente de estudio: giro de vehículos con fase ámbar sobre paso de peatones y carril bici (acción 3.2.2),PDF p.40 (pág. 37); txt l.1775,act
+C/ Xàtiva,calle,peatón/bici,,—,Marca vial 'Espere verde' en carril bici; descontador peatonal desde 2021,PDF p.40 (pág. 37); txt l.1766,act
+Gran Vía Germanías a la altura de C/ Castellón,punto,peatón,,2021,Primer descontador de tiempo para peatones,PDF p.22 (pág. 19); txt l.884,act
+Anillo Ciclista (Ronda Interior),eje ciclista,bici,más de 10.000 ciclistas/día en algunos tramos,mayo 2025,Itinerario ciclista de mayor intensidad (cita el plano de intensidades de Movilidad),PDF p.12 (pág. 9); txt l.443,diag
+Jardín del Turia,zona,VMP,,—,Zona de concentración de uso de VMP,PDF p.41 (pág. 38); txt l.1803,diag
+Ciutat Vella (Área de Prioridad Residencial),zona,todos,,2022,APR implantada en 2022; ampliación de 30 km/h a otros distritos (acción 3.5),PDF p.23 (pág. 20); txt l.915,act
+Lonja de la Seda y Plaza del Mercado,zona,peatón,,—,Peatonalización progresiva,PDF p.23 (pág. 20); txt l.930,act
+Estación Joaquín Sorolla (Kiss and Go),punto,todos,,2024,Carriles y parada rápida para reducir conflictos,PDF p.23 (pág. 20); txt l.932,act
+Av. del General Avilés - C/ Luis Buñuel (Campanar),cruce,peatón,,—,Ejemplo de nuevo paso de peatones en gran avenida (acción 3.2.1),PDF p.37 (pág. 34); txt l.1643,act
+Av. de Peris y Valero,punto,peatón,,—,Foto de paso peatonal accesible (acción 3.4),PDF p.47 (pág. 44); txt l.2121,diag

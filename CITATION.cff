@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "Si uses aquest treball, cita'l així. / Si usas este trabajo, cítalo así."
+type: software
+title: "Observatori de la bici i el patinet de València"
+abstract: >-
+  Observatori obert que segueix l'indicador de l'acció 3.2.2 del Pla Director de
+  Seguretat Viària de València 2026-2030 (sinistres amb bici o patinet) i mostra
+  on s'acumulen els sinistres. / Observatorio abierto que sigue el indicador de la
+  acción 3.2.2 del Plan Director de Seguridad Vial de València 2026-2030
+  (siniestros con bici o patinete) y muestra dónde se acumulan los siniestros.
+authors:
+  - family-names: Burgos
+    given-names: Roberto
+version: "0.1.0"
+date-released: "2026-11-07"
+license: MIT
+repository-code: "https://github.com/rburgosm/observatori-bici-vlc"
+url: "https://observatoribicivlc.org"
+keywords:
+  - seguridad vial
+  - seguretat viària
+  - bicicleta
+  - patinete eléctrico
+  - VMP
+  - València
+  - datos abiertos
+  - dades obertes

@@ -1,0 +1,7 @@
+/* Botón de tema (común; lo inserta construir_web.py en el marcador TEMA_CSS). Solo tokens: --ink, --ink2, --line, --surface. */
+button[data-tema]{display:inline-flex;align-items:center;gap:6px;min-height:32px}
+button[data-tema] svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+button[data-tema]:hover{border-color:var(--ink2)}
+button[data-tema]:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+/* en móvil estrecho, solo el icono (el estado sigue en aria-label y title) */
+@media (max-width:420px){button[data-tema] .tema-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}

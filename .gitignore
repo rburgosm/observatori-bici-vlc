@@ -1,0 +1,23 @@
+# Se copia como .gitignore en la raíz del repositorio público (scripts/exportar_publico.sh)
+.venv/
+__pycache__/
+*.pyc
+# derivados: se regeneran con make (make geocodificar, make)
+data/processed/siniestros_geo*.csv
+outputs/
+web/proto/datos/
+web/proto/build/
+data/processed/observatorio.sqlite*
+docs/incidencias_para_el_ajuntament.pdf
+# candado de make y capturas locales de la web (make capturas)
+.make.lock
+capturas/
+# ZIP mensuales de la PLACSP (200-300 MB cada uno; scripts/placsp_valencia.py descargar)
+data/raw/placsp/
+# documentos de terceros que no se redistribuyen (el PDF del Plan: ver DATOS.md)
+data/raw/pdsv/*.pdf
+# propuestas del agente verificador sin revisar (las valida una persona antes de pasar a plan_seguimiento.csv)
+data/processed/plan_seguimiento_propuestas.csv
+# configuración local
+.claude/*
+!.claude/agents/

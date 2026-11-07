@@ -1,0 +1,10758 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-30T21:00:26Z",
+    "timestamp_areas_base": "2026-10-30T16:09:51Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 27747819,
+  "lat": 39.4465535,
+  "lon": -0.3683039,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 27747836,
+  "lat": 39.4455051,
+  "lon": -0.3690624,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 27747837,
+  "lat": 39.4455250,
+  "lon": -0.3687867,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 27747841,
+  "lat": 39.4462936,
+  "lon": -0.3681171,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 29834280,
+  "lat": 39.4653553,
+  "lon": -0.3816558,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 35594394,
+  "lat": 39.4701996,
+  "lon": -0.3759388,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 69574717,
+  "lat": 39.4752669,
+  "lon": -0.3521548,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 69576777,
+  "lat": 39.4740478,
+  "lon": -0.3482017,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 69577206,
+  "lat": 39.4752374,
+  "lon": -0.3527145,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 69578001,
+  "lat": 39.4754587,
+  "lon": -0.3521624,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 69578186,
+  "lat": 39.4739718,
+  "lon": -0.3473662,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 69578665,
+  "lat": 39.4742275,
+  "lon": -0.3477622,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 69578748,
+  "lat": 39.4906632,
+  "lon": -0.3996337,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 69579179,
+  "lat": 39.4904974,
+  "lon": -0.3988030,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 69583314,
+  "lat": 39.4801360,
+  "lon": -0.3832336,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "crossing",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 88429463,
+  "lat": 39.4641521,
+  "lon": -0.3581106,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 96074344,
+  "lat": 39.4536820,
+  "lon": -0.3525815,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 96089043,
+  "lat": 39.4636154,
+  "lon": -0.4052777,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 97168107,
+  "lat": 39.4827805,
+  "lon": -0.4012930,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 97168113,
+  "lat": 39.4834114,
+  "lon": -0.4014568,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 107926579,
+  "lat": 39.4555983,
+  "lon": -0.3970888,
+  "tags": {
+    "direction": "backward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 108005063,
+  "lat": 39.4567341,
+  "lon": -0.3906357,
+  "tags": {
+    "direction": "backward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 109871865,
+  "lat": 39.4884305,
+  "lon": -0.3530894,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 109871920,
+  "lat": 39.4876562,
+  "lon": -0.3526352,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 109871927,
+  "lat": 39.4876110,
+  "lon": -0.3528179,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 110576045,
+  "lat": 39.4561777,
+  "lon": -0.3467223,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 110594184,
+  "lat": 39.4621196,
+  "lon": -0.3602414,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 110594187,
+  "lat": 39.4614937,
+  "lon": -0.3578220,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 110675754,
+  "lat": 39.4564475,
+  "lon": -0.3752449,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 111148812,
+  "lat": 39.4575490,
+  "lon": -0.3833939,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 111179623,
+  "lat": 39.4576355,
+  "lon": -0.4026584,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 111821345,
+  "lat": 39.4885880,
+  "lon": -0.3530841,
+  "tags": {
+    "crossing": "traffic_signals;marked",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 111821456,
+  "lat": 39.4885427,
+  "lon": -0.3532472,
+  "tags": {
+    "crossing": "traffic_signals",
+    "crossing:markings": "zebra",
+    "crossing:signals": "yes",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 111895020,
+  "lat": 39.4746320,
+  "lon": -0.4060075,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 111895225,
+  "lat": 39.4835719,
+  "lon": -0.4013964,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 111895251,
+  "lat": 39.4875115,
+  "lon": -0.4048079,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 111895257,
+  "lat": 39.4879319,
+  "lon": -0.4047777,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 111895295,
+  "lat": 39.4873704,
+  "lon": -0.4051838,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 111903396,
+  "lat": 39.4897164,
+  "lon": -0.3990369,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 111924912,
+  "lat": 39.4873228,
+  "lon": -0.4047605,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 111924914,
+  "lat": 39.4834828,
+  "lon": -0.4019729,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 111924917,
+  "lat": 39.4835476,
+  "lon": -0.4018259,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 112137555,
+  "lat": 39.4587318,
+  "lon": -0.3868238,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 113352699,
+  "lat": 39.4571474,
+  "lon": -0.3761272,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 113352708,
+  "lat": 39.4569221,
+  "lon": -0.3762294,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 115579004,
+  "lat": 39.4881025,
+  "lon": -0.4045293,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 128249166,
+  "lat": 39.4817886,
+  "lon": -0.3929413,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 128249198,
+  "lat": 39.4798423,
+  "lon": -0.3883349,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 128249203,
+  "lat": 39.4790509,
+  "lon": -0.3908090,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 128249302,
+  "lat": 39.4809958,
+  "lon": -0.3929575,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 128249322,
+  "lat": 39.4792448,
+  "lon": -0.3910307,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 128249349,
+  "lat": 39.4816825,
+  "lon": -0.3925996,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 128249461,
+  "lat": 39.4851924,
+  "lon": -0.3712431,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 128249478,
+  "lat": 39.4851453,
+  "lon": -0.3707029,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 131964575,
+  "lat": 39.4700415,
+  "lon": -0.3495654,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 132010596,
+  "lat": 39.4825187,
+  "lon": -0.3544015,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 132071474,
+  "lat": 39.4877808,
+  "lon": -0.3687915,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 132152538,
+  "lat": 39.4763839,
+  "lon": -0.3518649,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 132153808,
+  "lat": 39.4677058,
+  "lon": -0.3253977,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 191837705,
+  "lat": 39.4826534,
+  "lon": -0.3820978,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 191903852,
+  "lat": 39.4828593,
+  "lon": -0.3806653,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 249528527,
+  "lat": 39.4703226,
+  "lon": -0.3580712,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 249528543,
+  "lat": 39.4700782,
+  "lon": -0.3585610,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 250293052,
+  "lat": 39.4730164,
+  "lon": -0.3500665,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 252329877,
+  "lat": 39.4920146,
+  "lon": -0.3741028,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 252329883,
+  "lat": 39.4919432,
+  "lon": -0.3737651,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 253312497,
+  "lat": 39.4757232,
+  "lon": -0.3471012,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 253312711,
+  "lat": 39.4745661,
+  "lon": -0.3340081,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 253318373,
+  "lat": 39.4723150,
+  "lon": -0.3417234,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "uncontrolled",
+    "crossing:markings": "zebra",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 253318378,
+  "lat": 39.4722051,
+  "lon": -0.3425456,
+  "tags": {
+    "button_operated": "no",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 253487889,
+  "lat": 39.4659792,
+  "lon": -0.3356047,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 253488226,
+  "lat": 39.4710667,
+  "lon": -0.3374769,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 253488385,
+  "lat": 39.4701036,
+  "lon": -0.3435016,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 254010149,
+  "lat": 39.4561592,
+  "lon": -0.3465230,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "pedestrian_crossing",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 254015128,
+  "lat": 39.4641309,
+  "lon": -0.3350207,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 254902024,
+  "lat": 39.4678025,
+  "lon": -0.3953985,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 254902027,
+  "lat": 39.4681898,
+  "lon": -0.3953741,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 256627166,
+  "lat": 39.4699080,
+  "lon": -0.4099403,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 257429323,
+  "lat": 39.4891169,
+  "lon": -0.4018103,
+  "tags": {
+    "crossing": "traffic_signals",
+    "crossing:markings": "zebra",
+    "crossing:signals": "yes",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 260763282,
+  "lat": 39.4766227,
+  "lon": -0.3553648,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 280052460,
+  "lat": 39.3542260,
+  "lon": -0.3247304,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 318325885,
+  "lat": 39.4772950,
+  "lon": -0.3467521,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 429376790,
+  "lat": 39.4822329,
+  "lon": -0.3507863,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 429505317,
+  "lat": 39.4654822,
+  "lon": -0.3595340,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 430012786,
+  "lat": 39.4574293,
+  "lon": -0.3454949,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 430152426,
+  "lat": 39.4642226,
+  "lon": -0.3359378,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "no",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 442029972,
+  "lat": 39.4881373,
+  "lon": -0.3535989,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 506284047,
+  "lat": 39.4694201,
+  "lon": -0.4153378,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1316020815,
+  "lat": 39.4697823,
+  "lon": -0.3585870,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1326182072,
+  "lat": 39.4916790,
+  "lon": -0.3751921,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1326182097,
+  "lat": 39.4918736,
+  "lon": -0.3751531,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1326293437,
+  "lat": 39.4538361,
+  "lon": -0.3512880,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1334420878,
+  "lat": 39.4655427,
+  "lon": -0.3593311,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1334420887,
+  "lat": 39.4638262,
+  "lon": -0.4058911,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1342102437,
+  "lat": 39.4703450,
+  "lon": -0.3581489,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1565937028,
+  "lat": 39.4563502,
+  "lon": -0.3482659,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1567902378,
+  "lat": 39.4634113,
+  "lon": -0.4060380,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1567955390,
+  "lat": 39.4697669,
+  "lon": -0.4107000,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1567974719,
+  "lat": 39.4692509,
+  "lon": -0.4026393,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1567974721,
+  "lat": 39.4687438,
+  "lon": -0.3996717,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1567974722,
+  "lat": 39.4695580,
+  "lon": -0.4063042,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1575994686,
+  "lat": 39.4988151,
+  "lon": -0.3811045,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1579374380,
+  "lat": 39.4784530,
+  "lon": -0.3998937,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 1602528794,
+  "lat": 39.4680484,
+  "lon": -0.3636721,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1604298652,
+  "lat": 39.4635903,
+  "lon": -0.3463641,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1624649687,
+  "lat": 39.4824143,
+  "lon": -0.3514917,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1629038797,
+  "lat": 39.4972853,
+  "lon": -0.3865204,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1635581138,
+  "lat": 39.4676673,
+  "lon": -0.3254483,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1642589038,
+  "lat": 39.4750961,
+  "lon": -0.4033363,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 1666212054,
+  "lat": 39.4813072,
+  "lon": -0.3748491,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1827079007,
+  "lat": 39.4498100,
+  "lon": -0.3709931,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1827079015,
+  "lat": 39.4503569,
+  "lon": -0.3709709,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1867574504,
+  "lat": 39.4794742,
+  "lon": -0.3759687,
+  "tags": {
+    "crossing": "uncontrolled",
+    "crossing:markings": "zebra",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1870444683,
+  "lat": 39.4655618,
+  "lon": -0.3520498,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1876258396,
+  "lat": 39.4826913,
+  "lon": -0.3814658,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1876258397,
+  "lat": 39.4828148,
+  "lon": -0.3814465,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1880987974,
+  "lat": 39.4772921,
+  "lon": -0.3898000,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1881106770,
+  "lat": 39.4894211,
+  "lon": -0.4011085,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1881106779,
+  "lat": 39.4895342,
+  "lon": -0.4011878,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1973990842,
+  "lat": 39.4905860,
+  "lon": -0.3806273,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1980219429,
+  "lat": 39.4921416,
+  "lon": -0.3738720,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 1984268926,
+  "lat": 39.4699826,
+  "lon": -0.3586032,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2023503964,
+  "lat": 39.4950134,
+  "lon": -0.4027465,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 2079849909,
+  "lat": 39.4748426,
+  "lon": -0.3960027,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2079849916,
+  "lat": 39.4749648,
+  "lon": -0.3960467,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2173325981,
+  "lat": 39.4566345,
+  "lon": -0.3754938,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "traffic_lights"
+  }
+},
+{
+  "type": "node",
+  "id": 2225534576,
+  "lat": 39.4632892,
+  "lon": -0.4054992,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2424872616,
+  "lat": 39.4810697,
+  "lon": -0.3926038,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "no",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 2507729836,
+  "lat": 39.4733050,
+  "lon": -0.3484474,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 2630935308,
+  "lat": 39.4707927,
+  "lon": -0.4052864,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2670844292,
+  "lat": 39.4782878,
+  "lon": -0.3552699,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 2821185303,
+  "lat": 39.4473700,
+  "lon": -0.3900529,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821185304,
+  "lat": 39.4471221,
+  "lon": -0.3895886,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821185305,
+  "lat": 39.4471782,
+  "lon": -0.3892022,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821185306,
+  "lat": 39.4473160,
+  "lon": -0.3904366,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821185307,
+  "lat": 39.4469739,
+  "lon": -0.3895979,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821185308,
+  "lat": 39.4475224,
+  "lon": -0.3900908,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821185318,
+  "lat": 39.4461667,
+  "lon": -0.3861749,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821185319,
+  "lat": 39.4465403,
+  "lon": -0.3864632,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821185320,
+  "lat": 39.4464077,
+  "lon": -0.3858637,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821185321,
+  "lat": 39.4466611,
+  "lon": -0.3859846,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821185322,
+  "lat": 39.4467220,
+  "lon": -0.3865204,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821185323,
+  "lat": 39.4464782,
+  "lon": -0.3868438,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821185324,
+  "lat": 39.4463380,
+  "lon": -0.3862378,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821227686,
+  "lat": 39.4537535,
+  "lon": -0.3993595,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 2821227688,
+  "lat": 39.4537789,
+  "lon": -0.3998718,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 2821227691,
+  "lat": 39.4533374,
+  "lon": -0.3994161,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 2821227692,
+  "lat": 39.4700572,
+  "lon": -0.4057524,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821227693,
+  "lat": 39.4698737,
+  "lon": -0.4053213,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821227694,
+  "lat": 39.4695995,
+  "lon": -0.4055823,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821227695,
+  "lat": 39.4697585,
+  "lon": -0.4060303,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821227697,
+  "lat": 39.4705158,
+  "lon": -0.4050720,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821227698,
+  "lat": 39.4698678,
+  "lon": -0.4105464,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821227700,
+  "lat": 39.4696372,
+  "lon": -0.4104452,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821231904,
+  "lat": 39.4693642,
+  "lon": -0.4145650,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821231905,
+  "lat": 39.4693050,
+  "lon": -0.4154881,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821231906,
+  "lat": 39.4694854,
+  "lon": -0.4160563,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821231908,
+  "lat": 39.4692093,
+  "lon": -0.4030932,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821231909,
+  "lat": 39.4692142,
+  "lon": -0.4027927,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821231910,
+  "lat": 39.4693737,
+  "lon": -0.4026474,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821231911,
+  "lat": 39.4686501,
+  "lon": -0.3997868,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821231914,
+  "lat": 39.4681265,
+  "lon": -0.3968281,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821231915,
+  "lat": 39.4680881,
+  "lon": -0.3965838,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821231916,
+  "lat": 39.4681694,
+  "lon": -0.3964410,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821231930,
+  "lat": 39.4683024,
+  "lon": -0.3961914,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821231932,
+  "lat": 39.4682193,
+  "lon": -0.3951987,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2821231933,
+  "lat": 39.4679652,
+  "lon": -0.3954335,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2914614070,
+  "lat": 39.4654050,
+  "lon": -0.3813482,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3177991362,
+  "lat": 39.4781738,
+  "lon": -0.3399843,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3177991363,
+  "lat": 39.4779145,
+  "lon": -0.3381615,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3177991962,
+  "lat": 39.4796314,
+  "lon": -0.3441175,
+  "tags": {
+    "crossing:markings": "zebra",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3177992362,
+  "lat": 39.4760286,
+  "lon": -0.3335458,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3177992363,
+  "lat": 39.4758994,
+  "lon": -0.3333986,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3177992463,
+  "lat": 39.4789886,
+  "lon": -0.3418895,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3177992464,
+  "lat": 39.4764782,
+  "lon": -0.3340949,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3177992561,
+  "lat": 39.4793836,
+  "lon": -0.3441956,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3177992562,
+  "lat": 39.4793019,
+  "lon": -0.3438956,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3177992663,
+  "lat": 39.4776193,
+  "lon": -0.3380646,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3177992761,
+  "lat": 39.4795187,
+  "lon": -0.3437357,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3177992861,
+  "lat": 39.4786988,
+  "lon": -0.3418104,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3177992961,
+  "lat": 39.4784554,
+  "lon": -0.3400410,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3177992962,
+  "lat": 39.4768344,
+  "lon": -0.3353361,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3177993061,
+  "lat": 39.4770737,
+  "lon": -0.3352398,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178018761,
+  "lat": 39.4924046,
+  "lon": -0.3826049,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178018762,
+  "lat": 39.4922744,
+  "lon": -0.3830454,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178018861,
+  "lat": 39.4924233,
+  "lon": -0.3828654,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178018862,
+  "lat": 39.4921614,
+  "lon": -0.3827680,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178018961,
+  "lat": 39.4924625,
+  "lon": -0.3830227,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178019062,
+  "lat": 39.4922140,
+  "lon": -0.3829306,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178022062,
+  "lat": 39.4912424,
+  "lon": -0.3825749,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178022163,
+  "lat": 39.4914613,
+  "lon": -0.3825049,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178022164,
+  "lat": 39.4914980,
+  "lon": -0.3826708,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178022165,
+  "lat": 39.4912042,
+  "lon": -0.3824092,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178022166,
+  "lat": 39.4913807,
+  "lon": -0.3823769,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178022261,
+  "lat": 39.4912808,
+  "lon": -0.3827777,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178924462,
+  "lat": 39.4904161,
+  "lon": -0.3816530,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178924563,
+  "lat": 39.4903067,
+  "lon": -0.3816663,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178924662,
+  "lat": 39.4905110,
+  "lon": -0.3822995,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178924663,
+  "lat": 39.4904666,
+  "lon": -0.3821332,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178924664,
+  "lat": 39.4901378,
+  "lon": -0.3824426,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3178924861,
+  "lat": 39.4902530,
+  "lon": -0.3823736,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3179694917,
+  "lat": 39.4932688,
+  "lon": -0.3829924,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3179755261,
+  "lat": 39.4930828,
+  "lon": -0.3831041,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3179755262,
+  "lat": 39.4931831,
+  "lon": -0.3833979,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3179755263,
+  "lat": 39.4933244,
+  "lon": -0.3831918,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3179755361,
+  "lat": 39.4931369,
+  "lon": -0.3832710,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3179755561,
+  "lat": 39.4933659,
+  "lon": -0.3833531,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3179764663,
+  "lat": 39.4966365,
+  "lon": -0.3842324,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3179765864,
+  "lat": 39.4972160,
+  "lon": -0.3846556,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3179767661,
+  "lat": 39.4952529,
+  "lon": -0.3842578,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3179767663,
+  "lat": 39.4952263,
+  "lon": -0.3840479,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3179767862,
+  "lat": 39.4951759,
+  "lon": -0.3838665,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3179767961,
+  "lat": 39.4953409,
+  "lon": -0.3838411,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3179768261,
+  "lat": 39.4953937,
+  "lon": -0.3839476,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3179768361,
+  "lat": 39.4954238,
+  "lon": -0.3841235,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181463367,
+  "lat": 39.4980846,
+  "lon": -0.3840656,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181519263,
+  "lat": 39.4974336,
+  "lon": -0.3847970,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181521182,
+  "lat": 39.4985649,
+  "lon": -0.3813583,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181521183,
+  "lat": 39.4984279,
+  "lon": -0.3814977,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181521186,
+  "lat": 39.4987590,
+  "lon": -0.3816138,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181524862,
+  "lat": 39.4979934,
+  "lon": -0.3858157,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181524863,
+  "lat": 39.4980493,
+  "lon": -0.3844737,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181535961,
+  "lat": 39.4973103,
+  "lon": -0.3853025,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181535963,
+  "lat": 39.4979132,
+  "lon": -0.3846255,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181535964,
+  "lat": 39.4972940,
+  "lon": -0.3868605,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181535965,
+  "lat": 39.4970180,
+  "lon": -0.3867399,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181535967,
+  "lat": 39.4979238,
+  "lon": -0.3842242,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181536062,
+  "lat": 39.4977526,
+  "lon": -0.3865323,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181536068,
+  "lat": 39.4984153,
+  "lon": -0.3812049,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181538065,
+  "lat": 39.4987021,
+  "lon": -0.3812390,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3181571761,
+  "lat": 39.4988559,
+  "lon": -0.3814015,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3270269405,
+  "lat": 39.4594403,
+  "lon": -0.3425601,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3270269436,
+  "lat": 39.4641947,
+  "lon": -0.3588795,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3702168684,
+  "lat": 39.4967966,
+  "lon": -0.4162008,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 3702168685,
+  "lat": 39.4968099,
+  "lon": -0.4158958,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "backward"
+  }
+},
+{
+  "type": "node",
+  "id": 3702168691,
+  "lat": 39.4970283,
+  "lon": -0.4161040,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 3839790097,
+  "lat": 39.4939454,
+  "lon": -0.3571613,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 3839790099,
+  "lat": 39.4944954,
+  "lon": -0.3570477,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 3839790101,
+  "lat": 39.4945370,
+  "lon": -0.3582133,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 3889757303,
+  "lat": 39.4911489,
+  "lon": -0.3782918,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "kerb": "lowered",
+    "source": "local knowledge",
+    "tactile_paving": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3906226013,
+  "lat": 39.4674522,
+  "lon": -0.3765126,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598518,
+  "lat": 39.4691891,
+  "lon": -0.3612000,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598519,
+  "lat": 39.4688326,
+  "lon": -0.3614935,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598520,
+  "lat": 39.4682023,
+  "lon": -0.3607733,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598522,
+  "lat": 39.4675098,
+  "lon": -0.3580621,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598523,
+  "lat": 39.4671251,
+  "lon": -0.3567677,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598530,
+  "lat": 39.4665599,
+  "lon": -0.3548657,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598531,
+  "lat": 39.4660045,
+  "lon": -0.3529969,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598532,
+  "lat": 39.4657207,
+  "lon": -0.3520418,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598533,
+  "lat": 39.4655836,
+  "lon": -0.3515806,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598535,
+  "lat": 39.4652149,
+  "lon": -0.3503397,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598537,
+  "lat": 39.4647419,
+  "lon": -0.3487480,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598539,
+  "lat": 39.4645487,
+  "lon": -0.3480977,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598541,
+  "lat": 39.4642926,
+  "lon": -0.3472361,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598543,
+  "lat": 39.4640947,
+  "lon": -0.3465704,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598546,
+  "lat": 39.4633853,
+  "lon": -0.3441831,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598548,
+  "lat": 39.4630126,
+  "lon": -0.3429290,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 3941598550,
+  "lat": 39.4626421,
+  "lon": -0.3416823,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 4133776652,
+  "lat": 39.4755675,
+  "lon": -0.3471345,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 4133776653,
+  "lat": 39.4756149,
+  "lon": -0.3470434,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 4266669579,
+  "lat": 39.4834142,
+  "lon": -0.4018458,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 4278582609,
+  "lat": 39.4916830,
+  "lon": -0.3732255,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 4576301686,
+  "lat": 39.4829087,
+  "lon": -0.3790850,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 4576301789,
+  "lat": 39.4826613,
+  "lon": -0.3770038,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 4576301790,
+  "lat": 39.4825858,
+  "lon": -0.3770638,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 4585503829,
+  "lat": 39.4758972,
+  "lon": -0.3557053,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 4683229675,
+  "lat": 39.4718228,
+  "lon": -0.3681035,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 4708014598,
+  "lat": 39.4852117,
+  "lon": -0.3643249,
+  "tags": {
+    "crossing": "traffic_signals;marked",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 5338685808,
+  "lat": 39.4669533,
+  "lon": -0.4139676,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 5338685809,
+  "lat": 39.4668179,
+  "lon": -0.4141603,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 5338685810,
+  "lat": 39.4670224,
+  "lon": -0.4144859,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 5338688223,
+  "lat": 39.4669283,
+  "lon": -0.4144163,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 5381280144,
+  "lat": 39.4901813,
+  "lon": -0.3714703,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 5403385411,
+  "lat": 39.4693561,
+  "lon": -0.4103594,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 5465558088,
+  "lat": 39.4634632,
+  "lon": -0.4099974,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 5465558099,
+  "lat": 39.4638767,
+  "lon": -0.4034729,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 5537400378,
+  "lat": 39.4881328,
+  "lon": -0.3683399,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 5579104343,
+  "lat": 39.4695220,
+  "lon": -0.4103479,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 5579104344,
+  "lat": 39.4630182,
+  "lon": -0.4123849,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 5579104352,
+  "lat": 39.4628911,
+  "lon": -0.4121636,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 5579104360,
+  "lat": 39.4631083,
+  "lon": -0.4102055,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 5579104361,
+  "lat": 39.4632193,
+  "lon": -0.4099743,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 5579104362,
+  "lat": 39.4633292,
+  "lon": -0.4098060,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 5579104363,
+  "lat": 39.4631994,
+  "lon": -0.4127618,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 5579104365,
+  "lat": 39.4632249,
+  "lon": -0.4119958,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 5585863017,
+  "lat": 39.4796934,
+  "lon": -0.3721176,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 5683422984,
+  "lat": 39.4821024,
+  "lon": -0.3543298,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 5683422987,
+  "lat": 39.4824966,
+  "lon": -0.3546500,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 5683422989,
+  "lat": 39.4826875,
+  "lon": -0.3543764,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 5683486738,
+  "lat": 39.4836543,
+  "lon": -0.3586740,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 5683486742,
+  "lat": 39.4835021,
+  "lon": -0.3585229,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 5683486743,
+  "lat": 39.4836591,
+  "lon": -0.3582801,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 5683486744,
+  "lat": 39.4834733,
+  "lon": -0.3579839,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 5730577598,
+  "lat": 39.4671322,
+  "lon": -0.3603714,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 5730577599,
+  "lat": 39.4671917,
+  "lon": -0.3601678,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 5902824970,
+  "lat": 39.4704004,
+  "lon": -0.3761379,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 5908208393,
+  "lat": 39.4830788,
+  "lon": -0.3792007,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 5908208394,
+  "lat": 39.4830780,
+  "lon": -0.3787590,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 5910484899,
+  "lat": 39.4669926,
+  "lon": -0.3393718,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "crossing:markings": "zebra",
+    "crossing:signals": "yes",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6071965924,
+  "lat": 39.4813796,
+  "lon": -0.3521699,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 6071967785,
+  "lat": 39.4817636,
+  "lon": -0.3524228,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 6141274599,
+  "lat": 39.4498088,
+  "lon": -0.3706849,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 6154282853,
+  "lat": 39.4515045,
+  "lon": -0.3750021,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "kerb": "lowered",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 6154282871,
+  "lat": 39.4513708,
+  "lon": -0.3753090,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "kerb": "lowered",
+    "traffic_signals:direction": "both"
+  }
+},
+{
+  "type": "node",
+  "id": 6443891869,
+  "lat": 39.4747476,
+  "lon": -0.3502532,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6443891871,
+  "lat": 39.4746123,
+  "lon": -0.3503178,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 6459132650,
+  "lat": 39.4713839,
+  "lon": -0.3401189,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6459132652,
+  "lat": 39.4719181,
+  "lon": -0.3398529,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6466334391,
+  "lat": 39.4714453,
+  "lon": -0.3382486,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 6466334392,
+  "lat": 39.4711057,
+  "lon": -0.3371309,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 6489514273,
+  "lat": 39.4449140,
+  "lon": -0.3795487,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6632091253,
+  "lat": 39.4689793,
+  "lon": -0.3642722,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6772485300,
+  "lat": 39.4640907,
+  "lon": -0.3940008,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6777860424,
+  "lat": 39.4531937,
+  "lon": -0.3884999,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 6781594936,
+  "lat": 39.4608742,
+  "lon": -0.3996666,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6789027665,
+  "lat": 39.4691636,
+  "lon": -0.3839816,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6789030498,
+  "lat": 39.4676946,
+  "lon": -0.3829324,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6789030508,
+  "lat": 39.4671107,
+  "lon": -0.3829226,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6789030512,
+  "lat": 39.4669944,
+  "lon": -0.3827158,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 6789030590,
+  "lat": 39.4680125,
+  "lon": -0.3835642,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6793531703,
+  "lat": 39.4766106,
+  "lon": -0.3555612,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6812610031,
+  "lat": 39.4723252,
+  "lon": -0.3685459,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6812706722,
+  "lat": 39.4736613,
+  "lon": -0.3478239,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 6812804912,
+  "lat": 39.4718364,
+  "lon": -0.3421924,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "no",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6813234648,
+  "lat": 39.4714920,
+  "lon": -0.3379243,
+  "tags": {
+    "button_operated": "yes",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "no",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6813248659,
+  "lat": 39.4721693,
+  "lon": -0.3427951,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "no",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6813248682,
+  "lat": 39.4726747,
+  "lon": -0.3445008,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "no",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6813248685,
+  "lat": 39.4732095,
+  "lon": -0.3442366,
+  "tags": {
+    "button_operated": "no",
+    "check_date:traffic_signals:sound": "2025-11-12",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "no",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6813248710,
+  "lat": 39.4736591,
+  "lon": -0.3457949,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 6813248713,
+  "lat": 39.4731353,
+  "lon": -0.3460546,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6841745664,
+  "lat": 39.4629149,
+  "lon": -0.3821769,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6841745666,
+  "lat": 39.4650156,
+  "lon": -0.3816070,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6841745671,
+  "lat": 39.4680607,
+  "lon": -0.3798663,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6841745675,
+  "lat": 39.4686955,
+  "lon": -0.3794921,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6841745677,
+  "lat": 39.4696786,
+  "lon": -0.3787351,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6841745678,
+  "lat": 39.4698290,
+  "lon": -0.3787618,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6841745679,
+  "lat": 39.4693196,
+  "lon": -0.3770714,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975117,
+  "lat": 39.4689730,
+  "lon": -0.3768205,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975121,
+  "lat": 39.4696785,
+  "lon": -0.3757960,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975128,
+  "lat": 39.4679891,
+  "lon": -0.3736087,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975132,
+  "lat": 39.4685825,
+  "lon": -0.3727673,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975133,
+  "lat": 39.4683549,
+  "lon": -0.3728259,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975136,
+  "lat": 39.4691551,
+  "lon": -0.3722532,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975143,
+  "lat": 39.4696105,
+  "lon": -0.3710507,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975144,
+  "lat": 39.4698000,
+  "lon": -0.3710309,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975148,
+  "lat": 39.4720883,
+  "lon": -0.3700639,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975156,
+  "lat": 39.4727958,
+  "lon": -0.3670231,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975161,
+  "lat": 39.4757587,
+  "lon": -0.3697978,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975162,
+  "lat": 39.4758808,
+  "lon": -0.3694226,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975165,
+  "lat": 39.4789642,
+  "lon": -0.3663759,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975175,
+  "lat": 39.4765534,
+  "lon": -0.3583350,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975176,
+  "lat": 39.4761554,
+  "lon": -0.3563254,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975177,
+  "lat": 39.4757074,
+  "lon": -0.3556716,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975179,
+  "lat": 39.4735600,
+  "lon": -0.3573131,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975181,
+  "lat": 39.4723104,
+  "lon": -0.3571081,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6843975182,
+  "lat": 39.4724386,
+  "lon": -0.3575929,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005285,
+  "lat": 39.4687120,
+  "lon": -0.3599969,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005286,
+  "lat": 39.4673239,
+  "lon": -0.3579478,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005288,
+  "lat": 39.4673031,
+  "lon": -0.3564495,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005292,
+  "lat": 39.4656512,
+  "lon": -0.3532200,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005296,
+  "lat": 39.4652966,
+  "lon": -0.3512293,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005297,
+  "lat": 39.4653479,
+  "lon": -0.3514645,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005299,
+  "lat": 39.4648954,
+  "lon": -0.3501244,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005303,
+  "lat": 39.4637851,
+  "lon": -0.3455286,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005305,
+  "lat": 39.4631997,
+  "lon": -0.3440991,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005307,
+  "lat": 39.4623429,
+  "lon": -0.3406754,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005309,
+  "lat": 39.4618671,
+  "lon": -0.3390744,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005315,
+  "lat": 39.4613355,
+  "lon": -0.3372635,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005316,
+  "lat": 39.4611719,
+  "lon": -0.3367221,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005318,
+  "lat": 39.4609720,
+  "lon": -0.3360380,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005319,
+  "lat": 39.4608205,
+  "lon": -0.3355335,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005321,
+  "lat": 39.4605371,
+  "lon": -0.3345742,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005323,
+  "lat": 39.4603383,
+  "lon": -0.3339334,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005325,
+  "lat": 39.4601081,
+  "lon": -0.3331386,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005328,
+  "lat": 39.4602885,
+  "lon": -0.3327974,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005330,
+  "lat": 39.4598474,
+  "lon": -0.3328441,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844005336,
+  "lat": 39.4625990,
+  "lon": -0.3296685,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844117972,
+  "lat": 39.4692952,
+  "lon": -0.3738736,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844117976,
+  "lat": 39.4671815,
+  "lon": -0.3748174,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844143985,
+  "lat": 39.4625307,
+  "lon": -0.3863483,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844143987,
+  "lat": 39.4624972,
+  "lon": -0.3869027,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844143988,
+  "lat": 39.4627439,
+  "lon": -0.3864316,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844143994,
+  "lat": 39.4635855,
+  "lon": -0.3859078,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144003,
+  "lat": 39.4659978,
+  "lon": -0.3836130,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144008,
+  "lat": 39.4657851,
+  "lon": -0.3833704,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144009,
+  "lat": 39.4658731,
+  "lon": -0.3839427,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144010,
+  "lat": 39.4656523,
+  "lon": -0.3820599,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144011,
+  "lat": 39.4655205,
+  "lon": -0.3819750,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144014,
+  "lat": 39.4671247,
+  "lon": -0.3825329,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144016,
+  "lat": 39.4713706,
+  "lon": -0.3797108,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144017,
+  "lat": 39.4724930,
+  "lon": -0.3797524,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144022,
+  "lat": 39.4730613,
+  "lon": -0.3723882,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144026,
+  "lat": 39.4730686,
+  "lon": -0.3701243,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144027,
+  "lat": 39.4731158,
+  "lon": -0.3699756,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144040,
+  "lat": 39.4700632,
+  "lon": -0.3650801,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144041,
+  "lat": 39.4708562,
+  "lon": -0.3653434,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144042,
+  "lat": 39.4688000,
+  "lon": -0.3643099,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144043,
+  "lat": 39.4687383,
+  "lon": -0.3640480,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144049,
+  "lat": 39.4679687,
+  "lon": -0.3637970,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144081,
+  "lat": 39.4628932,
+  "lon": -0.3607372,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6844144166,
+  "lat": 39.4692789,
+  "lon": -0.3603401,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386640,
+  "lat": 39.4616692,
+  "lon": -0.3644062,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386643,
+  "lat": 39.4624065,
+  "lon": -0.3626468,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386644,
+  "lat": 39.4626501,
+  "lon": -0.3622934,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386649,
+  "lat": 39.4630115,
+  "lon": -0.3612052,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386651,
+  "lat": 39.4633669,
+  "lon": -0.3611348,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386652,
+  "lat": 39.4635285,
+  "lon": -0.3589866,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386655,
+  "lat": 39.4642897,
+  "lon": -0.3580311,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386656,
+  "lat": 39.4639168,
+  "lon": -0.3579037,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386657,
+  "lat": 39.4641280,
+  "lon": -0.3587614,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386658,
+  "lat": 39.4634297,
+  "lon": -0.3585426,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386659,
+  "lat": 39.4639382,
+  "lon": -0.3576915,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386660,
+  "lat": 39.4656463,
+  "lon": -0.3571570,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386666,
+  "lat": 39.4659961,
+  "lon": -0.3570897,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386667,
+  "lat": 39.4663037,
+  "lon": -0.3568355,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386668,
+  "lat": 39.4666082,
+  "lon": -0.3567925,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386671,
+  "lat": 39.4668128,
+  "lon": -0.3565888,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386673,
+  "lat": 39.4690259,
+  "lon": -0.3555021,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386676,
+  "lat": 39.4695704,
+  "lon": -0.3553408,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857386678,
+  "lat": 39.4694070,
+  "lon": -0.3557384,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857421986,
+  "lat": 39.4701257,
+  "lon": -0.3549638,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857421991,
+  "lat": 39.4710736,
+  "lon": -0.3544978,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857421995,
+  "lat": 39.4715822,
+  "lon": -0.3542227,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857421996,
+  "lat": 39.4713540,
+  "lon": -0.3544674,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422005,
+  "lat": 39.4718743,
+  "lon": -0.3542092,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422010,
+  "lat": 39.4725630,
+  "lon": -0.3537687,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422018,
+  "lat": 39.4728957,
+  "lon": -0.3537101,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422020,
+  "lat": 39.4727076,
+  "lon": -0.3535748,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422024,
+  "lat": 39.4738899,
+  "lon": -0.3532215,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422025,
+  "lat": 39.4738620,
+  "lon": -0.3531318,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422041,
+  "lat": 39.4754094,
+  "lon": -0.3523406,
+  "tags": {
+    "description": "Radar control semáforo.",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422042,
+  "lat": 39.4757013,
+  "lon": -0.3522204,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422043,
+  "lat": 39.4758389,
+  "lon": -0.3522952,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422049,
+  "lat": 39.4753735,
+  "lon": -0.3529643,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422050,
+  "lat": 39.4752189,
+  "lon": -0.3530392,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422051,
+  "lat": 39.4753277,
+  "lon": -0.3525483,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422053,
+  "lat": 39.4763600,
+  "lon": -0.3519615,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422054,
+  "lat": 39.4765697,
+  "lon": -0.3520084,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422057,
+  "lat": 39.4776572,
+  "lon": -0.3514363,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422058,
+  "lat": 39.4777783,
+  "lon": -0.3515395,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422065,
+  "lat": 39.4780313,
+  "lon": -0.3512784,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422066,
+  "lat": 39.4783322,
+  "lon": -0.3513227,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422067,
+  "lat": 39.4809222,
+  "lon": -0.3518611,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422068,
+  "lat": 39.4818488,
+  "lon": -0.3519985,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422070,
+  "lat": 39.4821391,
+  "lon": -0.3514531,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422071,
+  "lat": 39.4823063,
+  "lon": -0.3512737,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422072,
+  "lat": 39.4811322,
+  "lon": -0.3517519,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422073,
+  "lat": 39.4813312,
+  "lon": -0.3507451,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422074,
+  "lat": 39.4814063,
+  "lon": -0.3502654,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422075,
+  "lat": 39.4817592,
+  "lon": -0.3504481,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6857422076,
+  "lat": 39.4811954,
+  "lon": -0.3505011,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146189,
+  "lat": 39.4687553,
+  "lon": -0.3992606,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146194,
+  "lat": 39.4674996,
+  "lon": -0.3928303,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146195,
+  "lat": 39.4673012,
+  "lon": -0.3917273,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146209,
+  "lat": 39.4666863,
+  "lon": -0.3884464,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146212,
+  "lat": 39.4663822,
+  "lon": -0.3868113,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146217,
+  "lat": 39.4662622,
+  "lon": -0.3861366,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146218,
+  "lat": 39.4659928,
+  "lon": -0.3846060,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146220,
+  "lat": 39.4640641,
+  "lon": -0.3755845,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146221,
+  "lat": 39.4643552,
+  "lon": -0.3752778,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146230,
+  "lat": 39.4647167,
+  "lon": -0.3739602,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146231,
+  "lat": 39.4649646,
+  "lon": -0.3737961,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146232,
+  "lat": 39.4650353,
+  "lon": -0.3736170,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146233,
+  "lat": 39.4646361,
+  "lon": -0.3735349,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146236,
+  "lat": 39.4651648,
+  "lon": -0.3735090,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146237,
+  "lat": 39.4650782,
+  "lon": -0.3730160,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146245,
+  "lat": 39.4644121,
+  "lon": -0.3718036,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146250,
+  "lat": 39.4647176,
+  "lon": -0.3715600,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146271,
+  "lat": 39.4641535,
+  "lon": -0.3690153,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868146281,
+  "lat": 39.4634144,
+  "lon": -0.3672076,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868151405,
+  "lat": 39.4629029,
+  "lon": -0.3616675,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868151406,
+  "lat": 39.4626961,
+  "lon": -0.3619812,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868151409,
+  "lat": 39.4706590,
+  "lon": -0.3624460,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868151410,
+  "lat": 39.4706373,
+  "lon": -0.3622607,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868151411,
+  "lat": 39.4692565,
+  "lon": -0.3613720,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868151412,
+  "lat": 39.4701982,
+  "lon": -0.3591086,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868151413,
+  "lat": 39.4702562,
+  "lon": -0.3583650,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868151414,
+  "lat": 39.4707091,
+  "lon": -0.3586085,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868151416,
+  "lat": 39.4716132,
+  "lon": -0.3581450,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868151417,
+  "lat": 39.4721792,
+  "lon": -0.3573727,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868151418,
+  "lat": 39.4725956,
+  "lon": -0.3576609,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6868151419,
+  "lat": 39.4725992,
+  "lon": -0.3571616,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108286,
+  "lat": 39.4667322,
+  "lon": -0.3703566,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108288,
+  "lat": 39.4665743,
+  "lon": -0.3700676,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108311,
+  "lat": 39.4717753,
+  "lon": -0.3633474,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108312,
+  "lat": 39.4714904,
+  "lon": -0.3634120,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108313,
+  "lat": 39.4714970,
+  "lon": -0.3629572,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108314,
+  "lat": 39.4717840,
+  "lon": -0.3628493,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108334,
+  "lat": 39.4724434,
+  "lon": -0.3515220,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108337,
+  "lat": 39.4730350,
+  "lon": -0.3496291,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108338,
+  "lat": 39.4728865,
+  "lon": -0.3497871,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108340,
+  "lat": 39.4734977,
+  "lon": -0.3478698,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108343,
+  "lat": 39.4734001,
+  "lon": -0.3481720,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108344,
+  "lat": 39.4732671,
+  "lon": -0.3480084,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108347,
+  "lat": 39.4744480,
+  "lon": -0.3477458,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108348,
+  "lat": 39.4742658,
+  "lon": -0.3475424,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108358,
+  "lat": 39.4753856,
+  "lon": -0.3527527,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108359,
+  "lat": 39.4759227,
+  "lon": -0.3542398,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108364,
+  "lat": 39.4757900,
+  "lon": -0.3544027,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108369,
+  "lat": 39.4758703,
+  "lon": -0.3546689,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108370,
+  "lat": 39.4760066,
+  "lon": -0.3544846,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108371,
+  "lat": 39.4761829,
+  "lon": -0.3550505,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108373,
+  "lat": 39.4782519,
+  "lon": -0.3550000,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879108376,
+  "lat": 39.4792232,
+  "lon": -0.3570344,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129602,
+  "lat": 39.4835642,
+  "lon": -0.3627931,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129603,
+  "lat": 39.4836267,
+  "lon": -0.3629069,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129604,
+  "lat": 39.4837622,
+  "lon": -0.3626248,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129611,
+  "lat": 39.4805798,
+  "lon": -0.3524216,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129612,
+  "lat": 39.4804627,
+  "lon": -0.3527768,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129613,
+  "lat": 39.4805015,
+  "lon": -0.3522184,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129614,
+  "lat": 39.4809650,
+  "lon": -0.3525793,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129615,
+  "lat": 39.4810775,
+  "lon": -0.3526203,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129621,
+  "lat": 39.4703805,
+  "lon": -0.3750981,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129623,
+  "lat": 39.4702566,
+  "lon": -0.3748854,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129624,
+  "lat": 39.4704195,
+  "lon": -0.3743321,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129625,
+  "lat": 39.4706306,
+  "lon": -0.3741732,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129626,
+  "lat": 39.4734920,
+  "lon": -0.3742938,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129637,
+  "lat": 39.4791027,
+  "lon": -0.3750848,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129639,
+  "lat": 39.4796681,
+  "lon": -0.3764103,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129641,
+  "lat": 39.4750321,
+  "lon": -0.3883766,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6879129642,
+  "lat": 39.4751003,
+  "lon": -0.3880662,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6885127119,
+  "lat": 39.4632867,
+  "lon": -0.3294683,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6902637320,
+  "lat": 39.4636859,
+  "lon": -0.4050578,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6902637331,
+  "lat": 39.4597893,
+  "lon": -0.4004850,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6902637332,
+  "lat": 39.4599180,
+  "lon": -0.4004885,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6902637333,
+  "lat": 39.4599251,
+  "lon": -0.4007229,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6902637334,
+  "lat": 39.4602278,
+  "lon": -0.4000113,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6902637337,
+  "lat": 39.4613603,
+  "lon": -0.3987633,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6902637340,
+  "lat": 39.4616961,
+  "lon": -0.3985478,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6902993713,
+  "lat": 39.4712124,
+  "lon": -0.3795379,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6903111130,
+  "lat": 39.4816091,
+  "lon": -0.3926652,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6903111131,
+  "lat": 39.4815800,
+  "lon": -0.3929662,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6903111132,
+  "lat": 39.4815434,
+  "lon": -0.3925052,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6903111134,
+  "lat": 39.4857229,
+  "lon": -0.3957284,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6903111135,
+  "lat": 39.4861333,
+  "lon": -0.3966759,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6903111137,
+  "lat": 39.4862719,
+  "lon": -0.3961317,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6903111139,
+  "lat": 39.4861292,
+  "lon": -0.3955801,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6903111140,
+  "lat": 39.4859471,
+  "lon": -0.3955948,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6903111141,
+  "lat": 39.4898823,
+  "lon": -0.3989866,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6903111142,
+  "lat": 39.4900348,
+  "lon": -0.3998411,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6903111143,
+  "lat": 39.4906865,
+  "lon": -0.3986194,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6903111144,
+  "lat": 39.4917237,
+  "lon": -0.3966170,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6903111145,
+  "lat": 39.4937532,
+  "lon": -0.3986502,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6903111147,
+  "lat": 39.4959538,
+  "lon": -0.4001932,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6906214069,
+  "lat": 39.4607599,
+  "lon": -0.3825513,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6906214070,
+  "lat": 39.4618712,
+  "lon": -0.3824285,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6910748062,
+  "lat": 39.4568951,
+  "lon": -0.3759908,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6910748063,
+  "lat": 39.4569329,
+  "lon": -0.3755591,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6910748064,
+  "lat": 39.4569495,
+  "lon": -0.3753050,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6910748065,
+  "lat": 39.4568295,
+  "lon": -0.3753199,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "traffic_lights"
+  }
+},
+{
+  "type": "node",
+  "id": 6919951969,
+  "lat": 39.4618529,
+  "lon": -0.3602712,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 6920765686,
+  "lat": 39.4632627,
+  "lon": -0.3606170,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6925428624,
+  "lat": 39.4688540,
+  "lon": -0.3638245,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6932415930,
+  "lat": 39.4657242,
+  "lon": -0.3513177,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6933205980,
+  "lat": 39.4633036,
+  "lon": -0.3522964,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6970436936,
+  "lat": 39.4745907,
+  "lon": -0.4057638,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6970436937,
+  "lat": 39.4747182,
+  "lon": -0.4055784,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6970436938,
+  "lat": 39.4748193,
+  "lon": -0.4061923,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 6970436939,
+  "lat": 39.4748249,
+  "lon": -0.4060743,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7049576834,
+  "lat": 39.4563073,
+  "lon": -0.3904475,
+  "tags": {
+    "direction": "backward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7065756675,
+  "lat": 39.3824105,
+  "lon": -0.3343298,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7065756676,
+  "lat": 39.3823422,
+  "lon": -0.3342785,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7171687061,
+  "lat": 39.4894751,
+  "lon": -0.3859672,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7171687075,
+  "lat": 39.4892881,
+  "lon": -0.3861923,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7266671110,
+  "lat": 39.4820169,
+  "lon": -0.3509181,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7279935705,
+  "lat": 39.4690783,
+  "lon": -0.3602503,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7279947217,
+  "lat": 39.4636087,
+  "lon": -0.3588609,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7281885043,
+  "lat": 39.4566321,
+  "lon": -0.3468901,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7281885049,
+  "lat": 39.4557104,
+  "lon": -0.3471575,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7281976408,
+  "lat": 39.4942964,
+  "lon": -0.4021848,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7281976411,
+  "lat": 39.4943792,
+  "lon": -0.4028979,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7281976421,
+  "lat": 39.4949115,
+  "lon": -0.4020564,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7281976427,
+  "lat": 39.4923961,
+  "lon": -0.4086695,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7281976433,
+  "lat": 39.4918881,
+  "lon": -0.4079462,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7281976437,
+  "lat": 39.4923733,
+  "lon": -0.4079580,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7281976472,
+  "lat": 39.4880537,
+  "lon": -0.4054289,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7282074618,
+  "lat": 39.4615088,
+  "lon": -0.3574946,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7282074626,
+  "lat": 39.4613808,
+  "lon": -0.3568009,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7282106235,
+  "lat": 39.4858914,
+  "lon": -0.3964995,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7289321095,
+  "lat": 39.4822855,
+  "lon": -0.3539451,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 7289541605,
+  "lat": 39.4829671,
+  "lon": -0.4019726,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7293229215,
+  "lat": 39.4703509,
+  "lon": -0.4052821,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 7294558372,
+  "lat": 39.4564689,
+  "lon": -0.3756223,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "traffic_lights"
+  }
+},
+{
+  "type": "node",
+  "id": 7316216143,
+  "lat": 39.4702462,
+  "lon": -0.3583387,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 7316216144,
+  "lat": 39.4704794,
+  "lon": -0.3586334,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 7350308592,
+  "lat": 39.4761406,
+  "lon": -0.3552184,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7350308601,
+  "lat": 39.4761760,
+  "lon": -0.3561099,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7358773573,
+  "lat": 39.4719851,
+  "lon": -0.3688145,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7358773581,
+  "lat": 39.4719621,
+  "lon": -0.3681256,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7419257486,
+  "lat": 39.4974677,
+  "lon": -0.3854164,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 7419257514,
+  "lat": 39.4978183,
+  "lon": -0.3858162,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 7454993204,
+  "lat": 39.4673040,
+  "lon": -0.3250990,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 7504260556,
+  "lat": 39.4710628,
+  "lon": -0.3429050,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "no",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7656654709,
+  "lat": 39.4713002,
+  "lon": -0.3377989,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7659627592,
+  "lat": 39.4687189,
+  "lon": -0.3345924,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7659627609,
+  "lat": 39.4634734,
+  "lon": -0.3368914,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7659627610,
+  "lat": 39.4634296,
+  "lon": -0.3367130,
+  "tags": {
+    "button_operated": "no",
+    "check_date:tactile_paving": "2023-11-01",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7659627616,
+  "lat": 39.4613748,
+  "lon": -0.3389554,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "no",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7659627624,
+  "lat": 39.4593697,
+  "lon": -0.3424076,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7659627625,
+  "lat": 39.4594251,
+  "lon": -0.3418254,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7659627626,
+  "lat": 39.4568372,
+  "lon": -0.3476852,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7659627627,
+  "lat": 39.4558599,
+  "lon": -0.3480872,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7659627628,
+  "lat": 39.4553086,
+  "lon": -0.3490990,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703117805,
+  "lat": 39.4809639,
+  "lon": -0.3742414,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703117809,
+  "lat": 39.4825908,
+  "lon": -0.3820409,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703117810,
+  "lat": 39.4825289,
+  "lon": -0.3820047,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703117811,
+  "lat": 39.4820277,
+  "lon": -0.3835889,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7703117812,
+  "lat": 39.4818445,
+  "lon": -0.3840056,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7703117813,
+  "lat": 39.4816836,
+  "lon": -0.3840746,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7703117816,
+  "lat": 39.4797792,
+  "lon": -0.3882951,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703117837,
+  "lat": 39.4812006,
+  "lon": -0.3929185,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703117838,
+  "lat": 39.4811420,
+  "lon": -0.3932660,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703117840,
+  "lat": 39.4857970,
+  "lon": -0.3959367,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703117841,
+  "lat": 39.4858323,
+  "lon": -0.3963018,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703806585,
+  "lat": 39.4747216,
+  "lon": -0.3336249,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7703806586,
+  "lat": 39.4745117,
+  "lon": -0.3338139,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703806587,
+  "lat": 39.4742062,
+  "lon": -0.3337240,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703806596,
+  "lat": 39.4729516,
+  "lon": -0.3341147,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703806597,
+  "lat": 39.4729279,
+  "lon": -0.3339662,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703806610,
+  "lat": 39.4641481,
+  "lon": -0.3361690,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703806611,
+  "lat": 39.4637614,
+  "lon": -0.3366319,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703806612,
+  "lat": 39.4637088,
+  "lon": -0.3364577,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703806615,
+  "lat": 39.4614467,
+  "lon": -0.3392625,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703806616,
+  "lat": 39.4612411,
+  "lon": -0.3393736,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703806621,
+  "lat": 39.4587371,
+  "lon": -0.3436883,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7703806624,
+  "lat": 39.4585073,
+  "lon": -0.3437977,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7703806625,
+  "lat": 39.4585090,
+  "lon": -0.3440518,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7703806631,
+  "lat": 39.4673854,
+  "lon": -0.3599147,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7711150399,
+  "lat": 39.4939055,
+  "lon": -0.3580714,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7741079083,
+  "lat": 39.4774194,
+  "lon": -0.3900486,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7741079084,
+  "lat": 39.4774945,
+  "lon": -0.3902630,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7741086785,
+  "lat": 39.4751421,
+  "lon": -0.3886770,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7741086786,
+  "lat": 39.4749433,
+  "lon": -0.3881159,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 7741086787,
+  "lat": 39.4691482,
+  "lon": -0.3843742,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7741086788,
+  "lat": 39.4692424,
+  "lon": -0.3841788,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7741086789,
+  "lat": 39.4679317,
+  "lon": -0.3834111,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7741086790,
+  "lat": 39.4677568,
+  "lon": -0.3831200,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7765519010,
+  "lat": 39.4701634,
+  "lon": -0.3649939,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7765519012,
+  "lat": 39.4700534,
+  "lon": -0.3651623,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599849,
+  "lat": 39.4900556,
+  "lon": -0.3710992,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599852,
+  "lat": 39.4879082,
+  "lon": -0.3682113,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599853,
+  "lat": 39.4879920,
+  "lon": -0.3685187,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599854,
+  "lat": 39.4874954,
+  "lon": -0.3678720,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599856,
+  "lat": 39.4874973,
+  "lon": -0.3676604,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599857,
+  "lat": 39.4873306,
+  "lon": -0.3678228,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599859,
+  "lat": 39.4865777,
+  "lon": -0.3666389,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599860,
+  "lat": 39.4866528,
+  "lon": -0.3665348,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599865,
+  "lat": 39.4849886,
+  "lon": -0.3642851,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599867,
+  "lat": 39.4846033,
+  "lon": -0.3639861,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599868,
+  "lat": 39.4838764,
+  "lon": -0.3629760,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599869,
+  "lat": 39.4824786,
+  "lon": -0.3608974,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599872,
+  "lat": 39.4795173,
+  "lon": -0.3571187,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599873,
+  "lat": 39.4781439,
+  "lon": -0.3551090,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7769599874,
+  "lat": 39.4767537,
+  "lon": -0.3555650,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7777518956,
+  "lat": 39.4826277,
+  "lon": -0.4010953,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7777570895,
+  "lat": 39.4913816,
+  "lon": -0.3772399,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "no",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7777570898,
+  "lat": 39.4912194,
+  "lon": -0.3775003,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7791241111,
+  "lat": 39.4678132,
+  "lon": -0.3392656,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7791241112,
+  "lat": 39.4678866,
+  "lon": -0.3391012,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7791241117,
+  "lat": 39.4686993,
+  "lon": -0.3437502,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7791241118,
+  "lat": 39.4688138,
+  "lon": -0.3438706,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7791241119,
+  "lat": 39.4687688,
+  "lon": -0.3440010,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7791241120,
+  "lat": 39.4687008,
+  "lon": -0.3440996,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7791241121,
+  "lat": 39.4686702,
+  "lon": -0.3436352,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7791241124,
+  "lat": 39.4690773,
+  "lon": -0.3436562,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7791241129,
+  "lat": 39.4709338,
+  "lon": -0.3428636,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7791241130,
+  "lat": 39.4708469,
+  "lon": -0.3425725,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "crossing:island": "no",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7791241131,
+  "lat": 39.4719861,
+  "lon": -0.3421751,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7791241132,
+  "lat": 39.4725766,
+  "lon": -0.3420871,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7791241133,
+  "lat": 39.4730339,
+  "lon": -0.3457115,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7834505694,
+  "lat": 39.4727994,
+  "lon": -0.3538915,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7873053956,
+  "lat": 39.4636820,
+  "lon": -0.3368521,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7873059203,
+  "lat": 39.4666529,
+  "lon": -0.3372754,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7873149345,
+  "lat": 39.4456862,
+  "lon": -0.3688846,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7873149346,
+  "lat": 39.4458327,
+  "lon": -0.3693299,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7873149347,
+  "lat": 39.4463959,
+  "lon": -0.3684415,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7873149348,
+  "lat": 39.4465670,
+  "lon": -0.3690080,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7873149349,
+  "lat": 39.4466066,
+  "lon": -0.3673703,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7873149351,
+  "lat": 39.4470455,
+  "lon": -0.3671544,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7873149354,
+  "lat": 39.4489455,
+  "lon": -0.3624324,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 7873149355,
+  "lat": 39.4490621,
+  "lon": -0.3614397,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8024641548,
+  "lat": 39.4785536,
+  "lon": -0.3867853,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "tactile_paving": "yes",
+    "traffic_signals": "signal",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 8035851400,
+  "lat": 39.4809613,
+  "lon": -0.3508982,
+  "tags": {
+    "crossing": "traffic_signals;marked",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 8035851401,
+  "lat": 39.4760961,
+  "lon": -0.3520665,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8037890940,
+  "lat": 39.4710575,
+  "lon": -0.3247967,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8058591223,
+  "lat": 39.4680814,
+  "lon": -0.3606125,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "traffic_lights"
+  }
+},
+{
+  "type": "node",
+  "id": 8207186986,
+  "lat": 39.4691979,
+  "lon": -0.3758740,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8443167746,
+  "lat": 39.4657255,
+  "lon": -0.3815712,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8443167747,
+  "lat": 39.4654219,
+  "lon": -0.3814881,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8443167748,
+  "lat": 39.4657729,
+  "lon": -0.3817327,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8443167753,
+  "lat": 39.4783729,
+  "lon": -0.3547384,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8518734165,
+  "lat": 39.4853018,
+  "lon": -0.3709948,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8518734166,
+  "lat": 39.4850243,
+  "lon": -0.3709793,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8518734178,
+  "lat": 39.4850010,
+  "lon": -0.3644287,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8662774723,
+  "lat": 39.4502331,
+  "lon": -0.3709890,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8662774724,
+  "lat": 39.4499270,
+  "lon": -0.3709684,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8662774726,
+  "lat": 39.4877971,
+  "lon": -0.3528332,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8702510719,
+  "lat": 39.4523236,
+  "lon": -0.3724459,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8702510720,
+  "lat": 39.4522497,
+  "lon": -0.3726040,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8702510721,
+  "lat": 39.4524355,
+  "lon": -0.3723362,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8702510730,
+  "lat": 39.4531079,
+  "lon": -0.3729960,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8702510733,
+  "lat": 39.4552611,
+  "lon": -0.3744734,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8702510814,
+  "lat": 39.4551921,
+  "lon": -0.3747036,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8702510841,
+  "lat": 39.4555875,
+  "lon": -0.3746969,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8702510850,
+  "lat": 39.4555241,
+  "lon": -0.3749409,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8702510915,
+  "lat": 39.4663699,
+  "lon": -0.3597537,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8702510916,
+  "lat": 39.4663098,
+  "lon": -0.3599535,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 8887439424,
+  "lat": 39.4776319,
+  "lon": -0.3976917,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 9235908427,
+  "lat": 39.4639162,
+  "lon": -0.3885261,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 9235908446,
+  "lat": 39.4643832,
+  "lon": -0.3880064,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 9280655762,
+  "lat": 39.4296636,
+  "lon": -0.3935507,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 9453072135,
+  "lat": 39.4951558,
+  "lon": -0.4029791,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 9453072136,
+  "lat": 39.4951730,
+  "lon": -0.4026818,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 9453072139,
+  "lat": 39.4940958,
+  "lon": -0.4025070,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 9453072142,
+  "lat": 39.4941408,
+  "lon": -0.4022360,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 9453072144,
+  "lat": 39.4940930,
+  "lon": -0.4024123,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 9453072145,
+  "lat": 39.4941328,
+  "lon": -0.4019947,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 9548675312,
+  "lat": 39.4735023,
+  "lon": -0.3930001,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 9548675313,
+  "lat": 39.4734243,
+  "lon": -0.3928819,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 9548675314,
+  "lat": 39.4733451,
+  "lon": -0.3930354,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 9548675315,
+  "lat": 39.4733673,
+  "lon": -0.3929092,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 9850090811,
+  "lat": 39.4451746,
+  "lon": -0.3798167,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10040407229,
+  "lat": 39.4469010,
+  "lon": -0.3355411,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10101947230,
+  "lat": 39.4539490,
+  "lon": -0.3522235,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10125015298,
+  "lat": 39.4359170,
+  "lon": -0.3962786,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 10157282745,
+  "lat": 39.4615838,
+  "lon": -0.3575261,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10168730448,
+  "lat": 39.4531471,
+  "lon": -0.3511075,
+  "tags": {
+    "crossing": "no",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 10174679476,
+  "lat": 39.4717013,
+  "lon": -0.3626327,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 10189157898,
+  "lat": 39.4803273,
+  "lon": -0.3387162,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 10204146819,
+  "lat": 39.4676607,
+  "lon": -0.3252795,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 10204146820,
+  "lat": 39.4674322,
+  "lon": -0.3254197,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 10226685124,
+  "lat": 39.4529489,
+  "lon": -0.3514072,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10226685126,
+  "lat": 39.4528555,
+  "lon": -0.3510979,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 10245379090,
+  "lat": 39.4537385,
+  "lon": -0.3528793,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10251764410,
+  "lat": 39.4919120,
+  "lon": -0.3743080,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10252998189,
+  "lat": 39.4916498,
+  "lon": -0.4080988,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10252998194,
+  "lat": 39.4924745,
+  "lon": -0.4088042,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10252998195,
+  "lat": 39.4925107,
+  "lon": -0.4077612,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10253051429,
+  "lat": 39.4898436,
+  "lon": -0.3985839,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10253051430,
+  "lat": 39.4896866,
+  "lon": -0.3988069,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10253051436,
+  "lat": 39.4898701,
+  "lon": -0.4000683,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10253051437,
+  "lat": 39.4908275,
+  "lon": -0.3998316,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10253051438,
+  "lat": 39.4908177,
+  "lon": -0.3995859,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10253244145,
+  "lat": 39.4538337,
+  "lon": -0.4000896,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10253288204,
+  "lat": 39.4581148,
+  "lon": -0.3838040,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10253690544,
+  "lat": 39.4642886,
+  "lon": -0.3880794,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10253690545,
+  "lat": 39.4639479,
+  "lon": -0.3879367,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10253690546,
+  "lat": 39.4645634,
+  "lon": -0.3883809,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10253690548,
+  "lat": 39.4636301,
+  "lon": -0.3875952,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10255244177,
+  "lat": 39.4791549,
+  "lon": -0.3914590,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10255244178,
+  "lat": 39.4791692,
+  "lon": -0.3912204,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10255244179,
+  "lat": 39.4788073,
+  "lon": -0.3909806,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10255244180,
+  "lat": 39.4790756,
+  "lon": -0.3916376,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10255376761,
+  "lat": 39.4677339,
+  "lon": -0.3249490,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10259308268,
+  "lat": 39.4704895,
+  "lon": -0.4059971,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10264580701,
+  "lat": 39.4983879,
+  "lon": -0.3704665,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 10264583912,
+  "lat": 39.4981317,
+  "lon": -0.3702748,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 10274177814,
+  "lat": 39.4530745,
+  "lon": -0.3731871,
+  "tags": {
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10274177816,
+  "lat": 39.4555668,
+  "lon": -0.3743814,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10274177817,
+  "lat": 39.4551373,
+  "lon": -0.3749845,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10284526651,
+  "lat": 39.4692763,
+  "lon": -0.3248045,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10286283784,
+  "lat": 39.4749895,
+  "lon": -0.3526882,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10286283785,
+  "lat": 39.4748712,
+  "lon": -0.3526160,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10286283789,
+  "lat": 39.4755555,
+  "lon": -0.3527272,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10286283792,
+  "lat": 39.4751150,
+  "lon": -0.3521937,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10286283793,
+  "lat": 39.4753329,
+  "lon": -0.3519905,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10289968976,
+  "lat": 39.4727041,
+  "lon": -0.3337849,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10289968979,
+  "lat": 39.4725527,
+  "lon": -0.3340292,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10289968981,
+  "lat": 39.4732706,
+  "lon": -0.3340515,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10289968982,
+  "lat": 39.4739505,
+  "lon": -0.3339288,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10289968983,
+  "lat": 39.4737285,
+  "lon": -0.3338157,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10290034480,
+  "lat": 39.4751602,
+  "lon": -0.3336901,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10290034495,
+  "lat": 39.4716078,
+  "lon": -0.3343729,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10290034496,
+  "lat": 39.4714939,
+  "lon": -0.3342341,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291756028,
+  "lat": 39.4671653,
+  "lon": -0.3464859,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291791690,
+  "lat": 39.4619366,
+  "lon": -0.3385347,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291791691,
+  "lat": 39.4615525,
+  "lon": -0.3388637,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291791692,
+  "lat": 39.4623330,
+  "lon": -0.3378193,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291791693,
+  "lat": 39.4624762,
+  "lon": -0.3378680,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291791694,
+  "lat": 39.4623216,
+  "lon": -0.3375588,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291791697,
+  "lat": 39.4607807,
+  "lon": -0.3403780,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291791698,
+  "lat": 39.4604646,
+  "lon": -0.3406344,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291833466,
+  "lat": 39.4680205,
+  "lon": -0.3503723,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291833467,
+  "lat": 39.4688658,
+  "lon": -0.3498150,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291833468,
+  "lat": 39.4678830,
+  "lon": -0.3505693,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291833469,
+  "lat": 39.4676535,
+  "lon": -0.3503188,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291881272,
+  "lat": 39.4682511,
+  "lon": -0.3348669,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291881273,
+  "lat": 39.4683661,
+  "lon": -0.3349931,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291881275,
+  "lat": 39.4671204,
+  "lon": -0.3351942,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291881276,
+  "lat": 39.4670316,
+  "lon": -0.3350571,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291881280,
+  "lat": 39.4662301,
+  "lon": -0.3353779,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291881282,
+  "lat": 39.4660885,
+  "lon": -0.3352718,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291881283,
+  "lat": 39.4658495,
+  "lon": -0.3353601,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291881284,
+  "lat": 39.4655879,
+  "lon": -0.3356081,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291881285,
+  "lat": 39.4654705,
+  "lon": -0.3354999,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291881288,
+  "lat": 39.4641686,
+  "lon": -0.3367016,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10291881289,
+  "lat": 39.4669175,
+  "lon": -0.3354144,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10293024589,
+  "lat": 39.4591218,
+  "lon": -0.3776112,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10303532817,
+  "lat": 39.4446916,
+  "lon": -0.3774190,
+  "tags": {
+    "button_operated": "no",
+    "crossing": "traffic_signals",
+    "highway": "traffic_signals",
+    "kerb": "lowered",
+    "tactile_paving": "yes",
+    "traffic_signals:direction": "forward",
+    "traffic_signals:sound": "no",
+    "traffic_signals:vibration": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 10586970341,
+  "lat": 39.4719337,
+  "lon": -0.3691181,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10586970342,
+  "lat": 39.4724580,
+  "lon": -0.3686766,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10759549137,
+  "lat": 39.4536842,
+  "lon": -0.3514203,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10762226615,
+  "lat": 39.4504602,
+  "lon": -0.3588975,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10762226616,
+  "lat": 39.4506816,
+  "lon": -0.3583869,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10762226621,
+  "lat": 39.4504459,
+  "lon": -0.3585865,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10816699488,
+  "lat": 39.4558252,
+  "lon": -0.4050519,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10887187663,
+  "lat": 39.4637925,
+  "lon": -0.3684545,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10960192862,
+  "lat": 39.4683646,
+  "lon": -0.3771920,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 10965259505,
+  "lat": 39.4576564,
+  "lon": -0.4016483,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11174385764,
+  "lat": 39.4724279,
+  "lon": -0.3575999,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "traffic_lights"
+  }
+},
+{
+  "type": "node",
+  "id": 11330875461,
+  "lat": 39.4815753,
+  "lon": -0.3752085,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11330875462,
+  "lat": 39.4813048,
+  "lon": -0.3747157,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11330956172,
+  "lat": 39.4815824,
+  "lon": -0.3750667,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11413260530,
+  "lat": 39.4704898,
+  "lon": -0.3702003,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11413260531,
+  "lat": 39.4703128,
+  "lon": -0.3701301,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11413288931,
+  "lat": 39.4691860,
+  "lon": -0.3718992,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11420770025,
+  "lat": 39.4698130,
+  "lon": -0.3758795,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11420770027,
+  "lat": 39.4693389,
+  "lon": -0.3759352,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11420770028,
+  "lat": 39.4692684,
+  "lon": -0.3759565,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11682307656,
+  "lat": 39.4778550,
+  "lon": -0.3978509,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 11698547731,
+  "lat": 39.4783519,
+  "lon": -0.3999941,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 11833026595,
+  "lat": 39.4551045,
+  "lon": -0.4057084,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11837758711,
+  "lat": 39.4736764,
+  "lon": -0.3481234,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11837758712,
+  "lat": 39.4740734,
+  "lon": -0.3485088,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11837758713,
+  "lat": 39.4742009,
+  "lon": -0.3483169,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11837758715,
+  "lat": 39.4740173,
+  "lon": -0.3470377,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11837758716,
+  "lat": 39.4735497,
+  "lon": -0.3474115,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11838205174,
+  "lat": 39.4919065,
+  "lon": -0.3740448,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11838351647,
+  "lat": 39.4530386,
+  "lon": -0.3526396,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11838351656,
+  "lat": 39.4535560,
+  "lon": -0.3512392,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11838351657,
+  "lat": 39.4532473,
+  "lon": -0.3509924,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11838351658,
+  "lat": 39.4527599,
+  "lon": -0.3528128,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11838351659,
+  "lat": 39.4530385,
+  "lon": -0.3528652,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11838351660,
+  "lat": 39.4526867,
+  "lon": -0.3518275,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11842026129,
+  "lat": 39.4700052,
+  "lon": -0.3493294,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11842026131,
+  "lat": 39.4701349,
+  "lon": -0.3493943,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11842026132,
+  "lat": 39.4699164,
+  "lon": -0.3494989,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11842201919,
+  "lat": 39.4784577,
+  "lon": -0.3549996,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11842201920,
+  "lat": 39.4785426,
+  "lon": -0.3550751,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11854198703,
+  "lat": 39.4641494,
+  "lon": -0.3958764,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11854198708,
+  "lat": 39.4639999,
+  "lon": -0.3959137,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11973705512,
+  "lat": 39.4699019,
+  "lon": -0.3647170,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 11989900431,
+  "lat": 39.4631755,
+  "lon": -0.3245959,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 12093913159,
+  "lat": 39.4917370,
+  "lon": -0.4077576,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 12093913167,
+  "lat": 39.4879178,
+  "lon": -0.4045735,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 12093913168,
+  "lat": 39.4882312,
+  "lon": -0.4056223,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 12093913169,
+  "lat": 39.4882398,
+  "lon": -0.4052350,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 12154162901,
+  "lat": 39.4273416,
+  "lon": -0.3936234,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 12154162902,
+  "lat": 39.4275169,
+  "lon": -0.3937866,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12154162903,
+  "lat": 39.4272764,
+  "lon": -0.3938804,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "backward"
+  }
+},
+{
+  "type": "node",
+  "id": 12309606228,
+  "lat": 39.4693751,
+  "lon": -0.4173162,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 12334034732,
+  "lat": 39.4360368,
+  "lon": -0.3964643,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12334034733,
+  "lat": 39.4360268,
+  "lon": -0.3963695,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "backward"
+  }
+},
+{
+  "type": "node",
+  "id": 12334034736,
+  "lat": 39.4358497,
+  "lon": -0.3962938,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "backward"
+  }
+},
+{
+  "type": "node",
+  "id": 12361621175,
+  "lat": 39.4297490,
+  "lon": -0.3934494,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 12626190074,
+  "lat": 39.5014828,
+  "lon": -0.4228756,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "backward"
+  }
+},
+{
+  "type": "node",
+  "id": 12651141556,
+  "lat": 39.5039035,
+  "lon": -0.4254054,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12651141557,
+  "lat": 39.5037079,
+  "lon": -0.4254087,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12651141558,
+  "lat": 39.5037221,
+  "lon": -0.4258154,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12651141559,
+  "lat": 39.5035408,
+  "lon": -0.4257943,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12693773681,
+  "lat": 39.4752226,
+  "lon": -0.4036296,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12693773682,
+  "lat": 39.4752108,
+  "lon": -0.4021858,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12693773687,
+  "lat": 39.4776621,
+  "lon": -0.3980960,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12693773688,
+  "lat": 39.4778360,
+  "lon": -0.3979393,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12693773689,
+  "lat": 39.4776528,
+  "lon": -0.3976023,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12693773692,
+  "lat": 39.4784742,
+  "lon": -0.4010117,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12693773693,
+  "lat": 39.4783923,
+  "lon": -0.4011122,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12693773694,
+  "lat": 39.4784464,
+  "lon": -0.4026149,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12693773695,
+  "lat": 39.4786296,
+  "lon": -0.4023364,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12693773696,
+  "lat": 39.4785177,
+  "lon": -0.4021601,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12693773697,
+  "lat": 39.4783457,
+  "lon": -0.4033744,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12693773698,
+  "lat": 39.4784979,
+  "lon": -0.4035873,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 12693773699,
+  "lat": 39.4786756,
+  "lon": -0.4033284,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "backward"
+  }
+},
+{
+  "type": "node",
+  "id": 12693773700,
+  "lat": 39.4785543,
+  "lon": -0.4031482,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 13276690483,
+  "lat": 39.4667225,
+  "lon": -0.3930792,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13276690484,
+  "lat": 39.4665739,
+  "lon": -0.3930114,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13276694203,
+  "lat": 39.4651951,
+  "lon": -0.3943164,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13276694204,
+  "lat": 39.4656305,
+  "lon": -0.3946038,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13276694205,
+  "lat": 39.4656466,
+  "lon": -0.3942092,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13276694206,
+  "lat": 39.4653151,
+  "lon": -0.3945743,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13283866686,
+  "lat": 39.4661831,
+  "lon": -0.3920427,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13283866687,
+  "lat": 39.4661075,
+  "lon": -0.3923095,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13283866689,
+  "lat": 39.4663071,
+  "lon": -0.3923499,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13283866694,
+  "lat": 39.4670874,
+  "lon": -0.3916443,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13283866713,
+  "lat": 39.4641028,
+  "lon": -0.3935496,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13283866758,
+  "lat": 39.4639840,
+  "lon": -0.3941933,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13283866759,
+  "lat": 39.4641013,
+  "lon": -0.3938419,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13283866761,
+  "lat": 39.4643094,
+  "lon": -0.3940234,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13283866764,
+  "lat": 39.4640207,
+  "lon": -0.3936525,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13283866765,
+  "lat": 39.4649992,
+  "lon": -0.3931778,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13283866766,
+  "lat": 39.4651432,
+  "lon": -0.3933000,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13283866767,
+  "lat": 39.4650631,
+  "lon": -0.3929657,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339181169,
+  "lat": 39.4564574,
+  "lon": -0.3900224,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339181170,
+  "lat": 39.4565299,
+  "lon": -0.3899347,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339181171,
+  "lat": 39.4567723,
+  "lon": -0.3901881,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339181172,
+  "lat": 39.4566089,
+  "lon": -0.3901941,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339181174,
+  "lat": 39.4564288,
+  "lon": -0.3905448,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339185184,
+  "lat": 39.4563653,
+  "lon": -0.3921739,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339185185,
+  "lat": 39.4564833,
+  "lon": -0.3924325,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339185289,
+  "lat": 39.4563432,
+  "lon": -0.3925621,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339185306,
+  "lat": 39.4573962,
+  "lon": -0.3913912,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339185307,
+  "lat": 39.4574616,
+  "lon": -0.3914670,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339185333,
+  "lat": 39.4580291,
+  "lon": -0.3920611,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339185334,
+  "lat": 39.4582421,
+  "lon": -0.3922864,
+  "tags": {
+    "direction": "backward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339185335,
+  "lat": 39.4579638,
+  "lon": -0.3922648,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339379842,
+  "lat": 39.4641444,
+  "lon": -0.3957530,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339379843,
+  "lat": 39.4639102,
+  "lon": -0.3964642,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339379844,
+  "lat": 39.4638133,
+  "lon": -0.3964553,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339379846,
+  "lat": 39.4640172,
+  "lon": -0.3953947,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339379847,
+  "lat": 39.4639231,
+  "lon": -0.3955142,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339379848,
+  "lat": 39.4639093,
+  "lon": -0.3958763,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339379849,
+  "lat": 39.4638318,
+  "lon": -0.3961018,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380134,
+  "lat": 39.4593618,
+  "lon": -0.4010951,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380138,
+  "lat": 39.4592469,
+  "lon": -0.4010605,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380139,
+  "lat": 39.4593894,
+  "lon": -0.4014197,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380170,
+  "lat": 39.4602454,
+  "lon": -0.3997268,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380171,
+  "lat": 39.4605745,
+  "lon": -0.3997801,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380197,
+  "lat": 39.4616776,
+  "lon": -0.3987896,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380207,
+  "lat": 39.4622015,
+  "lon": -0.3978690,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380208,
+  "lat": 39.4623089,
+  "lon": -0.3978854,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380213,
+  "lat": 39.4625993,
+  "lon": -0.3974477,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380214,
+  "lat": 39.4625872,
+  "lon": -0.3970763,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380216,
+  "lat": 39.4629628,
+  "lon": -0.3971712,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380217,
+  "lat": 39.4629615,
+  "lon": -0.3973655,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380475,
+  "lat": 39.4639334,
+  "lon": -0.3922801,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380476,
+  "lat": 39.4641543,
+  "lon": -0.3920576,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380477,
+  "lat": 39.4640716,
+  "lon": -0.3924684,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380495,
+  "lat": 39.4643087,
+  "lon": -0.3884895,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380496,
+  "lat": 39.4642334,
+  "lon": -0.3886443,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380497,
+  "lat": 39.4642493,
+  "lon": -0.3896756,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380498,
+  "lat": 39.4641709,
+  "lon": -0.3899920,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13339380502,
+  "lat": 39.4639774,
+  "lon": -0.3963644,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547314,
+  "lat": 39.4636341,
+  "lon": -0.3963231,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547315,
+  "lat": 39.4636593,
+  "lon": -0.3960783,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547317,
+  "lat": 39.4607956,
+  "lon": -0.3993832,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547359,
+  "lat": 39.4575200,
+  "lon": -0.4028992,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547360,
+  "lat": 39.4575686,
+  "lon": -0.4029918,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547378,
+  "lat": 39.4574721,
+  "lon": -0.4023100,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547379,
+  "lat": 39.4574717,
+  "lon": -0.4021924,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547380,
+  "lat": 39.4574977,
+  "lon": -0.4018260,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547381,
+  "lat": 39.4575601,
+  "lon": -0.4017554,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547463,
+  "lat": 39.4559620,
+  "lon": -0.4054953,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547469,
+  "lat": 39.4559122,
+  "lon": -0.4049481,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547470,
+  "lat": 39.4558427,
+  "lon": -0.4047627,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547551,
+  "lat": 39.4587082,
+  "lon": -0.4018080,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547552,
+  "lat": 39.4586163,
+  "lon": -0.4017131,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547553,
+  "lat": 39.4586157,
+  "lon": -0.4016454,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547554,
+  "lat": 39.4566905,
+  "lon": -0.4038271,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547555,
+  "lat": 39.4578046,
+  "lon": -0.4025120,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547556,
+  "lat": 39.4577762,
+  "lon": -0.4021532,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547557,
+  "lat": 39.4583279,
+  "lon": -0.4024316,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547558,
+  "lat": 39.4585329,
+  "lon": -0.4023717,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547559,
+  "lat": 39.4577117,
+  "lon": -0.4029957,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547626,
+  "lat": 39.4641137,
+  "lon": -0.3914080,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547627,
+  "lat": 39.4641856,
+  "lon": -0.3912985,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547806,
+  "lat": 39.4639328,
+  "lon": -0.3974885,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547807,
+  "lat": 39.4638640,
+  "lon": -0.3976129,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547808,
+  "lat": 39.4638519,
+  "lon": -0.3993853,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547809,
+  "lat": 39.4637757,
+  "lon": -0.3997428,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547810,
+  "lat": 39.4636214,
+  "lon": -0.3994984,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547843,
+  "lat": 39.4636923,
+  "lon": -0.4032874,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547844,
+  "lat": 39.4636073,
+  "lon": -0.4038427,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547845,
+  "lat": 39.4635523,
+  "lon": -0.4051947,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547853,
+  "lat": 39.4638402,
+  "lon": -0.3996355,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547861,
+  "lat": 39.4638041,
+  "lon": -0.4005747,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547862,
+  "lat": 39.4637308,
+  "lon": -0.4008682,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547863,
+  "lat": 39.4635621,
+  "lon": -0.4007631,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547864,
+  "lat": 39.4639710,
+  "lon": -0.4008902,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547865,
+  "lat": 39.4637753,
+  "lon": -0.4007711,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547866,
+  "lat": 39.4637469,
+  "lon": -0.4009554,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547867,
+  "lat": 39.4637174,
+  "lon": -0.4011794,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341547868,
+  "lat": 39.4637909,
+  "lon": -0.4008772,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341577601,
+  "lat": 39.4609104,
+  "lon": -0.3993991,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341577607,
+  "lat": 39.4637477,
+  "lon": -0.4019445,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13341577608,
+  "lat": 39.4636820,
+  "lon": -0.4020235,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13458614939,
+  "lat": 39.4589233,
+  "lon": -0.3930489,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13458614940,
+  "lat": 39.4589145,
+  "lon": -0.3932907,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13458614941,
+  "lat": 39.4591495,
+  "lon": -0.3932981,
+  "tags": {
+    "direction": "backward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13458614980,
+  "lat": 39.4576676,
+  "lon": -0.3946901,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13458614981,
+  "lat": 39.4578937,
+  "lon": -0.3946823,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13462016247,
+  "lat": 39.4562722,
+  "lon": -0.3937351,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13462016248,
+  "lat": 39.4561288,
+  "lon": -0.3936622,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13462016249,
+  "lat": 39.4563005,
+  "lon": -0.3932531,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13462016250,
+  "lat": 39.4563190,
+  "lon": -0.3929367,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13462016251,
+  "lat": 39.4563267,
+  "lon": -0.3928288,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13462016622,
+  "lat": 39.4544575,
+  "lon": -0.3918826,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13563171077,
+  "lat": 39.4452172,
+  "lon": -0.3801386,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13563171078,
+  "lat": 39.4459273,
+  "lon": -0.3712452,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13563171079,
+  "lat": 39.4459516,
+  "lon": -0.3713922,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13563257833,
+  "lat": 39.4631002,
+  "lon": -0.3247693,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13772267855,
+  "lat": 39.4789556,
+  "lon": -0.3747440,
+  "tags": {
+    "highway": "traffic_signals",
+    "side": "right",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 13807045855,
+  "lat": 39.4609697,
+  "lon": -0.3910718,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13812191869,
+  "lat": 39.4600937,
+  "lon": -0.3941420,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13812215626,
+  "lat": 39.4610034,
+  "lon": -0.3907814,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13908482669,
+  "lat": 39.4607135,
+  "lon": -0.3827238,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13908482677,
+  "lat": 39.4604459,
+  "lon": -0.3831379,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13929653452,
+  "lat": 39.4660275,
+  "lon": -0.3835103,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13929653453,
+  "lat": 39.4660805,
+  "lon": -0.3844042,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13950979845,
+  "lat": 39.4584809,
+  "lon": -0.3890394,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13950979846,
+  "lat": 39.4577834,
+  "lon": -0.3895072,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13957458744,
+  "lat": 39.4564503,
+  "lon": -0.3907478,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13958427435,
+  "lat": 39.4570943,
+  "lon": -0.3869586,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13958427436,
+  "lat": 39.4572616,
+  "lon": -0.3872020,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13958427437,
+  "lat": 39.4571709,
+  "lon": -0.3871756,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13958427438,
+  "lat": 39.4566464,
+  "lon": -0.3882525,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13958427439,
+  "lat": 39.4565414,
+  "lon": -0.3886708,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13958427469,
+  "lat": 39.4566081,
+  "lon": -0.3885099,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13976392487,
+  "lat": 39.4562140,
+  "lon": -0.3963154,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13976392488,
+  "lat": 39.4553996,
+  "lon": -0.3973416,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13976392489,
+  "lat": 39.4547953,
+  "lon": -0.3980773,
+  "tags": {
+    "direction": "backward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13976392490,
+  "lat": 39.4545150,
+  "lon": -0.3984231,
+  "tags": {
+    "direction": "backward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13976392491,
+  "lat": 39.4539226,
+  "lon": -0.3991616,
+  "tags": {
+    "direction": "backward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13976392492,
+  "lat": 39.4543059,
+  "lon": -0.4003708,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13976392493,
+  "lat": 39.4549658,
+  "lon": -0.4007814,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13976392494,
+  "lat": 39.4560089,
+  "lon": -0.4014249,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 13977861806,
+  "lat": 39.4536315,
+  "lon": -0.3920086,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13977861807,
+  "lat": 39.4564876,
+  "lon": -0.3903680,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13977861809,
+  "lat": 39.4560550,
+  "lon": -0.3906143,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13977861810,
+  "lat": 39.4560068,
+  "lon": -0.3906462,
+  "tags": {
+    "direction": "backward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13977861811,
+  "lat": 39.4550361,
+  "lon": -0.3912987,
+  "tags": {
+    "direction": "backward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13977861812,
+  "lat": 39.4550992,
+  "lon": -0.3912575,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13977861813,
+  "lat": 39.4545456,
+  "lon": -0.3916296,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13977861814,
+  "lat": 39.4542440,
+  "lon": -0.3918319,
+  "tags": {
+    "direction": "backward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13977861815,
+  "lat": 39.4538179,
+  "lon": -0.3921152,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13978483515,
+  "lat": 39.4531579,
+  "lon": -0.3887008,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13978501899,
+  "lat": 39.4529178,
+  "lon": -0.3885630,
+  "tags": {
+    "direction": "backward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13991197980,
+  "lat": 39.4696492,
+  "lon": -0.4064382,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13991197981,
+  "lat": 39.4696985,
+  "lon": -0.4062347,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13991197982,
+  "lat": 39.4702186,
+  "lon": -0.4058594,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13991197983,
+  "lat": 39.4702539,
+  "lon": -0.4060538,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13991197984,
+  "lat": 39.4696032,
+  "lon": -0.4144822,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13991197985,
+  "lat": 39.4693915,
+  "lon": -0.4054228,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13991197987,
+  "lat": 39.4688756,
+  "lon": -0.4055820,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 13991197993,
+  "lat": 39.4670249,
+  "lon": -0.4056937,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 14011415830,
+  "lat": 39.4600839,
+  "lon": -0.3943430,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "both"
+  }
+},
+{
+  "type": "node",
+  "id": 14011415831,
+  "lat": 39.4599562,
+  "lon": -0.3943255,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "signal",
+    "traffic_signals:direction": "forward"
+  }
+},
+{
+  "type": "node",
+  "id": 14072947968,
+  "lat": 39.4590659,
+  "lon": -0.3886468,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 14072947969,
+  "lat": 39.4572383,
+  "lon": -0.3898746,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals",
+    "traffic_signals": "signal"
+  }
+},
+{
+  "type": "node",
+  "id": 14141495972,
+  "lat": 39.3050481,
+  "lon": -0.2943583,
+  "tags": {
+    "highway": "traffic_signals",
+    "traffic_signals": "pedestrian_crossing"
+  }
+},
+{
+  "type": "node",
+  "id": 14173792046,
+  "lat": 39.4535394,
+  "lon": -0.3845685,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 14300459926,
+  "lat": 39.4473173,
+  "lon": -0.3922808,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 14300459927,
+  "lat": 39.4473257,
+  "lon": -0.3921115,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 14300459928,
+  "lat": 39.4477530,
+  "lon": -0.3924864,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 14300459933,
+  "lat": 39.4475092,
+  "lon": -0.3922912,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 14300459942,
+  "lat": 39.4474823,
+  "lon": -0.3922395,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 14323573600,
+  "lat": 39.4625393,
+  "lon": -0.3865982,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 14323619501,
+  "lat": 39.4622153,
+  "lon": -0.3865916,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 14323619502,
+  "lat": 39.4631488,
+  "lon": -0.3872639,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 14323619503,
+  "lat": 39.4631817,
+  "lon": -0.3873940,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 14323619539,
+  "lat": 39.4642544,
+  "lon": -0.3883554,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 14323619584,
+  "lat": 39.4638520,
+  "lon": -0.3879516,
+  "tags": {
+    "direction": "forward",
+    "highway": "traffic_signals"
+  }
+}
+
+  ]
+}

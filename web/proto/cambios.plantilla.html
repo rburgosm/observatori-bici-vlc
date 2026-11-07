@@ -1,0 +1,172 @@
+<title>Canvis · Observatori de la bici i el patinet de València</title>
+<meta name="description" content="Seguim els sinistres amb bici i patinet a València amb les dades obertes de l'Ajuntament: on passen, què s'està fent i si el Pla Director de Seguretat Viària 2026-2030 funciona.">
+<meta name="theme-color" content="#EEF1F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F151B" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='11.5'%20fill='%2315202B'%20stroke='%2355626E'/%3E%3Cg%20fill='none'%20stroke='%23EEF1F2'%20stroke-width='2.2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Ccircle%20cx='6.5'%20cy='15'%20r='3.3'/%3E%3Ccircle%20cx='17.5'%20cy='15'%20r='3.3'/%3E%3Cpath%20d='M6.5%2015l3.8-6.5h4.7l2.5%206.5M10.3%208.5%209.3%206.2'/%3E%3C/g%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Observatori de la bici i el patinet de València">
+<meta property="og:url" content="https://observatoribicivlc.org/cambios.html">
+<meta property="og:title" content="Registre de canvis · Observatori de la bici i el patinet de València">
+<meta property="og:description" content="Cada canvi en les dades, en el mètode o en la web de l&#x27;observatori, amb la seua data.">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:image" content="https://observatoribicivlc.org/og/cambios.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Nombre de canvis publicats i data de l&#x27;últim.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Registre de canvis · Observatori de la bici i el patinet de València">
+<meta name="twitter:description" content="Cada canvi en les dades, en el mètode o en la web de l&#x27;observatori, amb la seua data.">
+<meta name="twitter:image" content="https://observatoribicivlc.org/og/cambios.png">
+<meta name="twitter:image:alt" content="Nombre de canvis publicats i data de l&#x27;últim.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* Página de cambios: registro público de lo que cambia en datos, método y web. Fuente: docs/cambios.csv (scripts/construir_web.py).
+   (paleta común de las páginas: mismos tokens que observatori e informe). Todas las cifras salen de window.MET (scripts/exportar_web.py). */
+:root{
+  --bg:#EEF1F2; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
+  --bici:#2a78d6; --pat:#C94B17; --amb:#14875E; --lane:#9DB8AE; --sel:#b87a00; --warn:#B42318; --mute:#AEB7BD; --hl:#FFE58A;
+  --display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F151B; --surface:#17212A; --line:#2A3641; --ink:#E7ECEF; --ink2:#9AA7B2;
+  --bici:#3987e5; --pat:#d95926; --amb:#199e70; --lane:#4E6A60; --sel:#c98500; --warn:#F97066; --mute:#3D4B57; --hl:#5C4A00; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F151B; --surface:#17212A; --line:#2A3641; --ink:#E7ECEF; --ink2:#9AA7B2;
+  --bici:#3987e5; --pat:#d95926; --amb:#199e70; --lane:#4E6A60; --sel:#c98500; --warn:#F97066; --mute:#3D4B57; --hl:#5C4A00; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.salta{position:absolute;left:-9999px}.salta:focus{left:16px;top:8px;z-index:50;background:var(--surface);padding:6px 10px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding-block:10px;flex-wrap:wrap}
+.marca{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:.01em;text-transform:uppercase}
+.senal{width:28px;height:28px;border-radius:50%;background:var(--ink);display:grid;place-items:center;flex:none}
+.senal svg{width:18px;height:18px}
+.top nav{margin-left:auto;display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+.navlink{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-right:8px}
+.top nav button{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 10px;cursor:pointer;border-radius:3px}
+.top nav button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--bici);outline-offset:2px}
+.intro{padding-block:36px 8px;max-width:780px}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:0}
+h1,h2,h3{font-family:var(--display);text-wrap:balance}
+.intro h1{font-weight:800;text-transform:uppercase;font-size:clamp(34px,5.5vw,58px);line-height:1;margin:8px 0 12px}
+.intro p{font-size:18px;color:var(--ink2);max-width:62ch;margin:0 0 10px}
+.cuerpo{display:grid;grid-template-columns:230px minmax(0,1fr);gap:40px;padding-bottom:60px}
+.indice{position:sticky;top:calc(env(safe-area-inset-top,0px) + 66px);align-self:start;font-family:var(--display);font-size:15px}
+.indice p{margin:0 0 6px}
+.indice ol{list-style:none;margin:0;padding:0;counter-reset:i}
+.indice li{counter-increment:i;margin:0}
+.indice a{display:grid;grid-template-columns:26px 1fr;padding:4px 6px;color:var(--ink2);text-decoration:none;border-left:3px solid transparent;font-weight:600}
+.indice a::before{content:counter(i);color:var(--ink2);font-weight:800}
+.indice a:hover{color:var(--ink)}
+.indice a[aria-current="true"]{color:var(--ink);border-left-color:var(--ink)}
+main{min-width:0}
+main section{max-width:760px;padding-block:22px 18px;border-top:1px solid var(--line);scroll-margin-top:70px}
+main section:first-child{border-top:0}
+main h2{font-size:30px;font-weight:800;text-transform:uppercase;line-height:1.05;margin:0 0 12px;display:flex;gap:10px;align-items:baseline}
+main h2 .n{font-size:18px;color:var(--ink2)}
+main h3{font-size:19px;font-weight:700;margin:18px 0 6px}
+main p{margin:0 0 12px}
+main ul{margin:0 0 12px;padding-left:20px}
+main li{margin-bottom:6px}
+b,td,th{font-variant-numeric:tabular-nums}
+.k{font-family:var(--display);font-weight:800;font-size:1.12em;letter-spacing:.01em}
+.cita{border-left:3px solid var(--line);padding:2px 0 2px 14px;color:var(--ink2);font-style:italic;margin:0 0 12px}
+.aviso{font-size:14.5px;color:var(--ink2);border-top:1px dashed var(--line);padding-top:8px}
+.tw{overflow-x:auto;margin:6px 0 14px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--surface);border:1px solid var(--line)}
+caption{caption-side:top;text-align:left;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.04em;color:var(--ink2);padding:0 0 4px}
+th,td{padding:5px 9px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+th{font-family:var(--display);font-weight:700;font-size:13.5px;letter-spacing:.03em;color:var(--ink2)}
+th:first-child,td:first-child{text-align:left}
+tr.dest td{font-weight:600}
+td.t{text-align:left}
+.sw{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.cats{display:flex;flex-wrap:wrap;gap:8px 18px;margin:4px 0 14px;font-family:var(--display);font-weight:600;font-size:15px}
+details.tec{margin:8px 0 6px;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:0 14px;font-size:14.5px}
+details.tec summary{cursor:pointer;padding:9px 0;font-family:var(--display);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:13.5px;color:var(--ink2)}
+details.tec[open]{padding-bottom:10px}
+details.tec p,details.tec li{color:var(--ink)}
+code{font-size:.9em;background:var(--bg);padding:1px 4px;border-radius:3px;overflow-wrap:anywhere}
+a{color:var(--ink)}
+.peu{font-size:13px;color:var(--ink2);padding-block:20px 50px;border-top:1px solid var(--line)}
+@media (max-width:860px){
+  .cuerpo{grid-template-columns:minmax(0,1fr);gap:0}
+  .indice{position:static;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:10px 12px;margin:10px 0 8px}
+  .indice ol{columns:2;column-gap:14px}
+  main h2{font-size:25px}
+}
+@media (max-width:420px){.indice ol{columns:1}}
+.intro{max-width:1180px}
+.dia{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding-block:18px;border-top:1px solid var(--line);max-width:860px}
+.dia:first-child{border-top:0}
+.dia h2{font-size:22px;font-weight:800;text-transform:uppercase;margin:0;line-height:1.1}
+.dia ul{list-style:none;margin:0;padding:0}
+.dia li{margin:0 0 10px;display:grid;grid-template-columns:78px minmax(0,1fr);gap:12px;align-items:baseline}
+.tipo{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:3px;padding:1px 6px;text-align:center;background:var(--surface)}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin:18px 0 8px}
+.filtros button{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 10px;cursor:pointer;border-radius:3px}
+.filtros button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+@media (max-width:640px){.dia{grid-template-columns:minmax(0,1fr);gap:8px}.dia li{grid-template-columns:minmax(0,1fr);gap:2px}.tipo{justify-self:start}}
+/*TEMA_CSS*/
+</style>
+<script>/*TEMA_JS*/</script>
+<script>/*PIE_JS*/</script>
+
+<a class="salta" href="#contingut" data-t="salta"></a>
+<header class="top"><div class="wrap">
+  <div class="marca"><span class="senal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" style="stroke:var(--bg)" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="16" r="3.5"/><circle cx="18" cy="16" r="3.5"/><path d="M6 16l4-7h5l3 7M10 9l-1-2.5H7.5M13 9l2 0"/></svg></span><span data-t="marca"></span></div>
+  <nav aria-label="Navegació"><a class="navlink" href="observatori.html" data-t="nav_obs"></a><a class="navlink" href="informe.html" data-t="nav_inf"></a><a class="navlink" href="pla.html" data-t="nav_pla"></a><a class="navlink" href="metode.html" data-t="nav_met"></a><button data-tema></button><button id="l-va" aria-pressed="true" lang="ca">VA</button><button id="l-es" aria-pressed="false" lang="es">ES</button></nav>
+</div></header>
+
+<div class="wrap intro">
+  <p class="eyebrow" data-t="ey"></p>
+  <h1 data-t="h1"></h1>
+  <p data-t="sub"></p>
+  <div class="filtros" id="filtros" role="group" aria-label="Tipus"></div>
+</div>
+<main class="wrap" id="contingut"></main>
+<div class="wrap"><p style="font-size:13px;color:var(--ink2);margin:24px 0 0" data-t="peu"></p></div>
+<footer class="wrap" data-pie></footer>
+
+<script>/*DATA*/</script>
+<script>
+"use strict";
+const C = window.CAMBIOS;   // [{f: "AAAA-MM-DD", t: "datos" | "metode" | "web", va, es}], de docs/cambios.csv
+let L = "va", F = "tots";
+const T = {
+va:{marca:"Observatori de la bici i el patinet de València", nav_obs:"Observatori", nav_inf:"Informe", nav_pla:"El Pla, al dia", nav_met:"Mètode", salta:"Salta al contingut",
+  ey:"Registre de canvis", h1:"Què ha canviat",
+  sub:"Cada canvi en les dades, en el mètode o en la web, amb la seua data. Quan una xifra canvia per una decisió nostra, ho expliquem ací i en la pàgina de mètode.",
+  tipos:{tots:"Tots", datos:"Dades", metode:"Mètode", web:"Web"},
+  peu:"Els canvis del codi queden, a més, en l'historial del repositori del projecte.",
+  mes:["de gener","de febrer","de març","d'abril","de maig","de juny","de juliol","d'agost","de setembre","d'octubre","de novembre","de desembre"]},
+es:{marca:"Observatorio de la bici y el patinete de València", nav_obs:"Observatorio", nav_inf:"Informe", nav_pla:"El Plan, al día", nav_met:"Método", salta:"Salta al contenido",
+  ey:"Registro de cambios", h1:"Qué ha cambiado",
+  sub:"Cada cambio en los datos, en el método o en la web, con su fecha. Cuando una cifra cambia por una decisión nuestra, lo explicamos aquí y en la página de método.",
+  tipos:{tots:"Todos", datos:"Datos", metode:"Método", web:"Web"},
+  peu:"Los cambios del código quedan, además, en el historial del repositorio del proyecto.",
+  mes:["de enero","de febrero","de marzo","de abril","de mayo","de junio","de julio","de agosto","de septiembre","de octubre","de noviembre","de diciembre"]}};
+const fecha = f => { const [y, m, d] = f.split("-").map(Number); return `${d} ${T[L].mes[m - 1]} ${y}`; };
+function pintar(){
+  const t = T[L];
+  document.documentElement.lang = L === "va" ? "ca" : "es";
+  document.title = `${t.ey} · ${t.marca}`;
+  document.querySelectorAll("[data-t]").forEach(el => { el.innerHTML = t[el.dataset.t]; });
+  document.getElementById("filtros").innerHTML = Object.entries(t.tipos).map(([k, v]) => `<button data-f="${k}" aria-pressed="${F === k}">${v}</button>`).join("");
+  document.querySelectorAll("#filtros button").forEach(b => b.onclick = () => { F = b.dataset.f; pintar(); });
+  const dias = [...new Set(C.map(c => c.f))].sort().reverse();   // lo más reciente arriba
+  document.getElementById("contingut").innerHTML = dias.map(f => { const es = C.filter(c => c.f === f && (F === "tots" || c.t === F));
+    return es.length ? `<section class="dia"><h2><time datetime="${f}">${fecha(f)}</time></h2><ul>${es.map(c => `<li><span class="tipo">${t.tipos[c.t]}</span><span>${c[L]}</span></li>`).join("")}</ul></section>` : ""; }).join("");
+  ["va", "es"].forEach(l => document.getElementById("l-" + l).setAttribute("aria-pressed", L === l));
+}
+try { const s = localStorage.getItem("obs-lang"); if (s === "va" || s === "es") L = s; } catch(e){}
+["va", "es"].forEach(l => document.getElementById("l-" + l).onclick = () => { L = l; try { localStorage.setItem("obs-lang", l); } catch(e){} pintar(); });
+pintar();
+</script>
