@@ -160,6 +160,76 @@ for c in ("lloc", "carrer"):
 nota("ERROR" if mal else "OK", f"cifras: {mal}" if mal else f"cifras = datos: {R['tot'][-1]} accidentes en {R['anys'][-1]}, {P['n']} medidas y su reparto, "
      f"{fich.get('lloc')} lugares y {fich.get('carrer')} calles en los índices")
 
+# avisos ciudadanos (data/processed/avisos_ciudadanos.csv): campos, fechas, resultado, fuente si se incorporó, sin datos
+# personales, y el recuento de la página del Ayuntamiento igual al del registro
+import csv, datetime
+sys.path.insert(0, str(ROOT / "scripts"))
+import sitio as S
+mal = []
+with open(S.AVISOS_CSV, newline="", encoding="utf-8") as fh:
+    rd = csv.DictReader(fh); av = list(rd)
+    if rd.fieldnames != S.AVISOS_CAMPOS: mal.append(f"columnas {rd.fieldnames} (esperadas {S.AVISOS_CAMPOS})")
+for i, r in enumerate(av, 2):
+    try:
+        if datetime.date.fromisoformat(r["fecha"]) > datetime.date.today(): mal.append(f"fila {i}: fecha futura {r['fecha']}")
+    except (TypeError, ValueError): mal.append(f"fila {i}: fecha no válida {r['fecha']!r} (AAAA-MM-DD)")
+    if r["resultado"] not in S.AVISOS_RESULTADO: mal.append(f"fila {i}: resultado {r['resultado']!r} (permitidos {sorted(S.AVISOS_RESULTADO)})")
+    if r["resultado"] == "incorporado" and not (r["fuente_url"] or "").startswith("http"): mal.append(f"fila {i}: incorporado sin fuente_url")
+    if not (r["resumen_va"] or "").strip() or not (r["resumen_es"] or "").strip(): mal.append(f"fila {i}: falta el resumen en va o es")
+    if any("@" in (v or "") for k, v in r.items() if k != "fuente_url"): mal.append(f"fila {i}: parece llevar un correo (no se publican datos de quien avisa)")
+    if r["medida_plan"] and r["medida_plan"] not in {a["id"] for a in P["acts"]}: mal.append(f"fila {i}: medida_plan {r['medida_plan']!r} no está en el seguimiento")
+m = re.search(r'id="avisa" data-avisos="(\d+)"', TXT["ajuntament/index.html"])
+if not m or int(m.group(1)) != len(av): mal.append(f"la página del Ayuntamiento muestra {m.group(1) if m else 'ningún'} bloque de avisos; el registro tiene {len(av)}")
+if 'href="mailto:' + S.CORREU + '?subject=' not in TXT["ajuntament/index.html"]: mal.append("falta el enlace de aviso con asunto en la página del Ayuntamiento")
+nota("ERROR" if mal else "OK", f"avisos ciudadanos: {mal[:5]}" if mal else f"avisos ciudadanos: {len(av)} en el registro, válidos y con el mismo recuento en la página del Ayuntamiento")
+
+# Data Package (Frictionless) de las descargas: /dades/datapackage.json y el del mapa (window.DATAPACKAGE, uno por lengua)
+# con la estructura del estándar, y sus campos = las columnas del CSV (CSV_COLS del mapa), en el mismo orden
+import sitio_dades as SD
+mal = []
+TIPOS_DP = {"string", "number", "integer", "boolean", "object", "array", "date", "time", "datetime", "year", "yearmonth",
+            "duration", "geopoint", "geojson", "any"}
+try:
+    dps = {"/dades/": json.loads((B / "dades/datapackage.json").read_text())}
+    m = re.search(r"window\.DATAPACKAGE = (\{.*?\});</script>", TXT["mapa/index.html"])
+    if not m: mal.append("el mapa no lleva window.DATAPACKAGE")
+    else: dps.update({f"mapa ({l})": d for l, d in json.loads(m.group(1)).items()})
+except (OSError, ValueError) as e:
+    mal.append(f"datapackage.json: {e}"); dps = {}
+cols = re.search(r"const CSV_COLS=\{(.*?)\};", TXT["mapa/index.html"], re.S)
+cols = {k: re.findall(r'"([^"]+)"', v) for k, v in re.findall(r"(\w+):\[([^\]]*)\]", cols.group(1))} if cols else {}
+if set(cols) != set(SD.DP_ORDEN): mal.append(f"CSV_COLS del mapa: vistas {sorted(cols)}")
+for q, d in dps.items():
+    for k in ("name", "title", "licenses", "sources", "version", "resources"):
+        if not d.get(k): mal.append(f"{q}: falta {k}")
+    if not re.fullmatch(r"[-a-z0-9._/]+", d.get("name", "")): mal.append(f"{q}: name no válido")
+    if [x.get("name") for x in d.get("licenses", [])] != ["CC-BY-4.0"]: mal.append(f"{q}: licencia")
+    if any(not str(x.get("path", "")).startswith("https://") for x in d.get("sources", [])): mal.append(f"{q}: fuente sin URL")
+    rs = d.get("resources", [])
+    if len(rs) != len(SD.DP_ORDEN): mal.append(f"{q}: {len(rs)} recursos"); continue
+    for v, r in zip(SD.DP_ORDEN, rs):
+        if not r.get("path", "").endswith(".csv") or not re.fullmatch(r"[-a-z0-9._/]+", r.get("name", "")): mal.append(f"{q}: recurso {v} sin path o name")
+        fs = r.get("schema", {}).get("fields", [])
+        if [f.get("name") for f in fs] != cols.get(v): mal.append(f"{q}: campos de {v} ≠ columnas del CSV")
+        if any(f.get("type") not in TIPOS_DP or not f.get("description") for f in fs): mal.append(f"{q}: {v} con tipo o descripción no válidos")
+if 'href="../dades/datapackage.json"' not in TXT["dades/index.html"]: mal.append("/dades/ no enlaza datapackage.json")
+nota("ERROR" if mal else "OK", f"datapackage: {mal[:5]}" if mal else
+     f"datapackage.json: {len(dps)} descriptores (/dades/ y el del mapa en va y es) válidos, con licencia, fuentes y campos = columnas del CSV")
+
+# repositorio y canal de Telegram (sitio.REPO, sitio.TELEGRAM_CANAL)
+mal = []
+if not S.REPO.startswith("https://github.com/"): mal.append(f"REPO {S.REPO!r}")
+for p in ("index.html", "dades/index.html", "metode/index.html", "sobre/index.html"):
+    if f'href="{S.REPO}"' not in TXT[p]: mal.append(f"{p} no enlaza el repositorio")
+if S.TELEGRAM_CANAL:
+    if not re.fullmatch(r"https://t\.me/[A-Za-z0-9_]{5,}", S.TELEGRAM_CANAL): mal.append(f"TELEGRAM_CANAL {S.TELEGRAM_CANAL!r} no empieza por https://t.me/")
+    for p in ("index.html", "ajuntament/index.html"):
+        if 'class="tarjeta telegram"' not in TXT[p]: mal.append(f"{p} sin la invitación al canal")
+    if any('class="pie-tg"' not in t for t in TXT.values()): mal.append("falta el canal en algún pie")
+elif any("t.me/" in t for t in TXT.values()): mal.append("TELEGRAM_CANAL vacío pero hay enlaces a t.me")
+nota("ERROR" if mal else "OK", f"repositorio y Telegram: {mal[:5]}" if mal else
+     f"repositorio enlazado en el pie, /dades/, /metode/ y /sobre/; canal de Telegram {'en el pie, la portada y /ajuntament/' if S.TELEGRAM_CANAL else 'sin poner (no se muestra)'}")
+
 # redirecciones de las direcciones viejas en el vhost
 _vh = ROOT / "deploy/nginx/DOMINIO.conf.plantilla"   # deploy/ no se publica
 conf = _vh.read_text() if _vh.exists() else None

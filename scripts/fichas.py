@@ -365,6 +365,10 @@ def pagina(D, f, slug_lloc, slug_carrer, ref, ejes_idx):
         else:
             o.append(f'<p>{T("El seguiment del Pla Director que fa l&#39;observatori no té cap actuació situada", "El seguimiento del Plan Director que hace el observatorio no tiene ninguna actuación situada")} {lugar_txt}. '
                      f'<a href="../../ajuntament/">{T("Què està fent l&#39;Ajuntament?", "¿Qué está haciendo el Ayuntamiento?")} →</a></p>')
+        # aviso ciudadano (sitio.mailto_aviso): asunto con el nombre del sitio; sin formulario ni datos personales en la web
+        o.append(f'<p class="nota" style="margin:12px 0 0">{T(f"Has vist obres o algun canvi {lugar_txt}?", f"¿Has visto obras o algún cambio {lugar_txt}?")} '
+                 f'<a href="{sitio.mailto_aviso(l, nom[l])}">{T("Avisa&#39;ns per correu", "Avísanos por correo")}</a>: '
+                 f'{T("buscarem la font oficial i, si n&#39;hi ha, ho afegirem al seguiment.", "buscaremos la fuente oficial y, si la hay, lo añadiremos al seguimiento.")}</p>')
         o.append("</section>")
         # uno a uno
         o.append(f'<section class="tarjeta ancho" style="min-width:0"><h2>{T("Els accidents, un a un", "Los accidentes, uno a uno")}</h2>'

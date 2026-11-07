@@ -655,6 +655,7 @@ csv_fmt:"Format: CSV estàndard (RFC 4180), separat per comes, UTF-8, dates ISO 
 csv_cols:"Columnes",
 csv_mes:"Més dades i mètode",
 csv_llegiu:"LLEGIU-ME.txt",
+csv_dp:"Descriptor de les dades: datapackage.json (estàndard obert Frictionless Data Package), amb el significat, el tipus i les unitats de cada columna, la llicència i les fonts.",
 
 veh_csv:{b:"bici",p:"patinet",a:"bici i patinet"},
 tipo_csv:{nudo:"cruïlla",tramo:"tram de carrer",zona:"zona"},
@@ -694,6 +695,7 @@ csv_fmt:"Formato: CSV estándar (RFC 4180), separado por comas, UTF-8, fechas IS
 csv_cols:"Columnas",
 csv_mes:"Más datos y método",
 csv_llegiu:"LEEME.txt",
+csv_dp:"Descriptor de los datos: datapackage.json (estándar abierto Frictionless Data Package), con el significado, el tipo y las unidades de cada columna, la licencia y las fuentes.",
 
 veh_csv:{b:"bici",p:"patinete",a:"bici y patinete"},
 tipo_csv:{nudo:"cruce",tramo:"tramo de calle",zona:"zona"},
@@ -1436,9 +1438,17 @@ p[4]>=0?t.gravs[p[4]]:"",p[5],p[6],t.geo[p[7]],p[9],p[10],p[1],p[0]]));
   // separador). La fuente, la licencia, el aviso de no reidentificar, el formato y las columnas van en el LLEGIU-ME / LEEME.
   const txt = "﻿"+[CSV_COLS[vista],...filas].map(r=>r.map(csvCampo).join(",")).join("\r\n")+"\r\n";
   const leeme = [t.csv_tit(t.csv_vista[vista],filtro), "", t.csv_font(I.conjunto,I.descarga), "", t.csv_lic(I.version), "",
-    t.csv_avis, "", t.csv_fmt, "", t.csv_cols+": "+CSV_COLS[vista].join(", "), "", t.csv_mes+": "+location.origin+"/dades/", ""].join("\r\n");
+    t.csv_avis, "", t.csv_fmt, "", t.csv_cols+": "+CSV_COLS[vista].join(", "), "", ...(window.DATAPACKAGE?[t.csv_dp,""]:[]),
+    t.csv_mes+": "+location.origin+"/dades/", ""].join("\r\n");
   const nom=`observatori-${t.csv_fitxer[vista]}${vista!=="uso"&&fAct()?`-${rangF()}-${F.v}-${F.g}`:""}`;
-  const zip=zipStore([[nom+".csv",txt],[t.csv_llegiu,"﻿"+leeme]]);
+  const fich=[[nom+".csv",txt],[t.csv_llegiu,"﻿"+leeme]];
+  // datapackage.json (Frictionless): el descriptor de la lengua de la página (scripts/sitio_dades.py, datapackage()) con
+  // el CSV descargado como único recurso; el orden de los recursos es pts, negros, uso
+  const DPK=window.DATAPACKAGE&&window.DATAPACKAGE[L];
+  if (DPK){ const r=Object.assign({},DPK.resources[{pts:0,negros:1,uso:2}[vista]],{name:nom,path:nom+".csv"});
+    r.description+=" "+t.csv_tit(t.csv_vista[vista],filtro);
+    fich.push(["datapackage.json",JSON.stringify(Object.assign({},DPK,{resources:[r]}),null,2)+"\n"]); }
+  const zip=zipStore(fich);
 
   const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([zip],{type:"application/zip"}));
   a.download=nom+".zip";

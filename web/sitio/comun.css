@@ -240,6 +240,8 @@ svg.graf.w600 text{font-size:16.5px} svg.graf.w440 text{font-size:13px} svg.graf
 .pie nav a{font-weight:600;color:var(--ink)}
 .pie p{margin:0 0 8px;max-width:110ch}
 .pie a{color:var(--ink)}
+.pie .pie-tg{margin:0 0 12px}
+.pie .pie-tg a{font-weight:600}
 
 /* ---------- inicio ---------- */
 .portada{padding:6px 0 4px}
@@ -342,7 +344,15 @@ div.tc a.tc-cifra{text-decoration-thickness:3px;text-underline-offset:6px;width:
 .publica li{display:flex;gap:10px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:8px 0}
 .ley-est{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
 .escribe{margin:30px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.escribe:has(> :only-child){grid-template-columns:1fr}
+/* avisos ciudadanos (Plan): la invitación y el registro público */
+.avisa > .tarjeta{border-left:6px solid var(--ink)}
+.avisa > h3{margin:24px 0 6px}
 .h-tarjeta{font-size:var(--t-h3)}
+/* invitación al canal de Telegram (solo si sitio.TELEGRAM_CANAL está puesto) */
+.telegram{margin:30px 0 0;border-left:6px solid var(--ink)}
+.telegram p{margin:8px 0 0;max-width:70ch}
+.telegram .tg-acc{margin:14px 0 0}
 @media (max-width:900px){.estado{grid-template-columns:1fr}.cuatro{grid-template-columns:repeat(2,minmax(0,1fr))}.mapa-med,.escribe{grid-template-columns:1fr}.filtro-lista{top:calc(var(--cab-alto) + 51px)}}
 @media (max-width:520px){.unidades{grid-template-columns:repeat(16,1fr)}.medidas summary{grid-template-columns:1fr}.medidas summary .est{grid-row:auto;justify-self:start}.medidas .donde,.medidas .cuando{grid-column:1}.filtro-lista{position:static}}
 

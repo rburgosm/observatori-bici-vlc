@@ -69,6 +69,8 @@ def secciones(c, L):
     T = lambda va, es: va if L == "va" else es
     a0, a1 = c["a0"], c["a1"]
     out = []
+    from sitio import REPO, TELEGRAM_CANAL, CORREU
+    git = T(f'<a href="{REPO}" rel="noopener">codi font a GitHub</a>', f'<a href="{REPO}" rel="noopener">código fuente en GitHub</a>')
 
     # ---------------------------------------------------------------- en cinco líneas
     out.append(("resum", {"va": "En cinc línies", "es": "En cinco líneas"}, T(
@@ -78,34 +80,38 @@ def secciones(c, L):
 <li>El portal només dona l'adreça escrita. Amb el carrerer municipal en situem {mil(c['n_geo'])} en el mapa, el {pc(c['n_geo'] / c['n_total'], 0)}.</li>
 <li>Agrupem els accidents per cruïlles (amb 30 metres al voltant) i per trams de carrer de fins a 150 metres.</li>
 <li>En {mil(c['n_uso'])} punts del carril bici on es compten les bicis, comparem els accidents amb el nombre de bicis que hi passen.</li>
-</ol>""",
+</ol>
+<p>Tot el procés és obert i es pot repetir: {git}. Qui manté l'observatori, cada quant s'actualitza i què passaria si es parara ho expliquem en <a href="{{RAIZ}}sobre/#continuitat">la continuïtat de l'observatori</a>.</p>""",
         f"""<ol class="cinco">
 <li>Partimos del conjunto «Siniestros de tráfico» del portal de datos abiertos del Ayuntamiento de València.</li>
 <li>Nos quedamos con los {mil(c['n_total'])} accidentes de {a0} a {a1} en los que hay al menos una bici o un patinete.</li>
 <li>El portal solo da la dirección escrita. Con el callejero municipal situamos {mil(c['n_geo'])} en el mapa, el {pc(c['n_geo'] / c['n_total'], 0)}.</li>
 <li>Agrupamos los accidentes por cruces (con 30 metros alrededor) y por tramos de calle de hasta 150 metros.</li>
 <li>En {mil(c['n_uso'])} puntos del carril bici donde se cuentan las bicis, comparamos los accidentes con el número de bicis que pasan.</li>
-</ol>""")))
+</ol>
+<p>Todo el proceso es abierto y se puede repetir: {git}. Quién mantiene el observatorio, cada cuánto se actualiza y qué pasaría si se parase lo explicamos en <a href="{{RAIZ}}sobre/#continuitat">la continuidad del observatorio</a>.</p>""")))
 
     # ---------------------------------------------------------------- descarga
     out.append(("descarrega", {"va": "Descarrega les dades", "es": "Descarga los datos"}, T(
         f"""<p>Els accidents amb bici o patinet situats en el mapa, un per un, i com hem situat cadascun. És la nostra aportació principal.</p>
 <div class="descarga">
-<div class="tarjeta"><span class="fmt">Ja disponible</span><span>Des del <a href="{{RAIZ}}mapa/">mapa</a>, amb el botó «Descarrega el que veus (CSV en ZIP)»: es descarrega un ZIP amb un CSV dels accidents situats en el mapa (un per fila), els 30 llocs o els punts de comptatge, amb els filtres que tingues posats, i un fitxer LLEGIU-ME amb la font, la llicència i les columnes. Les columnes tenen sempre el mateix nom, en qualsevol llengua.</span><a class="btn" href="{{RAIZ}}mapa/#vista=pts">Obri el mapa per a descarregar</a></div>
+<div class="tarjeta"><span class="fmt">Ja disponible</span><span>Des del <a href="{{RAIZ}}mapa/">mapa</a>, amb el botó «Descarrega el que veus (CSV en ZIP)»: es descarrega un ZIP amb un CSV dels accidents situats en el mapa (un per fila), els 30 llocs o els punts de comptatge, amb els filtres que tingues posats, un fitxer LLEGIU-ME amb la font, la llicència i les columnes, i el descriptor <code>datapackage.json</code>. Les columnes tenen sempre el mateix nom, en qualsevol llengua.</span><a class="btn" href="{{RAIZ}}mapa/#vista=pts">Obri el mapa per a descarregar</a></div>
 <div class="tarjeta"><span class="fmt">CSV i GeoJSON</span><span>El conjunt complet i versionat, amb com hem situat cada accident i un diccionari de camps. Encara no està publicat.</span><span class="pendiente">Pròximament</span></div>
 </div>
 <p class="nota">Cada versió anirà datada. Llicència CC BY 4.0, la mateixa que les dades del portal. Sense dades de les persones implicades. Està prohibit reidentificar persones creuant aquestes dades amb altres fonts.</p>
 <p class="nota">El CSV del mapa porta la data i l'hora, l'adreça i els factors de cada accident, que ja publica el portal de l'Ajuntament, i les coordenades que n'hem tret. Les fitxes de lloc i de carrer, en canvi, només donen el mes i l'any, perquè ixen en els cercadors amb el nom del lloc. La coordenada és la de la cruïlla o la del número de portal citat en el comunicat, no un domicili. Si un registre t'afecta i vols que el revisem, escriu-nos a <a href="mailto:hola@observatoribicivlc.org">hola@observatoribicivlc.org</a>; i si l'Ajuntament retira o corregix un registre, nosaltres també.</p>
+<p class="nota">El descriptor <code>datapackage.json</code> seguix l'estàndard obert Frictionless Data Package: diu què vol dir cada columna, de quin tipus és i en quines unitats va, i també la llicència, les fonts i la versió. Així un programa pot llegir i validar el CSV sense endevinar res. El pots consultar abans de descarregar: <a href="{{RAIZ}}dades/datapackage.json">descriptor de les dades (datapackage.json)</a>. El codi que el genera és públic: {git}.</p>
 <p class="cita"><b>Com citar-ho:</b> Observatori de la bici i el patinet de València ({c['version'][:4]}). Accidents de bici i patinet a València, {a0}-{a1}, situats en el mapa. Dades de l'Ajuntament de València (CC BY 4.0), modificades per l'observatori.</p>""",
         f"""<p>Los accidentes con bici o patinete situados en el mapa, uno a uno, y cómo hemos situado cada uno. Es nuestra principal aportación.</p>
 <div class="descarga">
-<div class="tarjeta"><span class="fmt">Ya disponible</span><span>Desde el <a href="{{RAIZ}}mapa/">mapa</a>, con el botón «Descarga lo que ves (CSV en ZIP)»: se descarga un ZIP con un CSV de los accidentes situados en el mapa (uno por fila), los 30 lugares o los puntos de conteo, con los filtros que tengas puestos, y un fichero LEEME con la fuente, la licencia y las columnas. Las columnas tienen siempre el mismo nombre, en cualquier lengua.</span><a class="btn" href="{{RAIZ}}mapa/#vista=pts">Abrir el mapa para descargar</a></div>
+<div class="tarjeta"><span class="fmt">Ya disponible</span><span>Desde el <a href="{{RAIZ}}mapa/">mapa</a>, con el botón «Descarga lo que ves (CSV en ZIP)»: se descarga un ZIP con un CSV de los accidentes situados en el mapa (uno por fila), los 30 lugares o los puntos de conteo, con los filtros que tengas puestos, un fichero LEEME con la fuente, la licencia y las columnas, y el descriptor <code>datapackage.json</code>. Las columnas tienen siempre el mismo nombre, en cualquier lengua.</span><a class="btn" href="{{RAIZ}}mapa/#vista=pts">Abrir el mapa para descargar</a></div>
 <div class="tarjeta"><span class="fmt">CSV y GeoJSON</span><span>El conjunto completo y versionado, con cómo hemos situado cada accidente y un diccionario de campos. Todavía no está publicado.</span><span class="pendiente">Próximamente</span></div>
 </div>
 <p class="nota">Cada versión irá fechada. Licencia CC BY 4.0, la misma que los datos del portal. Sin datos de las personas implicadas. Está prohibido reidentificar personas cruzando estos datos con otras fuentes.</p>
 <p class="nota">El CSV del mapa lleva la fecha y la hora, la dirección y los factores de cada accidente, que ya publica el portal del Ayuntamiento, y las coordenadas que hemos sacado de ella. Las fichas de lugar y de calle, en cambio, solo dan el mes y el año, porque aparecen en los buscadores con el nombre del sitio. La coordenada es la del cruce o la del número de portal citado en el parte, no un domicilio. Si un registro te afecta y quieres que lo revisemos, escríbenos a <a href="mailto:hola@observatoribicivlc.org">hola@observatoribicivlc.org</a>; y si el Ayuntamiento retira o corrige un registro, nosotros también.</p>
 
 
+<p class="nota">El descriptor <code>datapackage.json</code> sigue el estándar abierto Frictionless Data Package: dice qué significa cada columna, de qué tipo es y en qué unidades va, y también la licencia, las fuentes y la versión. Así un programa puede leer y validar el CSV sin adivinar nada. Puedes consultarlo antes de descargar: <a href="{{RAIZ}}dades/datapackage.json">descriptor de los datos (datapackage.json)</a>. El código que lo genera es público: {git}.</p>
 <p class="cita"><b>Cómo citarlo:</b> Observatorio de la bici y el patinete de València ({c['version'][:4]}). Accidentes de bici y patinete en València, {a0}-{a1}, situados en el mapa. Datos del Ayuntamiento de València (CC BY 4.0), modificados por el observatorio.</p>""")))
 
     # ---------------------------------------------------------------- límites
@@ -266,6 +272,47 @@ def secciones(c, L):
 </ul>""")))
 
     # ---------------------------------------------------------------- código
+    # ---------------------------------------------------------------- continuidad (07/11/2026, criterio 3 de las bases)
+    out.append(("continuitat", {"va": "Continuïtat", "es": "Continuidad"}, T(
+        f"""<p>L'observatori el manté una iniciativa ciutadana independent i sense ànim de lucre. No rep cap subvenció i no porta publicitat.</p>
+<ul>
+<li><b>Amb freqüència</b> revisem el seguiment de les mesures del Pla i comprovem si el portal de dades obertes ha publicat dades noves o ha canviat les que ja hi havia. Tan prompte com hi ha novetats en el Pla, en les dades o en la web, les publiquem ací i en el canal de Telegram.</li>
+<li><b>Cada any</b>, quan l'Ajuntament publica els accidents de l'any sencer, actualitzem el mapa, les fitxes i el seguiment de l'objectiu, i traiem un informe nou.</li>
+<li><b>Costa menys de 90 euros a l'any</b>: un servidor compartit de 5 euros al mes i els dominis. Ho paguem nosaltres.</li>
+<li><b>Si un dia el deixem de mantindre, no es perd res.</b> Tot el codi i les dades derivades són públics amb llicències obertes ({git}), i la web sencera es torna a construir amb una sola ordre (<code>make</code>) a partir de les dades del portal. Qualsevol persona o entitat pot continuar-lo o fer-ne un d'igual en una altra ciutat.</li>
+<li>Cada canvi en les dades, el mètode o la web queda apuntat, amb la data, en el <a href="#canvis">registre de canvis</a>.</li>
+</ul>""",
+        f"""<p>El observatorio lo mantiene una iniciativa ciudadana independiente y sin ánimo de lucro. No recibe ninguna subvención y no lleva publicidad.</p>
+<ul>
+<li><b>Con frecuencia</b> revisamos el seguimiento de las medidas del Plan y comprobamos si el portal de datos abiertos ha publicado datos nuevos o ha cambiado los que ya había. En cuanto hay novedades en el Plan, en los datos o en la web, las publicamos aquí y en el canal de Telegram.</li>
+<li><b>Cada año</b>, cuando el Ayuntamiento publica los accidentes del año completo, actualizamos el mapa, las fichas y el seguimiento del objetivo, y sacamos un informe nuevo.</li>
+<li><b>Cuesta menos de 90 euros al año</b>: un servidor compartido de 5 euros al mes y los dominios. Lo pagamos nosotros.</li>
+<li><b>Si un día dejamos de mantenerlo, no se pierde nada.</b> Todo el código y los datos derivados son públicos con licencias abiertas ({git}), y la web entera se vuelve a construir con una sola orden (<code>make</code>) a partir de los datos del portal. Cualquier persona o entidad puede continuarlo o hacer uno igual en otra ciudad.</li>
+<li>Cada cambio en los datos, el método o la web queda anotado, con la fecha, en el <a href="#canvis">registro de cambios</a>.</li>
+</ul>""")))
+
+    # ---------------------------------------------------------------- privacidad (07/11/2026)
+    tg = (T(f"""<li><b>Telegram.</b> El <a href="{TELEGRAM_CANAL}" rel="noopener">canal de Telegram</a> és un servei extern, amb la seua pròpia política de privacitat. Unir-s'hi es fa dins de Telegram, i és un canal només d'anuncis: no s'hi poden enviar missatges.</li>""",
+            f"""<li><b>Telegram.</b> El <a href="{TELEGRAM_CANAL}" rel="noopener">canal de Telegram</a> es un servicio externo, con su propia política de privacidad. Unirse se hace dentro de Telegram, y es un canal solo de anuncios: no se pueden enviar mensajes.</li>""")
+          if TELEGRAM_CANAL else "")
+    out.append(("privacitat", {"va": "Privacitat i galetes", "es": "Privacidad y cookies"}, T(
+        f"""<p>Aquesta web no fa servir galetes (cookies) ni res que et seguisca d'una web a una altra.</p>
+<ul>
+<li><b>Sense galetes.</b> Només guardem en el teu navegador (en el seu emmagatzematge local) la llengua i el tema, clar o fosc, que tries, perquè no els hages de triar cada vegada. Eixa informació no ix del teu aparell.</li>
+<li><b>Estadístiques anònimes.</b> Comptem les visites amb Umami, instal·lat en el nostre propi servidor. No fa servir galetes, no identifica ningú i no compta res si el navegador demana no ser rastrejat (Do Not Track). Només ens diu quantes visites té cada pàgina.</li>
+<li><b>Servidor i Cloudflare.</b> El servidor on està la web i Cloudflare, que la servix i la protegix d'atacs, tracten l'adreça IP de les visites només per a fer arribar les pàgines i per seguretat.</li>
+<li><b>Avisos per correu.</b> Si ens escrius un avís, mai publiquem el teu nom ni el teu correu. Només els fem servir per a respondre't.</li>
+{tg}</ul>
+<p>Si tens cap dubte sobre les teues dades, escriu-nos a <a href="mailto:{CORREU}">{CORREU}</a>.</p>""",
+        f"""<p>Esta web no usa cookies ni nada que te siga de una web a otra.</p>
+<ul>
+<li><b>Sin cookies.</b> Solo guardamos en tu navegador (en su almacenamiento local) la lengua y el tema, claro u oscuro, que elijas, para que no tengas que elegirlos cada vez. Esa información no sale de tu aparato.</li>
+<li><b>Estadísticas anónimas.</b> Contamos las visitas con Umami, instalado en nuestro propio servidor. No usa cookies, no identifica a nadie y no cuenta nada si el navegador pide no ser rastreado (Do Not Track). Solo nos dice cuántas visitas tiene cada página.</li>
+<li><b>Servidor y Cloudflare.</b> El servidor donde está la web y Cloudflare, que la sirve y la protege de ataques, tratan la dirección IP de las visitas solo para hacer llegar las páginas y por seguridad.</li>
+<li><b>Avisos por correo.</b> Si nos escribes un aviso, nunca publicamos tu nombre ni tu correo. Solo los usamos para responderte.</li>
+{tg}</ul>
+<p>Si tienes cualquier duda sobre tus datos, escríbenos a <a href="mailto:{CORREU}">{CORREU}</a>.</p>""")))
+
     # ---------------------------------------------------------------- accesibilidad (07/11/2026)
     out.append(("accessibilitat", {"va": "Accessibilitat", "es": "Accesibilidad"}, T(
         f"""<p>Volem que l'observatori el puga fer servir tothom, també qui veu malament, qui no distingix colors, qui navega amb el teclat o amb un lector de pantalla. Treballem amb les pautes WCAG 2.1 de nivell AA, les mateixes que la norma UNE-EN 301549 demana a les webs públiques. No és una certificació: és el que hem comprovat nosaltres, i ho expliquem ací.</p>
@@ -291,8 +338,131 @@ def secciones(c, L):
 
     out.append(("codi", {"va": "Codi i reproductibilitat", "es": "Código y reproducibilidad"}, T(
 
-        f"""<p>Tot el codi estarà en un repositori públic (pròximament). Amb una sola ordre (<code>make</code>) es tornen a fer les dades, les xifres i la web, a partir de les dades del portal.</p>
+        f"""<p>Tot el codi és públic: {git}. El codi té llicència MIT, i la documentació i les dades derivades, CC BY 4.0. Amb una sola ordre (<code>make</code>) es tornen a fer les dades, les xifres i la web, a partir de les dades del portal.</p>
+<p>Les dades que es descarreguen porten un <a href="{{RAIZ}}dades/datapackage.json">descriptor datapackage.json</a>, de l'estàndard obert Frictionless Data Package, amb el significat, el tipus i les unitats de cada columna.</p>
 <p class="nota">Els {mil(c['n_cambios'])} canvis públics en dades, mètode i web estan en el <a href="#canvis">registre de canvis</a>.</p>""",
-        f"""<p>Todo el código estará en un repositorio público (próximamente). Con una sola orden (<code>make</code>) se vuelven a hacer los datos, las cifras y la web, a partir de los datos del portal.</p>
+        f"""<p>Todo el código es público: {git}. El código tiene licencia MIT, y la documentación y los datos derivados, CC BY 4.0. Con una sola orden (<code>make</code>) se vuelven a hacer los datos, las cifras y la web, a partir de los datos del portal.</p>
+<p>Los datos que se descargan llevan un <a href="{{RAIZ}}dades/datapackage.json">descriptor datapackage.json</a>, del estándar abierto Frictionless Data Package, con el significado, el tipo y las unidades de cada columna.</p>
 <p class="nota">Los {mil(c['n_cambios'])} cambios públicos en datos, método y web están en el <a href="#canvis">registro de cambios</a>.</p>""")))
     return out
+
+
+# ---------------------------------------------------------------- Data Package (Frictionless) del ZIP de descarga
+# Descriptor estándar (https://specs.frictionlessdata.io/data-package/ y tabular-data-resource) de los tres CSV que da el
+# botón «Descarga lo que ves» del mapa. Se escribe con la biblioteca estándar (sin la librería frictionless) y lo usan:
+# construir_sitio.py, que lo publica en /dades/datapackage.json (las dos lenguas) y lo pasa al mapa para meterlo en el
+# ZIP (la lengua de la página, con el CSV descargado como único recurso); y comprobar_sitio.py, que comprueba que los
+# campos son las columnas del CSV (CSV_COLS de web/proto/observatori.plantilla.html) en el mismo orden (pendiente 113).
+PORTAL = "https://opendata.vlci.valencia.es"
+GEOPORTAL = "https://geoportal.valencia.es/server/rest/services/OPENDATA"
+_GR = ("graus (WGS 84, EPSG:4326)", "grados (WGS 84, EPSG:4326)")
+_ACC = ("accidents", "accidentes")
+# vista del mapa -> (nombre del fichero en va, en es, título va, título es, descripción va, descripción es, campos)
+# campo: (nombre, tipo Frictionless, descripción va, descripción es, unidad va, unidad es, formato)
+DP_VISTAS = {
+    "pts": ("accidents", "accidentes", "Accidents situats en el mapa", "Accidentes situados en el mapa",
+            "Un accident amb bici o patinet per fila, amb el punt on l'hem situat.",
+            "Un accidente con bici o patinete por fila, con el punto donde lo hemos situado.", [
+        ("fecha_hora", "datetime", "Data i hora de l'accident (hora local), tal com la publica el portal.", "Fecha y hora del accidente (hora local), tal como la publica el portal.", None, None, "%Y-%m-%dT%H:%M"),
+        ("anyo", "year", "Any de l'accident.", "Año del accidente.", None, None, None),
+        ("vehiculo", "string", "Quins vehicles d'interés hi ha: només bici, només patinet o bici i patinet.", "Qué vehículos de interés hay: solo bici, solo patinete o bici y patinete.", None, None, None),
+        ("gravedad", "string", "Gravetat segons el portal. No es pot comparar entre anys: des de 2023 és ferit greu qui passa més de 24 hores a l'hospital.", "Gravedad según el portal. No se puede comparar entre años: desde 2023 es herido grave quien pasa más de 24 horas en el hospital.", None, None, None),
+        ("tipo_ultimo_anyo", "string", "Tipus d'accident (xoc lateral, abast, caiguda…), només en l'últim any, l'únic en què és fiable; buit en els altres.", "Tipo de accidente (choque lateral, alcance, caída…), solo en el último año, el único en que es fiable; vacío en los demás.", None, None, None),
+        ("ubicacion", "string", "Adreça escrita en el comunicat de la policia, tal com la publica el portal.", "Dirección escrita en el parte de la policía, tal como la publica el portal.", None, None, None),
+        ("localizacion", "string", "Com l'hem situat: per encreuament, per portal, per portal proper o altres.", "Cómo lo hemos situado: por cruce, por portal, por portal cercano u otros.", None, None, None),
+        ("vehiculos_implicados", "string", "Vehicles implicats, tal com els publica el portal.", "Vehículos implicados, tal como los publica el portal.", None, None, None),
+        ("factores", "string", "Factors concurrents segons la policia, tal com els publica el portal.", "Factores concurrentes según la policía, tal como los publica el portal.", None, None, None),
+        ("lat", "number", "Latitud del punt: la cruïlla o el número de portal citat en el comunicat, no un domicili.", "Latitud del punto: el cruce o el número de portal citado en el parte, no un domicilio.", *_GR, None),
+        ("lon", "number", "Longitud del punt.", "Longitud del punto.", *_GR, None)]),
+    "negros": ("llocs", "lugares", "Llocs amb més accidents", "Lugares con más accidentes",
+               "Cruïlles (amb 30 metres al voltant), trams de carrer de fins a 150 metres i zones, amb els seus accidents.",
+               "Cruces (con 30 metros alrededor), tramos de calle de hasta 150 metros y zonas, con sus accidentes.", [
+        ("orden", "integer", "Posició en la llista, triada amb tots els accidents i tots els anys; buit en les zones.", "Puesto en la lista, elegido con todos los accidentes y todos los años; vacío en las zonas.", None, None, None),
+        ("lugar", "string", "Nom del lloc.", "Nombre del lugar.", None, None, None),
+        ("tipo", "string", "Cruïlla, tram de carrer o zona.", "Cruce, tramo de calle o zona.", None, None, None),
+        ("siniestros_filtro", "integer", "Accidents amb els filtres posats en el mapa.", "Accidentes con los filtros puestos en el mapa.", *_ACC, None),
+        ("solo_bici", "integer", "D'aquests, amb bici i sense patinet.", "De ellos, con bici y sin patinete.", *_ACC, None),
+        ("solo_patinete", "integer", "D'aquests, amb patinet i sense bici.", "De ellos, con patinete y sin bici.", *_ACC, None),
+        ("bici_y_patinete", "integer", "D'aquests, xocs entre bici i patinet.", "De ellos, choques entre bici y patinete.", *_ACC, None),
+        ("siniestros_todos", "integer", "Accidents de tots els anys, sense filtres.", "Accidentes de todos los años, sin filtros.", *_ACC, None),
+        ("plan_director", "string", "Si el Pla Director de Seguretat Viària cita aquest lloc, només el seu carrer o no l'esmenta.", "Si el Plan Director de Seguridad Vial cita este lugar, solo su calle o no lo menciona.", None, None, None),
+        ("lat", "number", "Latitud del centre del lloc.", "Latitud del centro del lugar.", *_GR, None),
+        ("lon", "number", "Longitud del centre del lloc.", "Longitud del centro del lugar.", *_GR, None),
+        ("ficha", "string", "Enllaç a la fitxa del lloc en el mapa.", "Enlace a la ficha del lugar en el mapa.", None, None, "uri")]),
+    "uso": ("punts-comptatge", "puntos-conteo", "Punts de comptatge segons el trànsit", "Puntos de conteo según el tráfico",
+            "Punts del carril bici on es compten les bicis, amb els accidents que hi ha i els que tenen de mitjana els punts amb un trànsit semblant.",
+            "Puntos del carril bici donde se cuentan las bicis, con los accidentes que hay y los que tienen de media los puntos con un tráfico parecido.", [
+        ("punto_conteo", "string", "Codi i nom del punt de comptatge.", "Código y nombre del punto de conteo.", None, None, None),
+        ("accidentes", "integer", "Accidents amb bici o patinet en la zona del punt, en els anys amb dades de trànsit.", "Accidentes con bici o patinete en la zona del punto, en los años con datos de tráfico.", *_ACC, None),
+        ("media_trafico_parecido", "number", "Accidents que tenen de mitjana els punts amb un trànsit semblant (model binomial negatiu).", "Accidentes que tienen de media los puntos con un tráfico parecido (modelo binomial negativo).", *_ACC, None),
+        ("resultado", "string", "Comparació amb la mitjana: sense indicis, potser per damunt o clarament per damunt.", "Comparación con la media: sin indicios, quizá por encima o claramente por encima.", None, None, None),
+        ("siniestros_bici", "integer", "Accidents amb bici en la zona del punt.", "Accidentes con bici en la zona del punto.", *_ACC, None),
+        ("siniestros_patinete", "integer", "Accidents amb patinet en la zona del punt.", "Accidentes con patinete en la zona del punto.", *_ACC, None),
+        ("bicis_dia_laborable", "integer", "Bicis que hi passen un dia laborable, de mitjana (intensitat mitjana diària).", "Bicis que pasan un día laborable, de media (intensidad media diaria).", "bicis per dia", "bicis por día", None),
+        ("anyos", "integer", "Anys amb dades de trànsit.", "Años con datos de tráfico.", "anys", "años", None),
+        ("contadores", "integer", "Comptadors que formen el punt (els dos sentits d'una via compten junts).", "Contadores que forman el punto (los dos sentidos de una vía cuentan juntos).", None, None, None),
+        ("lat", "number", "Latitud del punt.", "Latitud del punto.", *_GR, None),
+        ("lon", "number", "Longitud del punt.", "Longitud del punto.", *_GR, None),
+        ("ficha", "string", "Enllaç a la fitxa del punt en el mapa.", "Enlace a la ficha del punto en el mapa.", None, None, "uri")]),
+}
+DP_ORDEN = ["pts", "negros", "uso"]
+
+
+def datapackage(info, a0, a1, L=None):
+    """Descriptor Data Package (dict). L = «va» o «es»: textos en esa lengua (el del ZIP); None: las dos, «va / es» (el
+    de /dades/datapackage.json). Los recursos se llaman como los CSV del ZIP sin filtros (observatori-<vista>.csv)."""
+    def tx(va, es):
+        return va if L == "va" else es if L == "es" else f"{va} / {es}"
+    i = 0 if L in (None, "va") else 1
+    from sitio import DOMINIO, MARCA, CORREU, REPO
+    recursos = []
+    for v in DP_ORDEN:
+        fva, fes, tva, tes, dva, des, campos = DP_VISTAS[v]
+        fs = []
+        for n, ty, cva, ces, uva, ues, fmt in campos:
+            f = {"name": n, "type": ty, "description": tx(cva, ces)}
+            if fmt: f["format"] = fmt
+            if uva: f["unit"] = tx(uva, ues)
+            fs.append(f)
+        recursos.append({
+            "name": f"observatori-{(fva, fes)[i]}", "path": f"observatori-{(fva, fes)[i]}.csv",
+            "profile": "tabular-data-resource", "title": tx(tva, tes),
+            "description": tx(dva + " Els valors de text van en la llengua de la pàgina des de la qual es descarrega.",
+                              des + " Los valores de texto van en la lengua de la página desde la que se descarga."),
+            "format": "csv", "mediatype": "text/csv", "encoding": "utf-8",
+            "dialect": {"delimiter": ",", "lineTerminator": "\r\n", "quoteChar": "\"", "doubleQuote": True, "header": True},
+            "schema": {"fields": fs, "missingValues": [""]}})
+    return {
+        "profile": "tabular-data-package",
+        "name": "observatori-bici-patinet-valencia",
+        "id": f"{DOMINIO}/dades/",
+        "title": tx(f"Accidents de bici i patinet a València, {a0}-{a1}, situats en el mapa",
+                    f"Accidentes de bici y patinete en València, {a0}-{a1}, situados en el mapa"),
+        "description": tx("Accidents de trànsit amb almenys una bici o un patinet a València, del portal de dades obertes de l'Ajuntament, "
+                          "situats en el mapa amb el carrerer municipal. El ZIP del mapa porta un sol CSV, el de la vista i els filtres triats. "
+                          "Sense dades de les persones implicades: està prohibit reidentificar persones creuant aquestes dades amb altres fonts.",
+                          "Accidentes de tráfico con al menos una bici o un patinete en València, del portal de datos abiertos del Ayuntamiento, "
+                          "situados en el mapa con el callejero municipal. El ZIP del mapa lleva un solo CSV, el de la vista y los filtros elegidos. "
+                          "Sin datos de las personas implicadas: está prohibido reidentificar personas cruzando estos datos con otras fuentes."),
+        "homepage": f"{DOMINIO}/dades/",
+        "version": info["version"],
+        "created": f"{info['version']}T00:00:00Z",
+        "keywords": ["seguretat viària", "seguridad vial", "bicicleta", "patinet elèctric", "patinete eléctrico", "VMP", "València", "dades obertes"],
+        "licenses": [{"name": "CC-BY-4.0", "path": "https://creativecommons.org/licenses/by/4.0/", "title": "Creative Commons Attribution 4.0"}],
+        "contributors": [{"title": MARCA[i] if L else f"{MARCA[0]} / {MARCA[1]}", "email": CORREU, "path": DOMINIO, "role": "author"},
+                         {"title": "Ajuntament de València", "path": PORTAL, "role": "publisher"}],
+        "sources": [
+            {"title": tx(f"Ajuntament de València – Dades Obertes: sinistres de trànsit ({info['conjunto']}), obtinguts el {fecha(info['descarga'])}",
+                         f"Ajuntament de València – Dades Obertes: siniestros de tráfico ({info['conjunto']}), obtenidos el {fecha(info['descarga'])}"),
+             "path": f"{PORTAL}/dataset/{info['conjunto']}"},
+            {"title": tx("Geoportal de l'Ajuntament de València: carrerer (eixos de carrer, portals i vies)",
+                         "Geoportal del Ayuntamiento de València: callejero (ejes de calle, portales y vías)"),
+             "path": f"{GEOPORTAL}/UrbanismoEInfraestructuras/MapServer"},
+            {"title": tx("Geoportal de l'Ajuntament de València: carril bici (capa 189) i punts de comptatge de bicis (capa 225)",
+                         "Geoportal del Ayuntamiento de València: carril bici (capa 189) y puntos de conteo de bicis (capa 225)"),
+             "path": f"{GEOPORTAL}/Trafico/MapServer"},
+            {"title": tx("Ajuntament de València, Mobilitat: intensitats del carril bici", "Ayuntamiento de València, Movilidad: intensidades del carril bici"),
+             "path": "https://www.valencia.es/cas/movilidad/otras-descargas"}],
+        "codeRepository": REPO,
+        "resources": recursos,
+    }

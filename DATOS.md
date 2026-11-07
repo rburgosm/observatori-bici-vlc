@@ -64,6 +64,7 @@ El PDF original no se incluye. El que se usó tiene este SHA-256: `6e84d664ffb77
 | `plan_fuentes.csv` | Registro de las fuentes consultadas para «El Plan, al día»: qué publican, si son útiles y accesibles, consultas y aciertos |
 | `colaboran.csv` | Entidades que colaboran con el observatorio, con qué aportan y desde cuándo (solo las que lo han confirmado por escrito); las publica el pie de la web |
 | `incidencias_datos.csv` | Registro de incidencias detectadas en los datos del Ajuntament (prueba, impacto, cómo se tratan, sugerencia y estado de la comunicación); lo re-verifica `incidencias.py` (`make incidencias`) y lo publica la página de método |
+| `avisos_ciudadanos.csv` | Registro público de los avisos de la ciudadanía sobre obras o medidas del Plan (fecha, medida o lugar, resumen en va y es, resultado `incorporado`/`en_revision`/`sin_fuente` y fuente oficial); sin nombres ni correos de quien avisa. Lo publica la página del Ayuntamiento (`/ajuntament/#avisa`) y lo valida `comprobar_sitio.py` |
 
 Derivados de los datos del Ajuntament (callejero y Plan Director), con la atribución de arriba.
 

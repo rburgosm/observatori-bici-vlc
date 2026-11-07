@@ -151,7 +151,7 @@ $(W)/datos/fichas_indice.sri: $(FICHAS) ;
 # web pública: después de las fichas (usa su índice para el buscador y enlaza las fichas); hereda la lógica del mapa y del
 # método de observatori.plantilla.html y metode.plantilla.html. Marca: build/.sitio
 $(SITIO): scripts/construir_sitio.py $(SITIO_IN) $(FICHAS) $(DATOS) $(SQLITE) $(SIN)/ejes.geojson $(W)/observatori.plantilla.html \
-          $(W)/metode.plantilla.html $(W)/comun/carga.js $(W)/comun/tema.js docs/cambios.csv
+          $(W)/metode.plantilla.html $(W)/comun/carga.js $(W)/comun/tema.js docs/cambios.csv data/processed/avisos_ciudadanos.csv
 	$(PY) scripts/construir_sitio.py && touch $@
 
 comprobar:
@@ -170,6 +170,12 @@ $(INC_OUT) &: scripts/incidencias.py data/processed/incidencias_datos.csv $(GEO_
               $(wildcard $(SIN)/vmp_tipo_*.geojson) $(SIN)/intensidad_tramos.geojson $(SIN)/obras_ejecutadas.csv \
               $(SIN)/espiras_bici.geojson $(SIN)/ckan_siniestros_package.json $(SIN)/portales_atributos.json
 	$(PY) scripts/incidencias.py
+
+# canal de Telegram (scripts/telegram_publicar.py): prueba sin red, con datos, credenciales y API falsos. No entra en make.
+# Uso real: .venv/bin/python -I scripts/telegram_publicar.py --prova | --enviar | --resum-setmanal (deploy/README.md)
+.PHONY: telegram-prova
+telegram-prova:
+	$(PY) scripts/telegram_publicar.py --autoprova
 
 # capturas de la web para seguir su evolución (scripts/capturas.py): python3 del sistema + Chrome sin pantalla, contra la
 # web servida en localhost:8000 (cd web/proto/build && python3 -m http.server 8000). Salida en capturas/ (fuera de git),

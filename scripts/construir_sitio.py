@@ -372,6 +372,7 @@ def p_inicio():
 <a class="mas" href="dades/#limits">{T("Per què no es poden comparar els anys →", "Por qué no se pueden comparar los años →")}</a></li>
 </ul>
 </section>
+{S.telegram_invitacion("h-tg", R_)}
 <aside class="capa-sig" aria-labelledby="h-capa">
 <h2 id="h-capa">{T("Vols saber-ne més?", "¿Quieres saber más?")}</h2>
 <a href="informe/2025/">{T(f"Informe {A1}: què ha passat i si els accidents baixen al ritme necessari per a {R['meta']['año_meta']} →", f"Informe {A1}: qué ha pasado y si los accidentes bajan al ritmo necesario para {R['meta']['año_meta']} →")}</a>
@@ -605,6 +606,9 @@ def p_mapa():
     # conjunto, fecha de descarga y versión para el LLEGIU-ME / LEEME del ZIP de descarga (descargarCSV)
     pie_info = ("<script>window.PIE_INFO = "
                 + json.dumps({k: INFO[k] for k in ("conjunto", "descarga", "version")}, ensure_ascii=False).replace("</", "<\\/")
+                + ";window.DATAPACKAGE = "
+                # descriptor Frictionless de cada lengua: el mapa mete en el ZIP el recurso de la vista descargada
+                + json.dumps({l: SD.datapackage(INFO, A0, A1, l) for l in ("va", "es")}, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
                 + ";</script>\n")
     html = S.pagina("mapa", "mapa/", R_, t, d, cab + html_ + top, INFO, pasos, "og/observatori.png", extra_head=css,
                     extra_fin=pie_info + scr + "\n" + SELECCION, main_attrs=' data-pag="mapa"')
@@ -720,6 +724,40 @@ MAPA_MED_JS = """<script>
 """
 
 
+def avisos_bloque():
+    """«Has vist una obra o una mesura del Pla? Avisa'ns»: mailto con plantilla (sitio.mailto_aviso) y el registro público de
+    los avisos recibidos (data/processed/avisos_ciudadanos.csv; sin nombres ni correos de quien avisa)."""
+    with open(S.AVISOS_CSV, newline="", encoding="utf-8") as fh:
+        av = sorted(csv.DictReader(fh), key=lambda r: r["fecha"], reverse=True)
+    n = len(av)
+    if n:
+        filas = []
+        for r in av:
+            m = TP.MEDIDAS.get(r["medida_plan"]) if r["medida_plan"] else None
+            que = []
+            if m: que.append(f'<a href="#a-{ESC(r["medida_plan"])}">{T(ESC(m["tit"]["va"]), ESC(m["tit"]["es"]))}</a>')
+            if r["lugar"]: que.append(ESC(r["lugar"]))
+            res = T(*S.AVISOS_RESULTADO[r["resultado"]])
+            if r["fuente_url"]: res += f' · <a href="{ESC(r["fuente_url"])}" rel="noopener">{T("Font", "Fuente")}</a>'
+            filas.append(f'<tr><td>{fecha(r["fecha"])}</td><td>{T(ESC(r["resumen_va"]), ESC(r["resumen_es"]))}</td><td>{" · ".join(que) or "—"}</td><td>{res}</td></tr>')
+        registro = (f'<p>{T(f"Hem rebut {n} avís" if n == 1 else f"Hem rebut {n} avisos", f"Hemos recibido {n} aviso" if n == 1 else f"Hemos recibido {n} avisos")}. '
+                    f'{T("Ací tens què ens van dir i què n'hem fet, el més recent primer.", "Aquí tienes lo que nos dijeron y lo que hemos hecho, el más reciente primero.")}</p>'
+                    f'<div class="tabla-caja" tabindex="0" role="region" aria-label="Avisos rebuts / Avisos recibidos"><table class="tabla"><thead><tr><th>{T("Data", "Fecha")}</th><th>{T("Què ens van dir", "Qué nos dijeron")}</th>'
+                    f'<th>{T("Mesura o lloc", "Medida o lugar")}</th><th>{T("Què n'hem fet", "Qué hemos hecho")}</th></tr></thead><tbody>{"".join(filas)}</tbody></table></div>')
+    else:
+        registro = f'<p>{T("Encara no n'hem rebut cap. Quan n'arribe un, l'apuntarem ací amb la data, què ens van dir i què n'hem fet.", "Todavía no hemos recibido ninguno. Cuando llegue uno, lo apuntaremos aquí con la fecha, lo que nos dijeron y lo que hemos hecho con él.")}</p>'
+    return f'''<section class="bloque avisa" id="avisa" data-avisos="{n}">
+<h2>{T("Has vist una obra o una mesura del Pla? Avisa'ns", "¿Has visto una obra o una medida del Plan? Avísanos")}</h2>
+<div class="tarjeta">
+<p style="margin:0">{T("Si veus pel carrer un carril bici nou, un pas de vianants que ha canviat, unes obres que comencen o una mesura anunciada que no acaba d'arribar, conta-nos-ho. Amb el teu avís busquem la font oficial que ho confirma i l'afegim al seguiment. Només publiquem el que una font pot demostrar, i mai el nom ni el correu de qui ens escriu.", "Si ves en la calle un carril bici nuevo, un paso de peatones que ha cambiado, unas obras que empiezan o una medida anunciada que no acaba de llegar, cuéntanoslo. Con tu aviso buscamos la fuente oficial que lo confirma y lo añadimos al seguimiento. Solo publicamos lo que una fuente puede demostrar, y nunca el nombre ni el correo de quien nos escribe.")}</p>
+<p style="margin:14px 0 0"><a class="btn" data-l="va" href="{S.mailto_aviso("va")}">Escriu-nos un avís</a><a class="btn" data-l="es" lang="es" href="{S.mailto_aviso("es")}">Escríbenos un aviso</a></p>
+<p class="nota" style="margin:10px 0 0">{T(f"S'obri el teu programa de correu amb un missatge preparat: què has vist, on, quan i, si en tens, un enllaç o una foto. Si no s'obri, l'adreça és <a href=\"mailto:{S.CORREU}\">{S.CORREU}</a>.", f"Se abre tu programa de correo con un mensaje preparado: qué has visto, dónde, cuándo y, si tienes, un enlace o una foto. Si no se abre, la dirección es <a href=\"mailto:{S.CORREU}\">{S.CORREU}</a>.")}</p>
+</div>
+<h3>{T("Avisos rebuts", "Avisos recibidos")}</h3>
+{registro}
+</section>'''
+
+
 def p_ajuntament():
     R_ = "../"
     msrc, msri = mapa_medidas_datos()
@@ -806,8 +844,9 @@ def p_ajuntament():
 <p class="intro">{T(f"Són {len(pub)} publicacions, i encara no n'hem trobat {npub_sin}. Si saps on n'hi ha alguna, escriu-nos i l'afegim.", f"Son {len(pub)} publicaciones, y todavía no hemos encontrado {npub_sin} de ellas. Si sabes dónde está alguna, escríbenos y la añadimos.")}</p>
 <ul class="publica">{lpub}</ul>
 </section>
+{avisos_bloque()}
+{S.telegram_invitacion("h-tg", R_)}
 <div class="escribe">
-<aside class="tarjeta" aria-labelledby="h-aj-info"><h2 class="h-tarjeta" id="h-aj-info">{T("Tens informació que no apareix ací?", "¿Tienes información que no está aquí?")}</h2><p style="margin:8px 0 0">{T("Si una mesura ja està feta o coneixes una font que no hem vist, escriu-nos i la revisem.", "Si una medida ya está hecha o conoces una fuente que no hemos visto, escríbenos y la revisamos.")}</p><a class="mas" href="mailto:{S.CORREU}">{T("Escriu-nos →", "Escríbenos →")}</a></aside>
 <aside class="tarjeta" aria-labelledby="h-aj-mas"><h2 class="h-tarjeta" id="h-aj-mas">{T("Vols saber-ne més?", "¿Quieres saber más?")}</h2><p style="margin:8px 0 0">{T("Com decidim l'estat de cada mesura i quines fonts consultem.", "Cómo decidimos el estado de cada medida y qué fuentes consultamos.")}</p><a class="mas" href="{R_}metode/#seguiment">{T("Dades i mètode →", "Datos y método →")}</a></aside>
 </div>'''
     js = '''<script>
@@ -1104,14 +1143,14 @@ def p_informe():
 # marca en /dades/ y /metode/; las tres llevan pestañas entre ellas. Las anclas viejas de /dades/ redirigen a su sitio.
 PAG_DM = {"dades": ["descarrega", "limits", "base", "fitxes"],
           "metode": ["resum", "carrers", "filtres", "seguiment", "informes"],
-          "sobre": ["accessibilitat", "codi"]}
+          "sobre": ["continuitat", "codi", "privacitat", "accessibilitat"]}
 METODE_VIEJO = ["datos", "contar", "meta", "uso", "lugares", "normal", "plan", "gravedad", "limites", "errores", "revisiones", "futuro"]
 TIT_DM = {"dades": (("Dades", "Datos"), ("Les dades: descarrega, límits i ús", "Los datos: descarga, límites y uso"),
                     ("Què hi ha, com descarregar-ho, què no permet saber i com citar-ho.", "Qué hay, cómo descargarlo, qué no permite saber y cómo citarlo.")),
           "metode": (("Mètode", "Método"), ("Com ho fem", "Cómo lo hacemos"),
                      ("Cada decisió, explicada en llenguatge planer, amb el detall tècnic en les caixes plegables.", "Cada decisión, explicada en lenguaje llano, con el detalle técnico en las cajas plegables.")),
           "sobre": (("Sobre l'observatori", "Sobre el observatorio"), ("Sobre l'observatori", "Sobre el observatorio"),
-                    ("Qui som, accessibilitat, codi i tot el que ha canviat.", "Quiénes somos, accesibilidad, código y todo lo que ha cambiado."))}
+                    ("Qui som, com es manté, el codi, la privacitat, l'accessibilitat i tot el que ha canviat.", "Quiénes somos, cómo se mantiene, el código, la privacidad, la accesibilidad y todo lo que ha cambiado."))}
 
 
 def pestanyes_dm(actual, R_):
@@ -1190,9 +1229,11 @@ def p_dm(pag):
                       "Descarga los accidentes de bici y patinete de València situados en el mapa: qué hay, qué no permiten saber, privacidad y cómo citarlo."),
             "metode": ("Com situem els accidents en el mapa, com fem els llocs i els carrers, com seguim l'objectiu del Pla i les mesures de l'Ajuntament.",
                        "Cómo situamos los accidentes en el mapa, cómo hacemos los lugares y las calles, cómo seguimos el objetivo del Plan y las medidas del Ayuntamiento."),
-            "sobre": ("Qui fa l'observatori, accessibilitat, codi i registre de canvis.", "Quién hace el observatorio, accesibilidad, código y registro de cambios.")}[pag]
+            "sobre": ("Qui fa l'observatori, com es manté i s'actualitza, codi obert, privacitat, accessibilitat i registre de canvis.", "Quién hace el observatorio, cómo se mantiene y actualiza, código abierto, privacidad, accesibilidad y registro de cambios.")}[pag]
     pasos = [("inici", S.NOM["inici"]), ("dades", S.NOM["dades"]), (None, TIT_DM[pag][0])] if pag != "dades" else [("inici", S.NOM["inici"]), (None, S.NOM["dades"])]
     if pag == "dades":
+        # Data Package (Frictionless) de los CSV del ZIP del mapa, en las dos lenguas: /dades/datapackage.json
+        S.escribir(BUILD / "dades/datapackage.json", json.dumps(SD.datapackage(INFO, A0, A1), ensure_ascii=False, indent=2) + "\n")
         # metadatos estándar del conjunto (schema.org/Dataset, que leen Google Dataset Search y los catálogos; criterio 3 de
         # las bases: «estándares abiertos y buenas prácticas»). Sin «distribution» hasta que haya fichero versionado (pend. 74)
         ds = {"@context": "https://schema.org", "@type": "Dataset",

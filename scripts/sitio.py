@@ -40,6 +40,50 @@ APOYO = ("Dades obertes per a veure què passa al teu carrer i seguir si el Pla 
          "Datos abiertos para ver qué pasa en tu calle y seguir si el Plan del Ayuntamiento los reduce.")
 MARCA = ("Observatori de la bici i el patinet de València", "Observatorio de la bici y el patinete de València")
 CORREU = "hola@observatoribicivlc.org"
+# repositorio público del código (MIT) y de la documentación y los datos derivados (CC BY 4.0); lo enlazan el pie, /dades/,
+# /metode/ y /sobre/ (pendiente 111). Se exporta con scripts/exportar_publico.sh.
+REPO = "https://github.com/rburgosm/observatori-bici-vlc"
+# canal de Telegram de novedades (solo difusión: novedades del Plan, de los datos y de la web, y avisos incorporados, en cuanto las hay
+# incorporados). Vacío: la web no muestra nada. Con una URL (tiene que empezar por https://t.me/, lo comprueba
+# scripts/comprobar_sitio.py) salen el bloque del pie y la invitación de la portada y de /ajuntament/ (pendiente 112).
+TELEGRAM_CANAL = "https://t.me/observatoribicivlc"   # canal creado el 07/11/2026
+# avisos ciudadanos sobre obras o medidas del Plan (pendiente 110): solo un mailto con asunto y plantilla; sin formulario,
+# sin servidor y sin servicios de terceros. El registro público está en data/processed/avisos_ciudadanos.csv (sin nombres
+# ni correos de quien avisa) y el procedimiento, en las solicitudes de información (borradores internos)
+AVISOS_CSV = ROOT / "data/processed/avisos_ciudadanos.csv"
+AVISOS_CAMPOS = ["fecha", "medida_plan", "lugar", "resumen_va", "resumen_es", "resultado", "fuente_url"]
+AVISOS_RESULTADO = {"incorporado": ("Incorporat al seguiment", "Incorporado al seguimiento"),
+                    "en_revision": ("En revisió", "En revisión"),
+                    "sin_fuente": ("Sense font oficial, de moment", "Sin fuente oficial, por ahora")}
+
+
+def telegram_invitacion(id_, R):
+    """Invitación visible al canal de Telegram (portada y /ajuntament/). Vacía si TELEGRAM_CANAL no está puesto."""
+    if not TELEGRAM_CANAL: return ""
+    u = ESC(TELEGRAM_CANAL)
+    return (f'<aside class="tarjeta telegram" aria-labelledby="{id_}"><h2 class="h-tarjeta" id="{id_}">'
+            f'{T("Segueix les novetats en Telegram", "Sigue las novedades en Telegram")}</h2>'
+            f'<p>{T("En el nostre canal de Telegram publiquem les novetats tan prompte com n&#39;hi ha: cada canvi d&#39;estat d&#39;una mesura del Pla, les dades noves, les millores de la web i els avisos de la ciutadania que hem incorporat al seguiment. És un canal només d&#39;anuncis: no s&#39;hi poden enviar missatges.", "En nuestro canal de Telegram publicamos las novedades en cuanto las hay: cada cambio de estado de una medida del Plan, los datos nuevos, las mejoras de la web y los avisos de la ciudadanía que hemos incorporado al seguimiento. Es un canal solo de anuncios: no se pueden enviar mensajes.")}</p>'
+            f'<p class="tg-acc"><a class="btn" href="{u}" rel="noopener">{T("Uneix-te al canal de Telegram", "Únete al canal de Telegram")}</a></p>'
+            f'<p class="nota">{T("Telegram és un servei extern, amb la seua pròpia política de privacitat.", "Telegram es un servicio externo, con su propia política de privacidad.")} '
+            f'<a href="{R}sobre/#privacitat">{T("Com tractem les dades", "Cómo tratamos los datos")}</a>.</p></aside>')
+
+
+def mailto_aviso(l, lugar=None):
+    """Enlace mailto: para avisar de una obra o medida del Plan, con asunto y plantilla en la lengua l («va» o «es»).
+    Con lugar, el asunto lleva su nombre y el «On:/Dónde:» va relleno. Escapado para un atributo HTML."""
+    from urllib.parse import quote
+    if l == "va":
+        asunto = f"Avís sobre el Pla: {lugar}" if lugar else "Avís sobre una obra o una mesura del Pla"
+        cuerpo = ["Què has vist (una obra, un carril bici nou, un pas canviat, una mesura anunciada que no arriba…):", "",
+                  f"On: {lugar or ''}", "", "Quan:", "", "Enllaç o foto, si en tens:", ""]
+    else:
+        asunto = f"Aviso sobre el Plan: {lugar}" if lugar else "Aviso sobre una obra o una medida del Plan"
+        cuerpo = ["Qué has visto (una obra, un carril bici nuevo, un paso cambiado, una medida anunciada que no llega…):", "",
+                  f"Dónde: {lugar or ''}", "", "Cuándo:", "", "Enlace o foto, si tienes:", ""]
+    return ESC(f"mailto:{CORREU}?subject={quote(asunto, safe='')}&body={quote(chr(13) + chr(10)).join(quote(x, safe='') for x in cuerpo)}")
+
+
 SENAL = ('<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="var(--bg)" stroke-width="2.2" stroke-linecap="round">'
          '<circle cx="6.5" cy="15" r="3.6"/><circle cx="17.5" cy="15" r="3.6"/><path d="M6.5 15 10 8h5l2.5 7M10 8 12.5 15"/></g></svg>')
 
@@ -174,7 +218,10 @@ def pie(R, info):
            f'<a href="{R}informe/">{T("Informes", "Informes")}</a>'
            f'<a href="{R}sobre/#canvis">{T("Què ha canviat", "Qué ha cambiado")}</a>'
            f'<a href="{R}sobre/#accessibilitat">{T("Accessibilitat", "Accesibilidad")}</a>'
+           f'<a href="{R}sobre/#privacitat">{T("Privacitat i galetes", "Privacidad y cookies")}</a>'
            f'<a href="mailto:{CORREU}">{T("Contacte", "Contacto")}</a></nav>')
+    tg = (f'<p class="pie-tg"><a href="{ESC(TELEGRAM_CANAL)}" rel="noopener">{T("Segueix les novetats al canal de Telegram", "Sigue las novedades en el canal de Telegram")}</a></p>'
+          if TELEGRAM_CANAL else "")
     portal = '<a href="https://opendata.vlci.valencia.es">opendata.vlci.valencia.es</a>'
     c = f'<code>{ESC(info.get("conjunto", ""))}</code>'
     va = (f"<p>{MARCA[0]}, una iniciativa ciutadana independent · <a href=\"mailto:{CORREU}\">{CORREU}</a>. "
@@ -185,6 +232,7 @@ def pie(R, info):
           f"<b>Dades modificades</b> per l'observatori: situem els accidents en el mapa amb el carrerer. L'Ajuntament de València no "
           f"participa en aquest treball ni l'avala. Està prohibit reidentificar persones creuant aquestes dades amb altres fonts.</p>"
           f"<p>Textos i gràfics: <a href=\"https://creativecommons.org/licenses/by/4.0/deed.ca\" rel=\"license\">CC BY 4.0</a>. "
+          f"El codi és lliure (llicència MIT): <a href=\"{REPO}\" rel=\"noopener\">codi font a GitHub</a>. "
           f"Versió beta del {dma(info.get('version'))}.</p>")
     es = (f"<p>{MARCA[1]}, una iniciativa ciudadana independiente · <a href=\"mailto:{CORREU}\">{CORREU}</a>. "
           f"Si ves un error o falta algo, escríbenos.</p>"
@@ -194,8 +242,9 @@ def pie(R, info):
           f"<b>Datos modificados</b> por el observatorio: situamos los accidentes en el mapa con el callejero. El Ayuntamiento de València "
           f"no participa en este trabajo ni lo avala. Está prohibido reidentificar personas cruzando estos datos con otras fuentes.</p>"
           f"<p>Textos y gráficos: <a href=\"https://creativecommons.org/licenses/by/4.0/deed.es\" rel=\"license\">CC BY 4.0</a>. "
+          f"El código es libre (licencia MIT): <a href=\"{REPO}\" rel=\"noopener\">código fuente en GitHub</a>. "
           f"Versión beta del {dma(info.get('version'))}.</p>")
-    return (f'<footer class="pie"><div class="wrap">{nav}{colab}<div data-l="va">{va}</div><div data-l="es" lang="es">{es}</div></div></footer>')
+    return (f'<footer class="pie"><div class="wrap">{nav}{tg}{colab}<div data-l="va">{va}</div><div data-l="es" lang="es">{es}</div></div></footer>')
 
 
 HEAD_LANG = ('<script>try{if(localStorage.getItem("obs-lang")==="es")document.documentElement.lang="es"}catch(e){}</script>')
