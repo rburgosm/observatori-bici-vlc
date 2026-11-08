@@ -1,4 +1,7 @@
-# Enfoque del observatorio (03/11/2026)
+# Enfoque del observatorio (03/11/2026, corregido el 08/11/2026)
+
+> **Corrección del 08/11/2026 (usuario):** «nosotros no vamos a ver si funciona el Plan, es ver dónde se aplican las políticas y ver qué efectos tienen». Las tres preguntas pasan a ser: **dónde ocurren** los accidentes, **qué hace el Ayuntamiento y dónde** (medidas con lugar en el mapa, junto a los lugares con más accidentes) y **qué cambia donde se actúa** (antes y después en cada lugar, frente a lugares parecidos sin medida, cuando haya fechas de obra y años de datos de después). El indicador del −50 % (acción 3.2.2) se sigue solo como **referencia de toda la ciudad**: dirá si los accidentes bajan al ritmo que pide el Plan, no qué medida ha funcionado. No presentar el observatorio como evaluador del Plan. Aplicado en la portada y en el informe 2025 (pendiente 125). Lo de abajo se mantiene como historia; la sección 3 queda subordinada.
+
 
 Tras revisar las fechas del Plan Director de Seguridad Vial 2026-2030 (ver las notas internas de trabajo, «Fechas del Plan y año base»), la base de la meta pasa a ser **2025**. Como no hay datos de 2026, **hoy no se puede evaluar si el Plan funciona**. El proyecto se reorganiza en torno a tres preguntas, de la que se puede responder ya a la que tendrá que esperar.
 
@@ -24,7 +27,7 @@ Es el cuadro de mando que el propio Plan reconoce como «no existente» (acción
 - **Fuente de datos:** un CSV propio (`data/processed/plan_seguimiento.csv`) con acción, actuación, lugar, estado, fecha, fuente (URL) y fecha de comprobación. Se recoge a mano o con un agente y se actualiza cada cierto tiempo. Es un trabajo ideal para un socio (València en Bici, la universidad).
 - **Tono:** seguimiento, no auditoría. «Esto es lo que hemos encontrado publicado», con fuentes, y abierto a que el Ayuntamiento corrija o complete.
 
-## 3. Si funciona: la meta (cuando haya datos de 2026)
+## 3. ~~Si funciona~~ La meta, como referencia de toda la ciudad (cuando haya datos de 2026)
 - Lo que se mide es el indicador de la acción 3.2.2 del Plan (no la meta global, que es de fallecidos y heridos graves). La base es 2025 (1.659 siniestros), con la meta de 830 en 2030 y una bajada de en torno al 13 % anual. 2025 es el pico de la serie: se comprueba con la media 2023-2025 (1.544 → 772). 2024 (1.501 → 751) queda solo como tabla en metode. Detalle en las notas internas de trabajo, «Meta: decisiones del 04/11».
 - Cada año se juzga con un margen de Poisson al 95 % alrededor de la senda (por debajo · compatible · por encima; 2026: 1.370-1.519) y se lee junto a dos series de control (con heridos y cuota sobre la ciudad).
 - El primer año evaluable es 2026, cuando se publique. Mientras tanto, la portada dice de dónde se parte y qué hace falta.
