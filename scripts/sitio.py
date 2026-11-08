@@ -37,8 +37,8 @@ NOM = {"inici": ("Inici", "Inicio"), "mapa": ("Mapa d'accidents", "Mapa de accid
        "resso": ("Ressò", "Repercusión")}
 MENU = ["inici", "mapa", "ajuntament", "informe", "dades"]
 TITULO = ("Accidents de bici i patinet a València", "Accidentes de bici y patinete en València")
-APOYO = ("Dades obertes per a veure què passa al teu carrer i seguir si el Pla de l'Ajuntament els redueix.",
-         "Datos abiertos para ver qué pasa en tu calle y seguir si el Plan del Ayuntamiento los reduce.")
+APOYO = ("Dades obertes per a veure què passa al teu carrer, on actua l'Ajuntament i què hi canvia.",
+         "Datos abiertos para ver qué pasa en tu calle, dónde actúa el Ayuntamiento y qué cambia allí.")
 # titular de la portada (rediseño del 07/11/2026, opción A del boceto los bocetos de diseño (internos)/, aprobada por el usuario)
 FRASE = ("Seguim el Pla de Seguretat Viària de València mesura a mesura i mostrem on es registren els accidents amb bici i patinet.",
          "Seguimos el Plan de Seguridad Vial de València medida a medida y mostramos dónde se registran los accidentes con bici y patinete.")

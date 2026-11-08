@@ -364,6 +364,7 @@ def p_inicio():
     R_ = ""
     tot = R["tot"]; base, meta = E0["base"], E0["meta"]
     pe = P["por_estado"]; n_med = P["n"]
+    lug_med = [a for a in P["acts"] if a["amb"] == "lugar"]; n_lug = len(lug_med); n_lug_h = sum(a["est"] == "hecha" for a in lug_med)
     k = O["ciudad"]["k"]; ntot = O["cob"]["total"]; ngeo = O["cob"]["geo"]
     motor = de_cada(k["m"] / ntot)
     top30 = sum(n["n"] for n in O["negros"][:30]); uno_de = round(ngeo / top30)
@@ -371,16 +372,11 @@ def p_inicio():
     s1, n1 = ficha_top(1)
     calle_top = max((f for f in FICHAS if f[0] == "carrer"), key=lambda f: f[4])
     maxim = R["meta"]["max"]
-    sube_ciudad = CT["ciudad"][-1] / CT["ciudad"][0] - 1
-    sube_bv = tot[-1] / tot[0] - 1
-    # la conclusión de la tarjeta: ¿suben más, menos o igual que todos los accidentes de la ciudad? (±2 puntos = «igual»)
-    if abs(sube_bv - sube_ciudad) <= 0.02:
-        ritmo = T(f"Però tots els accidents de trànsit de la ciutat han pujat igual, un {pct(sube_ciudad)}.",
-                  f"Pero todos los accidentes de tráfico de la ciudad han subido lo mismo, un {pct(sube_ciudad)}.")
-    else:
-        mas = sube_bv > sube_ciudad
-        ritmo = T(f"Han pujat un {pct(sube_bv)}, {'més' if mas else 'menys'} que el total d'accidents de trànsit de la ciutat (un {pct(sube_ciudad)}).",
-                  f"Han subido un {pct(sube_bv)}, {'más' if mas else 'menos'} que el total de accidentes de tráfico de la ciudad (un {pct(sube_ciudad)}).")
+    # la conclusión de la tarjeta (08/11/2026): el total de la ciudad no sirve de comparación, porque casi toda su subida son
+    # accidentes sin heridos, que dependen de cómo se registran (saltan de golpe de 2022 a 2023). Se compara con heridos.
+    her = sube_her()
+    ritmo = T(f"Si es compten només els accidents amb ferits, que depenen menys de com es registren, els de bici o patinet han pujat un {pct(her['bv'])} i els de la resta del trànsit, un {pct(her['r'])}." + ("" if her["p"] < 0.05 else " Amb quatre anys, la diferència encara pot ser casual."),
+              f"Si se cuentan solo los accidentes con heridos, que dependen menos de cómo se registran, los de bici o patinete han subido un {pct(her['bv'])} y los del resto del tráfico, un {pct(her['r'])}." + ("" if her["p"] < 0.05 else " Con cuatro años, la diferencia todavía puede ser casual."))
     aprob = P["plan_doc"]["aprob"]
     conc_svg, ck = CONCEPTE
     n_res = len(RESSO)
@@ -403,14 +399,14 @@ def p_inicio():
 </section>
 <section class="bloque" aria-labelledby="h-tres">
 <h2 id="h-tres">{T("Tres preguntes, en aquest ordre", "Tres preguntas, en este orden")}</h2>
-<p class="intro">{T("Primer, què passa als carrers; després, què fa l'Ajuntament; i, quan hi haja dades, si funciona.", "Primero, qué pasa en las calles; después, qué hace el Ayuntamiento; y, cuando haya datos, si funciona.")}</p>
+<p class="intro">{T("Primer, on passen els accidents; després, què fa l'Ajuntament i on; i, amb el temps, què canvia en aquests llocs.", "Primero, dónde ocurren los accidentes; después, qué hace el Ayuntamiento y dónde; y, con el tiempo, qué cambia en esos lugares.")}</p>
 <ul class="puertas rej-cifras preg-num">
 <li><div class="tc">
 <h3 class="tc-preg">{T("Què està passant?", "¿Qué está pasando?")}</h3>
 <span class="tc-etq">{T(f"Accidents amb bici o patinet en {A1}", f"Accidentes con bici o patinete en {A1}")}</span>
 <span class="tc-cifra">{num(tot[-1])}</span>
 <span class="tc-texto"><span class="tc-frase">{T(f"És la xifra més alta de la sèrie ({A0}-{A1}); en {A0} n'hi va haver {num(tot[0])}." if maxim else f"En {A0} n'hi va haver {num(tot[0])}.", f"Es la cifra más alta de la serie ({A0}-{A1}); en {A0} hubo {num(tot[0])}." if maxim else f"En {A0} hubo {num(tot[0])}.")} {ritmo}</span>
-<span class="tc-nota">{T(f"A més, al {MESES['va'][int(SIASV[5:7]) - 1]} de {SIASV[:4]} la Policia Local va canviar la manera de registrar-los, i això complica comparar els anys.", f"Además, en {mes_any(SIASV, 'es')} la Policía Local cambió su forma de registrarlos, lo que complica comparar los años.")}</span></span>
+<span class="tc-nota">{T(f"El total d'accidents de la ciutat no servix per a comparar: els que no tenen ferits pugen un {pct(her['salto_sin'])} d'un any a l'altre, de {A0} a {int(A0) + 1}, segurament per com es registren. A més, al {MESES['va'][int(SIASV[5:7]) - 1]} de {SIASV[:4]} la Policia Local va canviar el seu sistema de registre.", f"El total de accidentes de la ciudad no sirve para comparar: los que no tienen heridos suben un {pct(her['salto_sin'])} de un año a otro, de {A0} a {int(A0) + 1}, seguramente por cómo se registran. Además, en {mes_any(SIASV, 'es')} la Policía Local cambió su sistema de registro.")}</span></span>
 <a class="mas" href="mapa/">{T("Mira en el mapa on passen →", "Ver en el mapa dónde ocurren →")}</a></div></li>
 <li><div class="tc">
 <h3 class="tc-preg">{T("Què està fent l'Ajuntament?", "¿Qué está haciendo el Ayuntamiento?")}</h3>
@@ -420,12 +416,12 @@ def p_inicio():
 <span class="tc-nota">{T(f"De les <a href='ajuntament/#f=sin_info'>altres {pe['sin_info']}</a> encara no hem trobat informació pública. Quasi totes les mesures són del Pla Director de Seguretat Viària 2026-2030, que es va aprovar el {fecha_larga(aprob, 'va')}.", f"De las <a href='ajuntament/#f=sin_info'>otras {pe['sin_info']}</a> todavía no hemos encontrado información pública. Casi todas las medidas son del Plan Director de Seguridad Vial 2026-2030, que se aprobó el {fecha_larga(aprob, 'es')}.")}</span></span>
 <a class="mas" href="ajuntament/">{T(f"Mira les {n_med} mesures →", f"Ver las {n_med} medidas →")}</a></div></li>
 <li><div class="tc">
-<h3 class="tc-preg">{T("Funciona?", "¿Funciona?")}</h3>
-<span class="tc-etq">{T(f"Encara no ho sabem. Objectiu: la meitat en {R['meta']['año_meta']}", f"Todavía no lo sabemos. Objetivo: la mitad en {R['meta']['año_meta']}")}</span>
-<span class="tc-cifra tc-cifra-par">{num(base)}<small> → {num(meta)}</small></span>
-<span class="tc-texto"><span class="tc-frase">{T(f"Sabrem si baixen al ritme necessari quan es publiquen les dades de {R['meta']['pendiente']}. Una de les accions del Pla vol reduir aquests accidents a la meitat: dels {num(base)} de {E0['año']} a {num(meta)} en {R['meta']['año_meta']}.", f"Sabremos si bajan al ritmo necesario cuando se publiquen los datos de {R['meta']['pendiente']}. Una de las acciones del Plan quiere reducir estos accidentes a la mitad: de los {num(base)} de {E0['año']} a {num(meta)} en {R['meta']['año_meta']}.")}</span>
-<span class="tc-nota">{T(f"El Pla no diu des de quin any es compta; nosaltres prenem {E0['año']}.", f"El Plan no dice desde qué año se cuenta; nosotros tomamos {E0['año']}.")}</span></span>
-<a class="mas" href="informe/2025/#objectiu">{T("Mira d'on partim i el ritme necessari →", "Ver de dónde partimos y el ritmo necesario →")}</a></div></li>
+<h3 class="tc-preg">{T("Què canvia on s'actua?", "¿Qué cambia donde se actúa?")}</h3>
+<span class="tc-etq">{T("Mesures amb un lloc concret", "Medidas con un lugar concreto")}</span>
+<span class="tc-cifra">{n_lug}</span>
+<span class="tc-texto"><span class="tc-frase">{T(f"Les posem en el mapa al costat dels accidents que hi havia abans. {n_lug_h} ja estan fetes. Per a saber què canvia, compararem cada lloc abans i després de la mesura amb el que passa en la resta de la ciutat.", f"Las ponemos en el mapa junto a los accidentes que había antes. {n_lug_h} ya están hechas. Para saber qué cambia, compararemos cada lugar antes y después de la medida con lo que pasa en el resto de la ciudad.")}</span>
+<span class="tc-nota">{T(f"Les últimes dades publicades són de {A1}: fan falta uns quants anys de després de cada mesura per a separar-ne l'efecte de l'atzar.", f"Los últimos datos publicados son de {A1}: hacen falta varios años de después de cada medida para separar su efecto del azar.")}</span></span>
+<a class="mas" href="ajuntament/#mapa-mesures">{T("Mira on actua l'Ajuntament →", "Ver dónde actúa el Ayuntamiento →")}</a></div></li>
 </ul>
 </section>
 <section class="bloque" aria-labelledby="h-quatre">
@@ -1126,6 +1122,15 @@ def nom_punto2(s):
     n = nom_punto(s); return n, n
 
 
+def sube_her():
+    """Subida de los accidentes con heridos (bici o patinete frente al resto) del primer al último año, con la prueba
+    exacta de Fisher sobre la tabla 2×2 (scipy), y el salto de los accidentes sin heridos de toda la ciudad el segundo año."""
+    from scipy.stats import fisher_exact
+    b0, b1, r0, r1 = CT["bv_her"][0], CT["bv_her"][-1], CT["resto_her"][0], CT["resto_her"][-1]
+    sin = [x + y for x, y in zip(CT["bv_sin"], CT["resto_sin"])]
+    return {"bv": b1 / b0 - 1, "r": r1 / r0 - 1, "p": fisher_exact([[b1, b0], [r1, r0]]).pvalue, "salto_sin": sin[1] / sin[0] - 1}
+
+
 def p_informe():
 
     R_ = "../../"
@@ -1180,7 +1185,7 @@ def p_informe():
 
     ala_barras = graf_lang(lambda l: barras_apiladas(ANYS, n0["vy3"], ("Accidents cada any" if l == "va" else "Accidentes cada año")))
     tits = [("objectiu", (f"Un indicador del Pla de Seguretat Viària demana reduir a la meitat els accidents de bici i patinet per a {am}", f"Un indicador del Plan de Seguridad Vial pide reducir a la mitad los accidentes de bici y patinete para {am}")),
-            ("pujada", (f"De {A0} a {A1}, els accidents de bici i patinet van pujar un {pct(tot[-1] / tot[0] - 1)}, quasi igual que tots els de la ciutat", f"De {A0} a {A1}, los accidentes de bici y patinete subieron un {pct(tot[-1] / tot[0] - 1)}, casi igual que todos los de la ciudad")),
+            ("pujada", (f"De {A0} a {A1}, els accidents registrats amb bici o patinet van pujar un {pct(tot[-1] / tot[0] - 1)}; amb ferits, un {pct(sube_her()['bv'])}", f"De {A0} a {A1}, los accidentes registrados con bici o patinete subieron un {pct(tot[-1] / tot[0] - 1)}; con heridos, un {pct(sube_her()['bv'])}")),
             ("patinet", ("Cada vegada hi ha més accidents amb patinet; els de bici es mantenen", "Cada vez hay más accidentes con patinete; los de bici se mantienen")),
             ("llocs", ("Els accidents es repetixen en els mateixos llocs", "Los accidentes se repiten en los mismos lugares")),
             ("transit", (f"En {len(alto)} dels {len(uso)} punts on es compten bicis hi ha clarament més accidents que en altres amb un trànsit semblant", f"En {len(alto)} de los {len(uso)} puntos donde se cuentan bicis hay claramente más accidentes que en otros con un tráfico parecido")),
@@ -1243,10 +1248,10 @@ def p_informe():
 <section class="seccion" id="pujada">{num_s(2)}{h2(2)}
 <div class="cols"><div>
 <p>{T(f"Els accidents amb bici o patinet van passar de {num(tot[0])} en {A0} a {num(tot[-1])} en {A1}.", f"Los accidentes con bici o patinete pasaron de {num(tot[0])} en {A0} a {num(tot[-1])} en {A1}.")}</p>
-<p>{T(f"Tots els accidents de trànsit de València, amb bici o sense, van passar de {num(CT['ciudad'][0])} en {A0} a {num(CT['ciudad'][-1])} en {A1}.", f"Todos los accidentes de tráfico de València, con bici o sin ella, pasaron de {num(CT['ciudad'][0])} en {A0} a {num(CT['ciudad'][-1])} en {A1}.")}</p>
+<p>{T(f"Tots els accidents de trànsit registrats a València, amb bici o sense, van passar de {num(CT['ciudad'][0])} en {A0} a {num(CT['ciudad'][-1])} en {A1}. Però tres quartes parts d'eixa pujada són accidents sense ferits, que pugen un {pct(sube_her()['salto_sin'])} només de {A0} a {int(A0) + 1}: és més probable que canviara com es registren que no el nombre d'accidents.", f"Todos los accidentes de tráfico registrados en València, con bici o sin ella, pasaron de {num(CT['ciudad'][0])} en {A0} a {num(CT['ciudad'][-1])} en {A1}. Pero tres cuartas partes de esa subida son accidentes sin heridos, que suben un {pct(sube_her()['salto_sin'])} solo de {A0} a {int(A0) + 1}: es más probable que cambiara cómo se registran que el número de accidentes.")}</p>
 <p>{T(f"Els accidents amb bici o patinet continuen sent uns {round(cuota * 100)} de cada 100 accidents de trànsit de la ciutat.", f"Los accidentes con bici o patinete siguen siendo unos {round(cuota * 100)} de cada 100 accidentes de tráfico de la ciudad.")}</p>
 <p>{T(f"Si es compten només els accidents amb ferits, els de bici i patinet pugen una mica més: un {pct(her_bv)}, davant d'un {pct(her_r)} de la resta. Però la diferència pot ser casual, i el canvi de registre de 2024 pot haver canviat qui es compta com a ferit.", f"Si se cuentan solo los accidentes con heridos, los de bici y patinete suben algo más: un {pct(her_bv)}, frente a un {pct(her_r)} del resto. Pero la diferencia puede ser casual, y el cambio de registro de 2024 puede haber cambiado a quién se cuenta como herido.")}</p>
-<p class="nota">{T(f"La Policia Local va canviar el seu sistema de registre {mes_any(SIASV, 'va')}. Per això comparem amb el total de la ciutat, que va passar pel mateix canvi.", f"En {mes_any(SIASV, 'es')} la Policía Local cambió su sistema de registro. Por eso comparamos con el total de la ciudad, que pasó por el mismo cambio.")}</p>
+<p class="nota">{T(f"La Policia Local va canviar el seu sistema de registre {mes_any(SIASV, 'va')}. Per això comparem amb la resta d'accidents, que van passar pel mateix canvi, i sobretot amb els que tenen ferits.", f"En {mes_any(SIASV, 'es')} la Policía Local cambió su sistema de registro. Por eso comparamos con el resto de accidentes, que pasaron por el mismo cambio, y sobre todo con los que tienen heridos.")}</p>
 </div><div class="graf-caja"><p class="graf-t">{T(f"Com canvien els accidents des de {A0} ({A0} = 100; {ib[-1]} vol dir un {ib[-1] - 100} % més)", f"Cómo cambian los accidentes desde {A0} ({A0} = 100; {ib[-1]} quiere decir un {ib[-1] - 100} % más)")}</p>
 <div class="solo-esc">{graf_lang(lambda l: g_ind(l, False))}</div><div class="solo-mov">{graf_lang(lambda l: g_ind(l, True))}</div>
 <div class="ley-l"><span><i></i>{T("Amb bici o patinet", "Con bici o patinete")}</span><span><i class="disc"></i>{T("Tots els de la ciutat", "Todos los de la ciudad")}</span></div>
@@ -1306,7 +1311,7 @@ def p_informe():
 <section class="seccion" id="sabem">{num_s(7)}{h2(7)}
 <div class="cols"><div><h3>{T("Ja ho sabem", "Ya lo sabemos")}</h3><ul class="limites">
 <li>{T(f"D'on partim: {num(base)} accidents amb bici o patinet en {ab}, i on cal arribar: {num(meta)} en {am}.", f"De dónde partimos: {num(base)} accidentes con bici o patinete en {ab}, y adónde hay que llegar: {num(meta)} en {am}.")}</li>
-<li>{T("Que pugen quasi igual que tots els accidents de la ciutat.", "Que suben casi igual que todos los accidentes de la ciudad.")}</li>
+<li>{T("Que els accidents amb bici o patinet registrats pugen, també els que tenen ferits.", "Que los accidentes con bici o patinete registrados suben, también los que tienen heridos.")}</li>
 <li>{T("Que cada vegada hi ha més accidents amb patinet.", "Que cada vez hay más accidentes con patinete.")}</li>
 <li>{T("On s'acumulen, i que els llocs amb més accidents en continuen tenint molts.", "Dónde se acumulan, y que los lugares con más accidentes siguen teniendo muchos.")}</li>
 </ul></div><div><h3>{T("Encara no ho sabem", "Todavía no lo sabemos")}</h3><ul class="limites">
@@ -1385,7 +1390,7 @@ def p_dm(pag):
         toc_viejo = f'<p>{T("El mètode, tema a tema", "El método, tema a tema")}</p><ol id="toc"></ol>'
     if pag == "sobre":
         qui = (f'<section class="dades-sec" id="qui"><h2>{T("Qui som", "Quiénes somos")}</h2>'
-               f'<p>{T("L&#39;Observatori de la bici i el patinet de València és una iniciativa ciutadana independent. Seguix amb les dades obertes de l&#39;Ajuntament on passen els accidents amb bici i patinet, què fa l&#39;Ajuntament per a reduir-los i si funciona. No depén de l&#39;Ajuntament, que no participa en aquest treball ni l&#39;avala.", "El Observatorio de la bici y el patinete de València es una iniciativa ciudadana independiente. Sigue con los datos abiertos del Ayuntamiento dónde ocurren los accidentes con bici y patinete, qué hace el Ayuntamiento para reducirlos y si funciona. No depende del Ayuntamiento, que no participa en este trabajo ni lo avala.")}</p>'
+               f'<p>{T("L&#39;Observatori de la bici i el patinet de València és una iniciativa ciutadana independent. Seguix amb les dades obertes de l&#39;Ajuntament on passen els accidents amb bici i patinet, què fa l&#39;Ajuntament per a reduir-los, on ho fa i què hi canvia. No depén de l&#39;Ajuntament, que no participa en aquest treball ni l&#39;avala.", "El Observatorio de la bici y el patinete de València es una iniciativa ciudadana independiente. Sigue con los datos abiertos del Ayuntamiento dónde ocurren los accidentes con bici y patinete, qué hace el Ayuntamiento para reducirlos, dónde lo hace y qué cambia allí. No depende del Ayuntamiento, que no participa en este trabajo ni lo avala.")}</p>'
                f'<p>{T("Per a qualsevol cosa, escriu-nos a", "Para cualquier cosa, escríbenos a")} <a href="mailto:{S.CORREU}">{S.CORREU}</a>.</p></section>')
         toc.insert(0, ("qui", ("Qui som", "Quiénes somos")))
         tipos = {"datos": ("Dades", "Datos"), "metode": ("Mètode", "Método"), "web": ("Web", "Web")}
