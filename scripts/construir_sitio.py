@@ -19,7 +19,7 @@ scripts/sitio_textos_plan.py (medidas del Plan) y scripts/sitio_dades.py (métod
 No toca las páginas viejas (construir_web.py); deploy/nginx las redirige con 301.
 
 Uso: .venv/bin/python -I scripts/construir_sitio.py"""
-import collections, csv, json, math, re, sqlite3, sys
+import collections, csv, itertools, json, math, re, sqlite3, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -42,11 +42,21 @@ def cargar(n):
 O, R, P, M = (cargar(f"{n}.js") for n in ("observatori", "relato", "pla", "metode"))
 CON = sqlite3.connect(DB)
 META = dict(CON.execute("SELECT clave, valor FROM meta").fetchall())
-CAMBIOS = CON.execute("SELECT fecha, tipo, va, es FROM cambio ORDER BY orden").fetchall()
+CAMBIOS = CON.execute("SELECT fecha, tipo, va, es, resumen_va, resumen_es FROM cambio ORDER BY orden").fetchall()
 _colab = W / "datos/colaboran.json"
 INFO = {"conjunto": META["conjunto_siniestros"], "descarga": META["fecha_descarga"], "version": max(c[0] for c in CAMBIOS)}
 if _colab.exists() and json.loads(_colab.read_text()):
     INFO["colab"] = json.loads(_colab.read_text())
+# «Ressò / Repercusión» (data/processed/resso.csv, como colaboran.csv): solo las filas con publicar = si, por fecha (la más
+# nueva primero). tipo: medio, entidad, administracion o reutilizacion; prueba: lo que guardamos (enlace, captura, correo
+# o acta). Una fila se añade cuando hay algo que se pueda enlazar; nunca entradas de ejemplo.
+RESSO_CAMPOS = ["fecha", "tipo", "quien", "titulo", "que_va", "que_es", "url", "prueba", "publicar"]
+RESSO_TIPOS = ["medio", "entidad", "administracion", "reutilizacion"]
+with open(ROOT / "data/processed/resso.csv", encoding="utf-8", newline="") as _f:
+    _r = csv.DictReader(_f)
+    assert _r.fieldnames == RESSO_CAMPOS, f"resso.csv: columnas {_r.fieldnames}"
+    RESSO = sorted(({k: (v or "").strip() for k, v in x.items()} for x in _r if (x["publicar"] or "").strip().lower() == "si"),
+                   key=lambda x: x["fecha"], reverse=True)
 # fichas: [clase, slug, nombre va, nombre es, n] (scripts/fichas.py) y uid del lugar → slug
 FICHAS = cargar("fichas_indice.js")
 SLUG_UID = dict(CON.execute("SELECT uid, slug FROM ficha WHERE clase = 'lloc'").fetchall())
@@ -222,6 +232,69 @@ def mapas():
         S.escribir(BUILD / "img" / f"mapa_{k}.svg", v)
 
 
+# ---------------------------------------------------------------- imagen de concepto de la portada (rediseño del 07/11/2026)
+# «La ciudad dibujada por sus accidentes» (boceto los bocetos de diseño (internos)/_concepte.py, aprobado): la red de calles del
+# callejero municipal (ejes.geojson) y, encima, los lugares con accidentes de bici o patinete (tabla lugar de la base:
+# nudos de cruce y tramos de calle) con tamaño según el número de accidentes y color según el vehículo que domina; anillos
+# en los 30 con más y rombos en las actuaciones del Plan con lugar (O["pla"]["pts"]). geopandas + shapely (EPSG:25830,
+# recorte y simplificación). Va en línea en la portada: los colores son clases de comun.css (.concepte), así que sigue al
+# tema claro u oscuro y al botón de tema. Devuelve el SVG y los recuentos para el texto alternativo.
+CONC_ANCHO, CONC_ALTO = 1000, 760
+
+
+def concepte():
+    import geopandas as gpd, pandas as pd
+    from shapely.geometry import box
+    lug = pd.read_sql("SELECT n, v_b, v_p, v_a, lon, lat, en_top30 FROM lugar", CON)
+    lug = gpd.GeoDataFrame(lug, geometry=gpd.points_from_xy(lug.lon, lug.lat), crs=4326).to_crs(25830)
+    # marco: el centro de la nube de lugares (percentiles 3 y 97), con la proporción de la imagen
+    x0, x1 = lug.geometry.x.quantile([.03, .97]); y0, y1 = lug.geometry.y.quantile([.03, .97])
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    w = max(x1 - x0, (y1 - y0) * CONC_ANCHO / CONC_ALTO) * 1.02; h = w * CONC_ALTO / CONC_ANCHO
+    marco = box(cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2); esc = CONC_ANCHO / w
+    xy = lambda x, y: ((x - (cx - w / 2)) * esc, ((cy + h / 2) - y) * esc)
+    ejes = gpd.read_file(ROOT / "data/raw/siniestros/ejes.geojson").to_crs(25830)
+    ejes = ejes[ejes.intersects(marco)].copy()
+    import shapely
+
+    def trazo(g):
+        out = []
+        for p in getattr(g, "geoms", [g]):
+            if p.is_empty or p.geom_type != "LineString": continue
+            pts = [f"{a:.0f},{b:.0f}" for a, b in (xy(x, y) for x, y in p.coords)]
+            pts = [q for i, q in enumerate(pts) if i == 0 or q != pts[i - 1]]      # sin puntos repetidos tras redondear
+            if len(pts) > 1: out.append("M" + "L".join(pts))
+        return "".join(out)
+    # cada clase de calle, unida en tramos continuos (union_all + line_merge) y simplificada a 1,5 px: el mismo dibujo con
+    # muchos menos «M» y puntos repetidos (la mitad de peso)
+    grandes = ejes.tipcalle.isin(PRINCIPALES)
+    red = lambda sel: shapely.line_merge(ejes[sel].geometry.union_all().intersection(marco)).simplify(1.5 / esc)
+    d0, d1 = trazo(red(~grandes)), trazo(red(grandes))
+    lug = lug[lug.intersects(marco)].sort_values("n")
+    clase = lambda r: "a" if r.v_a >= max(r.v_b, r.v_p) else ("p" if r.v_p >= r.v_b else "b")
+    radio = lambda n: 1.6 + 1.05 * n ** .5
+    circ, top = [], []
+    for r in lug.itertuples():
+        x, y = xy(r.geometry.x, r.geometry.y)
+        circ.append(f'<circle class="{clase(r)}" cx="{x:.0f}" cy="{y:.0f}" r="{radio(r.n):.1f}"/>')
+        if r.en_top30: top.append(f'<circle class="t" cx="{x:.0f}" cy="{y:.0f}" r="{radio(r.n) + 4:.1f}"/>')
+    pl = gpd.GeoDataFrame(geometry=gpd.points_from_xy([p[0] for p in O["pla"]["pts"]], [p[1] for p in O["pla"]["pts"]]), crs=4326).to_crs(25830)
+    rombos = []
+    for g in pl.geometry[pl.intersects(marco)]:
+        x, y = xy(g.x, g.y)
+        rombos.append(f'<rect class="m" x="{x - 7:.0f}" y="{y - 7:.0f}" width="14" height="14" transform="rotate(45 {x:.0f} {y:.0f})"/>')
+    k = {"lug": len(lug), "top": len(top), "pla": len(rombos), "acc": int(lug.n.sum())}
+    t = (f"Mapa de concepte: {num(k['lug'])} llocs amb accidents de bici o patinet de {A0} a {A1} dibuixen els carrers de València. "
+         f"{k['top']} anells marquen els llocs amb més accidents i {k['pla']} rombes, les actuacions del Pla amb lloc concret.",
+         f"Mapa de concepto: {num(k['lug'])} lugares con accidentes de bici o patinete de {A0} a {A1} dibujan las calles de València. "
+         f"{k['top']} anillos marcan los lugares con más accidentes y {k['pla']} rombos, las actuaciones del Plan con lugar concreto.")
+    svg = (f'<svg class="concepte" viewBox="0 0 {CONC_ANCHO} {CONC_ALTO}" role="img" aria-label="{ESC(t[0])}" '
+           f'data-aria-va="{ESC(t[0])}" data-aria-es="{ESC(t[1])}">'
+           f'<path class="c0" d="{d0}"/><path class="c1" d="{d1}"/>'
+           f'<g>{"".join(circ)}</g><g>{"".join(top)}</g><g>{"".join(rombos)}</g></svg>')
+    return svg, k
+
+
 # ---------------------------------------------------------------- gráficos en línea (clases de comun.css)
 def ticks(maximo, n=4):
     paso = 10 ** math.floor(math.log10(maximo / n))
@@ -309,47 +382,54 @@ def p_inicio():
         ritmo = T(f"Han pujat un {pct(sube_bv)}, {'més' if mas else 'menys'} que el total d'accidents de trànsit de la ciutat (un {pct(sube_ciudad)}).",
                   f"Han subido un {pct(sube_bv)}, {'más' if mas else 'menos'} que el total de accidentes de tráfico de la ciudad (un {pct(sube_ciudad)}).")
     aprob = P["plan_doc"]["aprob"]
-    cuerpo = f'''<div class="portada">
-<h1>{T(*S.TITULO)}</h1>
-<p class="apoyo">{T(*S.APOYO)}</p>
-<p class="quien">{T("Observatori ciutadà independent · dades del portal de dades obertes de l'Ajuntament", "Observatorio ciudadano independiente · datos del portal de datos abiertos del Ayuntamiento")}</p>
+    conc_svg, ck = CONCEPTE
+    n_res = len(RESSO)
+    cuerpo = f'''<section class="heroi" aria-labelledby="titol">
+<div>
+<p class="kicker">{T("Observatori ciutadà independent", "Observatorio ciudadano independiente")}</p>
+<h1 id="titol">{T(*S.FRASE)}</h1>
+<p class="apoyo">{T(f"Partim de les dades obertes de l'Ajuntament. Quan es publiquen les de {R['meta']['pendiente']}, direm si els accidents baixen al ritme que demana el Pla.", f"Partimos de los datos abiertos del Ayuntamiento. Cuando se publiquen los de {R['meta']['pendiente']}, diremos si los accidentes bajan al ritmo que pide el Plan.")}</p>
 <form class="gran-busca" role="search" data-busca action="mapa/">
 <label for="busca-portada">{T("Busca el teu carrer o una cruïlla", "Busca tu calle o un cruce")}</label>
 <div class="caja"><input id="busca-portada" name="cerca" type="search" autocomplete="off" aria-controls="sug-portada" placeholder="Pérez Galdós"><button type="submit">{T("Cerca", "Buscar")}</button><ul class="sug" id="sug-portada" hidden></ul></div>
 <p class="ej">{T("Per exemple:", "Por ejemplo:")} <a href="lloc/{s1}/">{T(f"«{ESC(limpio(n1[0]))}»", f"«{ESC(limpio(n1[1]))}»")}</a> {T("o", "o")} <a href="carrer/{calle_top[1]}/">{T(f"«{ESC(calle_top[2])}»", f"«{ESC(calle_top[3])}»")}</a>. {T("També pots consultar la llista de", "También puedes consultar la lista de")} <a href="carrer/">{T("tots els carrers", "todas las calles")}</a> {T("i de", "y de")} <a href="lloc/">{T("tots els llocs", "todos los lugares")}</a>.</p>
 </form>
 </div>
-<ul class="puertas rej-cifras">
+<figure class="concepte-fig">
+<p class="ley-una" aria-hidden="true"><span><i class="pt b"></i>{T("Més amb bici", "Más con bici")}</span><span><i class="pt p"></i>{T("Més amb patinet", "Más con patinete")}</span><span><i class="pt a"></i>{T("Bici contra patinet", "Bici contra patinete")}</span><span><i class="anell"></i>{T(f"{ck['top']} llocs amb més", f"{ck['top']} lugares con más")}</span><span><i class="romb"></i>{T("Actuació del Pla", "Actuación del Plan")}</span></p>
+{conc_svg}
+<figcaption>{T(f"Cada punt és una cruïlla o un tram de carrer on hi va haver accidents amb bici o patinet de {A0} a {A1}; com més gran, més accidents. El color diu quin vehicle hi apareix més. Font: Ajuntament de València – Dades Obertes (sinistres de trànsit {PER} i carrerer, CC BY 4.0), descarregades el {fecha(INFO['descarga'])}.", f"Cada punto es un cruce o un tramo de calle donde hubo accidentes con bici o patinete de {A0} a {A1}; cuanto mayor, más accidentes. El color dice qué vehículo aparece más. Fuente: Ajuntament de València – Dades Obertes (siniestros de tráfico {PER} y callejero, CC BY 4.0), descargados el {fecha(INFO['descarga'])}.")} <a href="mapa/">{T("Obri el mapa →", "Abrir el mapa →")}</a></figcaption>
+</figure>
+</section>
+<section class="bloque" aria-labelledby="h-tres">
+<h2 id="h-tres">{T("Tres preguntes, en aquest ordre", "Tres preguntas, en este orden")}</h2>
+<p class="intro">{T("Primer, què passa als carrers; després, què fa l'Ajuntament; i, quan hi haja dades, si funciona.", "Primero, qué pasa en las calles; después, qué hace el Ayuntamiento; y, cuando haya datos, si funciona.")}</p>
+<ul class="puertas rej-cifras preg-num">
 <li><div class="tc">
-<h2 class="tc-preg">{T("Què està passant?", "¿Qué está pasando?")}</h2>
+<h3 class="tc-preg">{T("Què està passant?", "¿Qué está pasando?")}</h3>
 <span class="tc-etq">{T(f"Accidents amb bici o patinet en {A1}", f"Accidentes con bici o patinete en {A1}")}</span>
 <span class="tc-cifra">{num(tot[-1])}</span>
 <span class="tc-texto"><span class="tc-frase">{T(f"És la xifra més alta de la sèrie ({A0}-{A1}); en {A0} n'hi va haver {num(tot[0])}." if maxim else f"En {A0} n'hi va haver {num(tot[0])}.", f"Es la cifra más alta de la serie ({A0}-{A1}); en {A0} hubo {num(tot[0])}." if maxim else f"En {A0} hubo {num(tot[0])}.")} {ritmo}</span>
 <span class="tc-nota">{T(f"A més, al {MESES['va'][int(SIASV[5:7]) - 1]} de {SIASV[:4]} la Policia Local va canviar la manera de registrar-los, i això complica comparar els anys.", f"Además, en {mes_any(SIASV, 'es')} la Policía Local cambió su forma de registrarlos, lo que complica comparar los años.")}</span></span>
 <a class="mas" href="mapa/">{T("Mira en el mapa on passen →", "Ver en el mapa dónde ocurren →")}</a></div></li>
 <li><div class="tc">
-<h2 class="tc-preg">{T("Què està fent l'Ajuntament?", "¿Qué está haciendo el Ayuntamiento?")}</h2>
+<h3 class="tc-preg">{T("Què està fent l'Ajuntament?", "¿Qué está haciendo el Ayuntamiento?")}</h3>
 <span class="tc-etq">{T("Mesures fetes", "Medidas hechas")}</span>
 <span class="tc-cifra">{pe['hecha']}<small> {T("de", "de")} {n_med}</small></span>
 <span class="tc-texto"><span class="tc-frase">{T(f"De les {n_med} mesures que seguim, <a href='ajuntament/#f=hecha'>{pe['hecha']} estan fetes</a>, <a href='ajuntament/#f=en_marcha'>{pe['en_marcha']} estan en marxa</a> i <a href='ajuntament/#f=anunciada'>{pe['anunciada']}, anunciades</a>.", f"De las {n_med} medidas que seguimos, <a href='ajuntament/#f=hecha'>{pe['hecha']} están hechas</a>, <a href='ajuntament/#f=en_marcha'>{pe['en_marcha']} están en marcha</a> y <a href='ajuntament/#f=anunciada'>{pe['anunciada']}, anunciadas</a>.")}<span class="minibarra" aria-hidden="true"><i style="flex:{pe['hecha']};background:var(--e-hecha)"></i><i style="flex:{pe['en_marcha']};background:var(--e-marcha)"></i><i style="flex:{pe['anunciada']};background:var(--e-anun)"></i><i style="flex:{pe['sin_info']};background:var(--line)"></i></span></span>
 <span class="tc-nota">{T(f"De les <a href='ajuntament/#f=sin_info'>altres {pe['sin_info']}</a> encara no hem trobat informació pública. Quasi totes les mesures són del Pla Director de Seguretat Viària 2026-2030, que es va aprovar el {fecha_larga(aprob, 'va')}.", f"De las <a href='ajuntament/#f=sin_info'>otras {pe['sin_info']}</a> todavía no hemos encontrado información pública. Casi todas las medidas son del Plan Director de Seguridad Vial 2026-2030, que se aprobó el {fecha_larga(aprob, 'es')}.")}</span></span>
 <a class="mas" href="ajuntament/">{T(f"Mira les {n_med} mesures →", f"Ver las {n_med} medidas →")}</a></div></li>
 <li><div class="tc">
-<h2 class="tc-preg">{T("Funciona?", "¿Funciona?")}</h2>
+<h3 class="tc-preg">{T("Funciona?", "¿Funciona?")}</h3>
 <span class="tc-etq">{T(f"Encara no ho sabem. Objectiu: la meitat en {R['meta']['año_meta']}", f"Todavía no lo sabemos. Objetivo: la mitad en {R['meta']['año_meta']}")}</span>
 <span class="tc-cifra tc-cifra-par">{num(base)}<small> → {num(meta)}</small></span>
 <span class="tc-texto"><span class="tc-frase">{T(f"Sabrem si baixen al ritme necessari quan es publiquen les dades de {R['meta']['pendiente']}. Una de les accions del Pla vol reduir aquests accidents a la meitat: dels {num(base)} de {E0['año']} a {num(meta)} en {R['meta']['año_meta']}.", f"Sabremos si bajan al ritmo necesario cuando se publiquen los datos de {R['meta']['pendiente']}. Una de las acciones del Plan quiere reducir estos accidentes a la mitad: de los {num(base)} de {E0['año']} a {num(meta)} en {R['meta']['año_meta']}.")}</span>
 <span class="tc-nota">{T(f"El Pla no diu des de quin any es compta; nosaltres prenem {E0['año']}.", f"El Plan no dice desde qué año se cuenta; nosotros tomamos {E0['año']}.")}</span></span>
 <a class="mas" href="informe/2025/#objectiu">{T("Mira d'on partim i el ritme necessari →", "Ver de dónde partimos y el ritmo necesario →")}</a></div></li>
 </ul>
-<section class="bloque">
-<h2>{T("On hi ha més accidents de bici i patinet", "Dónde hay más accidentes de bici y patinete")}</h2>
-<p class="intro">{T(f"Cada cercle marca on hi va haver accidents amb bici o patinet de {A0} a {A1}, segons l'adreça que va anotar la policia. Toca el mapa per a obrir-lo.", f"Cada círculo marca dónde hubo accidentes con bici o patinete de {A0} a {A1}, según la dirección que anotó la policía. Toca el mapa para abrirlo.")}</p>
-<a class="vista" href="mapa/"><div class="mapa"><img src="img/mapa_todos.svg" width="1000" height="{Proy(*CIUDAD, 1000).h}" alt=""></div><span class="abrir">{T("Obri el mapa →", "Abrir el mapa →")}</span></a>
-<div class="ley"><span><i class="pt b"></i>{T("Accident amb bici (sense patinet)", "Accidente con bici (sin patinete)")}</span><span><i class="pt p"></i>{T("Accident amb patinet (sense bici)", "Accidente con patinete (sin bici)")}</span><span><i class="pt a"></i>{T("Xoc entre bici i patinet", "Choque entre bici y patinete")}</span><span class="nota">{T("Un cercle més gran vol dir més accidents, no més trànsit.", "Un círculo más grande indica más accidentes, no más tráfico.")}</span></div>
 </section>
-<section class="bloque">
-<h2>{T("Quatre dades sobre els accidents de bici i patinet", "Cuatro datos sobre los accidentes de bici y patinete")}</h2>
+<section class="bloque" aria-labelledby="h-quatre">
+<h2 id="h-quatre">{T("Quatre dades sobre els accidents de bici i patinet", "Cuatro datos sobre los accidentes de bici y patinete")}</h2>
 <ul class="datos4 rej-cifras">
 <li class="tc"><span class="tc-etq">{T(f"Accidents amb un vehicle de motor, {PER}", f"Accidentes con un vehículo de motor, {PER}")}</span>
 <span class="tc-cifra">{pct(k['m'] / ntot)}</span>
@@ -372,7 +452,10 @@ def p_inicio():
 <a class="mas" href="dades/#limits">{T("Per què no es poden comparar els anys →", "Por qué no se pueden comparar los años →")}</a></li>
 </ul>
 </section>
+<div class="escribe">
+<section class="tarjeta" aria-labelledby="h-res"><h2 id="h-res" class="h-tarjeta">{T(*S.NOM["resso"])}</h2>{resso_resumen()}<p><a class="mas" href="resso/">{T("Com citar-lo i com dir-nos que l'has fet servir →", "Cómo citarlo y cómo decirnos que lo has usado →")}</a></p></section>
 {S.telegram_invitacion("h-tg", R_)}
+</div>
 <aside class="capa-sig" aria-labelledby="h-capa">
 <h2 id="h-capa">{T("Vols saber-ne més?", "¿Quieres saber más?")}</h2>
 <a href="informe/2025/">{T(f"Informe {A1}: què ha passat i si els accidents baixen al ritme necessari per a {R['meta']['año_meta']} →", f"Informe {A1}: qué ha pasado y si los accidentes bajan al ritmo necesario para {R['meta']['año_meta']} →")}</a>
@@ -382,6 +465,76 @@ def p_inicio():
     t = (S.MARCA[0] + " · " + S.TITULO[0], S.MARCA[1] + " · " + S.TITULO[1]); d = (S.APOYO[0], S.APOYO[1])
     html = S.pagina("inici", "", R_, t, d, cuerpo, INFO, None, "og/observatori.png")
     S.escribir(BUILD / "index.html", html)
+
+
+# ---------------------------------------------------------------- «Ressò / Repercusión» (rediseño del 07/11/2026)
+def resso_resumen():
+    """Párrafo de la portada: qué recoge la página y cuántas entradas hay (o que todavía no hay ninguna)."""
+    if not RESSO:
+        return (f'<p>{T(f"Ací recollirem els mitjans que en parlen, les entitats que el fan servir i qui reutilitza les dades. Encara no n&#39;hi ha cap: l&#39;observatori es va publicar el {fecha_larga(S.PUBLICADA, 'va')}.", f"Aquí recogeremos los medios que hablan de él, las entidades que lo usan y quién reutiliza los datos. Todavía no hay ninguno: el observatorio se publicó el {fecha_larga(S.PUBLICADA, 'es')}.")}</p>')
+    c = collections.Counter("entidad" if r["tipo"] == "administracion" else r["tipo"] for r in RESSO)
+    nom = {"medio": (("mitjà", "mitjans"), ("medio", "medios")), "entidad": (("entitat o administració", "entitats o administracions"), ("entidad o administración", "entidades o administraciones")),
+           "reutilizacion": (("reutilització", "reutilitzacions"), ("reutilización", "reutilizaciones"))}
+    parts = lambda i: [f"{c[k]} {nom[k][i][c[k] != 1]}" for k in ("medio", "entidad", "reutilizacion") if c[k]]
+    y = lambda xs, c_: xs[0] if len(xs) == 1 else ", ".join(xs[:-1]) + f" {c_} " + xs[-1]
+    u = RESSO[0]
+    return (f'<p>{T(f"Fins ara: {y(parts(0), 'i')}. L&#39;última entrada és del {fecha_larga(u['fecha'], 'va')} ({ESC(u['quien'])}).", f"Hasta ahora: {y(parts(1), 'y')}. La última entrada es del {fecha_larga(u['fecha'], 'es')} ({ESC(u['quien'])}).")}</p>')
+
+
+def p_resso():
+    R_ = "../"
+    pub = (fecha_larga(S.PUBLICADA, "va"), fecha_larga(S.PUBLICADA, "es"))
+
+    def lista(tipos, buit_va, buit_es, camps_va, camps_es):
+        xs = [r for r in RESSO if r["tipo"] in tipos]
+        if not xs:
+            return f'<div class="buit"><p>{T(buit_va, buit_es)}</p><p>{T(camps_va, camps_es)}</p></div>'
+        li = []
+        for r in xs:
+            tit = f'<a href="{ESC(r["url"])}" rel="noopener">{ESC(r["titulo"] or r["quien"])}</a>'
+            que = T(ESC(r["que_va"]), ESC(r["que_es"])) if r["que_va"] or r["que_es"] else ""
+            li.append(f'<li><span class="data">{T(fecha_larga(r["fecha"], "va"), fecha_larga(r["fecha"], "es"))}</span> · '
+                      f'<span class="qui">{ESC(r["quien"])}</span>: {tit}{(". " + que) if que else ""}</li>')
+        return f'<ul class="res-lista">{"".join(li)}</ul>'
+    any_ = INFO["version"][:4]; web = S.DOMINIO.split("//")[1]
+    asunto = {"va": "Ressò de l'observatori", "es": "Repercusión del observatorio"}
+    from urllib.parse import quote
+    mail = lambda l: ESC(f"mailto:{S.CORREU}?subject={quote(asunto[l], safe='')}")
+    cuerpo = f'''<h1 class="h1-pag">{T("Ressò: qui parla de l'observatori i qui en fa servir les dades", "Repercusión: quién habla del observatorio y quién usa sus datos")}</h1>
+<p class="sub">{T("Ací recollim, amb data i enllaç, els mitjans que en parlen, les entitats que el fan servir en el seu treball i els projectes que reutilitzen les dades. Només hi posem el que podem enllaçar.", "Aquí recogemos, con fecha y enlace, los medios que hablan de él, las entidades que lo usan en su trabajo y los proyectos que reutilizan los datos. Solo ponemos lo que podemos enlazar.")}</p>
+<section class="res-grup" aria-labelledby="h-premsa">
+<h2 id="h-premsa">{T("En els mitjans", "En los medios")}</h2>
+{lista({"medio"}, f"Encara no n'ha parlat cap mitjà. L'observatori es va publicar el {pub[0]}.", f"Todavía no ha hablado de él ningún medio. El observatorio se publicó el {pub[1]}.",
+       "Cada entrada portarà la data, el mitjà, el títol i l'enllaç a la peça.", "Cada entrada llevará la fecha, el medio, el título y el enlace a la pieza.")}
+</section>
+<section class="res-grup" aria-labelledby="h-ent">
+<h2 id="h-ent">{T("Entitats i administracions que el fan servir", "Entidades y administraciones que lo usan")}</h2>
+{lista({"entidad", "administracion"}, "Encara no en tenim cap. Si la teua associació, el teu centre educatiu o el teu servei municipal fa servir l'observatori, ens agradaria saber per a què.", "Todavía no tenemos ninguna. Si tu asociación, tu centro educativo o tu servicio municipal usa el observatorio, nos gustaría saber para qué.",
+       "Cada entrada dirà qui és, per a què el fa servir i des de quan, amb un enllaç que ho mostre.", "Cada entrada dirá quién es, para qué lo usa y desde cuándo, con un enlace que lo muestre.")}
+</section>
+<section class="res-grup" aria-labelledby="h-reu">
+<h2 id="h-reu">{T("Reutilitzacions de les dades", "Reutilizaciones de los datos")}</h2>
+{lista({"reutilizacion"}, "Encara no en coneixem cap. Les dades de cada accident situat en el mapa es poden descarregar amb llicència CC BY 4.0.", "Todavía no conocemos ninguna. Los datos de cada accidente situado en el mapa se pueden descargar con licencia CC BY 4.0.",
+       "Cada entrada portarà el nom del projecte, qui el fa, què hi fa amb les dades i l'enllaç.", "Cada entrada llevará el nombre del proyecto, quién lo hace, qué hace con los datos y el enlace.")}
+</section>
+<section class="res-grup" aria-labelledby="h-cita">
+<h2 id="h-cita">{T("Com citar-lo", "Cómo citarlo")}</h2>
+<p>{T("Si fas servir les xifres o els mapes, et demanem que cites l'observatori i la font original de les dades:", "Si usas las cifras o los mapas, te pedimos que cites el observatorio y la fuente original de los datos:")}</p>
+<p class="cita-blk">{T(f"{S.MARCA[0]} ({any_}), a partir de dades obertes de l'Ajuntament de València (CC BY 4.0). {web}", f"{S.MARCA[1]} ({any_}), a partir de datos abiertos del Ayuntamiento de València (CC BY 4.0). {web}")}</p>
+<ul class="kit">
+<li>{T("Les dades de cada accident situat, en CSV i GeoJSON, amb la seua descripció", "Los datos de cada accidente situado, en CSV y GeoJSON, con su descripción")}<a class="btn claro" href="{R_}dades/#accidents-geo">{T("Descarrega", "Descargar")}</a></li>
+<li>{T("Imatges dels mapes i dels gràfics per a premsa, amb la font i la data", "Imágenes de los mapas y de los gráficos para prensa, con la fuente y la fecha")}<span class="pendiente">{T("Aviat", "Pronto")}</span></li>
+</ul>
+</section>
+<section class="res-grup" aria-labelledby="h-dir">
+<h2 id="h-dir">{T("L'has fet servir? Digues-nos-ho", "¿Lo has usado? Dínoslo")}</h2>
+<p>{T(f'Escriu-nos a <a href="{mail("va")}">{S.CORREU}</a> amb l\'enllaç i, si vols, una frase sobre per a què t\'ha servit. Abans de publicar-ho t\'ho confirmarem.', f'Escríbenos a <a href="{mail("es")}">{S.CORREU}</a> con el enlace y, si quieres, una frase sobre para qué te ha servido. Antes de publicarlo te lo confirmaremos.')}</p>
+</section>'''
+    t = ("Ressò · " + S.MARCA[0], "Repercusión · " + S.MARCA[1])
+    d = ("Mitjans, entitats i administracions que parlen de l'observatori o el fan servir, reutilitzacions de les dades i com citar-lo.",
+         "Medios, entidades y administraciones que hablan del observatorio o lo usan, reutilizaciones de los datos y cómo citarlo.")
+    pasos = [("inici", S.NOM["inici"]), (None, S.NOM["resso"])]
+    S.escribir(BUILD / "resso/index.html", S.pagina(None, "resso/", R_, t, d, cuerpo, INFO, pasos, "og/observatori.png"))
 
 
 # ---------------------------------------------------------------- páginas con la lógica de la web anterior (mapa, método)
@@ -552,6 +705,51 @@ SELECCION = """<script>
 """
 
 
+def antes_mapa(R_):
+    """Dos párrafos antes del mapa (rediseño del 07/11/2026): qué muestra, qué significa cada color y qué se desprende.
+    Todas las cifras salen de los datos (observatori.js y la tabla lugar de la base)."""
+    tot, geo = O["cob"]["total"], O["cob"]["geo"]
+    top = O["negros"][:30]; n_top = len(top); uno_de = round(geo / sum(n["n"] for n in top))
+    vias = sum(n["nom"].split(" ", 1)[0] in {"AV", "PG", "GV", "BV"} for n in top)
+    vp, vb = zip(*CON.execute("SELECT v_p, v_b FROM lugar").fetchall())
+    mas_p = de_cada(sum(p > b for p, b in zip(vp, vb)) / len(vp))
+    return (f'<div class="antes-mapa">'
+            f'<p>{T(f"El mapa situa {num(geo)} dels {num(tot)} accidents amb bici o patinet que la Policia Local va registrar de {A0} a {A1}. Cada cercle és una cruïlla o un tram de carrer: com més gran, més accidents hi ha hagut. El color diu qui hi estava implicat: blau si era una bici, taronja si era un patinet i verd si van xocar una bici i un patinet.", f"El mapa sitúa {num(geo)} de los {num(tot)} accidentes con bici o patinete que la Policía Local registró de {A0} a {A1}. Cada círculo es un cruce o un tramo de calle: cuanto más grande, más accidentes ha habido. El color dice quién estaba implicado: azul si era una bici, naranja si era un patinete y verde si chocaron una bici y un patinete.")}</p>'
+            f'<p>{T(f"El que se&#39;n desprén és que els accidents no es reparteixen a l&#39;atzar: {n_top} cruïlles i trams de carrer reuneixen 1 de cada {uno_de} dels que hi ha en el mapa, i {vias} d&#39;aquests {n_top} són en avingudes, passejos o grans vies. A més, en {mas_p[0]} llocs hi ha hagut més accidents amb patinet que amb bici. Són els llocs on convé mirar primer, però no necessàriament els més perillosos, perquè no sabem quanta gent hi passa.", f"Lo que se desprende es que los accidentes no se reparten al azar: {n_top} cruces y tramos de calle reúnen 1 de cada {uno_de} de los que hay en el mapa, y {vias} de esos {n_top} están en avenidas, paseos o grandes vías. Además, en {mas_p[1]} lugares ha habido más accidentes con patinete que con bici. Son los lugares donde conviene mirar primero, pero no necesariamente los más peligrosos, porque no sabemos cuánta gente pasa por ellos.")}</p>'
+            f'<p class="nota">{T("Toca un punt per a veure què passa en aquell lloc; filtra per any, vehicle o gravetat i descarrega el que veus. També hi ha la llista de", "Toca un punto para ver qué pasa en ese lugar; filtra por año, vehículo o gravedad y descarga lo que ves. También está la lista de")} <a href="{R_}lloc/">{T("tots els llocs", "todos los lugares")}</a> {T("i de", "y de")} <a href="{R_}carrer/">{T("tots els carrers", "todas las calles")}</a> {T("amb fitxa.", "con ficha.")}</p></div>')
+
+
+def pie_mapa(R_):
+    """Pie del mapa: qué se ve, conjunto, licencia, fecha de descarga, cuándo se actualiza y enlace de descarga."""
+    f = fecha(INFO["descarga"]); c = ESC(INFO["conjunto"]); sig = R["meta"]["pendiente"]
+    return (f'<p class="pie-mapa">{T(f"<b>Accidents amb almenys una bici o un patinet, {PER}.</b> Font: Ajuntament de València – Dades Obertes, conjunt «Sinistres de trànsit» (<code>{c}</code>, CC BY 4.0), situats amb el carrerer municipal. Dades descarregades el {f}. S&#39;actualitzen una vegada l&#39;any, quan l&#39;Ajuntament publica les de l&#39;any anterior; les pròximes seran les de {sig}.", f"<b>Accidentes con al menos una bici o un patinete, {PER}.</b> Fuente: Ajuntament de València – Dades Obertes, conjunto «Siniestros de tráfico» (<code>{c}</code>, CC BY 4.0), situados con el callejero municipal. Datos descargados el {f}. Se actualizan una vez al año, cuando el Ayuntamiento publica los del año anterior; los próximos serán los de {sig}.")} '
+            f'<a href="{R_}dades/#accidents-geo">{T("Descarrega les dades", "Descarga los datos")}</a></p>')
+
+
+def com_llegir(R_):
+    """«Com llegir el mapa / Cómo leer el mapa»: los cinco límites, numerados, justo después del mapa (cifras de los datos)."""
+    tot, geo = O["cob"]["total"], O["cob"]["geo"]; cob = O["kpi"]["cob_any"]
+    c0, c1 = round(cob[str(A0)] * 100), round(cob[str(A1)] * 100)
+    tipo_desde = int(SIASV[:4]) + 1
+    tipo = (f"en {A1}", f"en {A1}") if tipo_desde >= A1 else (f"des de {tipo_desde}", f"desde {tipo_desde}")
+    sube = (" Per això, si compares anys en el mapa, els més recents hi pesen més del que els toca.", " Por eso, si comparas años en el mapa, los más recientes pesan más de lo que les corresponde.") if c1 > c0 else ("", "")
+    lis = [
+        T("<b>Més accidents no vol dir més perill.</b> Un lloc pot tindre&#39;n molts perquè hi passa molta gent. Hi ha comptadors de bicis en part del carril bici, però cap no compta patinets, així que no podem calcular el risc de cada lloc.",
+          "<b>Más accidentes no quiere decir más peligro.</b> Un lugar puede tener muchos porque pasa mucha gente. Hay contadores de bicis en parte del carril bici, pero ninguno cuenta patinetes, así que no podemos calcular el riesgo de cada lugar."),
+        T("<b>Només hi ha els accidents que va registrar la Policia Local.</b> Els que no es van comunicar a la policia no hi apareixen.",
+          "<b>Solo están los accidentes que registró la Policía Local.</b> Los que no se comunicaron a la policía no aparecen."),
+        T(f"<b>{num(tot - geo)} accidents no es veuen</b> perquè l&#39;adreça anotada no és prou precisa. En {A0} se&#39;n van poder situar {c0} de cada 100 i en {A1}, {c1}.{sube[0]}",
+          f"<b>{num(tot - geo)} accidentes no se ven</b> porque la dirección anotada no es lo bastante precisa. En {A0} se pudieron situar {c0} de cada 100 y en {A1}, {c1}.{sube[1]}"),
+        T(f"<b>Al {MESES['va'][int(SIASV[5:7]) - 1]} de {SIASV[:4]} la policia va canviar la manera de registrar-los.</b> Per això el tipus d&#39;accident només és fiable {tipo[0]} i la gravetat no es pot comparar entre anys.",
+          f"<b>En {mes_any(SIASV, 'es')} la policía cambió su forma de registrarlos.</b> Por eso el tipo de accidente solo es fiable {tipo[1]} y la gravedad no se puede comparar entre años."),
+        T("<b>Cada punt està on la policia va anotar l&#39;adreça,</b> no on va passar exactament. En una cruïlla, l&#39;accident pot haver passat en qualsevol dels seus costats.",
+          "<b>Cada punto está donde la policía anotó la dirección,</b> no donde ocurrió exactamente. En un cruce, el accidente puede haber ocurrido en cualquiera de sus lados."),
+    ]
+    return (f'<section class="interpretar" aria-labelledby="h-int"><h2 id="h-int">{T("Com llegir el mapa", "Cómo leer el mapa")}</h2>'
+            f'<ol>{"".join(f"<li>{x}</li>" for x in lis)}</ol>'
+            f'<p class="nota"><a href="{R_}dades/#limits">{T("Com situem els accidents i totes les limitacions de les dades →", "Cómo situamos los accidentes y todas las limitaciones de los datos →")}</a></p></section>')
+
+
 def p_mapa():
     R_ = "../"
     css, cuerpo = derivar("observatori.plantilla.html", "observatori.js", "web-mapa", R_, aparte={"calles": "mapa"}, ocultar=(
@@ -579,6 +777,11 @@ def p_mapa():
     cuerpo = cuerpo.replace(marca, marca + f'\n<script src="{R_}{nsrc}" integrity="{nsri}" onerror="__cargaFallo()"></script>', 1)
     cuerpo = cuerpo.replace('<div class="ficha-wrap" id="ficha-wrap">', '<div class="ficha-wrap" id="ficha-wrap"><p class="volver-mapa"><button type="button" id="volver-mapa">'
                             + T("↑ Torna al mapa", "↑ Volver al mapa") + '</button></p>', 1)
+    # rediseño del 07/11/2026: la leyenda de una línea (la de cada vista, #mapley) encima del mapa y, debajo, el pie con el
+    # conjunto, la licencia, la fecha de descarga, cuándo se actualiza y el enlace de descarga
+    ley = '\n    <div class="mapley" id="mapley"></div>'
+    assert cuerpo.count(ley) == 1 and cuerpo.count('<div class="mapa-wrap">\n    <div id="mapa"') == 1
+    cuerpo = cuerpo.replace(ley, "\n    " + pie_mapa(R_), 1).replace('<div class="mapa-wrap">\n    <div id="mapa"', '<div class="mapa-wrap">' + ley + '\n    <div id="mapa"', 1)
     cuerpo = cuerpo.replace("<main>", '<div class="vieja">', 1).replace("</main>", "</div>", 1).replace('class="wrap mapa-sec"', 'class="mapa-sec"')
     # lista de los 10 primeros y los índices
     lis = []
@@ -591,11 +794,9 @@ def p_mapa():
 <ol class="lista-pts" style="font-size:var(--t-body)">{"".join(lis)}</ol>
 <p class="nota">{T(f"El lloc en la llista té en compte que els primers anys es van poder situar en el mapa menys accidents ({round(cob[str(A0)] * 100)} de cada 100 en {A0} i {round(cob[str(A1)] * 100)} en {A1}): els d'aquells anys compten una mica més. Per això un lloc amb menys accidents pot anar per davant d'un altre.", f"El puesto tiene en cuenta que en los primeros años se pudieron situar en el mapa menos accidentes ({round(cob[str(A0)] * 100)} de cada 100 en {A0} y {round(cob[str(A1)] * 100)} en {A1}): los de esos años cuentan un poco más. Por eso un lugar con menos accidentes puede ir por delante de otro.")}</p>
 <p><a class="mas" href="{R_}lloc/">{T("Tots els llocs amb fitxa →", "Todos los lugares con ficha →")}</a> &nbsp; <a class="mas" href="{R_}carrer/">{T("Tots els carrers amb fitxa →", "Todas las calles con ficha →")}</a></p>
-</section>
-<p class="nota" style="margin-top:18px">{T("Més accidents no vol dir més perill: pot ser que hi passe més gent.", "Más accidentes no quiere decir más peligro: puede que pase más gente.")} <a href="{R_}metode/#filtres">{T("Vols saber-ne més? →", "¿Quieres saber más? →")}</a></p>'''
+</section>'''
     cab = (f'<h1 class="h1-pag">{T("On hi ha més accidents de bici i patinet a València", "Dónde hay más accidentes de bici y patinete en València")}</h1>'
-           f'<p class="sub">{T(f"El mapa mostra els accidents amb bici o patinet de {A0} a {A1}. Toca un punt per a veure què passa en aquell lloc; filtra per any, vehicle o gravetat i descarrega el que veus.", f"El mapa muestra los accidentes con bici o patinete de {A0} a {A1}. Toca un punto para ver qué pasa en ese lugar; filtra por año, vehículo o gravedad y descarga lo que ves.")}</p>'
-           f'<p class="nota">{T("Llista de", "Lista de")} <a href="{R_}lloc/">{T("tots els llocs", "todos los lugares")}</a> {T("i de", "y de")} <a href="{R_}carrer/">{T("tots els carrers", "todas las calles")}</a> {T("amb fitxa.", "con ficha.")} {T(f"De {A0} a {A1} hi va haver {num(O['cob']['total'])} accidents amb bici o patinet; el mapa en situa {num(O['cob']['geo'])}, perquè la resta no té una adreça precisa.", f"De {A0} a {A1} hubo {num(O['cob']['total'])} accidentes con bici o patinete; el mapa sitúa {num(O['cob']['geo'])}, porque el resto no tiene una dirección precisa.")} <a href="{R_}metode/#datos">{T("Com els situem", "Cómo los situamos")}</a>.</p>')
+           + antes_mapa(R_))
     # los scripts de la lógica van al final, tras el contenido: se separan del cuerpo
     i = cuerpo.index("<script>")
     html_, scr = cuerpo[:i], cuerpo[i:]
@@ -610,7 +811,7 @@ def p_mapa():
                 # descriptor Frictionless de cada lengua: el mapa mete en el ZIP el recurso de la vista descargada
                 + json.dumps({l: SD.datapackage(INFO, A0, A1, l) for l in ("va", "es")}, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
                 + ";</script>\n")
-    html = S.pagina("mapa", "mapa/", R_, t, d, cab + html_ + top, INFO, pasos, "og/observatori.png", extra_head=css,
+    html = S.pagina("mapa", "mapa/", R_, t, d, cab + html_ + com_llegir(R_) + top, INFO, pasos, "og/observatori.png", extra_head=css,
                     extra_fin=pie_info + scr + "\n" + SELECCION, main_attrs=' data-pag="mapa"')
     S.escribir(BUILD / "mapa/index.html", html)
 
@@ -1141,7 +1342,7 @@ def p_informe():
 # /dades/ para reutilizar los datos, /metode/ para cómo se hace (con el método viejo, tema a tema) y /sobre/ (quiénes
 # somos, accesibilidad, código y registro de cambios, desde el pie). Una sola entrada de menú («Dades i mètode»), que se
 # marca en /dades/ y /metode/; las tres llevan pestañas entre ellas. Las anclas viejas de /dades/ redirigen a su sitio.
-PAG_DM = {"dades": ["descarrega", "limits", "base", "fitxes"],
+PAG_DM = {"dades": ["descarrega", "accidents-geo", "limits", "base", "fitxes"],
           "metode": ["resum", "carrers", "filtres", "seguiment", "informes"],
           "sobre": ["continuitat", "codi", "privacitat", "accessibilitat"]}
 METODE_VIEJO = ["datos", "contar", "meta", "uso", "lugares", "normal", "plan", "gravedad", "limites", "errores", "revisiones", "futuro"]
@@ -1188,13 +1389,20 @@ def p_dm(pag):
                f'<p>{T("Per a qualsevol cosa, escriu-nos a", "Para cualquier cosa, escríbenos a")} <a href="mailto:{S.CORREU}">{S.CORREU}</a>.</p></section>')
         toc.insert(0, ("qui", ("Qui som", "Quiénes somos")))
         tipos = {"datos": ("Dades", "Datos"), "metode": ("Mètode", "Método"), "web": ("Web", "Web")}
-        lc = "".join(f'<li data-tipo="{ESC(t)}"><span>{fecha(f)}</span><span class="t">{T(*tipos[t])}</span><span>{T(ESC(va), ESC(es))}</span></li>' for f, t, va, es in reversed(CAMBIOS))
+        # registro de cambios: por día (lo más nuevo arriba), una línea por cambio con su tipo y su resumen corto
+        # (resumen_va/resumen_es de docs/cambios.csv); el texto largo queda dentro de un <details> cerrado
+        def _canvi(t, va, es, rva, res):
+            return (f'<li data-tipo="{ESC(t)}"><span class="t">{T(*tipos[t])}</span><div class="c-txt">{T(ESC(rva), ESC(res), "p", " class=\"c-res\"")}'
+                    f'<details class="c-mas"><summary>{T("Més detalls", "Más detalles")}</summary>{T(ESC(va), ESC(es), "p")}</details></div></li>')
+        lc = "".join(f'<div class="dia"><h3><time datetime="{f}">{T(fecha_larga(f, "va"), fecha_larga(f, "es"))}</time></h3><ul class="cambios">'
+                     + "".join(_canvi(*c[1:]) for c in grupo) + '</ul></div>'
+                     for f, grupo in itertools.groupby(reversed(CAMBIOS), key=lambda c: c[0]))
         nc = len(CAMBIOS); f0 = min(x[0] for x in CAMBIOS)
         canvis = (f'<section class="dades-sec" id="canvis"><h2>{T("Què ha canviat", "Qué ha cambiado")}</h2>'
                   f'<p class="nota">{T(f"{nc} canvis públics en les dades, el mètode o la web des del {fecha(f0)}, del més nou al més antic.", f"{nc} cambios públicos en los datos, el método o la web desde el {fecha(f0)}, del más nuevo al más antiguo.")}</p>'
                   f'<div class="chips" role="group" aria-label="Filtra els canvis / Filtrar los cambios"><button class="chip" type="button" data-ft="" aria-pressed="true">{T("Tot", "Todo")}</button>'
                   + "".join(f'<button class="chip" type="button" data-ft="{k}" aria-pressed="false">{T(*v)}</button>' for k, v in tipos.items())
-                  + f'</div><ul class="cambios">{lc}</ul></section>')
+                  + f'</div><div class="cambios-dias">{lc}</div></section>')
         toc.append(("canvis", ("Què ha canviat", "Qué ha cambiado")))
     toc_html = "".join(f'<li><a href="#{k}">{T(ESC(va), ESC(es))}</a></li>' for k, (va, es) in toc)
     k0, h1, sub = TIT_DM[pag]
@@ -1217,16 +1425,17 @@ def p_dm(pag):
     if pag == "sobre":
         js = '''<script>
 (function(){
-  var cs=[].slice.call(document.querySelectorAll(".cambios li"));
+  var cs=[].slice.call(document.querySelectorAll(".cambios li")), ds=[].slice.call(document.querySelectorAll(".cambios-dias .dia"));
   document.querySelectorAll(".chips .chip[data-ft]").forEach(function(b){ b.addEventListener("click",function(){
     var f=b.getAttribute("data-ft"); cs.forEach(function(li){ li.hidden=!!f&&li.getAttribute("data-tipo")!==f; });
+    ds.forEach(function(d){ d.hidden=!d.querySelector(".cambios li:not([hidden])"); });
     document.querySelectorAll(".chips .chip[data-ft]").forEach(function(x){ x.setAttribute("aria-pressed",String(x===b)); }); }); });
 })();
 </script>
 '''
     marca = (TIT_DM[pag][0][0] + " · " + S.MARCA[0], TIT_DM[pag][0][1] + " · " + S.MARCA[1])
-    desc = {"dades": ("Descarrega els accidents de bici i patinet de València situats en el mapa: què hi ha, què no permeten saber, privacitat i com citar-ho.",
-                      "Descarga los accidentes de bici y patinete de València situados en el mapa: qué hay, qué no permiten saber, privacidad y cómo citarlo."),
+    desc = {"dades": ("Descarrega els accidents de trànsit de València situats en el mapa, en CSV i GeoJSON amb versions: què hi ha, què no permeten saber, privacitat i com citar-ho.",
+                      "Descarga los accidentes de tráfico de València situados en el mapa, en CSV y GeoJSON con versiones: qué hay, qué no permiten saber, privacidad y cómo citarlo."),
             "metode": ("Com situem els accidents en el mapa, com fem els llocs i els carrers, com seguim l'objectiu del Pla i les mesures de l'Ajuntament.",
                        "Cómo situamos los accidentes en el mapa, cómo hacemos los lugares y las calles, cómo seguimos el objetivo del Plan y las medidas del Ayuntamiento."),
             "sobre": ("Qui fa l'observatori, com es manté i s'actualitza, codi obert, privacitat, accessibilitat i registre de canvis.", "Quién hace el observatorio, cómo se mantiene y actualiza, código abierto, privacidad, accesibilidad y registro de cambios.")}[pag]
@@ -1235,7 +1444,7 @@ def p_dm(pag):
         # Data Package (Frictionless) de los CSV del ZIP del mapa, en las dos lenguas: /dades/datapackage.json
         S.escribir(BUILD / "dades/datapackage.json", json.dumps(SD.datapackage(INFO, A0, A1), ensure_ascii=False, indent=2) + "\n")
         # metadatos estándar del conjunto (schema.org/Dataset, que leen Google Dataset Search y los catálogos; criterio 3 de
-        # las bases: «estándares abiertos y buenas prácticas»). Sin «distribution» hasta que haya fichero versionado (pend. 74)
+        # las bases: «estándares abiertos y buenas prácticas»). El de los CSV del mapa; el del dataset versionado, debajo
         ds = {"@context": "https://schema.org", "@type": "Dataset",
               "name": "Accidents amb bici i patinet a València situats en el mapa / Accidentes con bici y patinete en València situados en el mapa",
               "description": ("Accidents de trànsit amb almenys una bici o un patinet a València, del portal de dades obertes de l'Ajuntament, "
@@ -1253,6 +1462,26 @@ def p_dm(pag):
               "keywords": ["seguretat viària", "seguridad vial", "bicicleta", "patinet elèctric", "VMP", "accidents", "València", "dades obertes"],
               "variableMeasured": ["data i hora", "vehicles implicats", "gravetat", "factors concurrents", "coordenades (WGS 84)"]}
         css += '<script type="application/ld+json">' + json.dumps(ds, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+        # el dataset geolocalizado versionado (pendiente 74; scripts/exportar_dataset.py), con sus ficheros como «distribution»
+        vs = __import__("exportar_dataset").info_web()
+        if vs:
+            u = vs[0]; F = u["ficheros"]
+            dg = {"@context": "https://schema.org", "@type": "Dataset",
+                  "name": "Accidents de trànsit de València geolocalitzats / Accidentes de tráfico de València geolocalizados",
+                  "description": (f"Tots els accidents de trànsit del portal de dades obertes de l'Ajuntament de València ({A0}-{A1}), situats en el mapa amb el "
+                                  "carrerer municipal, amb el mètode i la incertesa de cada posició. / Todos los accidentes de tráfico del portal de datos "
+                                  f"abiertos del Ayuntamiento de València ({A0}-{A1}), situados en el mapa con el callejero municipal, con el método y la "
+                                  "incertidumbre de cada posición."),
+                  "url": f"{S.DOMINIO}/dades/#accidents-geo", "version": u["version"], "datePublished": u["fecha"],
+                  "license": "https://creativecommons.org/licenses/by/4.0/", "isAccessibleForFree": True, "inLanguage": ["ca", "es"],
+                  "temporalCoverage": f"{A0}/{A1}",
+                  "spatialCoverage": {"@type": "Place", "name": "València", "geo": {"@type": "GeoShape", "box": "39.27 -0.45 39.57 -0.27"}},
+                  "creator": {"@type": "Organization", "name": "Observatori de la bici i el patinet de València", "email": S.CORREU, "url": S.DOMINIO},
+                  "isBasedOn": {"@type": "Dataset", "name": INFO["conjunto"], "url": f"https://opendata.vlci.valencia.es/dataset/{INFO['conjunto']}",
+                                "creator": {"@type": "Organization", "name": "Ajuntament de València"}},
+                  "distribution": [{"@type": "DataDownload", "encodingFormat": fmt, "contentUrl": f"{S.DOMINIO}/datos/{F[k][0]}", "contentSize": f"{F[k][1]} B"}
+                                   for k, fmt in (("csv", "text/csv"), ("geojson", "application/geo+json"))]}
+            css += '<script type="application/ld+json">' + json.dumps(dg, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
     html = S.pagina("dades" if pag != "sobre" else None, f"{pag}/", R_, marca, desc, cuerpo_html, INFO, pasos, "og/metode.png",
                     extra_head=css,
  extra_fin=scr + js)
@@ -1321,9 +1550,10 @@ def p_indice(clase):
 
 
 def main():
-    S.assets(); mapas()
-    p_inicio(); p_mapa(); p_ajuntament(); p_informe(); p_dades(); p_indice("lloc"); p_indice("carrer")
-    for p in ("index.html", "mapa/index.html", "ajuntament/index.html", "informe/index.html", "informe/2025/index.html", "dades/index.html", "lloc/index.html", "carrer/index.html"):
+    global CONCEPTE
+    S.assets(); mapas(); CONCEPTE = concepte()
+    p_inicio(); p_resso(); p_mapa(); p_ajuntament(); p_informe(); p_dades(); p_indice("lloc"); p_indice("carrer")
+    for p in ("index.html", "resso/index.html", "mapa/index.html", "ajuntament/index.html", "informe/index.html", "informe/2025/index.html", "dades/index.html", "lloc/index.html", "carrer/index.html"):
         print(f"web/proto/build/{p} ({(BUILD / p).stat().st_size / 1e3:.0f} kB)")
 
 

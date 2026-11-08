@@ -153,7 +153,8 @@ def primera_frase(t, n=220):
 
 # Decisión del usuario (07/11/2026): el canal publica las novedades en cuanto las hay, sin cita fija (sin resumen
 # semanal): cambios de las medidas del Plan, avisos ciudadanos incorporados y cambios de datos y de la web de
-# docs/cambios.csv (no los de método). Los cambios salen cortos: la primera frase y el enlace al registro.
+# docs/cambios.csv (no los de método). Los cambios salen cortos: su resumen (resumen_va/resumen_es; si falta, la primera
+# frase) y el enlace al registro.
 TIPOS_CANVI = frozenset({"datos", "web"})
 
 
@@ -165,12 +166,14 @@ def novedades(cambios=CAMBIOS, plan=PLAN, avisos=AVISOS, tipos_canvi=TIPOS_CANVI
             continue
         tv, te = TIPO.get(r["tipo"], (r["tipo"], r["tipo"]))
         url = enlace("sobre/", "canvis")
-        cv, ce = primera_frase(r["va"]), primera_frase(r["es"])
+        # resumen corto de docs/cambios.csv (resumen_va/resumen_es, ≤ 120 caracteres); si falta, la primera frase
+        cv = " ".join((r.get("resumen_va") or "").split()) or primera_frase(r["va"])
+        ce = " ".join((r.get("resumen_es") or "").split()) or primera_frase(r["es"])
         out.append(dict(
             id="canvi:" + h(r["fecha"], r["tipo"], " ".join(r["es"].split())[:80]), fecha=r["fecha"], clase="canvi",
             va=f"<b>Què ha canviat</b> · {e(tv)} · {fecha_txt(r['fecha'])}\n\n{e(cv)}\n\n<a href=\"{url}\">Tots els canvis</a>",
             es=f"<b>Qué ha cambiado</b> · {e(te)} · {fecha_txt(r['fecha'])}\n\n{e(ce)}\n\n<a href=\"{url}\">Todos los cambios</a>",
-            va_corto=e(primera_frase(r["va"])), es_corto=e(primera_frase(r["es"])), url=url))
+            va_corto=e(cv), es_corto=e(ce), url=url))
 
     med = textos_medidas()
     for r in leer_csv(plan):
@@ -465,7 +468,7 @@ def autoprova():
 
     with tempfile.TemporaryDirectory() as tmp:
         t = Path(tmp)
-        (t / "cambios.csv").write_text("fecha,tipo,va,es\n2026-11-01,web,\"Primer canvi.\",\"Primer cambio.\"\n", encoding="utf-8")
+        (t / "cambios.csv").write_text("fecha,tipo,va,es,resumen_va,resumen_es\n2026-11-01,web,\"Primer canvi.\",\"Primer cambio.\",Primer.,Primero.\n", encoding="utf-8")
         (t / "plan.csv").write_text("id,actuacion,estado,fecha_estado,comprobado\nx-1,Medida <prueba> & co,anunciada,2026-10-01,\n",
                                     encoding="utf-8")
         (t / "avisos.csv").write_text("fecha,medida_plan,lugar,resumen_va,resumen_es,resultado,fuente_url\n"
@@ -486,16 +489,17 @@ def autoprova():
         assert run(A(enviar=True)) == 0 and not enviados, "la primera vez no se envía nada"
         assert len(json.loads(est.read_text())["publicat"]) == 2
         with open(t / "cambios.csv", "a", encoding="utf-8") as f:
-            f.write('2026-11-07,datos,"Dades <noves> & més.","Datos <nuevos> & más."\n')
+            f.write('2026-11-07,datos,"Detall llarg. Segona frase.","Detalle largo. Segunda frase.","Dades <noves> & més.","Datos <nuevos> & más."\n')
         cola.append({"ok": False, "error_code": 429, "description": "Too Many Requests", "parameters": {"retry_after": 1}})
         assert run(A(enviar=True)) == 0 and len(enviados) == 1, "un 429 se reintenta y se envía una vez"
         txt = enviados[0]["text"]
         assert "&lt;noves&gt; &amp; més" in txt and "<noves>" not in txt and enviados[0]["parse_mode"] == "HTML"
+        assert "Detall llarg" not in txt and "Detalle largo" not in txt, "el mensaje usa el resumen, no el detalle"
         assert txt.index("Què ha canviat") < txt.index("Qué ha cambiado") and "utm_source=telegram#canvis" in txt
         assert run(A(enviar=True)) == 0 and len(enviados) == 1, "lo enviado no se repite"
         cola.append({"ok": False, "error_code": 403, "description": "Forbidden: bot is not a member"})
         with open(t / "cambios.csv", "a", encoding="utf-8") as f:
-            f.write('2026-11-08,web,"Un altre.","Otro."\n')
+            f.write('2026-11-08,web,"Un altre.","Otro.",,\n')   # sin resumen: la primera frase
         print("(se espera un 429 y un error 403 simulados)")
         assert run(A(enviar=True)) == 1, "un 403 para con error"
         with open(t / "plan.csv", "a", encoding="utf-8") as f:
@@ -510,7 +514,7 @@ def autoprova():
         assert "&lt;prueba&gt;" in mensaje(next(n for n in nov() if n["clase"] == "pla")), "escape en los títulos del Plan"
         subscriptors(env=envf, abrir=lambda req, timeout=None: Resp({"ok": True, "result": 7}), ruta=t / "subs.csv", hoy="2026-11-09")
         assert (t / "subs.csv").read_text().splitlines() == ["fecha,subscriptors", "2026-11-09,7"]
-    print("autoprova OK: primera ejecución sin inundar, escape HTML, 429, 403, resumen semanal y subscriptors (sin red)")
+    print("autoprova OK: primera ejecución sin inundar, resumen del cambio, escape HTML, 429, 403, resumen semanal y subscriptors (sin red)")
     return 0
 
 

@@ -1,0 +1,245 @@
+{
+  "profile": "data-package",
+  "name": "observatori-bici-patinet-valencia-accidents-geolocalitzats",
+  "id": "https://observatoribicivlc.org/datos/siniestros_geo_v1.0_2026-11_datapackage.json",
+  "title": "Accidents de trànsit de València geolocalitzats, 2022-2025 / Accidentes de tráfico de València geolocalizados, 2022-2025",
+  "description": "Tots els accidents de trànsit del conjunt «Accidents de trànsit 2022-2025» del portal de dades obertes de l'Ajuntament de València, amb la seua posició en el mapa (situada amb el carrerer municipal), el mètode i la incertesa de cada posició, el codi de carrer, si hi ha bici o patinet i marques de qualitat. Sense dades de les persones implicades: està prohibit reidentificar persones. / Todos los accidentes de tráfico del conjunto «Accidentes de tráfico 2022-2025» del portal de datos abiertos del Ayuntamiento de València, con su posición en el mapa (situada con el callejero municipal), el método y la incertidumbre de cada posición, el código de calle, si hay bici o patinete y marcas de calidad. Sin datos de las personas implicadas: está prohibido reidentificar personas.",
+  "homepage": "https://observatoribicivlc.org/dades/#accidents-geo",
+  "version": "1.0",
+  "created": "2026-11-07T00:00:00Z",
+  "keywords": [
+    "seguretat viària",
+    "seguridad vial",
+    "accidents de trànsit",
+    "accidentes de tráfico",
+    "bicicleta",
+    "patinet",
+    "patinete",
+    "VMP",
+    "geocodificació",
+    "geocodificación",
+    "València"
+  ],
+  "licenses": [
+    {
+      "name": "CC-BY-4.0",
+      "path": "https://creativecommons.org/licenses/by/4.0/",
+      "title": "Creative Commons Attribution 4.0 International"
+    }
+  ],
+  "contributors": [
+    {
+      "title": "Observatori de la bici i el patinet de València / Observatorio de la bici y el patinete de València",
+      "email": "hola@observatoribicivlc.org",
+      "path": "https://observatoribicivlc.org",
+      "role": "author"
+    },
+    {
+      "title": "Ajuntament de València",
+      "path": "https://opendata.vlci.valencia.es",
+      "role": "publisher"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Font de les dades: Ajuntament de València – Dades Obertes. Accidents de trànsit 2022-2025 (siniestros-de-trafico-2022-2025), obtinguts el 2026-10-30 / Fuente de los datos: Ajuntament de València – Dades Obertes. Accidentes de tráfico 2022-2025 (siniestros-de-trafico-2022-2025), obtenidos el 2026-10-30",
+      "path": "https://opendata.vlci.valencia.es/dataset/siniestros-de-trafico-2022-2025"
+    },
+    {
+      "title": "Ajuntament de València – Dades Obertes: vies, eixos de carrer i portals (carrerer) / vías, ejes de calle y portales (callejero)",
+      "path": "https://geoportal.valencia.es/server/rest/services/OPENDATA/UrbanismoEInfraestructuras/MapServer"
+    }
+  ],
+  "resources": [
+    {
+      "name": "accidents-geolocalitzats-csv",
+      "path": "siniestros_geo_v1.0_2026-11.csv",
+      "profile": "tabular-data-resource",
+      "title": "Tots els accidents (també els no situats) / Todos los accidentes (también los no situados)",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "bytes": 6886442,
+      "hash": "sha256:3eda4e067db55e43b925f5ae1e2e0a58a5cae738c5c904195eb4bdfad1f92321",
+      "dialect": {
+        "delimiter": ",",
+        "lineTerminator": "\r\n",
+        "quoteChar": "\"",
+        "doubleQuote": true,
+        "header": true
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "id_portal",
+            "type": "integer",
+            "description": "Identificador de l'accident en el portal (camp _id del conjunt «Accidents de trànsit 2022-2025»). És l'únic identificador que publica el portal. / Identificador del accidente en el portal (campo _id del conjunto «Accidentes de tráfico 2022-2025»). Es el único identificador que publica el portal."
+          },
+          {
+            "name": "fecha_hora",
+            "type": "datetime",
+            "description": "Data i hora (local), tal com la publica el portal. Els segons només hi són des de juliol de 2024; abans valen 00. / Fecha y hora (local), tal como la publica el portal. Los segundos solo están desde julio de 2024; antes valen 00.",
+            "format": "%Y-%m-%dT%H:%M:%S"
+          },
+          {
+            "name": "anyo",
+            "type": "year",
+            "description": "Any de l'accident. / Año del accidente."
+          },
+          {
+            "name": "gravedad",
+            "type": "string",
+            "description": "Gravetat segons el portal. No es pot comparar entre anys: des de 2023 es compta com a ferit greu qui passa més de 24 hores a l'hospital. / Gravedad según el portal. No se puede comparar entre años: desde 2023 se cuenta como herido grave a quien pasa más de 24 horas en el hospital."
+          },
+          {
+            "name": "tipo_accidente",
+            "type": "string",
+            "description": "Tipus d'accident segons el portal (buit si no consta). Només és fiable des de juliol de 2024: abans falta en moltes files. / Tipo de accidente según el portal (vacío si no consta). Solo es fiable desde julio de 2024: antes falta en muchas filas."
+          },
+          {
+            "name": "vehiculos_implicados",
+            "type": "string",
+            "description": "Vehicles implicats, tal com els publica el portal (separats per comes). / Vehículos implicados, tal como los publica el portal (separados por comas)."
+          },
+          {
+            "name": "factores",
+            "type": "string",
+            "description": "Factors concurrents segons la policia, tal com els publica el portal (buit si no consta). / Factores concurrentes según la policía, tal como los publica el portal (vacío si no consta)."
+          },
+          {
+            "name": "ubicacion",
+            "type": "string",
+            "description": "Adreça escrita en el comunicat de la policia, tal com la publica el portal. / Dirección escrita en el parte de la policía, tal como la publica el portal."
+          },
+          {
+            "name": "con_bici",
+            "type": "boolean",
+            "description": "Hi ha almenys una bicicleta entre els vehicles implicats. / Hay al menos una bicicleta entre los vehículos implicados.",
+            "trueValues": [
+              "true"
+            ],
+            "falseValues": [
+              "false"
+            ]
+          },
+          {
+            "name": "con_patinete",
+            "type": "boolean",
+            "description": "Hi ha almenys un patinet o un altre vehicle de mobilitat personal (VMP) entre els vehicles implicats. / Hay al menos un patinete u otro vehículo de movilidad personal (VMP) entre los vehículos implicados.",
+            "trueValues": [
+              "true"
+            ],
+            "falseValues": [
+              "false"
+            ]
+          },
+          {
+            "name": "metodo",
+            "type": "string",
+            "description": "Com hem situat l'accident: cruce (cruïlla de dos carrers), portal (número de portal), portal_cercano (número de portal proper, de la mateixa banda i a 10 números o menys), cruce_fallo i numero_fallo (no s'ha pogut situar) o solo_calle (l'adreça només dona el carrer i no se situa). / Cómo hemos situado el accidente: cruce (cruce de dos calles), portal (número de portal), portal_cercano (número de portal cercano, del mismo lado y a 10 números o menos), cruce_fallo y numero_fallo (no se ha podido situar) o solo_calle (la dirección solo da la calle y no se sitúa)."
+          },
+          {
+            "name": "lon",
+            "type": "number",
+            "description": "Longitud del punt: la cruïlla o el número de portal citat en el comunicat, no un domicili. Buit si no s'ha pogut situar. / Longitud del punto: el cruce o el número de portal citado en el parte, no un domicilio. Vacío si no se ha podido situar.",
+            "unit": "graus (WGS 84, EPSG:4326) / grados (WGS 84, EPSG:4326)"
+          },
+          {
+            "name": "lat",
+            "type": "number",
+            "description": "Latitud del punt. / Latitud del punto.",
+            "unit": "graus (WGS 84, EPSG:4326) / grados (WGS 84, EPSG:4326)"
+          },
+          {
+            "name": "incertidumbre_m",
+            "type": "integer",
+            "description": "Radi aproximat al voltant del punt on pot estar el lloc que descriu l'adreça. No és un error mesurat: és una estimació segons el mètode (vegeu el LLEGIU-ME). / Radio aproximado alrededor del punto en el que puede estar el lugar que describe la dirección. No es un error medido: es una estimación según el método (ver el LÉEME).",
+            "unit": "metres / metros"
+          },
+          {
+            "name": "codvia",
+            "type": "integer",
+            "description": "Codi del carrer en el carrerer municipal (codvia): el carrer del portal o el primer carrer de la cruïlla. Buit si el nom no casa amb cap carrer o casa amb més d'un. / Código de la calle en el callejero municipal (codvia): la calle del portal o la primera calle del cruce. Vacío si el nombre no casa con ninguna calle o casa con más de una."
+          },
+          {
+            "name": "codvia_2",
+            "type": "integer",
+            "description": "Codi del segon carrer de la cruïlla (només en les cruïlles). / Código de la segunda calle del cruce (solo en los cruces)."
+          },
+          {
+            "name": "duplicado_de",
+            "type": "integer",
+            "description": "Si la fila és idèntica a una altra en tots els camps del portal llevat de l'identificador, l'id_portal de la primera. Buit en la resta. / Si la fila es idéntica a otra en todos los campos del portal salvo el identificador, el id_portal de la primera. Vacío en el resto."
+          },
+          {
+            "name": "mismo_lugar_y_hora",
+            "type": "boolean",
+            "description": "Hi ha una altra fila amb la mateixa data, hora i adreça però algun altre camp diferent: pot ser el mateix accident registrat dues vegades o dos accidents. / Hay otra fila con la misma fecha, hora y dirección pero algún otro campo distinto: puede ser el mismo accidente registrado dos veces o dos accidentes.",
+            "trueValues": [
+              "true"
+            ],
+            "falseValues": [
+              "false"
+            ]
+          },
+          {
+            "name": "fila_incompleta",
+            "type": "boolean",
+            "description": "La fila ve trencada del portal: els vehicles són només «[» o l'adreça porta «nan» en lloc d'un carrer o d'un número. / La fila viene rota del portal: los vehículos son solo «[» o la dirección lleva «nan» en lugar de una calle o de un número.",
+            "trueValues": [
+              "true"
+            ],
+            "falseValues": [
+              "false"
+            ]
+          },
+          {
+            "name": "en_analisis",
+            "type": "boolean",
+            "description": "L'observatori la fa servir en les xifres: anys complets i sense duplicats exactes. / El observatorio la usa en las cifras: años completos y sin duplicados exactos.",
+            "trueValues": [
+              "true"
+            ],
+            "falseValues": [
+              "false"
+            ]
+          },
+          {
+            "name": "incidencias",
+            "type": "string",
+            "description": "Codis dels errors detectats en les dades del portal que afecten la fila, separats per «;» (vegeu el LLEGIU-ME). / Códigos de los errores detectados en los datos del portal que afectan a la fila, separados por «;» (ver el LÉEME)."
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "id_portal"
+        ]
+      }
+    },
+    {
+      "name": "accidents-geolocalitzats-geojson",
+      "path": "siniestros_geo_v1.0_2026-11.geojson",
+      "profile": "data-resource",
+      "title": "Només els accidents situats en el mapa / Solo los accidentes situados en el mapa",
+      "description": "GeoJSON (RFC 7946, WGS 84). Les propietats són les columnes del CSV llevat de lon i lat. / Las propiedades son las columnas del CSV salvo lon y lat.",
+      "format": "geojson",
+      "mediatype": "application/geo+json",
+      "encoding": "utf-8",
+      "bytes": 17399120,
+      "hash": "sha256:94da15652df703fbeac977f911b876bfcde0cd5107194c838888f6a1ab8008d1"
+    },
+    {
+      "name": "llegiu-me-leeme",
+      "path": "siniestros_geo_v1.0_2026-11_LLEGIU-ME_LEEME.txt",
+      "profile": "data-resource",
+      "title": "LLEGIU-ME / LÉEME",
+      "format": "txt",
+      "mediatype": "text/plain",
+      "encoding": "utf-8",
+      "bytes": 20446,
+      "hash": "sha256:78b69d39a4b51eb2d5f9bbcad79346e18a3d54f453861a84e8554af715d77343"
+    }
+  ]
+}

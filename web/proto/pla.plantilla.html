@@ -1,6 +1,6 @@
 <title>El Pla, al dia · Observatori de la bici i el patinet de València</title>
 <meta name="description" content="Seguim els sinistres amb bici i patinet a València amb les dades obertes de l'Ajuntament: on passen, què s'està fent i si el Pla Director de Seguretat Viària 2026-2030 funciona.">
-<meta name="theme-color" content="#EEF1F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0F151B" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='11.5'%20fill='%2315202B'%20stroke='%2355626E'/%3E%3Cg%20fill='none'%20stroke='%23EEF1F2'%20stroke-width='2.2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Ccircle%20cx='6.5'%20cy='15'%20r='3.3'/%3E%3Ccircle%20cx='17.5'%20cy='15'%20r='3.3'/%3E%3Cpath%20d='M6.5%2015l3.8-6.5h4.7l2.5%206.5M10.3%208.5%209.3%206.2'/%3E%3C/g%3E%3C/svg%3E">
 <meta property="og:type" content="website">
@@ -28,7 +28,7 @@
    a la bici y al patinete. Datos: window.PLA (scripts/exportar_web.py, desde data/processed/plan_seguimiento.csv, el validado).
    Base de estilos: la de cambios.plantilla.html (paleta común de las páginas). */
 :root{
-  --bg:#EEF1F2; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
+  --bg:#FFFFFF; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
   --bici:#2a78d6; --pat:#C94B17; --amb:#14875E; --lane:#9DB8AE; --sel:#b87a00; --warn:#B42318; --mute:#AEB7BD; --hl:#FFE58A;
   --display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
   --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -53,11 +53,11 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .top nav button{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 10px;cursor:pointer;border-radius:3px}
 .top nav button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--bici);outline-offset:2px}
-.intro{padding-block:36px 8px;max-width:780px}
+.intro{padding-block:36px 8px}
 .eyebrow{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:0}
 h1,h2,h3{font-family:var(--display);text-wrap:balance}
 .intro h1{font-weight:800;text-transform:uppercase;font-size:clamp(34px,5.5vw,58px);line-height:1;margin:8px 0 12px}
-.intro p{font-size:18px;color:var(--ink2);max-width:62ch;margin:0 0 10px}
+.intro p{font-size:18px;color:var(--ink2);margin:0 0 10px}
 .cuerpo{display:grid;grid-template-columns:230px minmax(0,1fr);gap:40px;padding-bottom:60px}
 .indice{position:sticky;top:calc(env(safe-area-inset-top,0px) + 66px);align-self:start;font-family:var(--display);font-size:15px}
 .indice p{margin:0 0 6px}
@@ -68,7 +68,7 @@ h1,h2,h3{font-family:var(--display);text-wrap:balance}
 .indice a:hover{color:var(--ink)}
 .indice a[aria-current="true"]{color:var(--ink);border-left-color:var(--ink)}
 main{min-width:0}
-main section{max-width:760px;padding-block:22px 18px;border-top:1px solid var(--line);scroll-margin-top:70px}
+main section{padding-block:22px 18px;border-top:1px solid var(--line);scroll-margin-top:70px}
 main section:first-child{border-top:0}
 main h2{font-size:30px;font-weight:800;text-transform:uppercase;line-height:1.05;margin:0 0 12px;display:flex;gap:10px;align-items:baseline}
 main h2 .n{font-size:18px;color:var(--ink2)}
@@ -112,7 +112,7 @@ a{color:var(--ink)}
 .barra span{display:block;height:100%}
 .ley{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:4px 18px;font-size:14.5px}
 .ley li{margin:0}
-.rev{font-size:14.5px;color:var(--ink2);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:8px 12px;max-width:640px}
+.rev{font-size:14.5px;color:var(--ink2);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:8px 12px}
 .rev b{color:var(--ink)}
 /* estados: el color siempre va con su texto */
 .est{display:inline-block;font-family:var(--display);font-weight:700;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;padding:1px 7px;border:1px solid;white-space:nowrap}

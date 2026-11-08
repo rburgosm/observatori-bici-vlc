@@ -24,11 +24,15 @@ BD.mkdir(exist_ok=True)
 PAGINAS = (("observatori", "observatori.js"), ("informe", "relato.js"), ("metode", "metode.js"), ("cambios", "cambios.js"),
            ("pla", "pla.js"))   # None: sin datos
 
-# registro público de cambios: docs/cambios.csv (fecha, tipo, va, es) -> web/proto/datos/cambios.js
+# registro público de cambios: docs/cambios.csv (fecha, tipo, va, es, resumen_va, resumen_es) -> web/proto/datos/cambios.js
+# (rva/res: la frase corta que se ve en /sobre/#canvis; va/es: el detalle)
 import csv, json
 with open(ROOT / "docs/cambios.csv", newline="", encoding="utf-8") as f:
-    CAMBIOS = [{"f": r["fecha"], "t": r["tipo"], "va": r["va"], "es": r["es"]} for r in csv.DictReader(f)]
+    CAMBIOS = [{"f": r["fecha"], "t": r["tipo"], "va": r["va"], "es": r["es"], "rva": r.get("resumen_va") or "",
+                "res": r.get("resumen_es") or ""} for r in csv.DictReader(f)]
 assert all(c["t"] in {"datos", "metode", "web"} and c["va"] and c["es"] for c in CAMBIOS), "docs/cambios.csv: tipo o texto vacío"
+assert all(c["rva"] and c["res"] and len(c["rva"]) <= 120 and len(c["res"]) <= 120 and "\n" not in c["rva"] + c["res"]
+           for c in CAMBIOS), "docs/cambios.csv: falta resumen_va/resumen_es, pasa de 120 caracteres o tiene un salto de línea"
 (W / "datos/cambios.js").write_text("window.CAMBIOS = " + json.dumps(CAMBIOS, ensure_ascii=False) + ";\n")
 # pie común (comun/pie.js): conjunto de siniestros del portal y su fecha de obtención (la pide la política de uso del portal;
 # es la fecha del fichero descargado) y versión de la web (último cambio público de docs/cambios.csv)

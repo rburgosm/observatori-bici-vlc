@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 B = ROOT / "web/proto/build"
 UMAMI_JS = "https://estadisticas.observatoribicivlc.org/script.js"   # contador sin cookies en el propio servidor (deploy/umami/)
 PAGS = ["index.html", "mapa/index.html", "ajuntament/index.html", "informe/index.html", "informe/2025/index.html",
-        "dades/index.html", "metode/index.html", "sobre/index.html", "lloc/index.html", "carrer/index.html"]
+        "dades/index.html", "metode/index.html", "sobre/index.html", "resso/index.html", "lloc/index.html", "carrer/index.html"]
 errores = 0
 
 

@@ -1,0 +1,74 @@
+{
+  "version": "1.0",
+  "mes": "2026-11",
+  "fecha": "2026-11-07",
+  "nombre": "siniestros_geo_v1.0_2026-11",
+  "filas_csv": 34244,
+  "features_geojson": 30225,
+  "columnas": [
+    "id_portal",
+    "fecha_hora",
+    "anyo",
+    "gravedad",
+    "tipo_accidente",
+    "vehiculos_implicados",
+    "factores",
+    "ubicacion",
+    "con_bici",
+    "con_patinete",
+    "metodo",
+    "lon",
+    "lat",
+    "incertidumbre_m",
+    "codvia",
+    "codvia_2",
+    "duplicado_de",
+    "mismo_lugar_y_hora",
+    "fila_incompleta",
+    "en_analisis",
+    "incidencias"
+  ],
+  "ficheros": {
+    "siniestros_geo_v1.0_2026-11.csv": {
+      "sha256": "3eda4e067db55e43b925f5ae1e2e0a58a5cae738c5c904195eb4bdfad1f92321",
+      "bytes": 6886442
+    },
+    "siniestros_geo_v1.0_2026-11.geojson": {
+      "sha256": "94da15652df703fbeac977f911b876bfcde0cd5107194c838888f6a1ab8008d1",
+      "bytes": 17399120
+    },
+    "siniestros_geo_v1.0_2026-11_LLEGIU-ME_LEEME.txt": {
+      "sha256": "78b69d39a4b51eb2d5f9bbcad79346e18a3d54f453861a84e8554af715d77343",
+      "bytes": 20446
+    },
+    "siniestros_geo_v1.0_2026-11_datapackage.json": {
+      "sha256": "526fefd92d1e4f802b574284a08e63f900d83cb1fa3603a51b43ecb3cbce16b0",
+      "bytes": 12896
+    }
+  },
+  "nota_va": "Primera versió publicada: tots els accidents del portal de 2022 a 2025 (i les 17 files de l'1 de gener de 2026), situats en el mapa amb el carrerer municipal.",
+  "nota_es": "Primera versión publicada: todos los accidentes del portal de 2022 a 2025 (y las 17 filas del 1 de enero de 2026), situados en el mapa con el callejero municipal.",
+  "fuentes": {
+    "conjunto": "siniestros-de-trafico-2022-2025",
+    "fecha_descarga": "2026-10-30",
+    "data/raw/siniestros/siniestros-de-trafico-2022-2025.json": "852689c21907d023333ed513ff10aac91f686a9ae46beea6e86543147869c04c",
+    "data/processed/siniestros_geo.csv": "fdf1118b282661d122bfbf037dae5e0e329f3314b0c42982877139ab845604fe"
+  },
+  "parametros": {
+    "sep_portales_m": 13.9,
+    "radio_cruce_m": 30
+  },
+  "marcas": {
+    "INC-001": 18,
+    "INC-002": 58,
+    "INC-003": 25,
+    "INC-004": 17,
+    "INC-027": 44
+  },
+  "cobertura": {
+    "2022": 0.7157,
+    "2023": 0.8642,
+    "2024": 0.9359,
+    "2025": 0.9826
+  }
+}

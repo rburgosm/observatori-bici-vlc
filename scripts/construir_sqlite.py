@@ -217,7 +217,10 @@ CREATE TABLE cambio (
   orden INTEGER PRIMARY KEY,
   fecha TEXT NOT NULL CHECK (fecha {ISO_D}),
   tipo TEXT NOT NULL CHECK (tipo IN ('datos', 'metode', 'web')),
-  va TEXT NOT NULL CHECK (va <> ''), es TEXT NOT NULL CHECK (es <> '')
+  va TEXT NOT NULL CHECK (va <> ''), es TEXT NOT NULL CHECK (es <> ''),
+  -- resumen público (una frase corta; va/es son el detalle): obligatorio, ≤ 120 caracteres y sin saltos de línea
+  resumen_va TEXT NOT NULL CHECK (resumen_va <> '' AND length(resumen_va) <= 120 AND instr(resumen_va, char(10)) = 0 AND instr(resumen_va, char(13)) = 0),
+  resumen_es TEXT NOT NULL CHECK (resumen_es <> '' AND length(resumen_es) <= 120 AND instr(resumen_es, char(10)) = 0 AND instr(resumen_es, char(13)) = 0)
 );
 
 CREATE TABLE ficha (
@@ -302,7 +305,7 @@ EXPORTS = {
         sql="SELECT tipo, codvia, x, y, nom, nom_es, alta FROM nombre_lugar ORDER BY id", fmt=dict(codvia="i", x="f", y="f"), fin="\n"),
     "outputs/lugares_nudos.csv": dict(sql=None, fmt=None, fin="\n"),   # columnas de LUGAR_COLS, formato de LUGAR_FMT
     "data/processed/plan_seguimiento.csv": dict(sql=None, fmt=None, fin="\r\n"),
-    "docs/cambios.csv": dict(sql="SELECT fecha, tipo, va, es FROM cambio ORDER BY orden", fmt={}, fin="\n"),
+    "docs/cambios.csv": dict(sql="SELECT fecha, tipo, va, es, resumen_va, resumen_es FROM cambio ORDER BY orden", fmt={}, fin="\n"),
 }
 LUGAR_COLS, LUGAR_FMT = [], {}      # se rellenan al leer el CSV (pandas: int64 -> i, float64 -> f, bool -> b)
 
@@ -452,7 +455,8 @@ def construir(ruta=DB, plan_desde_csv=False):
 
     # --- cambios
     with open(ROOT / "docs/cambios.csv", newline="", encoding="utf-8") as f:
-        con.executemany("INSERT INTO cambio VALUES (?,?,?,?,?)", [(i, r["fecha"], r["tipo"], r["va"], r["es"]) for i, r in enumerate(csv.DictReader(f))])
+        con.executemany("INSERT INTO cambio VALUES (?,?,?,?,?,?,?)", [(i, r["fecha"], r["tipo"], r["va"], r["es"], r.get("resumen_va"), r.get("resumen_es"))
+                                                               for i, r in enumerate(csv.DictReader(f))])
 
     # --- fichas publicadas y slugs congelados
     fichas(con)

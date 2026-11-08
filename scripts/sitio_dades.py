@@ -62,6 +62,7 @@ def cifras(con, O, R, P, M):
         "plan_rev": P["rev"]["ult"], "plan_prox": P["rev"]["prox"], "plan_aprob": P["plan_doc"]["aprob"],
         "n_fuentes": n_fuentes, "tipos_cons": tipos_cons, "n_tipos": len(P["tipos"]),
         "n_cambios": n_cambios, "tablas": tablas,
+        "dataset": __import__("exportar_dataset").info_web(),   # versiones cerradas del dataset geolocalizado (pendiente 74)
     }
 
 
@@ -91,28 +92,78 @@ def secciones(c, L):
 </ol>
 <p>Todo el proceso es abierto y se puede repetir: {git}. Quién mantiene el observatorio, cada cuánto se actualiza y qué pasaría si se parase lo explicamos en <a href="{{RAIZ}}sobre/#continuitat">la continuidad del observatorio</a>.</p>""")))
 
+    # ---------------------------------------------------------------- dataset geolocalizado versionado (pendiente 74)
+    ds = c.get("dataset") or []
+    if ds:
+        u = ds[0]; F = u["ficheros"]
+        mb = lambda b: (f"{b / 1e6:.1f}".replace(".", ",") + " MB") if b >= 1e6 else f"{max(1, round(b / 1e3))} kB"
+        url = lambda k, fs=None: "{RAIZ}datos/" + (fs or F)[k][0]
+        cob = u["cobertura"]; ca = sorted(cob)
+        targeta_va = (f'<div class="tarjeta"><span class="fmt">Conjunt complet (v{u["version"]})</span><span>Tots els accidents de trànsit de {a0} a {a1}, '
+                      f'en CSV i GeoJSON, amb com hem situat cadascun i un diccionari de camps.</span><a class="btn" href="#accidents-geo">Vés al conjunt complet</a></div>')
+        targeta_es = (f'<div class="tarjeta"><span class="fmt">Conjunto completo (v{u["version"]})</span><span>Todos los accidentes de tráfico de {a0} a {a1}, '
+                      f'en CSV y GeoJSON, con cómo hemos situado cada uno y un diccionario de campos.</span><a class="btn" href="#accidents-geo">Ir al conjunto completo</a></div>')
+        def versiones_html(l):
+            o = []
+            for v in ds:
+                fs = v["ficheros"]
+                if l == "va":
+                    o.append(f'<li><b>Versió {v["version"]}</b>, del {fecha(v["fecha"])}: {ESC(v["nota_va"])} <a href="{url("csv", fs)}" download>CSV de la versió {v["version"]} ({mb(fs["csv"][1])})</a> · '
+                             f'<a href="{url("geojson", fs)}" download>GeoJSON de la versió {v["version"]} ({mb(fs["geojson"][1])})</a></li>')
+                else:
+                    o.append(f'<li><b>Versión {v["version"]}</b>, del {fecha(v["fecha"])}: {ESC(v["nota_es"])} <a href="{url("csv", fs)}" download>CSV de la versión {v["version"]} ({mb(fs["csv"][1])})</a> · '
+                             f'<a href="{url("geojson", fs)}" download>GeoJSON de la versión {v["version"]} ({mb(fs["geojson"][1])})</a></li>')
+            return "<ul>" + "".join(o) + "</ul>"
+        out.append(("accidents-geo", {"va": f"Accidents geolocalitzats (v{u['version']})", "es": f"Accidentes geolocalizados (v{u['version']})"}, T(
+            f"""<p>Tots els accidents de trànsit que l'Ajuntament publica per a {a0}-{a1}, no només els de bici o patinet: {mil(u['filas'])} files, de les quals n'hem situat {mil(u['features'])} en el mapa, el {pc(u['features'] / u['filas'], 0)}. Cada fila diu com l'hem situada, quina incertesa té la posició en metres i quin és el codi del carrer, i marca si hi ha bici o patinet i si la fila arriba del portal amb algun error.</p>
+<div class="descarga">
+<div class="tarjeta"><span class="fmt">CSV</span><span>Totes les files, també les que no hem pogut situar. S'obri amb qualsevol full de càlcul o programa d'anàlisi.</span><a class="btn" href="{url('csv')}" download>Descarrega el CSV ({mb(F['csv'][1])})</a></div>
+<div class="tarjeta"><span class="fmt">GeoJSON</span><span>Només els {mil(u['features'])} accidents situats, a punt per a obrir-los en un programa de mapes com QGIS.</span><a class="btn" href="{url('geojson')}" download>Descarrega el GeoJSON ({mb(F['geojson'][1])})</a></div>
+</div>
+<p class="nota">Versió {u['version']}, publicada el {fecha(u['fecha'])} amb les dades que vam obtindre del portal el {fecha(u['descarga'])}. Llicència CC BY 4.0: pots fer-les servir per a qualsevol fi si cites com a font l'Ajuntament de València – Dades Obertes i, com a autor de les coordenades, l'observatori. Abans de fer-les servir, llig el <a href="{url('txt')}">fitxer LLEGIU-ME amb el diccionari de dades, el mètode i les limitacions (text, {mb(F['txt'][1])})</a>. Per a llegir-les amb un programa, hi ha el <a href="{url('json')}">descriptor datapackage.json d'aquesta versió ({mb(F['json'][1])})</a>.</p>
+<p>Recorda que mostren on es registren més accidents, no on és més perillós, perquè no sabem quanta gent passa per cada lloc. A més, la part que hem pogut situar puja amb els anys, del {pc(cob[ca[0]], 0)} en {ca[0]} al {pc(cob[ca[-1]], 0)} en {ca[-1]}: per a veure si els accidents pugen o baixen, cal comptar totes les files, no només les situades. La incertesa en metres és una estimació segons com hem situat cada accident, no un error mesurat.</p>
+<p class="nota">Si vols enllaçar sempre la versió més nova, fes servir aquests enllaços fixos: <a href="{{RAIZ}}datos/siniestros_geo_ultima.csv" download>CSV de l'última versió</a> i <a href="{{RAIZ}}datos/siniestros_geo_ultima.geojson" download>GeoJSON de l'última versió</a>.</p>
+<h3 style="margin:24px 0 6px">Versions</h3>
+<p>Cada versió queda tancada: el seu fitxer no canvia mai, i una correcció es publica com a versió nova. Les versions 1.x milloren com situem els accidents amb les mateixes dades; la 2.0 arribarà amb les dades de {a1 + 1} o si canvien les columnes. Cada versió s'apunta també en el <a href="{{RAIZ}}sobre/#canvis">registre de canvis</a>.</p>
+{versiones_html('va')}
+<p class="cita"><b>Com citar-ho:</b> Observatori de la bici i el patinet de València ({u['fecha'][:4]}). Accidents de trànsit de València geolocalitzats, {a0}-{a1}, versió {u['version']}. Dades de l'Ajuntament de València – Dades Obertes (CC BY 4.0), modificades per l'observatori.</p>""",
+            f"""<p>Todos los accidentes de tráfico que el Ayuntamiento publica para {a0}-{a1}, no solo los de bici o patinete: {mil(u['filas'])} filas, de las que hemos situado {mil(u['features'])} en el mapa, el {pc(u['features'] / u['filas'], 0)}. Cada fila dice cómo la hemos situado, qué incertidumbre tiene la posición en metros y cuál es el código de la calle, y marca si hay bici o patinete y si la fila llega del portal con algún error.</p>
+<div class="descarga">
+<div class="tarjeta"><span class="fmt">CSV</span><span>Todas las filas, también las que no hemos podido situar. Se abre con cualquier hoja de cálculo o programa de análisis.</span><a class="btn" href="{url('csv')}" download>Descarga el CSV ({mb(F['csv'][1])})</a></div>
+<div class="tarjeta"><span class="fmt">GeoJSON</span><span>Solo los {mil(u['features'])} accidentes situados, listos para abrirlos en un programa de mapas como QGIS.</span><a class="btn" href="{url('geojson')}" download>Descarga el GeoJSON ({mb(F['geojson'][1])})</a></div>
+</div>
+<p class="nota">Versión {u['version']}, publicada el {fecha(u['fecha'])} con los datos que obtuvimos del portal el {fecha(u['descarga'])}. Licencia CC BY 4.0: puedes usarlos para cualquier fin si citas como fuente al Ayuntamiento de València – Dades Obertes y, como autor de las coordenadas, al observatorio. Antes de usarlos, lee el <a href="{url('txt')}">fichero LÉEME con el diccionario de datos, el método y las limitaciones (texto, {mb(F['txt'][1])})</a>. Para leerlos con un programa, está el <a href="{url('json')}">descriptor datapackage.json de esta versión ({mb(F['json'][1])})</a>.</p>
+<p>Recuerda que muestran dónde se registran más accidentes, no dónde es más peligroso, porque no sabemos cuánta gente pasa por cada lugar. Además, la parte que hemos podido situar sube con los años, del {pc(cob[ca[0]], 0)} en {ca[0]} al {pc(cob[ca[-1]], 0)} en {ca[-1]}: para ver si los accidentes suben o bajan, hay que contar todas las filas, no solo las situadas. La incertidumbre en metros es una estimación según cómo hemos situado cada accidente, no un error medido.</p>
+<p class="nota">Si quieres enlazar siempre la versión más nueva, usa estos enlaces fijos: <a href="{{RAIZ}}datos/siniestros_geo_ultima.csv" download>CSV de la última versión</a> y <a href="{{RAIZ}}datos/siniestros_geo_ultima.geojson" download>GeoJSON de la última versión</a>.</p>
+<h3 style="margin:24px 0 6px">Versiones</h3>
+<p>Cada versión queda cerrada: su fichero no cambia nunca, y una corrección se publica como versión nueva. Las versiones 1.x mejoran cómo situamos los accidentes con los mismos datos; la 2.0 llegará con los datos de {a1 + 1} o si cambian las columnas. Cada versión se anota también en el <a href="{{RAIZ}}sobre/#canvis">registro de cambios</a>.</p>
+{versiones_html('es')}
+<p class="cita"><b>Cómo citarlo:</b> Observatorio de la bici y el patinete de València ({u['fecha'][:4]}). Accidentes de tráfico de València geolocalizados, {a0}-{a1}, versión {u['version']}. Datos del Ayuntamiento de València – Dades Obertes (CC BY 4.0), modificados por el observatorio.</p>""")))
+    else:
+        targeta_va = targeta_es = ""
+
     # ---------------------------------------------------------------- descarga
     out.append(("descarrega", {"va": "Descarrega les dades", "es": "Descarga los datos"}, T(
-        f"""<p>Els accidents amb bici o patinet situats en el mapa, un per un, i com hem situat cadascun. És la nostra aportació principal.</p>
+        f"""<p>Els accidents situats en el mapa, un per un, i com hem situat cadascun. És la nostra aportació principal, i es pot descarregar de dues maneres.</p>
 <div class="descarga">
-<div class="tarjeta"><span class="fmt">Ja disponible</span><span>Des del <a href="{{RAIZ}}mapa/">mapa</a>, amb el botó «Descarrega el que veus (CSV en ZIP)»: es descarrega un ZIP amb un CSV dels accidents situats en el mapa (un per fila), els 30 llocs o els punts de comptatge, amb els filtres que tingues posats, un fitxer LLEGIU-ME amb la font, la llicència i les columnes, i el descriptor <code>datapackage.json</code>. Les columnes tenen sempre el mateix nom, en qualsevol llengua.</span><a class="btn" href="{{RAIZ}}mapa/#vista=pts">Obri el mapa per a descarregar</a></div>
-<div class="tarjeta"><span class="fmt">CSV i GeoJSON</span><span>El conjunt complet i versionat, amb com hem situat cada accident i un diccionari de camps. Encara no està publicat.</span><span class="pendiente">Pròximament</span></div>
+{targeta_va}
+<div class="tarjeta"><span class="fmt">Des del mapa</span><span>Amb el botó «Descarrega el que veus (CSV en ZIP)» del <a href="{{RAIZ}}mapa/">mapa</a> es descarrega un ZIP amb un CSV dels accidents amb bici o patinet situats en el mapa (un per fila), els 30 llocs o els punts de comptatge, amb els filtres que tingues posats, un fitxer LLEGIU-ME amb la font, la llicència i les columnes, i el descriptor <code>datapackage.json</code>. Les columnes tenen sempre el mateix nom, en qualsevol llengua.</span><a class="btn" href="{{RAIZ}}mapa/#vista=pts">Obri el mapa per a descarregar</a></div>
 </div>
-<p class="nota">Cada versió anirà datada. Llicència CC BY 4.0, la mateixa que les dades del portal. Sense dades de les persones implicades. Està prohibit reidentificar persones creuant aquestes dades amb altres fonts.</p>
+<p class="nota">Llicència CC BY 4.0, la mateixa que les dades del portal. Sense dades de les persones implicades. Està prohibit reidentificar persones creuant aquestes dades amb altres fonts.</p>
 <p class="nota">El CSV del mapa porta la data i l'hora, l'adreça i els factors de cada accident, que ja publica el portal de l'Ajuntament, i les coordenades que n'hem tret. Les fitxes de lloc i de carrer, en canvi, només donen el mes i l'any, perquè ixen en els cercadors amb el nom del lloc. La coordenada és la de la cruïlla o la del número de portal citat en el comunicat, no un domicili. Si un registre t'afecta i vols que el revisem, escriu-nos a <a href="mailto:hola@observatoribicivlc.org">hola@observatoribicivlc.org</a>; i si l'Ajuntament retira o corregix un registre, nosaltres també.</p>
 <p class="nota">El descriptor <code>datapackage.json</code> seguix l'estàndard obert Frictionless Data Package: diu què vol dir cada columna, de quin tipus és i en quines unitats va, i també la llicència, les fonts i la versió. Així un programa pot llegir i validar el CSV sense endevinar res. El pots consultar abans de descarregar: <a href="{{RAIZ}}dades/datapackage.json">descriptor de les dades (datapackage.json)</a>. El codi que el genera és públic: {git}.</p>
-<p class="cita"><b>Com citar-ho:</b> Observatori de la bici i el patinet de València ({c['version'][:4]}). Accidents de bici i patinet a València, {a0}-{a1}, situats en el mapa. Dades de l'Ajuntament de València (CC BY 4.0), modificades per l'observatori.</p>""",
-        f"""<p>Los accidentes con bici o patinete situados en el mapa, uno a uno, y cómo hemos situado cada uno. Es nuestra principal aportación.</p>
+<p class="cita"><b>Com citar el CSV del mapa:</b> Observatori de la bici i el patinet de València ({c['version'][:4]}). Accidents de bici i patinet a València, {a0}-{a1}, situats en el mapa. Dades de l'Ajuntament de València (CC BY 4.0), modificades per l'observatori.</p>""",
+        f"""<p>Los accidentes situados en el mapa, uno a uno, y cómo hemos situado cada uno. Es nuestra principal aportación, y se puede descargar de dos maneras.</p>
 <div class="descarga">
-<div class="tarjeta"><span class="fmt">Ya disponible</span><span>Desde el <a href="{{RAIZ}}mapa/">mapa</a>, con el botón «Descarga lo que ves (CSV en ZIP)»: se descarga un ZIP con un CSV de los accidentes situados en el mapa (uno por fila), los 30 lugares o los puntos de conteo, con los filtros que tengas puestos, un fichero LEEME con la fuente, la licencia y las columnas, y el descriptor <code>datapackage.json</code>. Las columnas tienen siempre el mismo nombre, en cualquier lengua.</span><a class="btn" href="{{RAIZ}}mapa/#vista=pts">Abrir el mapa para descargar</a></div>
-<div class="tarjeta"><span class="fmt">CSV y GeoJSON</span><span>El conjunto completo y versionado, con cómo hemos situado cada accidente y un diccionario de campos. Todavía no está publicado.</span><span class="pendiente">Próximamente</span></div>
+{targeta_es}
+<div class="tarjeta"><span class="fmt">Desde el mapa</span><span>Con el botón «Descarga lo que ves (CSV en ZIP)» del <a href="{{RAIZ}}mapa/">mapa</a> se descarga un ZIP con un CSV de los accidentes con bici o patinete situados en el mapa (uno por fila), los 30 lugares o los puntos de conteo, con los filtros que tengas puestos, un fichero LEEME con la fuente, la licencia y las columnas, y el descriptor <code>datapackage.json</code>. Las columnas tienen siempre el mismo nombre, en cualquier lengua.</span><a class="btn" href="{{RAIZ}}mapa/#vista=pts">Abrir el mapa para descargar</a></div>
 </div>
-<p class="nota">Cada versión irá fechada. Licencia CC BY 4.0, la misma que los datos del portal. Sin datos de las personas implicadas. Está prohibido reidentificar personas cruzando estos datos con otras fuentes.</p>
+<p class="nota">Licencia CC BY 4.0, la misma que los datos del portal. Sin datos de las personas implicadas. Está prohibido reidentificar personas cruzando estos datos con otras fuentes.</p>
 <p class="nota">El CSV del mapa lleva la fecha y la hora, la dirección y los factores de cada accidente, que ya publica el portal del Ayuntamiento, y las coordenadas que hemos sacado de ella. Las fichas de lugar y de calle, en cambio, solo dan el mes y el año, porque aparecen en los buscadores con el nombre del sitio. La coordenada es la del cruce o la del número de portal citado en el parte, no un domicilio. Si un registro te afecta y quieres que lo revisemos, escríbenos a <a href="mailto:hola@observatoribicivlc.org">hola@observatoribicivlc.org</a>; y si el Ayuntamiento retira o corrige un registro, nosotros también.</p>
 
 
 <p class="nota">El descriptor <code>datapackage.json</code> sigue el estándar abierto Frictionless Data Package: dice qué significa cada columna, de qué tipo es y en qué unidades va, y también la licencia, las fuentes y la versión. Así un programa puede leer y validar el CSV sin adivinar nada. Puedes consultarlo antes de descargar: <a href="{{RAIZ}}dades/datapackage.json">descriptor de los datos (datapackage.json)</a>. El código que lo genera es público: {git}.</p>
-<p class="cita"><b>Cómo citarlo:</b> Observatorio de la bici y el patinete de València ({c['version'][:4]}). Accidentes de bici y patinete en València, {a0}-{a1}, situados en el mapa. Datos del Ayuntamiento de València (CC BY 4.0), modificados por el observatorio.</p>""")))
+<p class="cita"><b>Cómo citar el CSV del mapa:</b> Observatorio de la bici y el patinete de València ({c['version'][:4]}). Accidentes de bici y patinete en València, {a0}-{a1}, situados en el mapa. Datos del Ayuntamiento de València (CC BY 4.0), modificados por el observatorio.</p>""")))
 
     # ---------------------------------------------------------------- límites
     v0, v1 = round(c["cob_v0"] * 100), round(c["cob_v1"] * 100)

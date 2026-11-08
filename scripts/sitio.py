@@ -29,15 +29,21 @@ ICONO = ("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewB
 
 # ruta de cada página (relativa a la raíz) y su nombre en el menú y en las migas
 RUTA = {"inici": "", "mapa": "mapa/", "ajuntament": "ajuntament/", "informes": "informe/", "informe": "informe/2025/",
-        "dades": "dades/", "lloc": "lloc/", "carrer": "carrer/"}
+        "dades": "dades/", "lloc": "lloc/", "carrer": "carrer/", "resso": "resso/"}
 NOM = {"inici": ("Inici", "Inicio"), "mapa": ("Mapa d'accidents", "Mapa de accidentes"),
        "ajuntament": ("Què està fent l'Ajuntament?", "¿Qué está haciendo el Ayuntamiento?"),
        "informes": ("Informes", "Informes"), "informe": ("Informe 2025", "Informe 2025"),
-       "dades": ("Dades i mètode", "Datos y método"), "lloc": ("Llocs", "Lugares"), "carrer": ("Carrers", "Calles")}
+       "dades": ("Dades i mètode", "Datos y método"), "lloc": ("Llocs", "Lugares"), "carrer": ("Carrers", "Calles"),
+       "resso": ("Ressò", "Repercusión")}
 MENU = ["inici", "mapa", "ajuntament", "informe", "dades"]
 TITULO = ("Accidents de bici i patinet a València", "Accidentes de bici y patinete en València")
 APOYO = ("Dades obertes per a veure què passa al teu carrer i seguir si el Pla de l'Ajuntament els redueix.",
          "Datos abiertos para ver qué pasa en tu calle y seguir si el Plan del Ayuntamiento los reduce.")
+# titular de la portada (rediseño del 07/11/2026, opción A del boceto los bocetos de diseño (internos)/, aprobada por el usuario)
+FRASE = ("Seguim el Pla de Seguretat Viària de València mesura a mesura i mostrem on es registren els accidents amb bici i patinet.",
+         "Seguimos el Plan de Seguridad Vial de València medida a medida y mostramos dónde se registran los accidentes con bici y patinete.")
+# fecha en que la web se publicó (servidor propio, 07/11/2026): la usan los estados vacíos de «Ressò / Repercusión»
+PUBLICADA = "2026-11-07"
 MARCA = ("Observatori de la bici i el patinet de València", "Observatorio de la bici y el patinete de València")
 CORREU = "hola@observatoribicivlc.org"
 # repositorio público del código (MIT) y de la documentación y los datos derivados (CC BY 4.0); lo enlazan el pie, /dades/,
@@ -213,6 +219,7 @@ def pie(R, info):
                   f'<b>Colaboran:</b> ' + " · ".join(ent(e) + (f' ({ESC(e["es"])})' if e.get("es") else "") for e in info["colab"]), "p")
     nav = (f'<nav aria-label="Peu / Pie">'
            f'<a href="{R}sobre/">{T("Sobre l\'observatori", "Sobre el observatorio")}</a>'
+           f'<a href="{R}resso/">{T("Ressò", "Repercusión")}</a>'
            f'<a href="{R}lloc/">{T("Tots els llocs", "Todos los lugares")}</a>'
            f'<a href="{R}carrer/">{T("Tots els carrers", "Todas las calles")}</a>'
            f'<a href="{R}informe/">{T("Informes", "Informes")}</a>'
@@ -278,7 +285,7 @@ def head(R, titulo, desc, url, og_img=None, og_alt=None, extra=""):
             '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
             f'{HEAD_LANG}\n<title>{ESC(titulo[0])}</title>\n<meta name="description" content="{ESC(desc[0])}">\n'
             f'<link rel="canonical" href="{url}">\n'
-            '<meta name="theme-color" content="#EEF1F2" media="(prefers-color-scheme: light)">\n'
+            '<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">\n'
             '<meta name="theme-color" content="#0F151B" media="(prefers-color-scheme: dark)">\n'
             f'<link rel="icon" type="image/svg+xml" href="{ICONO}">\n{og}\n{pre}\n'
             f'<link rel="stylesheet" href="{R}{A["css"]}" integrity="{A["css_sri"]}">\n'

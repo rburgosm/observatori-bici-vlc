@@ -1,6 +1,6 @@
 <title>Informe · Observatori de la bici i el patinet de València</title>
 <meta name="description" content="Seguim els sinistres amb bici i patinet a València amb les dades obertes de l'Ajuntament: on passen, què s'està fent i si el Pla Director de Seguretat Viària 2026-2030 funciona.">
-<meta name="theme-color" content="#EEF1F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0F151B" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='11.5'%20fill='%2315202B'%20stroke='%2355626E'/%3E%3Cg%20fill='none'%20stroke='%23EEF1F2'%20stroke-width='2.2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Ccircle%20cx='6.5'%20cy='15'%20r='3.3'/%3E%3Ccircle%20cx='17.5'%20cy='15'%20r='3.3'/%3E%3Cpath%20d='M6.5%2015l3.8-6.5h4.7l2.5%206.5M10.3%208.5%209.3%206.2'/%3E%3C/g%3E%3C/svg%3E">
 <meta property="og:type" content="article">
@@ -28,7 +28,7 @@
    Con animación: figura sticky y pasos que pasan. Sin animación (interruptor o prefers-reduced-motion): cada paso con su figura fija.
    El SVG usa viewBox = tamaño real en px: el texto mide lo que dice su font-size. Alturas en px medidas por JS, nunca vh. */
 :root{
-  --bg:#EEF1F2; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
+  --bg:#FFFFFF; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
   --bici:#2a78d6; --pat:#C94B17; --amb:#14875E; --lane:#9DB8AE; --sel:#b87a00; --meta:#15202B; --warn:#B42318; --mute:#AEB7BD; --hl:#FFE58A;
   --display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
   --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -55,11 +55,11 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .top nav button{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.04em;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 10px;cursor:pointer;border-radius:3px}
 .top nav button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--bici);outline-offset:2px}
-.intro{padding-block:40px 8px;max-width:760px;transform-origin:0 0}
+.intro{padding-block:40px 8px;transform-origin:0 0}
 html.anim .intro{will-change:opacity,transform}
 .eyebrow{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:0}
 .intro h1{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(36px,6vw,64px);line-height:.98;margin:8px 0 12px;text-wrap:balance}
-.intro p{font-size:18px;color:var(--ink2);max-width:58ch;margin:0}
+.intro p{font-size:18px;color:var(--ink2);margin:0}
 .relato{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:40px;position:relative}
 .pasos{padding-block:12px 240px}
 /* la primera tarjeta arranca alineada con la figura: al abrir se ven juntas, sin cortes */
@@ -111,7 +111,7 @@ svg .halo{paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:r
 .sab3 h3{font-size:16px;margin:0 0 6px;padding-top:8px;border-top:3px solid var(--ink)}
 .sab3 ul{margin:0;padding-left:18px}.sab3 li{margin-bottom:8px;font-size:15px;line-height:1.45}
 .sab3 a{color:var(--ink2);font-size:13px;white-space:nowrap}
-.fin{padding-block:30px 60px;max-width:680px}
+.fin{padding-block:30px 60px}
 .fin h2{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:30px;margin:6px 0 10px}
 .fin a{color:var(--ink);font-weight:600}
 .ref{font-size:12.5px;color:var(--ink2)}

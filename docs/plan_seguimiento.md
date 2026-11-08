@@ -243,7 +243,7 @@ Una revisión cada trimestre (enero, abril, julio y octubre), con revisión huma
    Las coordenadas de las filas nuevas de lugar se rellenan con `scripts/coords_plan_seguimiento.py`, que escribe en el CSV: después, `construir_sqlite.py --plan-desde-csv` las lleva a la base (y al volcado).
 5. **Revisión humana de lo que se va a publicar:** `git diff data/processed/plan_seguimiento.csv data/processed/observatorio_plan.sql`. El CSV se lee mejor; el volcado enseña además lo que el CSV no tiene (la fuente del estado y el tipo de cada fuente). Si algo está mal, se corrige con otra propuesta (o se deshace con `git checkout` de los dos ficheros y `make sqlite`).
 6. **`make web`**, que reconstruye la base desde el volcado (con lo derivado: junto a qué lugar o calle cae cada actuación) y regenera la web y las fichas. Se revisa en localhost antes de publicar. **Commit del volcado y del CSV juntos**: el deploy reconstruye la base desde el volcado de HEAD, así que un cambio sin commit no se publica.
-7. **Una fila curada en `docs/cambios.csv`** por revisión, no una por actuación. Lleva la fecha y el tipo `datos`, en va y en es. Por ejemplo: «Revisión trimestral de "El Plan, al día": 3 actuaciones cambian de estado, 2 nuevas; fuentes: Memoria de actuaciones y contratos».
+7. **Una fila curada en `docs/cambios.csv`** por revisión, no una por actuación. Lleva la fecha y el tipo `datos`, el detalle en va y en es y un resumen de una frase (`resumen_va`, `resumen_es`, ≤ 120 caracteres, que es lo que se ve en la web y en Telegram). Por ejemplo: «Revisión trimestral de "El Plan, al día": 3 actuaciones cambian de estado, 2 nuevas; fuentes: Memoria de actuaciones y contratos».
 8. Actualizar el recuento de la sec. 3 y dejar constancia de la revisión en la lista de tareas del proyecto.
 
 **Salvaguardas** (`make sqlite`, `make comprobar`):
@@ -259,3 +259,13 @@ Aplicadas a mano en `data/processed/plan_seguimiento.csv`, fuera del flujo de pr
 - `7.1.1-cuadro-mando`: se quita la mención a un partido. Queda solo el hecho y su fuente. Revisado el CSV entero: no hay más partidos. También se quitan las frases internas o de parte: «Preguntar…» (3.2.2-zonas-lista y 7.1.2), «Candidatas: la lista de puntos persistentes del observatorio» (3.7) y «Es la vía de entrada de un socio del observatorio» (6.2).
 - `1.2.4-web-seguridad-vial`: se queda en `sin_info`. Nota: «La web existe, pero sin el apartado de datos que prevé el Plan…».
 - Los textos de actuaciones, notas y citas no se traducen: la web los muestra en la lengua original de la fuente.
+
+## 10. Archivo de capas del portal: pistas para las propuestas (desde el 07/11/2026)
+
+Las capas de infraestructura del geoportal no tienen fecha. `make archivar` (`scripts/archivar_capas.py`) guarda una foto al mes en `data/archivo_capas/AAAA-MM-DD/` y la compara con la anterior **por geometría** (en EPSG:25830, con 2 m de tolerancia en líneas y 5 m en puntos), no por identificador, porque el portal recarga las capas en bloque y reasigna los ID. Las altas, bajas y cambios de atributo quedan en `data/archivo_capas/cambios.csv` con un punto y la longitud. Capas: itinerarios ciclistas (189), velocidad de las calles (223), red VMP (2 y 3), pasos ciclistas y de peatones de la señalización horizontal (238) y ocupación de la vía (209). No hay retroactivo: la primera foto, la del 07/11/2026, es la línea base.
+
+Cómo entra en el seguimiento:
+1. Después de cada `make archivar`, se leen las filas nuevas de `cambios.csv` que caen en una actuación o un lugar del Plan (por ejemplo, un tramo de carril bici nuevo en una calle con una licitación, o una calle que pasa de 50 a 30 o a 20).
+2. **Un cambio en la capa no prueba un cambio en la calle.** Puede ser una corrección del inventario, una redigitalización o una recarga. Es una pista, no una fuente: antes de proponer nada, se busca la fuente oficial (contrato, acuerdo, nota municipal, Memoria) con el procedimiento de la sec. 8.
+3. Si la fuente lo confirma, se escribe una propuesta en `plan_seguimiento_propuestas.csv` con esa fuente; en la nota se puede citar la capa y la fecha de la foto como indicio de cuándo apareció en el portal. Nunca se cambia `plan_seguimiento.csv` solo por el archivo: la validación humana es la misma.
+4. Desde 2027, las fotos sirven para el antes y el después en los lugares (qué había y qué hay), siempre con la cautela de que la foto fecha la capa y no la obra.

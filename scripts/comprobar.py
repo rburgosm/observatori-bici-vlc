@@ -20,11 +20,15 @@ Imprime una línea OK / AVISO / ERROR por comprobación y termina con código 1 
   de make filtros con un año literal;
 - errores detectados en los datos del Ajuntament: data/processed/incidencias_datos.csv igual que la tabla de metode.js, estados
   coherentes con la fecha de comunicación y avisos de la última re-verificación (scripts/incidencias.py, make incidencias);
+- registro de cambios (docs/cambios.csv): columnas y, en cada fila, resumen_va y resumen_es (≤ 120 caracteres, una línea);
+- «Ressò / Repercusión» (data/processed/resso.csv): columnas, y cada fila publicada con fecha válida, url, tipo y prueba;
 - «Hi col·laboren / Colaboran» (data/processed/colaboran.csv): cada fila publicada (publicar = si) con fecha, prueba, tipo
   y texto en va y es, y datos/colaboran.json al día;
 - que cada página de web/proto/build/ cargue sus datos de build/datos/<página>.<hash>.js con el SRI correcto y el mismo
   contenido que web/proto/datos/, que el HTML no los incruste y, si se publica (PUBLICAR_JSON, hoy desactivado), que la
-  descarga estable <página>.json lleve esos datos.
+  descarga estable <página>.json lleve esos datos;
+- dataset geolocalizado versionado (scripts/exportar_dataset.py): cada versión cerrada de data/publicado/ con el sha256 de
+  su manifiesto, filas = las del portal, coordenadas en València, copia idéntica en build/datos/ y «ultima» = la más nueva.
 Uso: .venv/bin/python -I scripts/comprobar.py   (o make comprobar)"""
 import ast, json, re, sys
 from pathlib import Path
@@ -533,6 +537,58 @@ try:
 except Exception as e:
     msg("ERROR", f"no se puede comprobar colaboran ({type(e).__name__}: {e})")
 
+# ---------- «Ressò / Repercusión» (data/processed/resso.csv -> /resso/ y bloque de la portada) ----------
+try:
+    import datetime as _dt
+    _rs = pd.read_csv(ROOT / "data/processed/resso.csv", dtype=str).fillna("")
+    _rcols = ["fecha", "tipo", "quien", "titulo", "que_va", "que_es", "url", "prueba", "publicar"]
+    _rpub = _rs[_rs.publicar.str.strip().str.lower() == "si"] if list(_rs.columns) == _rcols else _rs.iloc[0:0]
+    def _rfecha(f):
+        try: return _dt.date.fromisoformat(f.strip()) <= _dt.date.today()
+        except ValueError: return False
+    _rmalas = [r.quien or f"fila {i + 2}" for i, r in _rpub.iterrows()
+               if not (r.quien.strip() and _rfecha(r.fecha) and r.url.strip().startswith("https://")
+                       and r.tipo.strip() in {"medio", "entidad", "administracion", "reutilizacion"}
+                       and r.prueba.strip() in {"enlace", "captura", "correo", "acta"})]
+    _rotras = sorted(set(_rs.publicar.str.strip().str.lower()) - {"si", "no"}) if "publicar" in _rs else ["sin columna"]
+    _rok = list(_rs.columns) == _rcols and not _rmalas and not _rotras
+    msg("OK" if _rok else "ERROR",
+        f"resso: {len(_rs)} filas, {len(_rpub)} publicadas ({'se ven en /resso/' if len(_rpub) else 'estados vacíos en /resso/'}); "
+        f"columnas {'bien' if list(_rs.columns) == _rcols else 'MAL'}; publicadas sin quien, fecha válida (AAAA-MM-DD, no futura), "
+        f"url https, tipo (medio/entidad/administracion/reutilizacion) o prueba (enlace/captura/correo/acta): {_rmalas or 'ninguna'}; "
+        f"publicar distinto de si/no: {_rotras or 'ninguno'}")
+except Exception as e:
+    msg("ERROR", f"no se puede comprobar resso ({type(e).__name__}: {e})")
+
+# ---------- registro público de cambios (docs/cambios.csv -> /sobre/#canvis y canal de Telegram) ----------
+# Cada fila: fecha, tipo, va y es (el detalle, plegado en «Més detalls») y resumen_va/resumen_es (la frase corta que se ve y
+# que publica Telegram): obligatorios, ≤ 120 caracteres y sin saltos de línea. CSV RFC 4180 (lo lee el módulo csv).
+try:
+    import csv as _csv, datetime as _dt
+    with open(ROOT / "docs/cambios.csv", newline="", encoding="utf-8") as _f:
+        _cr = _csv.reader(_f); _ccab = next(_cr); _cfilas = list(_cr)
+    _ccols = ["fecha", "tipo", "va", "es", "resumen_va", "resumen_es"]
+    def _cmal(i, r):
+        if len(r) != len(_ccols): return f"línea {i + 2}: {len(r)} campos"
+        d = dict(zip(_ccols, r))
+        try: _dt.date.fromisoformat(d["fecha"])
+        except ValueError: return f"línea {i + 2}: fecha «{d['fecha']}»"
+        if d["tipo"] not in {"datos", "metode", "web"}: return f"línea {i + 2}: tipo «{d['tipo']}»"
+        if not (d["va"].strip() and d["es"].strip()): return f"línea {i + 2}: falta el texto va/es"
+        for k in ("resumen_va", "resumen_es"):
+            v = d[k]
+            if not v.strip(): return f"línea {i + 2}: falta {k}"
+            if len(v) > 120: return f"línea {i + 2}: {k} de {len(v)} caracteres (máx. 120)"
+            if "\n" in v or "\r" in v: return f"línea {i + 2}: {k} con salto de línea"
+        return None
+    _cmalas = [m for m in (_cmal(i, r) for i, r in enumerate(_cfilas)) if m]
+    _cok = _ccab == _ccols and not _cmalas
+    msg("OK" if _cok else "ERROR",
+        f"cambios.csv: {len(_cfilas)} filas; columnas {'bien' if _ccab == _ccols else f'MAL ({_ccab})'}; "
+        f"con resumen_va y resumen_es de ≤ 120 caracteres, una línea: {'todas' if not _cmalas else '; '.join(_cmalas[:5])}")
+except Exception as e:
+    msg("ERROR", f"no se puede comprobar docs/cambios.csv ({type(e).__name__}: {e})")
+
 # ---------- build: datos aparte, versionados y con SRI (scripts/construir_web.py) ----------
 import base64, hashlib
 BUILD = WEB / "build"
@@ -618,6 +674,14 @@ try:
     for _niv, _txt in _FI.comprobaciones(): msg(_niv, _txt)
 except Exception as e:
     msg("ERROR", f"no se pueden comprobar la base y las fichas ({type(e).__name__}: {e})")
+
+# ---------- dataset geolocalizado versionado (scripts/exportar_dataset.py, pendiente 74) ----------
+print("\n== Dataset geolocalizado ==")
+try:
+    import exportar_dataset as _ED
+    for _niv, _txt in _ED.comprobaciones(): msg(_niv, _txt)
+except Exception as e:
+    msg("ERROR", f"no se puede comprobar el dataset publicado ({type(e).__name__}: {e})")
 
 print(f"\n{'ERROR: ' + str(errores) + ' comprobaciones fallan' if errores else 'Sin errores.'}")
 sys.exit(1 if errores else 0)

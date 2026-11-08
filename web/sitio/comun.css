@@ -1,7 +1,8 @@
-/* FONDO GRIS O CUADRO BLANCO (regla del 07/11/2026, la guía interna de estilo, sec. 5): va en cuadro blanco (--surface) solo
-   lo que es una unidad cerrada o se puede tocar: tarjetas de cifras, mapas y gráficos, la ficha de un lugar, cada medida
-   desplegable, tablas de datos, buscador y controles. Lo que se lee (titulares, párrafos, listas, explicaciones) va sobre
-   el fondo gris de la página. */
+/* FONDO O CUADRO (regla del 07/11/2026, la guía interna de estilo, sec. 5): va en cuadro (--surface, con borde y, en el tema
+   claro, una sombra muy suave: --sombra) solo lo que es una unidad cerrada o se puede tocar: tarjetas de cifras, mapas y
+   gráficos, la ficha de un lugar, cada medida desplegable, tablas de datos, buscador y controles. Lo que se lee (titulares,
+   párrafos, listas, explicaciones) va sobre el fondo de la página, sin caja. Desde el rediseño del 07/11/2026 el fondo
+   del tema claro es blanco (--bg #FFFFFF; antes gris #EEF1F2) y el tema oscuro no cambia. */
 /* Web pública (06/11/2026): estilos comunes de todas las páginas y de las fichas. Diseño de los bocetos aceptados
    (los bocetos de diseño (internos) y fichas.css): paleta, escala tipográfica y piezas. Lo publica scripts/construir_sitio.py en
    build/datos/sitio.<hash8>.css con SRI. Las fuentes (woff2, subconjunto latino) en build/fuentes/, con preload.
@@ -19,13 +20,13 @@
 @font-face{font-family:"Public fb";src:local("Arial"),local("ArialMT"),local("Liberation Sans");size-adjust:103.5%;ascent-override:91.8%;descent-override:21.7%;line-gap-override:0%}
 
 :root{
-  --bg:#EEF1F2; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
+  --bg:#FFFFFF; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
   --bici:#2a78d6; --pat:#C94B17; --amb:#14875E; --mix:#8A949D; --warn:#B42318; --meta:#15202B;
   --mapbg:#F7F8F8; --calle:#C9D0D4; --calle-sel:#15202B;
   --e-hecha:#6E1470; --e-marcha:#A23A9E; --e-anun:#B865B4; --e-sin:#6B7680;
   --capa-bg:#15202B; --capa-ink:#EEF1F2;
   --e-hecha-bg:#F3E6F3; --e-marcha-bg:#F6EAF5; --e-anun-bg:#FBF1FA;
-  --tint:#E4E9EB;
+  --tint:#EEF1F2; --sombra:0 1px 2px rgba(21,32,43,.06),0 3px 10px rgba(21,32,43,.06);
   --t-meta:1rem; --t-body:1.125rem; --t-lead:clamp(1.3125rem,2.2vw,1.5rem); --t-menu:1.25rem; --t-h3:1.375rem;
   --t-h2:clamp(1.75rem,3.2vw,2.25rem); --t-h1:clamp(2.25rem,5vw,3.5rem);
   --t-cifra:clamp(2.75rem,6vw,3.75rem); --t-cifra-xl:clamp(3.5rem,8vw,5rem);
@@ -39,14 +40,14 @@
   --mapbg:#121A21; --calle:#2C3843; --calle-sel:#E7ECEF;
   --e-hecha:#E7A6E3; --e-marcha:#B657B2; --e-anun:#A050A6; --e-sin:#7D8892;
   --capa-bg:#17212A; --capa-ink:#E7ECEF;
-  --e-hecha-bg:#2E2233; --e-marcha-bg:#2A2030; --e-anun-bg:#241D2B; --tint:#1B2731; color-scheme:dark}}
+  --e-hecha-bg:#2E2233; --e-marcha-bg:#2A2030; --e-anun-bg:#241D2B; --tint:#1B2731; --sombra:none; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0F151B; --surface:#17212A; --line:#3A4954; --ink:#E7ECEF; --ink2:#9AA7B2;
   --bici:#3987e5; --pat:#d95926; --amb:#199e70; --mix:#6F7B86; --warn:#F97066; --meta:#E7ECEF;
   --mapbg:#121A21; --calle:#2C3843; --calle-sel:#E7ECEF;
   --e-hecha:#E7A6E3; --e-marcha:#B657B2; --e-anun:#A050A6; --e-sin:#7D8892;
   --capa-bg:#17212A; --capa-ink:#E7ECEF;
-  --e-hecha-bg:#2E2233; --e-marcha-bg:#2A2030; --e-anun-bg:#241D2B; --tint:#1B2731; color-scheme:dark}
+  --e-hecha-bg:#2E2233; --e-marcha-bg:#2A2030; --e-anun-bg:#241D2B; --tint:#1B2731; --sombra:none; color-scheme:dark}
 
 /* ---------- lengua: lo decide <html lang> ---------- */
 :root:not([lang="es"]) [data-l="es"],:root[lang="es"] [data-l="va"]{display:none!important}
@@ -238,7 +239,7 @@ svg.graf.w600 text{font-size:16.5px} svg.graf.w440 text{font-size:13px} svg.graf
 .pie{border-top:1px solid var(--line);margin-top:56px;padding:24px 0 40px;font-size:var(--t-meta);color:var(--ink2)}
 .pie nav{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0 0 12px}
 .pie nav a{font-weight:600;color:var(--ink)}
-.pie p{margin:0 0 8px;max-width:110ch}
+.pie p{margin:0 0 8px}
 .pie a{color:var(--ink)}
 .pie .pie-tg{margin:0 0 12px}
 .pie .pie-tg a{font-weight:600}
@@ -351,7 +352,7 @@ div.tc a.tc-cifra{text-decoration-thickness:3px;text-underline-offset:6px;width:
 .h-tarjeta{font-size:var(--t-h3)}
 /* invitación al canal de Telegram (solo si sitio.TELEGRAM_CANAL está puesto) */
 .telegram{margin:30px 0 0;border-left:6px solid var(--ink)}
-.telegram p{margin:8px 0 0;max-width:70ch}
+.telegram p{margin:8px 0 0}
 .telegram .tg-acc{margin:14px 0 0}
 @media (max-width:900px){.estado{grid-template-columns:1fr}.cuatro{grid-template-columns:repeat(2,minmax(0,1fr))}.mapa-med,.escribe{grid-template-columns:1fr}.filtro-lista{top:calc(var(--cab-alto) + 51px)}}
 @media (max-width:520px){.unidades{grid-template-columns:repeat(16,1fr)}.medidas summary{grid-template-columns:1fr}.medidas summary .est{grid-row:auto;justify-self:start}.medidas .donde,.medidas .cuando{grid-column:1}.filtro-lista{position:static}}
@@ -377,7 +378,10 @@ div.tc a.tc-cifra{text-decoration-thickness:3px;text-underline-offset:6px;width:
 .ley-l i{display:inline-block;width:22px;height:0;border-top:3px solid var(--ink)}
 .ley-l i.disc{border-top:2px dashed var(--ink2)}
 .ley-l i.ban{height:10px;border:1.5px dashed var(--ink2);background:color-mix(in srgb,var(--ink2) 25%,transparent)}
-.seccion.con-ejemplo{background:var(--tint);border-radius:0 0 14px 14px;padding:26px 22px 22px}
+/* sección con ejemplo: en el tema claro, blanca con borde (sin banda gris: 08/11/2026); en el oscuro, la banda tintada de siempre */
+.seccion.con-ejemplo{background:var(--bg);border:1px solid var(--line);border-top:3px solid var(--ink);border-radius:0 0 14px 14px;padding:26px 22px 22px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seccion.con-ejemplo{background:var(--tint);border-color:transparent;border-top-color:var(--ink)}}
+:root[data-theme="dark"] .seccion.con-ejemplo{background:var(--tint);border-color:transparent;border-top-color:var(--ink)}
 .ejemplo{margin:22px 0 0;background:var(--surface);border:1px solid var(--line);border-left:8px solid var(--ink);border-radius:10px;padding:16px 18px}
 .ejemplo .etiqueta{display:inline-block;font-family:var(--display);font-weight:700;font-size:var(--t-meta);letter-spacing:.05em;text-transform:uppercase;background:var(--ink);color:var(--bg);padding:3px 10px;border-radius:4px}
 .ejemplo .donde{font-family:var(--display);font-weight:700;font-size:var(--t-h3);margin:10px 0 4px}
@@ -405,12 +409,21 @@ div.tc a.tc-cifra{text-decoration-thickness:3px;text-underline-offset:6px;width:
 .dades-sec{margin:40px 0 0;scroll-margin-top:calc(var(--cab-alto) + var(--menu-alto) + 12px)}
 .dades-sec > h2,.dades-sec section > h2{margin:0 0 10px;text-transform:none;letter-spacing:0;font-size:var(--t-h2)}
 .dades-sec:first-child{margin-top:0}
-.cambios{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:0}
-.cambios li{display:grid;grid-template-columns:110px 80px 1fr;gap:10px;border-bottom:1px solid var(--line);padding:8px 0;font-size:var(--t-meta)}
-.cambios .t{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink2)}
+/* registro de cambios (/sobre/#canvis): un título por día y, debajo, una línea por cambio (tipo + resumen); el detalle, plegado */
+.cambios-dias{margin:8px 0 0}
+.dia{margin:22px 0 0}
+.dia h3{margin:0;font-size:var(--t-h3);text-transform:none;letter-spacing:0}
+.cambios{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:0}
+.cambios li{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:4px 12px;align-items:start;border-bottom:1px solid var(--line);padding:10px 0;font-size:var(--t-body)}
+.cambios .t{justify-self:start;margin-top:3px;font-family:var(--display);font-weight:700;font-size:var(--t-meta);text-transform:uppercase;letter-spacing:.04em;color:var(--ink2);border:1px solid var(--line);border-radius:999px;padding:0 8px;line-height:1.6}
+.cambios .c-res{margin:0}
+.c-mas summary{display:inline-flex;align-items:center;gap:6px;min-height:32px;cursor:pointer;font-size:var(--t-meta);color:var(--ink2);text-decoration:underline;text-underline-offset:3px}
+.c-mas summary:hover{color:var(--ink)}
+.c-mas p{margin:4px 0 6px;color:var(--ink2);line-height:1.5}
+@media (max-width:520px){.cambios li{grid-template-columns:minmax(0,1fr);gap:6px}}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
 .lado>*{min-width:0}
-@media (max-width:900px){.lado{grid-template-columns:minmax(0,1fr)}.toc{position:static;max-height:none}.descarga{grid-template-columns:1fr}.cambios li{grid-template-columns:100px 1fr}.cambios li > :last-child{grid-column:1/-1}}
+@media (max-width:900px){.lado{grid-template-columns:minmax(0,1fr)}.toc{position:static;max-height:none}.descarga{grid-template-columns:1fr}}
 
 /* ---------- índices de lugares y calles ---------- */
 .idx-ctrl{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:18px 0 0;position:sticky;top:calc(var(--cab-alto) + var(--menu-alto) + 1px);background:var(--bg);padding:10px 0;z-index:4;border-bottom:1px solid var(--line)}
@@ -482,6 +495,7 @@ div.tc a.tc-cifra{text-decoration-thickness:3px;text-underline-offset:6px;width:
   .b-menu{height:44px;width:48px}
   .busca-cab input[type=search],.busca-cab button{height:44px}
   .chip{min-height:44px;padding:6px 14px}
+  .c-mas summary{min-height:44px}
   .menu a{padding:12px 14px}
   .btn{min-height:44px}
   body[data-pag="inici"] .busca-row{display:none}
@@ -511,3 +525,63 @@ input[type=search]::placeholder{color:var(--ink2);opacity:1}
 .pest-dm a{font-family:var(--display);font-weight:700;font-size:var(--t-body);text-decoration:none;color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;padding:8px 16px;min-height:44px;display:inline-flex;align-items:center}
 .pest-dm a[aria-current="page"]{background:var(--ink);color:var(--bg)}
 .pest-dm a:hover{background:var(--tint)}.pest-dm a[aria-current="page"]:hover{background:var(--ink)}
+
+/* ---------- rediseño del 07/11/2026 (los bocetos de diseño (internos)/, aprobado por el usuario) ----------
+   Paleta reducida: la interfaz es tinta (--ink, --ink2) sobre fondo y superficie; los colores de dato (--bici, --pat, --amb)
+   y del Plan (--e-*) solo se usan en datos (mapas, gráficos, estados), nunca en botones ni títulos. */
+/* fondo blanco: las tarjetas ya no se separan por color, conservan el borde y ganan una sombra muy suave (solo en claro) */
+.tc,.tarjeta,.graf-caja,.estado,.indice,.mapa,.medidas details,.ejemplo{box-shadow:var(--sombra)}
+a.tc:hover{box-shadow:0 0 0 1px var(--ink),var(--sombra)}
+/* portada: una imagen de concepto (la ciudad dibujada por sus accidentes) y una frase */
+.heroi{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:36px;align-items:center;padding:20px 0 8px}
+.heroi > *{min-width:0}
+.heroi .kicker{margin-bottom:12px}
+.heroi h1{font-size:clamp(2.125rem,3.9vw,3.25rem);font-weight:800;line-height:1.04;letter-spacing:-.005em;text-wrap:balance;margin:0}
+.heroi .apoyo{font-size:var(--t-lead);line-height:1.4;margin:18px 0 0;color:var(--ink)}
+.heroi .gran-busca{margin-top:26px}
+.concepte-fig{margin:0}
+.concepte{display:block;width:100%;height:auto;background:var(--mapbg);border:1px solid var(--line);border-radius:12px}
+.concepte .c0{fill:none;stroke:var(--calle);stroke-width:.6;stroke-linejoin:round;stroke-linecap:round}
+.concepte .c1{fill:none;stroke:var(--calle);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+.concepte .b{fill:var(--bici)} .concepte .p{fill:var(--pat)} .concepte .a{fill:var(--amb)}
+.concepte circle{fill-opacity:.85}
+.concepte .t{fill:none;stroke:var(--ink);stroke-width:1.8}
+.concepte .m{fill:var(--e-hecha);stroke:var(--surface);stroke-width:2}
+.concepte-fig figcaption{font-size:var(--t-meta);color:var(--ink2);margin:10px 2px 0;line-height:1.45}
+.ley-una{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;font-size:var(--t-meta);color:var(--ink);margin:0 0 8px}
+.ley-una > span{display:inline-flex;align-items:center;gap:6px}
+.ley-una .anell{width:14px;height:14px;border-radius:50%;border:2px solid var(--ink);display:inline-block}
+.ley-una .romb{width:11px;height:11px;background:var(--e-hecha);transform:rotate(45deg);display:inline-block;margin:0 2px}
+@media (max-width:900px){.heroi{grid-template-columns:minmax(0,1fr);gap:22px}}
+/* tres preguntas numeradas: el hilo de la web (qué pasa, qué se hace, si funciona) */
+.preg-num{counter-reset:pq}
+.preg-num > li .tc-preg::before{counter-increment:pq;content:counter(pq);display:inline-grid;place-items:center;width:1.6em;height:1.6em;margin-right:.45em;border-radius:50%;background:var(--ink);color:var(--bg);font-size:.8em;vertical-align:.08em}
+/* página del mapa: dos párrafos antes, leyenda en una línea encima, pie con la fuente y «cómo leer el mapa» después */
+.antes-mapa{font-size:var(--t-body);margin:18px 0 0}
+.antes-mapa p{margin:0 0 .7em}
+.vieja .mapley{border-top:0;padding:0 2px 8px;font-size:var(--t-meta);color:var(--ink)}
+.pie-mapa{font-size:var(--t-meta);color:var(--ink2);margin:8px 2px 0;line-height:1.45}
+.pie-mapa b{color:var(--ink);font-weight:600}
+.interpretar{margin:36px 0 0}
+.interpretar h2{margin:0 0 12px}
+.interpretar ol{margin:0;padding-left:1.6em;display:grid;gap:12px}
+.interpretar li{padding-left:.3em}
+.interpretar li::marker{font-family:var(--display);font-weight:800}
+.interpretar li b{font-weight:600}
+/* «Ressò / Repercusión» */
+.res-grup{margin:40px 0 0}
+.res-grup h2{margin:0 0 8px}
+.res-grup > p{margin:0 0 12px}
+.buit{border:1.5px dashed var(--line);border-radius:10px;padding:16px 18px;color:var(--ink);background:transparent}
+.buit p{margin:0}
+.buit p + p{margin-top:8px;color:var(--ink2);font-size:var(--t-meta)}
+.res-lista{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.res-lista li{border-bottom:1px solid var(--line);padding:8px 0}
+.res-lista .qui{font-weight:600}
+.res-lista .data{color:var(--ink2);font-size:var(--t-meta)}
+.cita-blk{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--ink);border-radius:8px;padding:14px 16px;box-shadow:var(--sombra);font-size:var(--t-body);overflow-wrap:anywhere}
+.kit{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
+.kit li{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:8px 0}
+.kit .pendiente{font-family:var(--display);font-weight:700;font-size:var(--t-meta);border:1.5px dashed var(--ink2);border-radius:8px;padding:4px 10px;white-space:nowrap}
+@media (max-width:520px){.kit li{grid-template-columns:1fr}}
+.escribe > .tarjeta{margin:0}

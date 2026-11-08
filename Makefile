@@ -6,7 +6,10 @@
 #      make plan          (transcripción del Plan Director: data/processed/pdsv_*.csv)
 #      make sqlite        (base data/processed/observatorio.sqlite: de ella leen exportar_web.py, fichas, comprobar y bocetos)
 #      make geocodificar  (lento y cambia todo: solo a propósito; ver siniestros_geo.csv abajo)
+#      make dataset VERSION=1.1 NOTA_VA="…" NOTA_ES="…"  (publica una versión CERRADA nueva del dataset geolocalizado en
+#                         data/publicado/; nunca regenera una que ya existe; ver scripts/exportar_dataset.py)
 #      make incidencias   (re-verifica las incidencias de los datos del Ajuntament e informe para enviarlo, en .md y .pdf; no entra en make web)
+#      make archivar      (foto mensual de las capas de infraestructura del geoportal y cambios; no entra en make)
 #      make capturas ETIQUETA=v1-…  (capturas de la web servida en localhost:8000, en capturas/; no entra en make ni make web)
 #      make -B web        (fuerza exportar, montar y tarjetas aunque nada haya cambiado; lo usa deploy/deploy.sh)
 # Cada script es una regla cuyo objetivo son sus salidas reales y cuyos prerequisitos son el script, los módulos que
@@ -29,7 +32,7 @@ export OMP_NUM_THREADS = 2
 export OPENBLAS_NUM_THREADS = 2
 export MKL_NUM_THREADS = 2
 
-.PHONY: all analisis web plan sqlite comprobar geocodificar incidencias capturas
+.PHONY: all analisis web plan sqlite comprobar geocodificar incidencias capturas dataset
 all: analisis web comprobar
 
 # ---------- entradas ----------
@@ -58,12 +61,15 @@ HTML = $(PAGINAS:%=$(W)/build/%.html)
 OG = $(foreach p,$(PAGINAS),$(W)/build/og/$(p).png $(W)/build/og/$(p)_es.png)
 SQLITE = data/processed/observatorio.sqlite
 FICHAS = $(W)/build/.fichas
-# web pública (scripts/construir_sitio.py): /, /mapa/, /ajuntament/, /informe/, /informe/2025/, /dades/, /lloc/, /carrer/
+# web pública (scripts/construir_sitio.py): /, /mapa/, /ajuntament/, /informe/, /informe/2025/, /dades/, /lloc/, /carrer/, /resso/
 SITIO = $(W)/build/.sitio
-SITIO_IN = scripts/sitio.py scripts/sitio_textos_plan.py scripts/sitio_dades.py scripts/nombres.py data/processed/nombres_puntos_conteo.csv $(SIN)/vias.json $(wildcard web/sitio/*)
+# dataset geolocalizado versionado (pendiente 74): versiones cerradas en data/publicado/v<X.Y>/, copiadas tal cual a build/datos/
+PUBLICADO = $(wildcard data/publicado/*/*)
+DATASET = $(W)/build/.dataset
+SITIO_IN = scripts/sitio.py scripts/sitio_textos_plan.py scripts/sitio_dades.py scripts/nombres.py scripts/exportar_dataset.py $(PUBLICADO) data/processed/nombres_puntos_conteo.csv $(SIN)/vias.json $(wildcard web/sitio/*)
 
 analisis: $(ANALISIS)
-web: $(HTML) $(OG) $(FICHAS) $(SITIO)
+web: $(HTML) $(OG) $(FICHAS) $(SITIO) $(DATASET)
 plan: $(PDSV)
 sqlite: $(SQLITE)
 
@@ -150,9 +156,17 @@ $(FICHAS): scripts/fichas.py $(SQLITE) $(wildcard $(W)/fichas/*) $(SIN)/ejes.geo
 $(W)/datos/fichas_indice.sri: $(FICHAS) ;
 # web pública: después de las fichas (usa su índice para el buscador y enlaza las fichas); hereda la lógica del mapa y del
 # método de observatori.plantilla.html y metode.plantilla.html. Marca: build/.sitio
-$(SITIO): scripts/construir_sitio.py $(SITIO_IN) $(FICHAS) $(DATOS) $(SQLITE) $(SIN)/ejes.geojson $(W)/observatori.plantilla.html \
+$(SITIO): scripts/construir_sitio.py $(SITIO_IN) $(FICHAS) $(DATOS) $(SQLITE) $(SIN)/ejes.geojson $(W)/observatori.plantilla.html data/processed/resso.csv \
           $(W)/metode.plantilla.html $(W)/comun/carga.js $(W)/comun/tema.js docs/cambios.csv data/processed/avisos_ciudadanos.csv
 	$(PY) scripts/construir_sitio.py && touch $@
+
+# dataset geolocalizado (scripts/exportar_dataset.py): copia las versiones cerradas a build/datos/ y el alias «ultima»
+# (CSV y GeoJSON de la más nueva). Marca: build/.dataset (oculta). Publicar una versión nueva: `make dataset VERSION=…`
+$(DATASET): scripts/exportar_dataset.py $(PUBLICADO)
+	$(PY) scripts/exportar_dataset.py --build && touch $@
+dataset: $(SQLITE)
+	@test -n "$(VERSION)" || { echo 'uso: make dataset VERSION=X.Y NOTA_VA="…" NOTA_ES="…" [MES=AAAA-MM]' >&2; exit 1; }
+	$(PY) scripts/exportar_dataset.py --publicar $(VERSION) $(if $(MES),--mes $(MES),) --nota-va "$(NOTA_VA)" --nota-es "$(NOTA_ES)"
 
 comprobar:
 	$(PY) scripts/comprobar.py
@@ -183,4 +197,11 @@ telegram-prova:
 capturas:
 	@test -n "$(ETIQUETA)" || { echo "uso: make capturas ETIQUETA=v1-descripcion" >&2; exit 1; }
 	python3 -I scripts/capturas.py "$(ETIQUETA)"
+
+# archivo mensual de las capas de infraestructura del geoportal (scripts/archivar_capas.py): foto en data/archivo_capas/
+# AAAA-MM-DD/ (solo las capas que han cambiado) y cambios por geometría en data/archivo_capas/cambios.csv. Descarga
+# (unos 8 min, 4 s entre peticiones): no entra en make ni en make web. Un cambio es una pista, no un hecho.
+.PHONY: archivar
+archivar:
+	$(PY) scripts/archivar_capas.py
 endif

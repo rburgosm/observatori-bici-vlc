@@ -34,7 +34,7 @@
     if (document.getElementById("pie-css")) return;
     var s = document.createElement("style"); s.id = "pie-css";
     s.textContent = ".pie{font-size:12.5px;line-height:1.5;color:var(--ink2);border-top:1px solid var(--line);padding-top:16px;padding-bottom:40px;margin-top:20px}"
-      + ".pie p{margin:0 0 8px;max-width:110ch}.pie .pie-q{font-size:13.5px;color:var(--ink)}.pie a{color:var(--ink)}"
+      + ".pie p{margin:0 0 8px}.pie .pie-q{font-size:13.5px;color:var(--ink)}.pie a{color:var(--ink)}"
       + ".pie code{font-size:.95em;overflow-wrap:anywhere}.pie .pie-colab{font-size:13.5px;color:var(--ink)}";
     document.head.appendChild(s);
   }

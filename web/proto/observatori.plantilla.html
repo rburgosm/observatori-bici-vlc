@@ -1,6 +1,6 @@
 <title>Observatori de la bici i el patinet de València</title>
 <meta name="description" content="Seguim els sinistres amb bici i patinet a València amb les dades obertes de l'Ajuntament: on passen, què s'està fent i si el Pla Director de Seguretat Viària 2026-2030 funciona.">
-<meta name="theme-color" content="#EEF1F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0F151B" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='11.5'%20fill='%2315202B'%20stroke='%2355626E'/%3E%3Cg%20fill='none'%20stroke='%23EEF1F2'%20stroke-width='2.2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Ccircle%20cx='6.5'%20cy='15'%20r='3.3'/%3E%3Ccircle%20cx='17.5'%20cy='15'%20r='3.3'/%3E%3Cpath%20d='M6.5%2015l3.8-6.5h4.7l2.5%206.5M10.3%208.5%209.3%206.2'/%3E%3C/g%3E%3C/svg%3E">
 <meta property="og:type" content="website">
@@ -26,7 +26,7 @@
 <style>
 /* Layout: banda de meta arriba, mapa protagonista con ficha lateral, hallazgos y datos debajo. Lenguaje de señalización vial. */
 :root{
-  --bg:#EEF1F2; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
+  --bg:#FFFFFF; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
   /* categorías (orden fijo: bici, patinete, choque bici–patinete); validadas con validate_palette.js sobre #EEF1F2:
      el naranja y el aqua no llegan a 3:1 en claro, así que siempre van con leyenda o etiqueta */
   --bici:#2a78d6; --pat:#C94B17; --amb:#14875E; --mix:#8A949D; --meta:#15202B; --warn:#B42318;
@@ -58,7 +58,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid 
 .proto{font-size:13px;color:var(--ink2);padding-block:8px;border-bottom:1px dashed var(--line)}
 /* entradilla de la portada: de qué va y tres accesos con su respuesta (dónde ocurren · qué se hace, en pla.html · ¿funciona?) */
 .entrada{padding-block:28px 4px}
-.entrada h1{font-size:clamp(22px,2.7vw,31px);font-weight:600;line-height:1.2;max-width:46ch;margin:0 0 18px}
+.entrada h1{font-size:clamp(22px,2.7vw,31px);font-weight:600;line-height:1.2;margin:0 0 18px}
 .accesos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 @media (max-width:980px){.accesos{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .accesos a{display:block;box-sizing:border-box;height:100%;min-height:44px;border-top:4px solid var(--ink);background:var(--surface);padding:10px 14px 12px;color:var(--ink);text-decoration:none}
@@ -84,11 +84,11 @@ section{padding-block:28px}
 .meta h2 em{display:block;font-style:normal;font-weight:600;font-size:.56em;line-height:1.2;margin-top:.55em;padding-left:12px;border-left:4px solid var(--ink);color:var(--ink)}
 .meta h2 em.alerta{border-left-color:var(--warn)}
 .meta h2 em.alerta{color:var(--warn)}
-.estado{font-size:17px;max-width:46ch}
+.estado{font-size:17px}
 .estado b{font-variant-numeric:tabular-nums}
 .leyenda{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--ink2);margin-top:12px}
 .leyenda i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:5px;vertical-align:-1px}
-.nota{font-size:12.5px;color:var(--ink2);max-width:60ch;margin-top:10px}
+.nota{font-size:12.5px;color:var(--ink2);margin-top:10px}
 .control summary{cursor:pointer;font-weight:600;color:var(--ink)}
 .control table{border-collapse:collapse;margin-block:6px;font-variant-numeric:tabular-nums}
 .control th,.control td{padding:2px 8px 2px 0;text-align:right;border-bottom:1px solid var(--line);vertical-align:bottom}
@@ -113,7 +113,7 @@ select,input[type=search]{font:inherit;font-size:14px;border:1.5px solid var(--i
 #res li a:hover,#res li a:focus-visible{background:var(--bg)}
 #res li a .ref{color:var(--ink2);font-weight:400}
 .mapa-wrap{border:1px solid var(--line);background:var(--surface)}
-.expl{font-size:14.5px;color:var(--ink2);max-width:80ch;margin:0 0 10px}
+.expl{font-size:14.5px;color:var(--ink2);margin:0 0 10px}
 .ques{pointer-events:none}
 .selbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:8px 12px;border-top:1px solid var(--line);background:var(--bg);font-size:14px}
 .selbar .et{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
@@ -130,7 +130,6 @@ select,input[type=search]{font:inherit;font-size:14px;border:1.5px solid var(--i
 .mm-caja p{margin:4px 0 0}
 .ficha{padding:6px 20px 18px;min-width:0}
 .plan h5{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin:6px 0 4px}
-.ficha .cab{max-width:80ch}
 .secs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px 28px}
 .secs .mini-svg{max-width:320px}
 .lista{width:100%;border-collapse:collapse;font-size:13.5px}
@@ -139,12 +138,11 @@ select,input[type=search]{font:inherit;font-size:14px;border:1.5px solid var(--i
 .lista-wrap{overflow-x:auto}
 .hb-ley{margin:0 0 6px}
 .cab .lugar h4{margin-top:12px}
-.resum{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.2;margin:2px 0 6px;max-width:40ch}
+.resum{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.2;margin:2px 0 6px}
 .br-m{display:inline-block;width:18px;height:8px;background:var(--ink2);border-radius:2px;vertical-align:0}
 .ct-m{display:inline-block;width:3px;height:14px;background:var(--ink);border-radius:1px;vertical-align:-3px;margin-left:4px}
 details.com{margin-top:14px;border-top:1px solid var(--line);padding-top:8px;font-size:13.5px;color:var(--ink2)}
 details.com summary{cursor:pointer;font-family:var(--display);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:13px;color:var(--ink)}
-details.com p{max-width:80ch}
 .secs .ancho{grid-column:1/-1}
 .plan-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px 28px}
 .plan{margin:0;padding-left:18px;font-size:14px}.plan li{margin-bottom:8px}
@@ -224,7 +222,7 @@ ul.pla-aqui .rombo{width:9px;height:9px;margin:0 8px 0 2px;vertical-align:0}
 .filtros-fila{margin-top:-4px}
 .f-any{display:inline-flex;align-items:center;gap:6px}
 .f-any select{min-width:5.2em}
-.avis{font-size:14px;max-width:90ch;margin:0 0 10px;padding:8px 12px;border-left:3px solid var(--warn);background:var(--surface)}
+.avis{font-size:14px;margin:0 0 10px;padding:8px 12px;border-left:3px solid var(--warn);background:var(--surface)}
 .f-resum{font-size:14px;margin:0 0 8px;font-variant-numeric:tabular-nums}
 .f-resum:empty{display:none}
 .sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -661,7 +659,7 @@ veh_csv:{b:"bici",p:"patinet",a:"bici i patinet"},
 tipo_csv:{nudo:"cruïlla",tramo:"tram de carrer",zona:"zona"},
 pl_csv:["no l'esmenta","cita aquest lloc","només cita el seu carrer"],
 mapa_aria:"Mapa dels sinistres amb bici i patinet",
-leer_t:"Com es llig el mapa?",
+leer_t:"Què vol dir cada símbol?",
 ley_c:{bici:"Bici",pat:"Patinet",amb:"Xoc bici–patinet",mescla:"Diverses categories",pl:["","El Pla cita el lloc","El Pla cita el carrer"],verd:["Sense indicis d'excés","Potser per damunt","Clarament per damunt"]},
 anillo_l:"Anell continu: el Pla Director cita aquest lloc pel seu nom. Anell de punts: el Pla només cita el seu carrer. Sense anell: el Pla no l'esmenta.",
 teclat:"Teclat: amb el mapa seleccionat (tecla Tab), les fletxes <kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> mouen el mapa, <kbd>+</kbd> i <kbd>−</kbd> apropen i allunyen, <kbd>Intro</kbd> tria el més proper a la mira, <kbd>N</kbd> i <kbd>P</kbd> passen al següent i a l'anterior (de més a menys sinistres) i <kbd>Esc</kbd> desfà la tria.",
@@ -701,7 +699,7 @@ veh_csv:{b:"bici",p:"patinete",a:"bici y patinete"},
 tipo_csv:{nudo:"cruce",tramo:"tramo de calle",zona:"zona"},
 pl_csv:["no lo menciona","cita este lugar","solo cita su calle"],
 mapa_aria:"Mapa de los siniestros con bici y patinete",
-leer_t:"¿Cómo leer el mapa?",
+leer_t:"¿Qué quiere decir cada símbolo?",
 ley_c:{bici:"Bici",pat:"Patinete",amb:"Choque bici–patinete",mescla:"Varias categorías",pl:["","El Plan cita el lugar","El Plan cita la calle"],verd:["Sin indicios de exceso","Quizá por encima","Claramente por encima"]},
 anillo_l:"Anillo continuo: el Plan Director cita este lugar por su nombre. Anillo de puntos: el Plan solo cita su calle. Sin anillo: el Plan no lo menciona.",
 teclat:"Teclado: con el mapa seleccionado (tecla Tab), las flechas <kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> mueven el mapa, <kbd>+</kbd> y <kbd>−</kbd> acercan y alejan, <kbd>Intro</kbd> elige el más cercano a la mira, <kbd>N</kbd> y <kbd>P</kbd> pasan al siguiente y al anterior (de más a menos siniestros) y <kbd>Esc</kbd> deshace la elección.",

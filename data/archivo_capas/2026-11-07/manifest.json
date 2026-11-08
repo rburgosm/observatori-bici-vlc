@@ -1,0 +1,177 @@
+{
+ "fecha": "2026-11-07",
+ "servicio": "https://geoportal.valencia.es/server/rest/services/OPENDATA/Trafico/MapServer",
+ "crs": "EPSG:4326",
+ "decimales": 7,
+ "normalizacion": "sin IDs internos; coordenadas a 7 decimales; shapely.normalize; entidades ordenadas; sha256 del JSON canónico (claves ordenadas, sin espacios, UTF-8)",
+ "foto_anterior": null,
+ "capas": {
+  "189_itinerarios_ciclistas": {
+   "capa": 189,
+   "nombre": "Itinerarios Ciclistas",
+   "url": "https://geoportal.valencia.es/server/rest/services/OPENDATA/Trafico/MapServer/189/query?where=1%3D1&outFields=estado%2Cobjectid&returnGeometry=true&outSR=4326&geometryPrecision=7&f=geojson",
+   "dominios": {
+    "estado": {
+     "1": "Carril bici",
+     "2": "Ciclocalle",
+     "3": "Calles peatonales",
+     "4": "Carril bici Jardín del Túria",
+     "5": "Cortado por obras",
+     "6": "Senda ciclable",
+     "7": "Carril bus-bici",
+     "9": "Ciclobarrio",
+     "8": "Red ciclista fuera del término municipal"
+    }
+   },
+   "filtro": "1=1",
+   "campos": [
+    "estado"
+   ],
+   "descargado": "2026-11-07T19:49:06+01:00",
+   "n": 1705,
+   "sin_geometria": 0,
+   "sha256": "e7f51cda8448f6bcda0de22677203e7ea9d1953e08c8acebcbb3f87d1afd891a",
+   "crs": "EPSG:4326",
+   "sin_cambios": false,
+   "archivo": "2026-11-07/189_itinerarios_ciclistas.geojson.gz",
+   "bytes_gz": 288619
+  },
+  "223_velocidad_calles": {
+   "capa": 223,
+   "nombre": "Velocidad Calles",
+   "url": "https://geoportal.valencia.es/server/rest/services/OPENDATA/Trafico/MapServer/223/query?where=1%3D1&outFields=velocidad%2Ctipcalle%2Cnomcalle%2Ctipnomcall%2Cobjectid&returnGeometry=true&outSR=4326&geometryPrecision=7&f=geojson",
+   "dominios": {
+    "velocidad": {
+     "10": "10 km/h",
+     "20": "20 km/h",
+     "30": "30 km/h",
+     "40": "40 km/h",
+     "50": "50 km/h",
+     "Ciclocalle": "Ciclocalle (30 km/h)",
+     "Coexistencia": "Zona de coexistencia (20 Km/h)",
+     "Peatonal": "Peatonal",
+     "Residencia": "Residencia",
+     "Zona de estancia y juegos 10": "Zona de estancia y juegos (10 Km/h)"
+    }
+   },
+   "filtro": "1=1",
+   "campos": [
+    "velocidad",
+    "tipcalle",
+    "nomcalle",
+    "tipnomcall"
+   ],
+   "descargado": "2026-11-07T19:49:46+01:00",
+   "n": 12877,
+   "sin_geometria": 0,
+   "sha256": "81d0945644581428fcffaa18fec184f63fd0f5775bc1d31955c637e37d2218be",
+   "crs": "EPSG:4326",
+   "sin_cambios": false,
+   "archivo": "2026-11-07/223_velocidad_calles.geojson.gz",
+   "bytes_gz": 355072
+  },
+  "2_vmp_tipo_a": {
+   "capa": 2,
+   "nombre": "Vehículos Movilidad Personal Tipo A",
+   "url": "https://geoportal.valencia.es/server/rest/services/OPENDATA/Trafico/MapServer/2/query?where=1%3D1&outFields=gid&returnGeometry=true&outSR=4326&geometryPrecision=7&f=geojson",
+   "dominios": {},
+   "filtro": "1=1",
+   "campos": [],
+   "descargado": "2026-11-07T19:50:16+01:00",
+   "n": 9256,
+   "sin_geometria": 0,
+   "sha256": "ff7eec002caee0ef726131282d7c65f5a5168eb7b4ad3b6e6d171db10c3097df",
+   "crs": "EPSG:4326",
+   "sin_cambios": false,
+   "archivo": "2026-11-07/2_vmp_tipo_a.geojson.gz",
+   "bytes_gz": 332442
+  },
+  "3_vmp_tipo_b": {
+   "capa": 3,
+   "nombre": "Vehículos Movilidad Personal Tipo B",
+   "url": "https://geoportal.valencia.es/server/rest/services/OPENDATA/Trafico/MapServer/3/query?where=1%3D1&outFields=gid&returnGeometry=true&outSR=4326&geometryPrecision=7&f=geojson",
+   "dominios": {},
+   "filtro": "1=1",
+   "campos": [],
+   "descargado": "2026-11-07T19:50:45+01:00",
+   "n": 9256,
+   "sin_geometria": 0,
+   "sha256": "ff7eec002caee0ef726131282d7c65f5a5168eb7b4ad3b6e6d171db10c3097df",
+   "crs": "EPSG:4326",
+   "sin_cambios": false,
+   "archivo": "2026-11-07/3_vmp_tipo_b.geojson.gz",
+   "bytes_gz": 332442
+  },
+  "238_pasos_ciclistas": {
+   "capa": 238,
+   "nombre": "Señalización Horizontal: pasos ciclistas",
+   "url": "https://geoportal.valencia.es/server/rest/services/OPENDATA/Trafico/MapServer/238/query?where=GRUPO+IN+%28%27Pasos+Bicis%27%2C%27CarrilBiciPaso%27%2C%27CarrilBiciPasoPoli%27%2C%27CarrilBiciPasoAcri%27%29&outFields=GRUPO%2CCALLE%2CTIPOCALLE%2CCOLOR%2CCREATED_DATE%2CLAST_EDITED_DATE%2COBJECTID&returnGeometry=true&outSR=4326&geometryPrecision=7&f=geojson",
+   "dominios": {},
+   "filtro": "GRUPO IN ('Pasos Bicis','CarrilBiciPaso','CarrilBiciPasoPoli','CarrilBiciPasoAcri')",
+   "campos": [
+    "GRUPO",
+    "CALLE",
+    "TIPOCALLE",
+    "COLOR",
+    "CREATED_DATE",
+    "LAST_EDITED_DATE"
+   ],
+   "descargado": "2026-11-07T19:51:13+01:00",
+   "n": 7991,
+   "sin_geometria": 0,
+   "sha256": "7a20e9d92e01f063eb5e7c986dd732592bbdb107803fcc6db89c2f1908bba39d",
+   "crs": "EPSG:4326",
+   "sin_cambios": false,
+   "archivo": "2026-11-07/238_pasos_ciclistas.geojson.gz",
+   "bytes_gz": 281920
+  },
+  "238_pasos_peatones": {
+   "capa": 238,
+   "nombre": "Señalización Horizontal: pasos de peatones",
+   "url": "https://geoportal.valencia.es/server/rest/services/OPENDATA/Trafico/MapServer/238/query?where=GRUPO+IN+%28%27Pasos+Pastillas%27%2C%27Pasos+Tacos%27%29&outFields=GRUPO%2CCALLE%2CTIPOCALLE%2CCOLOR%2CCREATED_DATE%2CLAST_EDITED_DATE%2COBJECTID&returnGeometry=true&outSR=4326&geometryPrecision=7&f=geojson",
+   "dominios": {},
+   "filtro": "GRUPO IN ('Pasos Pastillas','Pasos Tacos')",
+   "campos": [
+    "GRUPO",
+    "CALLE",
+    "TIPOCALLE",
+    "COLOR",
+    "CREATED_DATE",
+    "LAST_EDITED_DATE"
+   ],
+   "descargado": "2026-11-07T19:57:14+01:00",
+   "n": 131888,
+   "sin_geometria": 0,
+   "sha256": "3db32e5df2f03431056e871644515fc2e3688c6fca81c491df9dd913b5f69c93",
+   "crs": "EPSG:4326",
+   "sin_cambios": false,
+   "archivo": "2026-11-07/238_pasos_peatones.geojson.gz",
+   "bytes_gz": 3969212
+  },
+  "209_ocupacion_via_publica": {
+   "capa": 209,
+   "nombre": "Ocupación vía pública",
+   "url": "https://geoportal.valencia.es/server/rest/services/OPENDATA/Trafico/MapServer/209/query?where=1%3D1&outFields=id_incidencia%2Cdesc_incidencia%2Ctipo_incidencia%2Cdesc_calle%2Ctipo_afectacion%2Cfecha_inicio%2Cfecha_fin%2Cnumero_policia_origen%2Cobjectid&returnGeometry=true&outSR=4326&geometryPrecision=7&f=geojson",
+   "dominios": {},
+   "filtro": "1=1",
+   "campos": [
+    "id_incidencia",
+    "desc_incidencia",
+    "tipo_incidencia",
+    "desc_calle",
+    "tipo_afectacion",
+    "fecha_inicio",
+    "fecha_fin",
+    "numero_policia_origen"
+   ],
+   "descargado": "2026-11-07T19:57:24+01:00",
+   "n": 557,
+   "sin_geometria": 0,
+   "sha256": "45d479e01e1bbf696c344ec6d55c8a37711040c0e89bd477ac4c406d9594ca4f",
+   "crs": "EPSG:4326",
+   "sin_cambios": false,
+   "archivo": "2026-11-07/209_ocupacion_via_publica.geojson.gz",
+   "bytes_gz": 13575
+  }
+ }
+}

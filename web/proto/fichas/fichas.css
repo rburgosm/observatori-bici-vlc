@@ -2,10 +2,10 @@
    (bocetos v1, comun.css): misma paleta, escala tipográfica y piezas. Un solo fichero para todas las fichas:
    build/datos/fichas.<hash8>.css, con integridad SRI. */
 :root{
-  --bg:#EEF1F2; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
+  --bg:#FFFFFF; --surface:#FFFFFF; --line:#D3D9DC; --ink:#15202B; --ink2:#55626E;
   --bici:#2a78d6; --pat:#C94B17; --amb:#14875E; --mix:#8A949D; --mapbg:#F7F8F8; --calle:#C9D0D4; --calle-sel:#15202B;
   --e-hecha:#6E1470; --e-marcha:#A23A9E; --e-anun:#D08ACD; --e-sin:#8A949D;
-  --e-hecha-bg:#F3E6F3; --e-marcha-bg:#F6EAF5; --e-anun-bg:#FBF1FA; --tint:#E4E9EB;
+  --e-hecha-bg:#F3E6F3; --e-marcha-bg:#F6EAF5; --e-anun-bg:#FBF1FA; --tint:#EEF1F2;
   --t-meta:1rem; --t-body:1.125rem; --t-lead:clamp(1.25rem,2.2vw,1.5rem); --t-h3:1.375rem;
   --t-h2:clamp(1.75rem,3.2vw,2.25rem); --t-h1:clamp(2.25rem,5vw,3.5rem); --t-cifra-xl:clamp(3.5rem,8vw,5rem);
   --display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;

@@ -1,0 +1,254 @@
+ACCIDENTS DE TRÀNSIT DE VALÈNCIA GEOLOCALITZATS, 2022-2025 — versió 1.0 (2026-11)
+ACCIDENTES DE TRÁFICO DE VALÈNCIA GEOLOCALIZADOS, 2022-2025 — versión 1.0 (2026-11)
+
+Observatori de la bici i el patinet de València · https://observatoribicivlc.org/dades/#accidents-geo
+(Castellano más abajo.)
+
+==============================================================================
+VALENCIÀ
+==============================================================================
+
+## Què és
+
+Tots els accidents de trànsit que publica l'Ajuntament de València en el conjunt «Accidents de trànsit 2022-2025»
+del seu portal de dades obertes (34.244 files), amb el lloc on els hem situat en el mapa. El portal només dona
+l'adreça escrita en el comunicat de la policia («C/ X cruce C/ Y», «AV X 46»); nosaltres la convertim en coordenades
+amb el carrerer municipal. N'hem pogut situar 30.225, el 88,3 %.
+
+Cada fila diu també com l'hem situada (`metodo`), quina incertesa té la posició (`incertidumbre_m`), el codi del
+carrer en el carrerer (`codvia`), si hi ha bici o patinet i si la fila té algun error que ve del portal.
+
+Fitxers:
+- `siniestros_geo_v1.0_2026-11.csv`: tots els accidents, també els que no s'han pogut situar (sense coordenades). CSV (RFC 4180), UTF-8
+  amb BOM, separat per comes.
+- `siniestros_geo_v1.0_2026-11.geojson`: només els 30.225 accidents situats, en GeoJSON (RFC 7946, WGS 84).
+- `siniestros_geo_v1.0_2026-11_datapackage.json`: descriptor Frictionless Data Package (columnes, tipus, unitats, llicència, fonts i sha256).
+- `siniestros_geo_ultima.csv` i `siniestros_geo_ultima.geojson` (en la web): sempre la versió més nova.
+
+## Llicència i atribució
+
+CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/deed.ca). Pots copiar les dades, redistribuir-les, transformar-les
+i fer-les servir per a qualsevol fi, també comercial, si cites la font.
+
+Font de les dades: Ajuntament de València – Dades Obertes (https://opendata.vlci.valencia.es). Conjunts «Accidents de trànsit 2022-2025»
+(siniestros-de-trafico-2022-2025), «Vies», «Eixos de carrer» i «Portals dels carrers», CC BY 4.0, obtinguts el 30/10/2026.
+Dades modificades per l'Observatori de la bici i el patinet: s'hi afigen les coordenades situades amb el carrerer
+municipal, el mètode i la incertesa de la posició, el codi de carrer, les marques de bici i patinet i les marques de
+qualitat; «NULL» es publica com a camp buit. L'Ajuntament de València no participa en aquest treball ni l'avala.
+
+## Privacitat
+
+- No hi ha cap dada de les persones implicades: ni edat, ni sexe, ni noms, ni matrícules. Una fila és un accident.
+- La coordenada és la de la cruïlla o la del número de portal citat en el comunicat, no un domicili.
+- Està prohibit reidentificar persones creuant aquestes dades amb altres fonts, com en la política d'ús del portal.
+- Si un registre t'afecta i vols que el revisem, escriu-nos a hola@observatoribicivlc.org. Si l'Ajuntament retira o corregix un
+  registre, la versió següent el retira o el corregix igual.
+
+## Diccionari de dades
+
+| Columna | Tipus | Què és |
+|---|---|---|
+| `id_portal` | integer | Identificador de l'accident en el portal (camp _id del conjunt «Accidents de trànsit 2022-2025»). És l'únic identificador que publica el portal. |
+| `fecha_hora` | datetime | Data i hora (local), tal com la publica el portal. Els segons només hi són des de juliol de 2024; abans valen 00. |
+| `anyo` | year | Any de l'accident. |
+| `gravedad` | string | Gravetat segons el portal. No es pot comparar entre anys: des de 2023 es compta com a ferit greu qui passa més de 24 hores a l'hospital. |
+| `tipo_accidente` | string | Tipus d'accident segons el portal (buit si no consta). Només és fiable des de juliol de 2024: abans falta en moltes files. |
+| `vehiculos_implicados` | string | Vehicles implicats, tal com els publica el portal (separats per comes). |
+| `factores` | string | Factors concurrents segons la policia, tal com els publica el portal (buit si no consta). |
+| `ubicacion` | string | Adreça escrita en el comunicat de la policia, tal com la publica el portal. |
+| `con_bici` | boolean | Hi ha almenys una bicicleta entre els vehicles implicats. |
+| `con_patinete` | boolean | Hi ha almenys un patinet o un altre vehicle de mobilitat personal (VMP) entre els vehicles implicats. |
+| `metodo` | string | Com hem situat l'accident: cruce (cruïlla de dos carrers), portal (número de portal), portal_cercano (número de portal proper, de la mateixa banda i a 10 números o menys), cruce_fallo i numero_fallo (no s'ha pogut situar) o solo_calle (l'adreça només dona el carrer i no se situa). |
+| `lon` | number | Longitud del punt: la cruïlla o el número de portal citat en el comunicat, no un domicili. Buit si no s'ha pogut situar. Unitat: graus (WGS 84, EPSG:4326). |
+| `lat` | number | Latitud del punt. Unitat: graus (WGS 84, EPSG:4326). |
+| `incertidumbre_m` | integer | Radi aproximat al voltant del punt on pot estar el lloc que descriu l'adreça. No és un error mesurat: és una estimació segons el mètode (vegeu el LLEGIU-ME). Unitat: metres. |
+| `codvia` | integer | Codi del carrer en el carrerer municipal (codvia): el carrer del portal o el primer carrer de la cruïlla. Buit si el nom no casa amb cap carrer o casa amb més d'un. |
+| `codvia_2` | integer | Codi del segon carrer de la cruïlla (només en les cruïlles). |
+| `duplicado_de` | integer | Si la fila és idèntica a una altra en tots els camps del portal llevat de l'identificador, l'id_portal de la primera. Buit en la resta. |
+| `mismo_lugar_y_hora` | boolean | Hi ha una altra fila amb la mateixa data, hora i adreça però algun altre camp diferent: pot ser el mateix accident registrat dues vegades o dos accidents. |
+| `fila_incompleta` | boolean | La fila ve trencada del portal: els vehicles són només «[» o l'adreça porta «nan» en lloc d'un carrer o d'un número. |
+| `en_analisis` | boolean | L'observatori la fa servir en les xifres: anys complets i sense duplicats exactes. |
+| `incidencias` | string | Codis dels errors detectats en les dades del portal que afecten la fila, separats per «;» (vegeu el LLEGIU-ME). |
+
+Codis de la columna `incidencias` (errors del portal que hem comunicat a l'Ajuntament):
+- `INC-001` (18 files): fila idèntica a una altra llevat del _id (duplicat exacte).
+- `INC-002` (58 files): mateixa data, hora i adreça que una altra fila, amb algun camp diferent.
+- `INC-003` (25 files): vehicles implicats buits o tallats («[»).
+- `INC-004` (17 files): accident de l'1 de gener de 2026 dins del conjunt 2022-2025.
+- `INC-027` (44 files): adreça amb «nan» o cruïlla d'un carrer amb si mateix.
+
+## Com l'hem fet
+
+Amb el carrerer municipal (vies, eixos de carrer i portals) i sense cap dada d'OpenStreetMap. Mètode complet:
+https://observatoribicivlc.org/metode/ i codi obert: https://github.com/rburgosm/observatori-bici-vlc
+
+- Cruïlla (`cruce`, 16.265 files): el punt més pròxim entre els eixos dels dos carrers, si estan a 40 m o menys.
+- Portal (`portal`, 13.672 files): el punt del número de portal en el carrerer.
+- Portal proper (`portal_cercano`, 288 files): si el número no existeix, el més pròxim de la mateixa
+  banda del carrer, a 10 números o menys.
+- No situats: `cruce_fallo` (1.341; els carrers no es toquen o no es troben), `numero_fallo`
+  (256; el carrer no es troba o no té portals pròxims) i `solo_calle` (2.422; l'adreça només
+  dona el carrer).
+
+`incertidumbre_m` és una estimació, no un error mesurat, del radi on pot estar el lloc que descriu l'adreça:
+- cruïlla: 30 m (el radi que fem servir per a una cruïlla) més la meitat de la distància entre els eixos;
+- portal: la distància del portal a l'eix del carrer (l'accident és en la calçada, no en la porta) més la meitat de la
+  separació típica entre dos portals seguits de la mateixa banda (13,9 m, la mediana del carrerer);
+- portal proper: el mateix, més la distància estimada fins al número escrit.
+Medianes: cruïlla 30 m, portal 20 m, portal proper 41 m. Les cruïlles molt grans
+(places i rotondes) poden tindre més incertesa de la que diu la columna.
+
+## Limitacions
+
+- Mostra on es registren més accidents, no on és més perillós: no sabem quanta gent passa per cada lloc.
+- Hem pogut situar el 88 % dels accidents, però la part situada canvia amb l'any:
+  2022: 72 % (bici o patinet: 77 %); 2023: 86 % (bici o patinet: 84 %); 2024: 94 % (bici o patinet: 91 %); 2025: 98 % (bici o patinet: 95 %).
+  Les tendències fetes només amb els accidents situats estan esbiaixades: per a seguir-les, cal fer servir totes les
+  files o corregir per la cobertura de cada any.
+- La gravetat no es pot comparar entre anys (des de 2023 es compta com a ferit greu qui passa més de 24 hores a
+  l'hospital). El tipus d'accident i els factors només són complets des de juliol de 2024.
+- Fins a mitjan 2024, en molts comunicats no hi consta la persona atropellada.
+- Les 17 files de l'1 de gener de 2026 venen dins del conjunt 2022-2025 del portal; no entren en les xifres de
+  l'observatori (`en_analisis` = false).
+- `id_portal` és el `_id` del portal en la descàrrega del 30/10/2026. És l'únic identificador que hi ha. Si el portal
+  els renumera en una publicació futura, la versió següent dirà com es corresponen.
+
+## Versions
+
+Cada versió és tancada: el fitxer d'una versió no canvia mai. Una correcció és una versió nova.
+- v1.x: correccions o millores de la geolocalització amb les mateixes dades d'origen.
+- v2.0: dades de 2026 (una altra descàrrega del portal) o canvi de columnes.
+Totes les versions estan en https://observatoribicivlc.org/dades/#accidents-geo i en el registre de canvis (https://observatoribicivlc.org/sobre/#canvis).
+
+- v1.0 (2026-11-07): Primera versió publicada: tots els accidents del portal de 2022 a 2025 (i les 17 files de l'1 de gener de 2026), situats en el mapa amb el carrerer municipal.
+
+## Com citar-ho
+
+Observatori de la bici i el patinet de València (2026). Accidents de trànsit de València geolocalitzats,
+2022-2025, versió 1.0. https://observatoribicivlc.org/datos/siniestros_geo_v1.0_2026-11.csv. Dades de l'Ajuntament de València – Dades Obertes
+(CC BY 4.0), modificades per l'observatori.
+
+
+==============================================================================
+CASTELLANO
+==============================================================================
+
+## Qué es
+
+Todos los accidentes de tráfico que publica el Ayuntamiento de València en el conjunto «Accidentes de tráfico
+2022-2025» de su portal de datos abiertos (34.244 filas), con el lugar donde los hemos situado en el mapa. El portal
+solo da la dirección escrita en el parte de la policía («C/ X cruce C/ Y», «AV X 46»); nosotros la convertimos en
+coordenadas con el callejero municipal. Hemos podido situar 30.225, el 88,3 %.
+
+Cada fila dice también cómo la hemos situado (`metodo`), qué incertidumbre tiene la posición (`incertidumbre_m`), el
+código de la calle en el callejero (`codvia`), si hay bici o patinete y si la fila tiene algún error que viene del portal.
+
+Ficheros:
+- `siniestros_geo_v1.0_2026-11.csv`: todos los accidentes, también los que no se han podido situar (sin coordenadas). CSV (RFC 4180),
+  UTF-8 con BOM, separado por comas.
+- `siniestros_geo_v1.0_2026-11.geojson`: solo los 30.225 accidentes situados, en GeoJSON (RFC 7946, WGS 84).
+- `siniestros_geo_v1.0_2026-11_datapackage.json`: descriptor Frictionless Data Package (columnas, tipos, unidades, licencia, fuentes y sha256).
+- `siniestros_geo_ultima.csv` y `siniestros_geo_ultima.geojson` (en la web): siempre la versión más nueva.
+
+## Licencia y atribución
+
+CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/deed.es). Puedes copiar los datos, redistribuirlos, transformarlos
+y usarlos para cualquier fin, también comercial, si citas la fuente.
+
+Fuente de los datos: Ajuntament de València – Dades Obertes (https://opendata.vlci.valencia.es). Conjuntos «Accidentes de tráfico 2022-2025»
+(siniestros-de-trafico-2022-2025), «Vías», «Ejes de calle» y «Portales de las calles», CC BY 4.0, obtenidos el 30/10/2026.
+Datos modificados por el Observatorio de la bici y el patinete: se añaden las coordenadas situadas con el callejero
+municipal, el método y la incertidumbre de la posición, el código de calle, las marcas de bici y patinete y las marcas
+de calidad; «NULL» se publica como campo vacío. El Ajuntament de València no participa en este trabajo ni lo avala.
+
+## Privacidad
+
+- No hay ningún dato de las personas implicadas: ni edad, ni sexo, ni nombres, ni matrículas. Una fila es un accidente.
+- La coordenada es la del cruce o la del número de portal citado en el parte, no un domicilio.
+- Está prohibido reidentificar personas cruzando estos datos con otras fuentes, como en la política de uso del portal.
+- Si un registro te afecta y quieres que lo revisemos, escríbenos a hola@observatoribicivlc.org. Si el Ayuntamiento retira o corrige un
+  registro, la versión siguiente lo retira o lo corrige igual.
+
+## Diccionario de datos
+
+| Columna | Tipo | Qué es |
+|---|---|---|
+| `id_portal` | integer | Identificador del accidente en el portal (campo _id del conjunto «Accidentes de tráfico 2022-2025»). Es el único identificador que publica el portal. |
+| `fecha_hora` | datetime | Fecha y hora (local), tal como la publica el portal. Los segundos solo están desde julio de 2024; antes valen 00. |
+| `anyo` | year | Año del accidente. |
+| `gravedad` | string | Gravedad según el portal. No se puede comparar entre años: desde 2023 se cuenta como herido grave a quien pasa más de 24 horas en el hospital. |
+| `tipo_accidente` | string | Tipo de accidente según el portal (vacío si no consta). Solo es fiable desde julio de 2024: antes falta en muchas filas. |
+| `vehiculos_implicados` | string | Vehículos implicados, tal como los publica el portal (separados por comas). |
+| `factores` | string | Factores concurrentes según la policía, tal como los publica el portal (vacío si no consta). |
+| `ubicacion` | string | Dirección escrita en el parte de la policía, tal como la publica el portal. |
+| `con_bici` | boolean | Hay al menos una bicicleta entre los vehículos implicados. |
+| `con_patinete` | boolean | Hay al menos un patinete u otro vehículo de movilidad personal (VMP) entre los vehículos implicados. |
+| `metodo` | string | Cómo hemos situado el accidente: cruce (cruce de dos calles), portal (número de portal), portal_cercano (número de portal cercano, del mismo lado y a 10 números o menos), cruce_fallo y numero_fallo (no se ha podido situar) o solo_calle (la dirección solo da la calle y no se sitúa). |
+| `lon` | number | Longitud del punto: el cruce o el número de portal citado en el parte, no un domicilio. Vacío si no se ha podido situar. Unidad: grados (WGS 84, EPSG:4326). |
+| `lat` | number | Latitud del punto. Unidad: grados (WGS 84, EPSG:4326). |
+| `incertidumbre_m` | integer | Radio aproximado alrededor del punto en el que puede estar el lugar que describe la dirección. No es un error medido: es una estimación según el método (ver el LÉEME). Unidad: metros. |
+| `codvia` | integer | Código de la calle en el callejero municipal (codvia): la calle del portal o la primera calle del cruce. Vacío si el nombre no casa con ninguna calle o casa con más de una. |
+| `codvia_2` | integer | Código de la segunda calle del cruce (solo en los cruces). |
+| `duplicado_de` | integer | Si la fila es idéntica a otra en todos los campos del portal salvo el identificador, el id_portal de la primera. Vacío en el resto. |
+| `mismo_lugar_y_hora` | boolean | Hay otra fila con la misma fecha, hora y dirección pero algún otro campo distinto: puede ser el mismo accidente registrado dos veces o dos accidentes. |
+| `fila_incompleta` | boolean | La fila viene rota del portal: los vehículos son solo «[» o la dirección lleva «nan» en lugar de una calle o de un número. |
+| `en_analisis` | boolean | El observatorio la usa en las cifras: años completos y sin duplicados exactos. |
+| `incidencias` | string | Códigos de los errores detectados en los datos del portal que afectan a la fila, separados por «;» (ver el LÉEME). |
+
+Códigos de la columna `incidencias` (errores del portal que hemos comunicado al Ayuntamiento):
+- `INC-001` (18 filas): fila idéntica a otra salvo el _id (duplicado exacto).
+- `INC-002` (58 filas): misma fecha, hora y dirección que otra fila, con algún campo distinto.
+- `INC-003` (25 filas): vehículos implicados vacíos o cortados («[»).
+- `INC-004` (17 filas): accidente del 1 de enero de 2026 dentro del conjunto 2022-2025.
+- `INC-027` (44 filas): dirección con «nan» o cruce de una calle consigo misma.
+
+## Cómo lo hemos hecho
+
+Con el callejero municipal (vías, ejes de calle y portales) y sin ningún dato de OpenStreetMap. Método completo:
+https://observatoribicivlc.org/metode/ y código abierto: https://github.com/rburgosm/observatori-bici-vlc
+
+- Cruce (`cruce`, 16.265 filas): el punto más próximo entre los ejes de las dos calles, si están a 40 m o menos.
+- Portal (`portal`, 13.672 filas): el punto del número de portal en el callejero.
+- Portal cercano (`portal_cercano`, 288 filas): si el número no existe, el más próximo del mismo lado
+  de la calle, a 10 números o menos.
+- No situados: `cruce_fallo` (1.341; las calles no se tocan o no se encuentran), `numero_fallo`
+  (256; la calle no se encuentra o no tiene portales próximos) y `solo_calle` (2.422; la
+  dirección solo da la calle).
+
+`incertidumbre_m` es una estimación, no un error medido, del radio en el que puede estar el lugar que describe la dirección:
+- cruce: 30 m (el radio que usamos para un cruce) más la mitad de la distancia entre los ejes;
+- portal: la distancia del portal al eje de la calle (el accidente está en la calzada, no en la puerta) más la mitad de
+  la separación típica entre dos portales seguidos del mismo lado (13,9 m, la mediana del callejero);
+- portal cercano: lo mismo, más la distancia estimada hasta el número escrito.
+Medianas: cruce 30 m, portal 20 m, portal cercano 41 m. Los cruces muy grandes
+(plazas y rotondas) pueden tener más incertidumbre de la que dice la columna.
+
+## Limitaciones
+
+- Muestra dónde se registran más accidentes, no dónde es más peligroso: no sabemos cuánta gente pasa por cada lugar.
+- Hemos podido situar el 88 % de los accidentes, pero la parte situada cambia con el año:
+  2022: 72 % (bici o patinete: 77 %); 2023: 86 % (bici o patinete: 84 %); 2024: 94 % (bici o patinete: 91 %); 2025: 98 % (bici o patinete: 95 %).
+  Las tendencias hechas solo con los accidentes situados están sesgadas: para seguirlas, hay que usar todas las filas
+  o corregir por la cobertura de cada año.
+- La gravedad no se puede comparar entre años (desde 2023 se cuenta como herido grave a quien pasa más de 24 horas en
+  el hospital). El tipo de accidente y los factores solo están completos desde julio de 2024.
+- Hasta mediados de 2024, en muchos partes no consta la persona atropellada.
+- Las 17 filas del 1 de enero de 2026 vienen dentro del conjunto 2022-2025 del portal; no entran en las cifras del
+  observatorio (`en_analisis` = false).
+- `id_portal` es el `_id` del portal en la descarga del 30/10/2026. Es el único identificador que hay. Si el portal los
+  renumera en una publicación futura, la versión siguiente dirá cómo se corresponden.
+
+## Versiones
+
+Cada versión es cerrada: el fichero de una versión no cambia nunca. Una corrección es una versión nueva.
+- v1.x: correcciones o mejoras de la geolocalización con los mismos datos de origen.
+- v2.0: datos de 2026 (otra descarga del portal) o cambio de columnas.
+Todas las versiones están en https://observatoribicivlc.org/dades/#accidents-geo y en el registro de cambios (https://observatoribicivlc.org/sobre/#canvis).
+
+- v1.0 (2026-11-07): Primera versión publicada: todos los accidentes del portal de 2022 a 2025 (y las 17 filas del 1 de enero de 2026), situados en el mapa con el callejero municipal.
+
+## Cómo citarlo
+
+Observatorio de la bici y el patinete de València (2026). Accidentes de tráfico de València geolocalizados,
+2022-2025, versión 1.0. https://observatoribicivlc.org/datos/siniestros_geo_v1.0_2026-11.csv. Datos del Ayuntamiento de València – Dades Obertes
+(CC BY 4.0), modificados por el observatorio.

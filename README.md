@@ -40,6 +40,8 @@ La web queda en `web/proto/build/`. Per a veure-la: `python3 -m http.server 8000
 
 `make` regenera tots els fitxers derivats (`data/processed/siniestros_geo.csv`, `outputs/`, `web/proto/datos/`, `web/proto/build/` i la base SQLite). Cap d'ells està al repositori.
 
+L'excepció és el conjunt de dades geolocalitzat que publiquem (`data/publicado/v<versió>/`: CSV, GeoJSON, LLEGIU-ME i `datapackage.json`). Cada versió queda tancada i no es torna a generar: `make dataset VERSION=X.Y` en publica una de nova, i `make comprobar` verifica que les ja publicades no canvien (sha256 del `manifest.json`).
+
 ### Estructura
 
 | Carpeta | Contingut |
@@ -125,6 +127,8 @@ Después, para trabajar:
 La web queda en `web/proto/build/`. Para verla: `python3 -m http.server 8000 --directory web/proto/build` y abrir http://localhost:8000/.
 
 `make` regenera todos los ficheros derivados (`data/processed/siniestros_geo.csv`, `outputs/`, `web/proto/datos/`, `web/proto/build/` y la base SQLite). Ninguno de ellos está en el repositorio.
+
+La excepción es el conjunto de datos geolocalizado que publicamos (`data/publicado/v<versión>/`: CSV, GeoJSON, LÉEME y `datapackage.json`). Cada versión queda cerrada y no se vuelve a generar: `make dataset VERSION=X.Y` publica una nueva, y `make comprobar` verifica que las ya publicadas no cambian (sha256 del `manifest.json`).
 
 ### Estructura
 
