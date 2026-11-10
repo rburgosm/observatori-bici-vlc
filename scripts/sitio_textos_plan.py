@@ -91,8 +91,8 @@ MEDIDAS = {
                   "Hacer más carriles bici separados de los coches y pasar a la calzada los que van por la acera"),
         "lugar": None,
         "plan": _t("El Pla preveu passar de 225 a 250 km de carril bici.", "El Plan prevé pasar de 225 a 250 km de carril bici."),
-        "nota": _t("Hi ha dues obres en marxa, en Giorgeta i Pérez Galdós i en Gaspar Aguilar (Memòria d'actuacions 2023-2026, apartat 2.11), i diverses licitacions en 2026. Bona part són trasllats a la calçada, que no sumen quilòmetres. No hem trobat cap recompte oficial de quilòmetres posterior al de novembre de 2025 (225,7 km).",
-                   "Hay dos obras en marcha, en Giorgeta y Pérez Galdós y en Gaspar Aguilar (Memoria de actuaciones 2023-2026, apartado 2.11), y varias licitaciones en 2026. Buena parte son traslados a la calzada, que no suman kilómetros. No hemos encontrado ningún recuento oficial de kilómetros posterior al de noviembre de 2025 (225,7 km).")},
+        "nota": _t("Hi ha dues obres en marxa, en Giorgeta i Pérez Galdós i en Gaspar Aguilar (Memòria d'actuacions 2023-2026, apartat 2.11), i diverses licitacions en 2026, l'última la dels itineraris d'Orriols (novembre). Bona part són trasllats a la calçada, que no sumen quilòmetres. No hem trobat cap recompte oficial de quilòmetres posterior al de novembre de 2025 (225,7 km).",
+                   "Hay dos obras en marcha, en Giorgeta y Pérez Galdós y en Gaspar Aguilar (Memoria de actuaciones 2023-2026, apartado 2.11), y varias licitaciones en 2026, la última la de los itinerarios de Orriols (noviembre). Buena parte son traslados a la calzada, que no suman kilómetros. No hemos encontrado ningún recuento oficial de kilómetros posterior al de noviembre de 2025 (225,7 km).")},
     "3.2.2-ciclocalles": {
         "tit": _t("Ampliar els ciclocarrers, carrers senyalitzats en què la bici va per la calçada al costat dels cotxes",
                   "Ampliar las ciclocalles, calles señalizadas en las que la bici va por la calzada junto a los coches"),
@@ -227,6 +227,14 @@ MEDIDAS = {
                    "El Plan prevé seguir mejorando la seguridad de los itinerarios ciclistas que ya existen."),
         "nota": _t("La licitació està publicada i encara sense adjudicar. Una d'anterior, de l'Av. de la Plata (maig de 2026), va quedar deserta.",
                    "La licitación está publicada y todavía sin adjudicar. Una anterior, de la avenida de la Plata (mayo de 2026), quedó desierta.")},
+    "3.2.2-orriols-itinerarios": {
+        "tit": _t("Millora dels itineraris ciclistes d'Orriols: un de nou per l'Av. d'Alfauir, Primat Reig, Benicarló i Peníscola, i la connexió entre els carrils de Reig Genovés i Sant Vicent de Paül",
+                  "Mejora de los itinerarios ciclistas de Orriols: uno nuevo por la avenida de Alfauir, Primado Reig, Benicarló y Peñíscola, y la conexión entre los carriles de Reig Genovés y San Vicente de Paúl"),
+        "lugar": None,
+        "plan": _t("El Pla preveu continuar millorant la seguretat dels itineraris ciclistes que ja existeixen i passar de 225 a 250 km de carril bici.",
+                   "El Plan prevé seguir mejorando la seguridad de los itinerarios ciclistas que ya existen y pasar de 225 a 250 km de carril bici."),
+        "nota": _t("La Junta de Govern la va aprovar el 29/10/2026 i la licitació es va publicar el 2/11/2026, en dos lots (334.645,28 €, IVA inclòs, amb fons europeus FEDER). Encara no s'ha adjudicat. La nota de l'Ajuntament no cita el Pla.",
+                   "La Junta de Gobierno la aprobó el 29/10/2026 y la licitación se publicó el 2/11/2026, en dos lotes (334.645,28 €, IVA incluido, con fondos europeos FEDER). Todavía no se ha adjudicado. La nota del Ayuntamiento no cita el Plan.")},
     "3.2.2-gaspar-aguilar": {
         "tit": _t("Carril bici de doble sentit, separat dels cotxes, en l'Av. de Gaspar Aguilar (1,2 km, de la Pl. de Jesús a l'Av. Doctor Tomàs Sala)",
                   "Carril bici de doble sentido, separado de los coches, en la avenida de Gaspar Aguilar (1,2 km, de la plaza de Jesús a la avenida Doctor Tomás Sala)"),
@@ -241,8 +249,8 @@ MEDIDAS = {
                     "Calle Beato Nicolás Factor, entre la calle María Jordán y la calle Azagador de las Monjas"),
         "plan": _t("El Pla preveu continuar millorant la seguretat dels itineraris ciclistes que ja existeixen.",
                    "El Plan prevé seguir mejorando la seguridad de los itinerarios ciclistas que ya existen."),
-        "nota": _t("La licitació es va publicar el 20/10/2026 (236.232,97 €, IVA inclòs) i l'Ajuntament la va anunciar el 2/11/2026. Encara no s'ha adjudicat.",
-                   "La licitación se publicó el 20/10/2026 (236.232,97 €, IVA incluido) y el Ayuntamiento la anunció el 2/11/2026. Todavía no se ha adjudicado.")},
+        "nota": _t("La licitació es va publicar el 20/10/2026 (236.232,97 €, IVA inclòs) i l'Ajuntament la va anunciar el 2/11/2026. Segons la premsa, serà un carril bici de doble sentit separat dels cotxes, de 2,80 m, amb dos mesos d'obra. Encara no s'ha adjudicat.",
+                   "La licitación se publicó el 20/10/2026 (236.232,97 €, IVA incluido) y el Ayuntamiento la anunció el 2/11/2026. Según la prensa, será un carril bici de doble sentido separado de los coches, de 2,80 m, con dos meses de obra. Todavía no se ha adjudicado.")},
     "3.2.3c-carril-bici-escolar": {
         "tit": _t("Completar la xarxa de carrils bici al voltant dels col·legis, connectada amb la de la ciutat",
                   "Completar la red de carriles bici en el entorno de los colegios, conectada con la de la ciudad"),
@@ -307,8 +315,8 @@ MEDIDAS = {
         "lugar": _t("Gran Via de Ferran el Catòlic - C/ Àngel Guimerà", "Gran Vía de Fernando el Católico con la calle Ángel Guimerá"),
         "plan": _t("El Pla diu que en 2025 es van reordenar les cruïlles amb més accidents revisades en 2024, i cita aquesta.",
                    "El Plan dice que en 2025 se reordenaron los cruces con más accidentes revisados en 2024, y cita este."),
-        "nota": _t("És una mesura pensada sobretot per a qui va a peu, per la boca de metro de la mitjana. La font la presenta com «una de les actuacions executades» fins al febrer de 2025; la resta de millores de la cruïlla no les hem trobades fetes. És anterior a l'aprovació del Pla (23/07/2026).",
-                   "Es una medida pensada sobre todo para quien va a pie, por la boca de metro de la mediana. La fuente la presenta como «una de las actuaciones ejecutadas» hasta febrero de 2025; el resto de mejoras del cruce no las hemos encontrado hechas. Es anterior a la aprobación del Plan (23/07/2026).")},
+        "nota": _t("És una mesura pensada sobretot per a qui va a peu, per la boca de metro de la mitjana. La font la presenta com «una de les actuacions executades» fins al febrer de 2025; la resta de millores de la cruïlla no les hem trobades fetes. És anterior a l'aprovació del Pla (23/07/2026). El 10/11/2026 l'Ajuntament va anunciar que ha encarregat un estudi per a millorar la seguretat de la cruïlla, sense import ni termini; no parla de bicis ni de patinets.",
+                   "Es una medida pensada sobre todo para quien va a pie, por la boca de metro de la mediana. La fuente la presenta como «una de las actuaciones ejecutadas» hasta febrero de 2025; el resto de mejoras del cruce no las hemos encontrado hechas. Es anterior a la aprobación del Plan (23/07/2026). El 10/11/2026 el Ayuntamiento anunció que ha encargado un estudio para mejorar la seguridad del cruce, sin importe ni plazo; no habla de bicis ni de patinetes.")},
     "3.7-benlloch-puerto": {
         "tit": _t("Canvis en la cruïlla de l'Av. Cardenal Benlloch amb l'Av. del Port, després de la revisió de seguretat de 2024",
                   "Cambios en el cruce de la avenida Cardenal Benlloch con la avenida del Puerto, tras la revisión de seguridad de 2024"),
